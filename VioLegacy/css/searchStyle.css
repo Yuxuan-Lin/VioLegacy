@@ -1,0 +1,169 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.top-bar{
+	display: flex;
+	background-color:purple;
+	align-items: center;
+	
+	border: 5px black solid;
+	padding: 3px;
+	height: 60px;
+	margin-bottom: 10px;
+}
+
+.top-bar h2{
+	font-size: 180%;
+	margin: 0 5% 0 10%;
+	color: white;
+}
+
+.search-container{
+	flex: 1 0 auto;
+	display: flex;
+	height:80%;
+}
+
+.search-container input, a{
+	margin-right: 5%;
+	font-size: 130%;
+	color: white;
+	text-decoration: none;
+}
+
+
+.search-container input{
+	flex: 1 0 auto;
+	height: 100%;
+	color: black;
+}
+
+.search-container a:link,
+.search-container a:visited{
+	display:flex;
+	flex: 0 1 20%;
+	border: 0px white solid;
+	transition: border 0.2s;
+	align-items: center;
+}
+
+.search-container a:hover,
+.search-container a:active{
+	border: 2px white solid;
+	align-items: center;
+}
+
+.big-icon{
+	flex: 0 1 20%;
+	font-size: 150%;
+	margin-right: 5%;
+	margin-left: 10%;
+}
+
+.account-box{
+	display: flex;
+	align-items: center;
+	flex: 0 1 20%;
+	height:100%;
+}
+.account-box img{
+	margin: 0 13%;
+	object-fit: cover;
+	height: 40px;
+	width: 40px;
+
+	flex: 0 1 auto;
+	border-radius: 50%
+}
+
+.container {
+	display: flex;
+	width: 80%;
+	height: 90%;
+	margin: auto;
+}
+
+.result-box {
+	flex: 0 1 70%;
+	border: 3px black solid;
+	height: 650px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+.result-box::-webkit-scrollbar-track{
+	border-radius: 10px;
+	background-color: black;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.result-box::-webkit-scrollbar-thumb{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.detail-box {
+	flex: 1 0 30%;
+	border: 3px black solid;	
+	margin-left: 3%;
+
+}
+
+.profile-box {
+	display: flex;
+	align-items: center;
+	border: 3px black dotted;
+	margin: 5%;
+	height: 150px;
+}
+
+.profile-box:hover {
+	border-style: solid;
+}
+
+
+.image-box {
+	height: 100px;
+	margin: 5% 4%;
+}
+
+.image-box img {
+	object-fit: cover;
+	height: 100px;
+	width: 100px;
+}
+
+.info-box {
+	margin-right: 4%;
+}
+
+.detail-head {
+	margin: 5% 4%;
+	display: flex;
+	align-items: center;
+	height:130px;
+}
+
+.detail-head img {
+	border: 3px black solid;
+	margin-right: 5%;
+	object-fit: cover;
+	height: 130px;
+	width: 130px;
+}
+
+.detail-head h3 {
+	font-size: 200%;
+}
+
+.detail-text {
+	margin: 5% 4%;
+}
+
+.detail-text h4 {
+	font-size: 150%;
+	margin: 5% 0;
+}

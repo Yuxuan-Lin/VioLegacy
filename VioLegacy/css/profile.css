@@ -1,0 +1,195 @@
+body{
+	margin:0px;
+	padding:0px;
+	margin: auto;
+}
+
+.clr{
+	clear:both;
+	float:none;
+}
+
+#main-header{
+	margin:0px;
+	padding:3% 0px;
+	padding-left: 10%;
+	background-image: no-repeat;
+	background-image: url(../images/purple_wallpaper2.jpeg);
+	background-position: center;
+	color:white;
+	text-align:left;
+}
+
+#main-header h1{
+	margin:0px;
+	font-size: 40px;
+}
+
+#break{
+	padding:5px;
+	border-bottom: 5px rgb(111,111,111) solid;
+}
+
+.container{
+	width: auto;
+	padding-left: 0%;
+	padding-right: 0%;
+}
+
+#left{
+	float:left;
+	width:50%;
+	padding: 2%;
+	border-right: 5px rgb(111,111,111) solid;
+	box-sizing: border-box;
+
+}
+
+#mid{
+	float:left;
+	width: 50%;
+	padding:2%;
+	box-sizing: border-box;
+}
+
+#special-container{
+	float:left;
+	width:66.6666%;
+	border-right: 5px rgb(111,111,111) solid;
+}
+
+#right{
+	float:left;
+	width:30%;
+	padding: 2%;
+	box-sizing: border-box;
+
+}
+
+.image-left{
+	float:left;
+	width: 30%;
+	box-sizing: border-box;
+}
+
+.text-right{
+	float: right;
+	width: 70%;
+	box-sizing: border-box;
+}
+
+.text-right h4{
+	margin:0px;
+	padding:5px;
+}
+
+
+.main-profile{
+	padding: 5%;
+	margin: 0px;
+	text-align:center;
+	align-items: center;
+	background-color: rgb(233,233,233);
+}
+
+.self-intro{
+	padding:5%;
+	margin: 5% 0px;
+	background-color: rgb(233,233,233);
+}
+
+#flex-img{
+	display: flex;
+  	align-items: center;
+}
+
+#profile-pic{
+	margin:auto;
+}
+
+.exp-list{
+	padding:0px;
+    list-style-type: none;
+    margin-top: 0px;
+}
+
+.image-side{
+	float:left;
+	width:20%;
+	padding-top: 7%;
+	box-sizing: border-box;
+}
+
+.main-side{
+	float:left;
+	width: 80%;
+	box-sizing: border-box;
+}
+
+.experience h2{
+	margin-bottom:0px;
+}
+
+.experience{
+	background-color: rgb(233,233,233);
+	padding: 5%;
+}
+
+.recent-item{
+	border: 2.5px rgb(123,123,123) dotted;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.recent-main{
+	float:left;
+	width:70%;
+	box-sizing: border-box;
+}
+
+.recent-main h4{
+	margin: 0px;
+	padding: 0px;
+}
+
+.recent-main h2{
+	margin: 0px;
+}
+
+.edit-input-mode{
+	background-color:white;
+	margin: 5% auto;
+	padding:0.5px;
+	font-size: 20px;
+}
+
+#edit-button{
+	display: block;
+	margin: auto;
+}	
+
+
+.item__delete {
+    float: right;
+    width: 10%;
+    padding: 10% 0px;
+    box-sizing: border-box;
+}
+
+.item__delete--btn {
+    font-size: 35px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    display: none;
+}
+
+.recent-item:hover .item__delete--btn { display: block; }
+.recent-item:hover{
+	border: 3px purple solid;
+	padding: 10px;
+	margin-bottom: 10px;
+}

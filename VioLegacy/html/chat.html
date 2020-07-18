@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="../css/chat-style.css">
+	<title></title>
+</head>
+<body>
+	<div class="top-bar">
+		<h2>VioLegacy</h2>
+		<div class="search-container">		
+			<input type="text" name="search-bar" placeholder="Enter here">
+			<a type="button" class="btn" href="#">
+				<ion-icon name="people-outline" class="big-icon"></ion-icon>
+				<h3>People</h3>
+			</a>
+			<a type="button" class="btn" href="#">
+				<ion-icon name="briefcase-outline" class="big-icon"></ion-icon>
+				<h3>Event</h3>
+			</a>
+		</div>
+		
+		<div class="account-box">
+			<img src="../images/Bill.jpg" alt="Bill">
+			<h3>Bill Ruochen Gu</h3>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="profile-box">
+			<div class="main-profile">
+				<div id="flex-img"><img id="profile-pic" src="../images/kerwin.jpg", width="15%"></div>
+				<h2 id = "name">Kerwin Yuxuan Lin</h2>
+				<h3 id = "school">New York University</h3>
+				<h3 id = "major">Bechelors, Computer Science</h3>
+				<h3 id = "gradDate" class="special">Graudate: May 2022</h3>
+				<h3 id = "gpa" class="special">GPA: 5.0</h3>
+			</div>
+
+			<div class="self-intro">
+				<h2>Introduction</h2>
+				<p id = "description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				</p>
+			</div>
+		</div>
+	
+
+		<div class="chat-box">
+			<div class="chat-field">
+				<ul class="chat-history">
+					<li class="message-received">
+						<div class="message-avatar"><img src="../images/Bill.jpg"></div>
+						<div class="message-text talk-bubble tri-right left-top">
+							<div class="talktext">
+    							<p>Hi, Kerwin. Ning chi le me?</p>
+  							</div>
+						</div>
+						<div class="message-empty">&nbsp;</div>
+					</li>
+					<li class="message-received">
+						<div class="message-avatar"><img src="../images/Bill.jpg"></div>
+						<div class="message-text talk-bubble tri-right left-top">
+							<div class="talktext">
+    							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  							</div>
+						</div>
+						<div class="message-empty">&nbsp;</div>
+					</li>
+					<li class="message-sent">
+						<div class="message-avatar"><img src="../images/kerwin.jpg"></div>
+						<div class="message-text talk-bubble tri-right right-top">
+							<div class="talktext">
+    							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  							</div>
+						</div>
+						<div class="message-empty">&nbsp;</div>
+					</li>
+					<li class="message-sent">
+						<div class="message-avatar"><img src="../images/kerwin.jpg"></div>
+						<div class="message-text talk-bubble tri-right right-top">
+							<div class="talktext">
+    							<p>Mei chi. Fine, thank you, and you?</p>
+  							</div>
+						</div>
+						<div class="message-empty">&nbsp;</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="type-field">
+
+				<ul class="tool-bar">
+					<li class="tool-icon">
+						<ion-icon name="happy-outline" class="small-icon"></ion-icon>
+					</li>
+					<li class="tool-icon">
+						<ion-icon name="image-outline" class="small-icon"></ion-icon>
+					</li>
+					<li class="tool-icon">
+						<ion-icon name="mic-outline" class="small-icon"></ion-icon>
+					</li>
+					<li class="tool-icon">
+						<ion-icon name="folder-outline" class="small-icon"></ion-icon>
+					</li>
+					<li class="tool-icon">
+						<ion-icon name="link-outline" class="small-icon"></ion-icon>
+					</li>
+					<li class="tool-icon-special">
+						&nbsp;
+					</li>
+				</ul>
+
+				<div class="input-field">
+					<input type="text" name="message-input-field">
+				</div>
+
+				<div class="button-bar">
+					<div>&nbsp;</div>
+					<input type="submit" name="send-button" class="send-btn">
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+
+<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+
+</html>
