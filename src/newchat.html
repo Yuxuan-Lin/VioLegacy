@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>VioLegacy Chat Page</title>
+	<link rel="stylesheet" type="text/css" href="css/newchat.css">
+</head>
+<body>
+	<div class="container">
+		<div class="navigator">
+			<div class="head">
+				<div>
+					<img src="./images/Logo.jpg"></img>
+				</div>
+				<h2>VioLegacy</h2>
+			</div>
+			<ul class="tools">
+				<li id="0">
+					<div class="tab" id="invisible-1">
+						<h2>&nbsp;</h2>
+					</div>					
+				</li>
+                <li id="1">
+                    <div class="tab">                     
+                        <div>
+                            <ion-icon name="home-outline" class="small-icon"></ion-icon>
+                        </div>
+                        <h2>Home</h2>                       
+                    </div>
+				</li>
+				<li id="2">
+					<div class="tab">
+						<div>
+							<ion-icon name="briefcase-outline" class="small-icon"></ion-icon>
+						</div>
+						<h2>Opportunities</h2>
+					</div>					
+				</li>
+				<li id="3">
+					<div class="tab">
+                        <div>
+                            <ion-icon name="chatbox-ellipses-outline" class="small-icon"></ion-icon>
+                        </div>
+                        <h2>Messages</h2>
+                    </div>
+				</li>
+                <li id="4">
+					<div class="tab" id="invisible-2">
+						<h2>&nbsp;</h2>
+					</div>					
+				</li>
+			</ul>
+			<ul class="helps">
+				<li class="tab">
+					<div>
+						<ion-icon name="help-circle-outline" class="small-icon"></ion-icon>
+					</div>
+					<h2>FAQ</h2>
+				</li>
+				<li class="tab">
+					<div>
+						<ion-icon name="settings-outline" class="small-icon"></ion-icon>
+					</div>
+					<h2>Account Settings</h2>
+				</li>
+				<li class="tab">
+					<div>
+						<ion-icon name="log-out-outline" class="small-icon"></ion-icon>
+					</div>
+					<h2>Log Out</h2>
+				</li>
+			</ul>
+			<div class="collapse tab">
+				<div>
+					<ion-icon name="arrow-back-outline" class="big-icon"></ion-icon>
+				</div>
+				<h2>Collapse Menu</h2>
+			</div>
+		</div>
+    
+        <!--
+		<div class="contacts">
+			<div class="search-bar">
+				<div>
+					<ion-icon name="search-outline" class="small-icon"></ion-icon>
+				</div>
+				<input type="text" name="search" placeholder="Search names, chats, etc.">
+			</div>
+			<ul class="contact-list">
+				//????????????????????????????????
+                <li class="contact-person">
+					<div class="person-image"><img class="round-image" src="images/Bill.jpg"></div>
+					<div class="person-info">
+						<div class="person-top">
+							<h3 class="name">Bill Ruochen Gu</h3>
+							<h3 class="time">8:30AM</h3>
+						</div>
+						<h3>ok.</h3>
+					</div>
+				</li>
+                //????????????????????????????????
+			</ul>
+		</div>
+
+		<div class="chat-block">
+			<div class="profile">
+                //????????????????????????????????
+				<div class="profile-image">
+					<img class="round-image" src="images/Bill.jpg">
+				</div>
+				<div class="profile-info">
+					<h3 class="profile-name">Bill Ruochen Gu</h3>
+					<h3 class="profile-major">BS Computer Science '20</h3>
+					<h3 class="profile-career">Bill will refer you to the position of "Software Developer" at Apple.</h3>
+				</div>
+                //????????????????????????????????
+			</div>
+
+			<div class="chat-box">
+				<div class="chat-field">
+					<ul class="chat-history">
+						//?????????????????????????????
+                        <li class="message-received">
+							<div class="message-avatar"><img class="round-image" src="images/Bill.jpg"></div>
+							<div class="message-text talk-bubble tri-right left-top">
+								<div class="talktext">
+	    							<p>Hi, Kerwin. Ning chi le me?</p>
+	  							</div>
+							</div>
+							<div class="message-empty">&nbsp;</div>
+						</li>
+						<li class="message-received">
+							<div class="message-avatar"><img class="round-image" src="images/Bill.jpg"></div>
+							<div class="message-text talk-bubble tri-right left-top">
+								<div class="talktext">
+	    							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	    							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	    							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	    							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	    							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	    							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	  							</div>
+							</div>
+							<div class="message-empty">&nbsp;</div>
+						</li>
+						<li class="message-sent">
+							<div class="message-avatar"><img class="round-image" src="images/kerwin.jpg"></div>
+							<div class="message-text talk-bubble tri-right right-top">
+								<div class="talktext">
+	    							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	    							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	    							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	    							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	    							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	    							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	  							</div>
+							</div>
+							<div class="message-empty">&nbsp;</div>
+						</li>
+						<li class="message-sent">
+							<div class="message-avatar"><img class="round-image" src="images/kerwin.jpg"></div>
+							<div class="message-text talk-bubble tri-right right-top">
+								<div class="talktext">
+	    							<p>Mei chi. Fine, thank you, and you?</p>
+	  							</div>
+							</div>
+							<div class="message-empty">&nbsp;</div>
+						</li>
+						<li class="message-received">
+							<div class="message-avatar"><img class="round-image" src="images/Bill.jpg"></div>
+							<div class="message-text talk-bubble tri-right left-top">
+								<div class="talktext">
+	    							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	    							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	    							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	    							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	    							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	    							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	  							</div>
+							</div>
+							<div class="message-empty">&nbsp;</div>
+						</li>
+                        //???????????????????????????
+					</ul>
+				</div>
+
+				<div class="type-field">
+
+					<ul class="tool-bar">
+						<li class="tool-icon">
+							<ion-icon name="happy-outline" class="small-icon"></ion-icon>
+						</li>
+						<li class="tool-icon">
+							<ion-icon name="image-outline" class="small-icon"></ion-icon>
+						</li>
+						<li class="tool-icon">
+							<ion-icon name="mic-outline" class="small-icon"></ion-icon>
+						</li>
+						<li class="tool-icon">
+							<ion-icon name="folder-outline" class="small-icon"></ion-icon>
+						</li>
+						<li class="tool-icon">
+							<ion-icon name="link-outline" class="small-icon"></ion-icon>
+						</li>
+						<li class="tool-icon-special">
+							&nbsp;
+						</li>
+					</ul>
+
+					<div class="input-field">
+						<input type="text" name="message-input-field">
+					</div>
+
+					<div class="button-bar">
+						<div>&nbsp;</div>
+						<input type="submit" name="send-button" class="send-btn">
+					</div>
+				</div>
+			</div>
+
+		</div>
+        -->
+	</div>
+	
+
+</body>
+
+<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+
+</html>

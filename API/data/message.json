@@ -1,0 +1,51 @@
+{
+    "data": [
+        {
+            "id": "0",
+            "profile": {
+                "name" : "Ruochen Gu Bill",
+                "major" : "Computer Science",
+                "company" : "Google",
+                "year" : "2020",
+                "image" : "../images/Bill.jpg"
+            },
+            "chatHistory": [
+                {"chatTime": "18:30 2020/08/19", "chatSender": "self", "chatContent": "HI Bill!"},
+                {"chatTime": "18:34 2020/08/19", "chatSender": "other", "chatContent": "HI, Kerwin!"},
+                {"chatTime": "18:35 2020/08/19", "chatSender": "self", "chatContent": "What's up?"}
+            ]
+        },
+
+        {
+            "id": "1",
+            "profile": {
+                "name" : "Alice Wang",
+                "major" : "Computer Science",
+                "company" : "Apple",
+                "year" : "2022",
+                "image" : "../images/Alice.jpg"
+            },
+            "chatHistory": [
+                {"chatTime": "18:30 2020/08/19", "chatSender": "other", "chatContent": "HI Kerwin!"},
+                {"chatTime": "18:34 2020/08/19", "chatSender": "other", "chatContent": "Hello?"},
+                {"chatTime": "18:35 2020/08/19", "chatSender": "self", "chatContent": "HI, what's going on?"}
+            ]
+        },
+
+        {
+            "id": "2",
+            "profile": {
+                "name" : "Lilly Zhang",
+                "major" : "Computer Science",
+                "company" : "Microsoft",
+                "year" : "2021",
+                "image" : "../images/Lilly.jpg"
+            },
+            "chatHistory": [
+                {"chatTime": "18:30 2020/08/19", "chatSender": "self", "chatContent": "HI Lilly!"},
+                {"chatTime": "18:34 2020/08/19", "chatSender": "self", "chatContent": "You there?"},
+                {"chatTime": "18:35 2020/08/19", "chatSender": "self", "chatContent": "Hello?"}
+            ]
+        }
+    ]
+}
