@@ -1,5 +1,7 @@
 # VioLegacy
 
+A web app
+
 ## Setup
 
 In one shell:
