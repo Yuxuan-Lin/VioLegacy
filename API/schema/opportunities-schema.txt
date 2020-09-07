@@ -17,7 +17,7 @@
             "description": str
         },
         ...
-    ],
+    ]
 }
 //Example
 {
@@ -35,7 +35,7 @@
             "declined" : ["Alice Wang"],
             "description": "Deserunt culpa excepteur in minim consectetur adipisicing minim et pariatur anim minim. Enim eu reprehenderit pariatur veniam enim duis dolore nulla dolor veniam labore proident. Nisi aliqua ut nulla ad veniam adipisicing eiusmod dolore reprehenderit incididunt ipsum adipisicing labore sunt."
         }
-    ],
+    ]
 }
 
 //"/opportunities" GET endpoint
@@ -60,7 +60,7 @@ category=str   //Only returns opportunities with this category; only works if om
             "description": str
         },
         ...
-    ],
+    ]
 }
 //Example
 {
