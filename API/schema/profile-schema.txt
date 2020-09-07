@@ -1,8 +1,8 @@
 //Database
 {     
     // This is the storage of all profiles.
-    "profiles": [
-        {
+    "profiles": {
+        <name>: {
             "name": str,
             "major": str,
             "year" : int,
@@ -20,12 +20,12 @@
             ]
         },
         ...
-    ]
+    }
 }
 //Example
 {     
-    "profiles": [
-        {
+    "profiles": {
+        "BenWei Lu": {
             "name": "BenWei Lu",
             "major": "Tu Kuai",
             "year" : "2020",
@@ -48,7 +48,7 @@
                 }
             ]
         }
-    ]
+    }
 }
 
 //"/profile" GET endpoint
