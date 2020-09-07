@@ -17,20 +17,16 @@
 //Example
 {
     chatStorage: {
-        "Bill Gu+Kerwin Lin": {
-            chatHistory: [
+        "Bill Gu+Kerwin Lin": [
                 {"chatTime": "18:30 2020/08/19", "chatSender": "Kerwin Lin", "chatContent": "HI Bill!"},
                 {"chatTime": "18:34 2020/08/19", "chatSender": "Bill Gu", "chatContent": "HI, Kerwin!"},
                 {"chatTime": "18:35 2020/08/19", "chatSender": "Bill Gu", "chatContent": "What's up?"}
-            ]
-        },
-        "Bill Gu+Lilly Zhang": {
-            chatHistory: [
+        ],
+        "Bill Gu+Lilly Zhang": [
                 {"chatTime": "18:30 2020/08/19", "chatSender": "Bill Gu", "chatContent": "HI Lilly!"},
                 {"chatTime": "18:34 2020/08/19", "chatSender": "Bill Gu", "chatContent": "You there?"},
                 {"chatTime": "18:35 2020/08/19", "chatSender": "Bill Gu", "chatContent": "Hello?"}
-            ]
-        },
+        ],
     }
 }
 
