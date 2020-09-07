@@ -16,7 +16,6 @@
         }
     ],
 }
-
 //Example
 {
     chatStorage: [
@@ -31,7 +30,7 @@
     ],
 }
 
-//"/messages" API endpoint
+//"/messages" GET endpoint
 //Params
 sender1=str
 sender2=str
@@ -43,7 +42,6 @@ numResults=int
         ...
     ]
 }
-
 //Example
 {
     chatHistory: [
