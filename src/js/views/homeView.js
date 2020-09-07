@@ -48,6 +48,7 @@ export const renderExps = experiences => {
     experiences.forEach(renderExp);
 };
 
+export let oppStatus = [0,0,0];
 export const renderOpp = opp => {
     let markup = `
         <li class = "opp-column-item">
@@ -58,6 +59,7 @@ export const renderOpp = opp => {
     `;
     
     if (opp.status == "Pending") {
+        oppStatus[0]++;
         markup += `
             <div class="opp-item-right">
                 <div class="opp-item-icon">
@@ -73,6 +75,7 @@ export const renderOpp = opp => {
     `;
     }
     else if(opp.status == "Accepted") {
+        oppStatus[1]++;
         markup += `
             <div class="opp-item-right">
                 <div class="opp-item-icon">
@@ -88,6 +91,7 @@ export const renderOpp = opp => {
     `;
     }
     else {
+        oppStatus[2]++;
         markup += `
             <div class="opp-item-right">
                 <div class="opp-item-icon">
@@ -107,6 +111,7 @@ export const renderOpp = opp => {
 
 export const renderOpps = opps => {
     opps.forEach(renderOpp);
+    console.log("oppStatus: " + oppStatus);
 };
 
 

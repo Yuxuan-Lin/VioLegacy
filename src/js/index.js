@@ -6,6 +6,7 @@ import {elements} from './views/base';
 import * as contactsView from './views/contactsView'; 
 import * as chatView from './views/chatView';
 import * as homeView from './views/homeView';
+import * as oppView from './views/oppView';
 
 
 //experimental area
@@ -17,11 +18,13 @@ state.opp = new Opp("Ishmael");
 state.contacts = new Contacts("chat");
 state.image = "../images/kerwin.jpg";
 state.home.collapsed = false;
+state.menuCollapsed = false;
+
 
 const controlHome = async () => {
     //1) Get contact list(array)
     await state.home.getHomeData();
-    console.log(state.home.result.profile.image);
+    
     //2) Prepare UI(optional)
     homeView.clearProfile();
     
@@ -45,9 +48,10 @@ const controlOpp = async () => {
     await state.opp.getOppData();
     
     //2) Prepare UI(optional)
+    oppView.clearOpps();
 
     //3) Render contacts on UI
-
+    oppView.renderOpps(state.opp.result.opportunities);
     //1) Get chatHistory(array) and profile
 
     //2) Prepare UI(clear field)
@@ -90,9 +94,59 @@ const controlChat = async (id=0) => {
 
 
 
-controlOpp();
 
 
+//Collapse Menu
+elements.collapse.addEventListener('click', e => {
+    e.preventDefault();
+    const tab = e.target.closest('.collapse');
+    if (!state.menuCollapsed){
+        collapseMenu();
+    } else if (state.menuCollapsed){
+        expandMenu();
+    }
+});
+
+const collapseMenu = function() {
+    //console.log("success");
+    state.menuCollapsed = true;
+    const labelled = document.querySelectorAll('.collapse-label');
+    labelled.forEach(labelCollapse);
+    elements.navi.classList.add('collapsed-navigator');
+    document.querySelector('.collapse-icon').innerHTML = `
+        <ion-icon name="arrow-forward-outline" class="small-icon"></ion-icon>
+    `;
+};
+
+const expandMenu = function(){
+    //console.log("success");
+    state.menuCollapsed = false;
+    const labelled = document.querySelectorAll('.collapse-label');
+    labelled.forEach(labelExpand);
+    elements.navi.classList.remove('collapsed-navigator');
+    document.querySelector('.collapse-icon').innerHTML = `
+        <ion-icon name="arrow-back-outline" class="small-icon"></ion-icon>
+    `;
+};
+
+const labelCollapse = function(el){
+    el.classList.add('invisible');
+};
+
+const labelExpand = function(el){
+    el.classList.remove('invisible');
+};
+
+
+
+
+
+
+
+
+
+
+//3 main function tabs
 elements.tools.addEventListener('click', e => {
     e.preventDefault();
     const tab = e.target.closest('.tab');
@@ -100,8 +154,8 @@ elements.tools.addEventListener('click', e => {
     tabSwitch(tab);
 });
 
+
 const tabSwitch = function (tab){
-    
     const id = parseInt(tab.parentNode.id);
     console.log(id);
     if (id != 0 && id != 4){
@@ -130,7 +184,7 @@ const tabSwitch = function (tab){
 };
 
 
-const screenSwitch = function (tab){
+const screenSwitch = async function (tab){
     state.tab = tab.parentNode.id;
 
     clearScreen();
@@ -167,22 +221,96 @@ const screenSwitch = function (tab){
                 <h2 class="opp-title">My Opportunity Updates</h2>
                 <div class = "opp-bar">
                     <ul class = "opp-bar-list">
-                        <li class = "opp-bar-button">
-                            <h4>All(?)</h4>
-                        </li>
-                        <li class = "opp-bar-button">
-                            <h4>Pending(?)</h4>
-                        </li>
-                        <li class = "opp-bar-button">
-                            <h4>Accepted(?)</h4>
-                        </li>
-                        <li class = "opp-bar-button">
-                            <h4>Declined(?)</h4>
-                        </li>
                     </ul>
-                    <input type="text" name="search" placeholder="Search key words of applied opportunities.">
+                    <div class="search-bar opp-search-bar">
+                        <div>
+                            <ion-icon name="search-outline" class="small-icon"></ion-icon>
+                        </div>
+                        <input type="text" name="search" placeholder="Search job title, companies, etc.">
+                    </div>
                 </div>
                 <ul class = "opp-column">
+                </ul>
+            </div>
+        </div>
+    `;
+    
+    const oppSetUp = `
+        <div class="opp-container">
+            <div class="opp-top">
+                <div class="search-bar opp-search-bar">
+                    <div>
+                        <ion-icon name="search-outline" class="small-icon"></ion-icon>
+                    </div>
+                    <input type="text" name="search" placeholder="Search job title, companies, etc.">
+                </div>
+                <div class="filter-bar">
+                    <ul class="filters">
+                        <li class="filter">
+                            <h4>Filter 1</h4>
+                            <ion-icon name="chevron-down-outline" class="small-icon"></ion-icon>
+                        </li>
+                        <li class="filter">
+                            <h4>Filter 2</h4>
+                            <ion-icon name="chevron-down-outline" class="small-icon"></ion-icon>
+                        </li>
+                        <li class="filter">
+                            <h4>Filter 3</h4>
+                            <ion-icon name="chevron-down-outline" class="small-icon"></ion-icon>
+                        </li>
+                    </ul>
+                    <div class="clear-bar">
+                        <ion-icon name="close-outline" class="small-icon"></ion-icon>
+                        <h4>Clear Filter</h4>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="referral-box">
+                <ul class="referral-row" id="row-0">
+                    <li class="referral">
+                        <h3 class='opp-category'>SUBJECT CATEGORY</h3>
+                        <div>
+                            <h2>Job Title</h2>
+                            <h3>Company Name</h3>
+                            <h3 class="opp-alumni">from Alumni Name</h3>
+                        </div>
+                    </li>
+                    <li class="referral">
+                        <h3 class='opp-category'>SUBJECT CATEGORY</h3>
+                        <div>
+                            <h2>Job Title</h2>
+                            <h3>Company Name</h3>
+                            <h3 class="opp-alumni">from Alumni Name</h3>
+                        </div>
+                    </li>
+                    <li class="referral">
+                        <h3 class='opp-category'>SUBJECT CATEGORY</h3>
+                        <div>
+                            <h2>Job Title</h2>
+                            <h3>Company Name</h3>
+                            <h3 class="opp-alumni">from Alumni Name</h3>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="referral-row" id="row-1">
+                    <li class="referral">
+                        <h3 class='opp-category'>SUBJECT CATEGORY</h3>
+                        <div>
+                            <h2>Job Title</h2>
+                            <h3>Company Name</h3>
+                            <h3 class="opp-alumni">from Alumni Name</h3>
+                        </div>
+                    </li>
+                    <li class="referral">
+                        <h3 class='opp-category'>SUBJECT CATEGORY</h3>
+                        <div>
+                            <h2>Job Title</h2>
+                            <h3>Company Name</h3>
+                            <h3 class="opp-alumni">from Alumni Name</h3>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -237,11 +365,32 @@ const screenSwitch = function (tab){
         </div>
     `;
     
+
+    
     
     if (state.tab == '1'){
-        elements.container.insertAdjacentHTML('beforeend',homeSetUp);
-        controlHome();
-        console.log('the end');
+       elements.container.insertAdjacentHTML('beforeend',homeSetUp);
+        await controlHome();
+        state.home.pending = homeView.oppStatus[0];
+        state.home.accepted = homeView.oppStatus[1];
+        state.home.declined = homeView.oppStatus[2];
+        
+        
+        const oppBarSetUp = `
+            <li class = "opp-bar-button">
+                <h4>All(${state.home.pending + state.home.accepted + state.home.declined})</h4>
+            </li>
+            <li class = "opp-bar-button">
+                <h4>Pending(${state.home.pending})</h4>
+            </li>
+            <li class = "opp-bar-button">
+                <h4>Accepted(${state.home.accepted})</h4>
+            </li>
+            <li class = "opp-bar-button">
+                <h4>Declined(${state.home.declined})</h4>
+            </li>
+        `;
+        document.querySelector('.opp-bar').insertAdjacentHTML('afterbegin',oppBarSetUp);
         
         document.querySelector('.expand-collapse').addEventListener('click', e => {
             const btn = e.target.closest('.expand-collapse');
@@ -258,9 +407,12 @@ const screenSwitch = function (tab){
         });
         
     }
+    else if (state.tab == '2'){
+        billFunction(oppSetUp);
+    }
     else if (state.tab == '3'){
         elements.container.insertAdjacentHTML('beforeend',messageSetUp);
-        console.log("Screen fully Setup");
+        //console.log("Screen fully Setup");
         controlContacts();
         controlChat();
         
@@ -275,28 +427,72 @@ const screenSwitch = function (tab){
         });
     }
     
-    console.log(document.querySelector(".container").childNodes);
+};
+
+const billFunction = function(oppSetUp){
+    elements.container.insertAdjacentHTML('beforeend',oppSetUp);
+    controlOpp();
+
+    document.querySelector('.referral-box').addEventListener('click', e => {
+        const btn = e.target.closest('.referral');
+
+        if(btn) {
+            // clear right screen
+            clearScreen();
+            // render temp 2
+            oppView.renderDetail(state.opp.result.opportunities[btn.id]);
+
+            document.querySelector('.back-top').addEventListener('click', e => {
+                const btn2 = e.target.closest('.back-top');
+
+                if(btn) {
+                    // clear right screen
+                    clearScreen();
+                    // render temp 2
+                    billFunction(oppSetUp);
+                }
+            });
+            
+            document.querySelector('.ref-request').addEventListener('click', e => {
+                const btn3 = e.target.closest('.ref-request');
+
+                if(btn3 && btn3.id == 0) {
+                    // UI change
+                    btn3.innerHTML = `
+                        <div class="ref-request" id="1">
+                            <button type="button">Request Sent!</button>
+                        </div>
+                    `;
+                } else if(btn3 && btn3.id == 1) {
+                    btn3.innerHTML = `
+                        <div class="ref-request" id="0">
+                            <button type="button">Request a Referral</button>
+                        </div>
+                    `;
+                }
+            });
+        }
+    });
 };
 
 const clearScreen = function(){
-    console.log(elements.container.childNodes);
     const container = document.querySelector(".container").childNodes;
     let temp = 0;
-    console.log(container[1].nodeName);
+
     while(temp < container.length){
-        if(container[temp].nodeName == "DIV" && container[temp].className != "navigator") {
+        if(container[temp].nodeName == "DIV" && !container[temp].classList.contains("navigator")) {
                 elements.container.removeChild(container[temp]);
         }
         temp++;
     }
 
     console.log("screen clear success");
-    console.log('testing webpack');
-    console.log(elements.container.childNodes);
 };
 
 
 
+//????????????????????????????????????????????
+tabSwitch(document.getElementById("default"));
 
 
 

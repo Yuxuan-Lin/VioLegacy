@@ -25,6 +25,10 @@
 	font-weight: 200;
 }
 
+.collapsed-navigator{
+    flex: 0 1 5.5%;
+}
+
 .contacts{
 	flex: 0 1 30%;
 	padding: 3vh;
@@ -32,8 +36,7 @@
 
 .head{
 	display:flex;
-	margin-top: 5%;
-	margin-left: 2vw;
+	margin-top: 1vh;
 }
 
 .head div{
@@ -41,8 +44,8 @@
 }
 
 .head div img{
-    height: 5vh;
-    
+    height: 4vh;
+    align-self: center;
 }
 
 .head h2{
@@ -53,11 +56,11 @@
 }
 
 .tools{
-	margin-top: 20%;
+	margin-top: 3vh;
 }
 
 .helps{
-	margin-top: 20%;
+	margin-top: 3vh;
 }
 
 .tab{
@@ -254,7 +257,7 @@
 
 .chat-history{
 	width:100%;
-	height: 100%;
+	height: 95%;
 }
 
 .message-received{
@@ -593,4 +596,142 @@
 
 .invisible{
     display: none;
+}
+
+.opp-container{
+    padding: 3vh;
+    flex: 1 0 auto;
+}
+
+.opp-top{
+    display:flex;
+    margin-bottom: 3vh;
+}
+
+.opp-search-bar{
+    margin-right: 2vw;
+    padding:0 1vh;
+    width: 10vw;
+    flex: 0 1 40%;
+}
+
+
+.filter-bar{
+    flex: 1 0 auto;
+    display:flex;
+    align-items: center;
+}
+
+.filters{
+    padding-left: 10%; 
+    flex: 0 1 70%;
+    display:flex;
+}
+
+.filter{
+    flex: 0 1 30%;
+    display:flex;
+}
+
+.clear-bar{
+    display: flex;
+    flex:1 0 auto;
+}
+
+.referral-row{
+    list-style: none;
+    display: flex;
+}
+
+.referral{
+    margin:3vh;
+    flex:0 1 25%;
+    border-radius: 3vh;
+    box-shadow: 0px 2vh 3vh rgba(0, 0, 0, 0.25);
+}
+
+.opp-category{
+    font-weight: normal;
+    padding: 3vh;
+    
+    background-color: #CCA2D8;
+    border-radius: 3vh 3vh 0 0;
+}
+
+.referral div{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 3vh;
+    height:20vh;
+    border-radius: 0 0 3vh 3vh;
+}
+
+.opp-alumni{
+    position: absolute;
+    bottom: 10%;
+}
+
+.referral-detail{
+    padding: 5vh 8vh;
+    flex: 1 0 80%;
+}
+
+.back-top{
+    display: flex;
+    align-items: center;
+    width: 15vw;
+}
+
+.back-top:hover{
+    color: #CCA2D8;
+}
+
+.back-top div{
+    flex: 0 1 25%;
+}
+
+.back-top h2{
+    flex: 1 0 auto;
+}
+
+.detail-mid{
+    display:flex;
+    margin: 3vh 0;
+}
+
+.detail-mid h1,
+.detail-mid h3,
+.detail-mid h4{
+    margin-top: 1vh;
+}
+
+.ref-info{
+    flex: 1 0 auto;
+}
+.ref-request{
+    flex: 0 1 20%;
+}
+
+.ref-request button{
+    font-size: 150%;
+    color: white;
+    height: 8vh;
+    width: 28vh;
+    background: linear-gradient(180deg, #E3B3EF 0%, #CCA2D8 100%);
+    box-shadow: 0px 2vh 4vh rgba(204, 162, 216, 0.5);
+    border-radius: 2vh;
+}
+
+.ref-descriptions{
+    margin-top: 5vh;
+    list-style: none;
+}
+
+.ref-description{
+    margin-top: 3vh;
+}
+
+.ref-description h4{
+    font-weight: normal;
 }
