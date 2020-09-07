@@ -20,8 +20,6 @@
 
     //One conversation extracted from chatStorage, between two users of course
     {
-        interlocutors: ["name1","name2"], 
-        
         chatHistory: [
             {"chatTime": "18:30 2020/08/19", "chatSender": "name1", "chatContent": "HI Bill!"},
             {"chatTime": "18:34 2020/08/19", "chatSender": "name2", "chatContent": "HI, Kerwin!"},
