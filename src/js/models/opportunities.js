@@ -8,7 +8,7 @@ export default class Opportunities{
 		try{
 			const res = await fetch('http://localhost:5000/opportunities').then((res) => res.json());
 			this.result = res;
-            console.log(this.result);
+            //console.log(this.result);
 		} catch (error){
 			alert(error);
 		}

@@ -7,11 +7,11 @@
 <body>
 	<div class="container">
 		<div class="navigator">
-			<div class="head">
+			<div class="tab head">
 				<div>
 					<img src="./images/Logo.jpg"></img>
 				</div>
-				<h2>VioLegacy</h2>
+				<h2 class='collapse-label'>VioLegacy</h2>
 			</div>
 			<ul class="tools">
 				<li id="0">
@@ -20,11 +20,11 @@
 					</div>					
 				</li>
                 <li id="1">
-                    <div class="tab">                     
+                    <div class="tab" id="default">                     
                         <div>
                             <ion-icon name="home-outline" class="small-icon"></ion-icon>
                         </div>
-                        <h2>Home</h2>                       
+                        <h2 class='collapse-label'>Home</h2>                    
                     </div>
 				</li>
 				<li id="2">
@@ -32,7 +32,7 @@
 						<div>
 							<ion-icon name="briefcase-outline" class="small-icon"></ion-icon>
 						</div>
-						<h2>Opportunities</h2>
+						<h2 class='collapse-label'>Opportunities</h2>
 					</div>					
 				</li>
 				<li id="3">
@@ -40,7 +40,7 @@
                         <div>
                             <ion-icon name="chatbox-ellipses-outline" class="small-icon"></ion-icon>
                         </div>
-                        <h2>Messages</h2>
+                        <h2 class='collapse-label'>Messages</h2>
                     </div>
 				</li>
                 <li id="4">
@@ -54,26 +54,26 @@
 					<div>
 						<ion-icon name="help-circle-outline" class="small-icon"></ion-icon>
 					</div>
-					<h2>FAQ</h2>
+					<h2 class='collapse-label'>FAQ</h2>
 				</li>
 				<li class="tab">
 					<div>
 						<ion-icon name="settings-outline" class="small-icon"></ion-icon>
 					</div>
-					<h2>Account Settings</h2>
+					<h2 class='collapse-label'>Account Settings</h2>
 				</li>
 				<li class="tab">
 					<div>
 						<ion-icon name="log-out-outline" class="small-icon"></ion-icon>
 					</div>
-					<h2>Log Out</h2>
+					<h2 class='collapse-label'>Log Out</h2>
 				</li>
 			</ul>
 			<div class="collapse tab">
-				<div>
-					<ion-icon name="arrow-back-outline" class="big-icon"></ion-icon>
+				<div class="collapse-icon">
+					<ion-icon name="arrow-back-outline" class="small-icon"></ion-icon>
 				</div>
-				<h2>Collapse Menu</h2>
+				<h2 class='collapse-label'>Collapse Menu</h2>
 			</div>
 		</div>
     
