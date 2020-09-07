@@ -18,7 +18,6 @@
 
     "opportunity":[
         {
-            "id":"0",
             "category":"Science",
             "title": "Data Analyst",
             "company": "Microsoft",
