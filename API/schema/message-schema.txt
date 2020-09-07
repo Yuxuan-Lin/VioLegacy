@@ -1,3 +1,4 @@
+//Database
 //Our message system will limit to 2 interlocutors
 {
     //The ultimate storage of all the conversations between users
@@ -16,7 +17,7 @@
     ],
 }
 
-// Example
+//Example
 {
     chatStorage: [
         {
@@ -30,13 +31,12 @@
     ],
 }
 
-
-/messages endpoint
-// params
+//"/messages" API endpoint
+//Params
 sender1=str
 sender2=str
 numResults=int
-// resource
+//Resource
 {
     chatHistory: [
         {"chatTime": datetime, "chatSender": str, "chatContent": str},
@@ -44,7 +44,7 @@ numResults=int
     ]
 }
 
-// Example
+//Example
 {
     chatHistory: [
         {"chatTime": "18:30 2020/08/19", "chatSender": "Kerwin Lin", "chatContent": "HI Bill!"},
