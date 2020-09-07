@@ -5,25 +5,50 @@
         //One conversation between 2 people, including all their chat history and messages
         {
             //This array includes the names of the two interlocutors
-            interlocutors: ["name1","name2"], 
+            interlocutors: [str, str], (alphabetical)
 
             //This array stores all the messages between the two interlocutors
             chatHistory: [
-                {"chatTime": "18:30 2020/08/19", "chatSender": "name1", "chatContent": "HI Bill!"},
-                {"chatTime": "18:34 2020/08/19", "chatSender": "name2", "chatContent": "HI, Kerwin!"},
-                {"chatTime": "18:35 2020/08/19", "chatSender": "name2", "chatContent": "What's up?"}
+                {"chatTime": datetime, "chatSender": str (interlocuters[i]), "chatContent": str},
+                ...
             ]
         }
     ],
+}
+
+// Example
+{
+    chatStorage: [
+        {
+            interlocutors: ["Bill Gu", "Kerwin Lin"], 
+            chatHistory: [
+                {"chatTime": "18:30 2020/08/19", "chatSender": "Kerwin Lin", "chatContent": "HI Bill!"},
+                {"chatTime": "18:34 2020/08/19", "chatSender": "Bill Gu", "chatContent": "HI, Kerwin!"},
+                {"chatTime": "18:35 2020/08/19", "chatSender": "Bill Gu", "chatContent": "What's up?"}
+            ]
+        }
+    ],
+}
 
 
+/messages endpoint
+// params
+sender1=str
+sender2=str
+numResults=int
+// resource
+{
+    chatHistory: [
+        {"chatTime": datetime, "chatSender": str, "chatContent": str},
+        ...
+    ]
+}
 
-    //One conversation extracted from chatStorage, between two users of course
-    {
-        chatHistory: [
-            {"chatTime": "18:30 2020/08/19", "chatSender": "name1", "chatContent": "HI Bill!"},
-            {"chatTime": "18:34 2020/08/19", "chatSender": "name2", "chatContent": "HI, Kerwin!"},
-            {"chatTime": "18:35 2020/08/19", "chatSender": "name2", "chatContent": "What's up?"}
-        ]
-    }
+// Example
+{
+    chatHistory: [
+        {"chatTime": "18:30 2020/08/19", "chatSender": "Kerwin Lin", "chatContent": "HI Bill!"},
+        {"chatTime": "18:34 2020/08/19", "chatSender": "Bill Gu", "chatContent": "HI, Kerwin!"},
+        {"chatTime": "18:35 2020/08/19", "chatSender": "Bill Gu", "chatContent": "What's up?"}
+    ]
 }
