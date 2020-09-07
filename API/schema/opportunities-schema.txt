@@ -1,0 +1,34 @@
+{
+    //Here stores all the opportunities
+    "opportunities":[
+        {
+            "id":"0",
+            "category":"Science",
+            "title": "Data Analyst",
+            "company": "Microsoft",
+            "alumni": "Bill Gu",
+            "deadline": "str",                  //no comment
+            "limit": int,                       //Here is the max number of spot for juniors to be accepted
+            "registered" : ["str","str","str"], //Here is the name of all the juniors that registered for this opportunity
+            "accepted" : ["str","str"],         //Here is the name of all the juniors that registered and was accepted for further conversation
+            "declined" : ["str","str"],         //Here is the name of all that got rejected
+            "description": "Deserunt culpa excepteur in minim consectetur adipisicing minim et pariatur anim minim. Enim eu reprehenderit pariatur veniam enim duis dolore nulla dolor veniam labore proident. Nisi aliqua ut nulla ad veniam adipisicing eiusmod dolore reprehenderit incididunt ipsum adipisicing labore sunt."
+        }
+    ],
+
+    "opportunity":[
+        {
+            "id":"0",
+            "category":"Science",
+            "title": "Data Analyst",
+            "company": "Microsoft",
+            "alumni": "Bill Gu",
+            "deadline": "str",                  //no comment
+            "limit": int,                       //Here is the max number of spot for juniors to be accepted
+            "registered" : ["str","str","str"], //Here is the name of all the juniors that registered for this opportunity
+            "accepted" : ["str","str"],         //Here is the name of all the juniors that registered and was accepted for further conversation
+            "declined" : ["str","str"],         //Here is the name of all that got rejected
+            "description": "Deserunt culpa excepteur in minim consectetur adipisicing minim et pariatur anim minim. Enim eu reprehenderit pariatur veniam enim duis dolore nulla dolor veniam labore proident. Nisi aliqua ut nulla ad veniam adipisicing eiusmod dolore reprehenderit incididunt ipsum adipisicing labore sunt."
+        }
+    ]
+}

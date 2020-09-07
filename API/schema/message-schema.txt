@@ -1,0 +1,31 @@
+//Our message system will limit to 2 interlocutors
+{
+    //The ultimate storage of all the conversations between users
+    chatStorage: [
+        //One conversation between 2 people, including all their chat history and messages
+        {
+            //This array includes the names of the two interlocutors
+            interlocutors: ["name1","name2"], 
+
+            //This array stores all the messages between the two interlocutors
+            chatHistory: [
+                {"chatTime": "18:30 2020/08/19", "chatSender": "name1", "chatContent": "HI Bill!"},
+                {"chatTime": "18:34 2020/08/19", "chatSender": "name2", "chatContent": "HI, Kerwin!"},
+                {"chatTime": "18:35 2020/08/19", "chatSender": "name2", "chatContent": "What's up?"}
+            ]
+        }
+    ],
+
+
+
+    //One conversation extracted from chatStorage, between two users of course
+    {
+        interlocutors: ["name1","name2"], 
+        
+        chatHistory: [
+            {"chatTime": "18:30 2020/08/19", "chatSender": "name1", "chatContent": "HI Bill!"},
+            {"chatTime": "18:34 2020/08/19", "chatSender": "name2", "chatContent": "HI, Kerwin!"},
+            {"chatTime": "18:35 2020/08/19", "chatSender": "name2", "chatContent": "What's up?"}
+        ]
+    }
+}
