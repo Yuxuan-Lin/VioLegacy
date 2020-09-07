@@ -1,5 +1,26 @@
+//Database
 {
     //Here stores all the opportunities
+    "opportunities":[
+        // One opportunity
+        {
+            "id":int,
+            "category":str,
+            "title": str,
+            "company": str,
+            "alumni": str,
+            "deadline": datetime,      //Here is the deadline of the opportunity
+            "limit": int,              //Here is the max number of spot for juniors to be accepted
+            "registered" : [str, ...], //Here is the name of all the juniors that registered for this opportunity
+            "accepted" : [str, ...],   //Here is the name of all the juniors that registered and was accepted for further conversation
+            "declined" : [str, ...],   //Here is the name of all that got rejected
+            "description": str
+        },
+        ...
+    ],
+}
+//Example
+{
     "opportunities":[
         {
             "id":"0",
@@ -7,26 +28,53 @@
             "title": "Data Analyst",
             "company": "Microsoft",
             "alumni": "Bill Gu",
-            "deadline": "str",                  //no comment
-            "limit": int,                       //Here is the max number of spot for juniors to be accepted
-            "registered" : ["str","str","str"], //Here is the name of all the juniors that registered for this opportunity
-            "accepted" : ["str","str"],         //Here is the name of all the juniors that registered and was accepted for further conversation
-            "declined" : ["str","str"],         //Here is the name of all that got rejected
+            "deadline": "18:30 2020/08/19",
+            "limit": 3,
+            "registered" : [],
+            "accepted" : ["Bill Gu",],
+            "declined" : ["Alice Wang"],
             "description": "Deserunt culpa excepteur in minim consectetur adipisicing minim et pariatur anim minim. Enim eu reprehenderit pariatur veniam enim duis dolore nulla dolor veniam labore proident. Nisi aliqua ut nulla ad veniam adipisicing eiusmod dolore reprehenderit incididunt ipsum adipisicing labore sunt."
         }
     ],
+}
 
-    "opportunity":[
+//"/opportunities" GET endpoint
+//Params
+// omitName must be true for a request from junior and must be false for a request from senior
+name=str       //A student's name to filter on
+omitName=bool  //If true, removes any opportunity with name given above, if false, only returns opportunities with name given above
+category=str   //Only returns opportunities with this category; only works if omitName is true
+//Resource
+{
+    "opportunities":[
+        {
+            "category":str,
+            "title": str,
+            "company": str,
+            "alumni": str,
+            "deadline": datetime,      //Here is the deadline of the opportunity
+            "limit": int,              //Here is the max number of spot for juniors to be accepted
+            "registered" : [str, ...], //Here is the name of all the juniors that registered for this opportunity
+            "accepted" : [str, ...],   //Here is the name of all the juniors that registered and was accepted for further conversation
+            "declined" : [str, ...],   //Here is the name of all that got rejected
+            "description": str
+        },
+        ...
+    ],
+}
+//Example
+{
+    "opportunities":[
         {
             "category":"Science",
             "title": "Data Analyst",
             "company": "Microsoft",
             "alumni": "Bill Gu",
-            "deadline": "str",                  //no comment
-            "limit": int,                       //Here is the max number of spot for juniors to be accepted
-            "registered" : ["str","str","str"], //Here is the name of all the juniors that registered for this opportunity
-            "accepted" : ["str","str"],         //Here is the name of all the juniors that registered and was accepted for further conversation
-            "declined" : ["str","str"],         //Here is the name of all that got rejected
+            "deadline": "18:30 2020/08/19",
+            "limit": 3,
+            "registered" : [],
+            "accepted" : ["Bill Gu",],
+            "declined" : ["Alice Wang"],
             "description": "Deserunt culpa excepteur in minim consectetur adipisicing minim et pariatur anim minim. Enim eu reprehenderit pariatur veniam enim duis dolore nulla dolor veniam labore proident. Nisi aliqua ut nulla ad veniam adipisicing eiusmod dolore reprehenderit incididunt ipsum adipisicing labore sunt."
         }
     ]
