@@ -13,8 +13,9 @@
                 {"chatTime": datetime, "chatSender": str (interlocuters[i]), "chatContent": str},
                 ...
             ]
-        }
-    ],
+        },
+        ...
+    ]
 }
 //Example
 {
@@ -27,7 +28,7 @@
                 {"chatTime": "18:35 2020/08/19", "chatSender": "Bill Gu", "chatContent": "What's up?"}
             ]
         }
-    ],
+    ]
 }
 
 //"/messages" GET endpoint
