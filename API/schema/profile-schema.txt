@@ -1,5 +1,29 @@
+//Database
 {     
     // This is the storage of all profiles.
+    "profiles": [
+        {
+            "name": str,
+            "major": str,
+            "year" : int,
+            "image": str,
+            "about": str,
+            "experience" : [
+                {
+                    "title": str,
+                    "company": str,
+                    "time": str,
+                    "location": str,
+                    "description": str
+                },
+                ...
+            ]
+        },
+        ...
+    ]
+}
+//Example
+{     
     "profiles": [
         {
             "name": "BenWei Lu",
@@ -24,10 +48,34 @@
                 }
             ]
         }
-    ],
-    
+    ]
+}
 
-    // This is the profile output for a single endpoint.
+//"/profile" GET endpoint
+//Params
+name=str
+//Resource
+{
+    "profile" : {
+        "name": str,
+        "major": str,
+        "year" : int,
+        "image": str,
+        "about": str,
+        "experience" : [
+            {
+                "title": str,
+                "company": str,
+                "time": str,
+                "location": str,
+                "description": str
+            },
+            ...
+        ]
+    }
+}
+//Example
+{
     "profile" : {
         "name": "BenWei Lu",
         "major": "Tu Kuai",
@@ -51,5 +99,4 @@
             }
         ]
     }
-    
 }
