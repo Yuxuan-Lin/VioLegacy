@@ -4,13 +4,16 @@
   "description": "newchat",
   "main": "index.js",
   "scripts": {
+    "app": "npm run server && npm run start",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open"
+    "start": "webpack-dev-server --mode development --open",
+    "server": "forever start API/index.js"
   },
   "author": "Yuxuan Lin Kerwin",
   "license": "ISC",
   "devDependencies": {
+    "forever": "^3.0.2",
     "html-webpack-plugin": "^4.3.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
