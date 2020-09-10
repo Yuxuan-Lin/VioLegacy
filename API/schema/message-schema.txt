@@ -2,12 +2,9 @@
 //Our message system will limit to 2 interlocutors
 {
     //The ultimate storage of all the conversations between users
-    chatStorage: [
+    chatStorage: {
         //One conversation between 2 people, including all their chat history and messages
-        {
-            //This array includes the names of the two interlocutors
-            interlocutors: [str, str], (alphabetical)
-
+        <name+name> (str; names alphabetical): {
             //This array stores all the messages between the two interlocutors
             chatHistory: [
                 {"chatTime": datetime, "chatSender": str (interlocuters[i]), "chatContent": str},
@@ -15,20 +12,22 @@
             ]
         },
         ...
-    ]
+    }
 }
 //Example
 {
-    chatStorage: [
-        {
-            interlocutors: ["Bill Gu", "Kerwin Lin"], 
-            chatHistory: [
+    chatStorage: {
+        "Bill Gu+Kerwin Lin": [
                 {"chatTime": "18:30 2020/08/19", "chatSender": "Kerwin Lin", "chatContent": "HI Bill!"},
                 {"chatTime": "18:34 2020/08/19", "chatSender": "Bill Gu", "chatContent": "HI, Kerwin!"},
                 {"chatTime": "18:35 2020/08/19", "chatSender": "Bill Gu", "chatContent": "What's up?"}
-            ]
-        }
-    ]
+        ],
+        "Bill Gu+Lilly Zhang": [
+                {"chatTime": "18:30 2020/08/19", "chatSender": "Bill Gu", "chatContent": "HI Lilly!"},
+                {"chatTime": "18:34 2020/08/19", "chatSender": "Bill Gu", "chatContent": "You there?"},
+                {"chatTime": "18:35 2020/08/19", "chatSender": "Bill Gu", "chatContent": "Hello?"}
+        ],
+    }
 }
 
 //"/messages" GET endpoint
