@@ -4,8 +4,12 @@ const message = require('./data/message.json');
 const home = require('./data/home.json');
 const opportunities = require('./data/opportunities.json');
 const cors = require('cors');
+const exp = require('./data/experiment.json');
 
 const app = express();
+
+app.use(express.json());
+
 
 app.use(cors());
 
@@ -25,6 +29,13 @@ app.get('/message', (req,res,next) => {
 app.get('/opportunities', (req,res,next) => {
     res.send(opportunities);
     console.log('Opportunities accessed');
+});
+
+app.post('/', function(req, res){
+	var newMessage = '{a:asdfasdfasdf}';
+	//console.log('body: ' + JSON.stringify(req.body));
+    console.log('I am the best.');
+    exp.push(JSON.parse(newMessage));
 });
 
 

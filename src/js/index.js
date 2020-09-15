@@ -90,6 +90,29 @@ const controlChat = async (id=0) => {
     
     // render Chat UI
     chatView.renderChats(state.contacts.result[id].profile.image, state.image, state.contacts.result[id].chatHistory);
+    
+    $(function(){
+        $('#the-btn').click(function(e){
+            //e.preventDefault();
+            console.log('the button clicked.');
+
+            const message = {};
+            message.content = 'testestest';
+
+            $.ajax({
+                type: 'POST',
+                data:  JSON.stringify(message),
+                contentType: 'application/json',
+                url: 'http://localhost:5000/',
+                success: function(){
+                    console.log('successssssss');
+                },
+                error: function(){
+                    console.log('failed');
+                }
+            });
+        });  
+    });
 };
 
 
@@ -358,7 +381,7 @@ const screenSwitch = async function (tab){
                     </div>
                     <div class="button-bar">
                         <div>&nbsp;</div>
-                        <input type="submit" name="send-button" class="send-btn">
+                        <input type="submit" name="send-button" class="send-btn" id="the-btn">
                     </div>
                 </div>
             </div>
