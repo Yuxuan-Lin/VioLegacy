@@ -1,32 +1,33 @@
-const fs = require("fs");
-const http = require("http");
-const url = require("url");
+const express = require('express');
+const path = require('path');
+const message = require('./data/message.json');
+const home = require('./data/home.json');
+const opportunities = require('./data/opportunities.json');
+const cors = require('cors');
 
-const json = fs.readFileSync(`${__dirname}/data/message.json`,'utf-8');
-const chatData = JSON.parse(json);
+const app = express();
 
-const server = http.createServer((req,res) => {
+app.use(cors());
 
-	console.log("Server Accessed.")
+app.get('/', (req,res,next) => {
+    console.log('welcome')});
 
-	const pathName = url.parse(req.url,true).pathname;
-	const query = url.parse(req.url, true).query;
-
-	if(pathName === "/" || pathName === "/chat"){
-		res.writeHead(200, {'Content-type': 'text/html'});
-
-		fs.readFile(`${__dirname}/data/message.json`,'utf-8',(err,data) => {
-			res.end(data);
-		})
-	}
-	else{
-		res.writeHead(404, {'Content-type': 'text/html'});
-		res.end("URL was not found on the server.");
-	}
-
+app.get('/home', (req,res,next) => {
+    res.send(home);
+    console.log('Home accessed');
 });
 
-server.listen(3000, '127.0.0.1', () => {
-	console.log("Listening for requests now.");
+app.get('/message', (req,res,next) => {
+    res.send(message);
+    console.log('Message accessed');
 });
 
+app.get('/opportunities', (req,res,next) => {
+    res.send(opportunities);
+    console.log('Opportunities accessed');
+});
+
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {console.log('Server Started!')});

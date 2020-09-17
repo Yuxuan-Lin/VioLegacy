@@ -2,18 +2,12 @@
 
 A web app
 
-## Setup
+## Steps to run web app
 
-In one shell:
-- Copy the files to a directory ad move into the directory (e.g. `git clone https://github.com/Yuxuan-Lin/VioLegacy.git && cd VioLegacy`)
-- Install dependencies with `npm i`
-- Set up server with `node API/Test.js`
+Run the following commands in a shell (Terminal, CMD, PowerShell, ...)
 
-## Run website
-
-In another shell:
-- Move into directory again (`cd VioLegacy`)
-- Start website `npm start`
-
-I am the best.
-
+```bash
+git clone https://github.com/Yuxuan-Lin/VioLegacy.git && cd VioLegacy
+npm i
+npm run app
+```
