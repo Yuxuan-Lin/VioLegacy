@@ -95,22 +95,28 @@ const controlChat = async (id=0) => {
         $('#the-btn').click(function(e){
             //e.preventDefault();
             console.log('the button clicked.');
-
+            
             const message = {};
-            message.content = 'testestest';
-
-            $.ajax({
-                type: 'POST',
-                data:  JSON.stringify(message),
-                contentType: 'application/json',
-                url: 'http://localhost:5000/',
-                success: function(){
-                    console.log('successssssss');
-                },
-                error: function(){
-                    console.log('failed');
-                }
-            });
+            message.content = $('#type-box').val();
+            //console.log($('#type-box'));
+            //console.log(message.content);
+            
+            if (message.content){
+                $.ajax({
+                    type: 'POST',
+                    data:  JSON.stringify(message),
+                    contentType: 'application/json',
+                    url: 'http://localhost:5000/',
+                    success: function(){
+                        console.log('successssssss');
+                    },
+                    error: function(){
+                        console.log('failed');
+                    }
+                });
+            }
+            
+            
         });  
     });
 };
@@ -377,7 +383,7 @@ const screenSwitch = async function (tab){
                         </li>
                     </ul>
                     <div class="input-field">
-                        <input type="text" name="message-input-field">
+                        <input type="text" name="message-input-field" id="type-box">
                     </div>
                     <div class="button-bar">
                         <div>&nbsp;</div>
