@@ -8,11 +8,11 @@ export const clearProfile = () => {
 export const renderProfile = self => {
     const markup = `
         <div class = "profile-pic">
-            <img class="round-image" src="${self.profile.image}" alt="${self.profile.name}">
+            <img class="round-image" src="${self.image}" alt="${self.name}">
         </div>
         <div class = "home-top-info">
-            <h2>${self.profile.name}</h2>
-            <h3>${self.profile.major}</h3>
+            <h2>${self.name}</h2>
+            <h3>${self.major}</h3>
         </div>
         <div class="home-top-icon">
             <ion-icon name="pencil-outline" class="big-icon"></ion-icon>
@@ -25,7 +25,7 @@ export const renderProfile = self => {
 export const renderAbout = self => {
     const markup = `
         <h3>About</h3>
-        <h4>${self.profile.about}</h4>
+        <h4>${self.about}</h4>
     `;
     
     document.querySelector('.about').insertAdjacentHTML('beforeend',markup);
@@ -53,7 +53,7 @@ export const renderOpp = opp => {
     let markup = `
         <li class = "opp-column-item">
             <div class="opp-item-left">
-                <h2>${opp.position}</h2>
+                <h2>${opp.title}</h2>
                 <h4>${opp.company}</h4>
             </div>
     `;

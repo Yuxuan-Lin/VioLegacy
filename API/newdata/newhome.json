@@ -1,0 +1,27 @@
+{     
+    "profiles": {
+        "BenWei Lu": {
+            "name": "BenWei Lu",
+            "major": "Tu Kuai",
+            "year" : "2020",
+            "image": "../images/LBW.jpg",
+            "about": "Cong xian zai kai shi, zhe li jiao zuo lu ben wei guang chang.",
+            "experience" : [
+                {
+                    "title": "Software Developer",
+                    "company": "Airbnb",
+                    "time": "01/2020 - 03/2020",
+                    "location": "New York, NY",
+                    "description": "Deserunt culpa excepteur in minim consectetur adipisicing minim et pariatur anim minim. Enim eu reprehenderit pariatur veniam enim duis dolore nulla dolor veniam labore proident."
+                },
+                {
+                    "title": "Data Analyst",
+                    "company": "Apple",
+                    "time": "03/2020 - 05/2020",
+                    "location": "Brooklyn, NY",
+                    "description": "Deserunt culpa excepteur in minim consectetur adipisicing minim et pariatur anim minim. Enim eu reprehenderit pariatur veniam enim duis dolore nulla dolor veniam labore proident."
+                }
+            ]
+        }
+    }
+}

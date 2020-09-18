@@ -1,7 +1,6 @@
 import Home from './models/home';
 import Opp from './models/opportunities';
 import Contacts from './models/contacts';
-import Chat from './models/chat';
 import {elements} from './views/base';
 import * as contactsView from './views/contactsView'; 
 import * as chatView from './views/chatView';
@@ -13,7 +12,7 @@ import * as oppView from './views/oppView';
 
 
 const state = {};
-state.home = new Home("whatever");
+state.home = new Home("BenWei_Lu");
 state.opp = new Opp("Ishmael");
 state.contacts = new Contacts("chat");
 state.image = "../images/kerwin.jpg";
@@ -29,10 +28,10 @@ const controlHome = async () => {
     homeView.clearProfile();
     
     //3) Render UI
-    homeView.renderProfile(state.home.result);
-    homeView.renderAbout(state.home.result);
-    homeView.renderExps(state.home.result.profile.experience);
-    homeView.renderOpps(state.home.result.opportunities);
+    homeView.renderProfile(state.home.profile);
+    homeView.renderAbout(state.home.profile);
+    homeView.renderExps(state.home.profile.experience);
+    homeView.renderOpps(state.home.opp);
     console.log('home fully rendered');
     
     //1) Get chatHistory(array) and profile
@@ -115,7 +114,6 @@ const controlChat = async (id=0) => {
                     }
                 });
             }
-            
             
         });  
     });
