@@ -50,3 +50,28 @@ numResults=int
         {"chatTime": "18:35 2020/08/19", "chatSender": "Bill Gu", "chatContent": "What's up?"}
     ]
 }
+
+
+//"/messages" POST endpoint
+//Params
+sender1=str
+sender2=str
+//Resource
+{
+    //One single message added to the conversation between two people, the chat storage between these two users is updated
+    <name+name> (str; names alphabetical): [
+        {"chatTime": datetime, "chatSender": str, "chatContent": str},
+        
+        //new message
+        {"chatTime": datetime, "chatSender": str, "chatContent": str}
+    ]
+}
+//Example
+{
+    "Bill Gu+Kerwin Lin": [
+        {"chatTime": "18:30 2020/08/19", "chatSender": "Kerwin Lin", "chatContent": "HI Bill!"},
+        
+        //Notice, new message
+        {"chatTime": "new time", "chatSender": "Kerwin Lin", "chatContent": "new message"}
+    ]
+}
