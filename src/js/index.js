@@ -462,7 +462,7 @@ const billFunction = function(oppSetUp){
 
     document.querySelector('.referral-box').addEventListener('click', e => {
         const btn = e.target.closest('.referral');
-
+        const oppQuery = `?id=${btn.id}`;
         if(btn) {
             // clear right screen
             clearScreen();
@@ -490,12 +490,31 @@ const billFunction = function(oppSetUp){
                             <button type="button">Request Sent!</button>
                         </div>
                     `;
+                    
+                      
                 } else if(btn3 && btn3.id == 1) {
                     btn3.innerHTML = `
                         <div class="ref-request" id="0">
                             <button type="button">Request a Referral</button>
                         </div>
                     `;
+                }
+                
+                if(btn3){
+                    $(function(){
+                        $.ajax({
+                            type: 'PUT',
+                            data:  '',
+                            contentType: 'application/json',
+                            url: `http://localhost:5000/opportunities${oppQuery}`,
+                            success: function(){
+                                console.log('opp registration success');
+                            },
+                            error: function(){
+                                console.log('opp registration failed');
+                            }
+                        });
+                    });
                 }
             });
         }
