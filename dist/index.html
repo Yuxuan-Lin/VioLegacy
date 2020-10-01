@@ -2,16 +2,63 @@
 <html>
 <head>
 	<title>VioLegacy Chat Page</title>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js"></script>
+
+
+	<script>
+		// Your web app's Firebase configuration
+		// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+		var firebaseConfig = {
+			apiKey: "AIzaSyBiCwymuT8cMZHBqG2csQ7OnDHsyyhrhl4",
+			authDomain: "violegacy-26a40.firebaseapp.com",
+			databaseURL: "https://violegacy-26a40.firebaseio.com",
+			projectId: "violegacy-26a40",
+			storageBucket: "violegacy-26a40.appspot.com",
+			messagingSenderId: "49331994721",
+			appId: "1:49331994721:web:ab5255883b3f9b077a2a20",
+			measurementId: "G-R9G1V3E3RE"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+
+		const auth = firebase.auth();
+		const db = firebase.firestore();
+
+		db.settings({ timestampsInSnapshots : true });
+	</script>
+	
 	<link rel="stylesheet" type="text/css" href="css/newchat.css">
 </head>
 <body>
-	<div class="container">
+	<div class="sign-in-up">
+		
+		<div class="sign-content">
+			<h4>Sign up</h4><br>
+			<form id="signup-form">
+				<div class="signup-input-field">
+					<input type="email" id="signup-email" required />
+					<label for="signup-email">Email address</label>
+				</div>
+				<div class="signup-input-field">
+					<input type="password" id="signup-password" required />
+					<label for="signup-password">Choose password</label>
+				</div>
+				
+				<button class="btn yellow darken-2 z-depth-0">Sign up</button>
+				<p class="error pink-text center-align"></p>
+			</form>
+		</div>		
+	</div>
+	<div class="container invisible">
 		<div class="navigator">
-			<div class="head">
+			<div class="tab head">
 				<div>
 					<img src="./images/Logo.jpg"></img>
 				</div>
-				<h2>VioLegacy</h2>
+				<h2 class='collapse-label'>VioLegacy</h2>
 			</div>
 			<ul class="tools">
 				<li id="0">
@@ -20,11 +67,11 @@
 					</div>					
 				</li>
                 <li id="1">
-                    <div class="tab">                     
+                    <div class="tab" id="default">                     
                         <div>
                             <ion-icon name="home-outline" class="small-icon"></ion-icon>
                         </div>
-                        <h2 class='collapse-label'>Home</h2>                       
+                        <h2 class='collapse-label'>Home</h2>                    
                     </div>
 				</li>
 				<li id="2">
@@ -45,7 +92,7 @@
 				</li>
                 <li id="4">
 					<div class="tab" id="invisible-2">
-						<h2 class='collapse-label'>&nbsp;</h2>
+						<h2>&nbsp;</h2>
 					</div>					
 				</li>
 			</ul>
@@ -54,26 +101,26 @@
 					<div>
 						<ion-icon name="help-circle-outline" class="small-icon"></ion-icon>
 					</div>
-					<h2>FAQ</h2>
+					<h2 class='collapse-label'>FAQ</h2>
 				</li>
 				<li class="tab">
 					<div>
 						<ion-icon name="settings-outline" class="small-icon"></ion-icon>
 					</div>
-					<h2>Account Settings</h2>
+					<h2 class='collapse-label'>Account Settings</h2>
 				</li>
 				<li class="tab">
 					<div>
 						<ion-icon name="log-out-outline" class="small-icon"></ion-icon>
 					</div>
-					<h2>Log Out</h2>
+					<h2 class='collapse-label'>Log Out</h2>
 				</li>
 			</ul>
 			<div class="collapse tab">
-				<div>
-					<ion-icon name="arrow-back-outline" class="big-icon"></ion-icon>
+				<div class="collapse-icon">
+					<ion-icon name="arrow-back-outline" class="small-icon"></ion-icon>
 				</div>
-				<h2>Collapse Menu</h2>
+				<h2 class='collapse-label'>Collapse Menu</h2>
 			</div>
 		</div>
     
@@ -222,8 +269,16 @@
 	</div>
 	
 
-<script src="js/bundle.js"></script></body>
+<script src="js/authBundle.js"></script></body>
 
+
+
+
+<script
+  src="https://code.jquery.com/jquery-2.2.4.js"
+  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+  crossorigin="anonymous"></script>
 <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+
 
 </html>

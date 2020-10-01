@@ -135,7 +135,7 @@ elements.collapse.addEventListener('click', e => {
 });
 
 const collapseMenu = function() {
-    //console.log("success");
+    console.log("success");
     state.menuCollapsed = true;
     const labelled = document.querySelectorAll('.collapse-label');
     labelled.forEach(labelCollapse);
