@@ -4,11 +4,14 @@ export default class Opportunities{
 	}
 
 	async getOppData(){
-		// const proxy = 'https://cors-anywhere.herokuapp.com/';
 		try{
-			const res = await fetch('http://localhost:5000/opportunities').then((res) => res.json());
-			this.result = res;
-            //console.log(this.result);
+			//const oppArr = {};
+			await db.collection('Opportunities').get().then(snapshot => {
+				this.opps = snapshot.docs;
+				//console.log(snapshot.docs[0].id);
+			})
+			
+			console.log(this.opps[0].data());
 		} catch (error){
 			alert(error);
 		}

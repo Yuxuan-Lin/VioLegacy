@@ -8,7 +8,7 @@ export const clearProfile = () => {
 export const renderProfile = self => {
     const markup = `
         <div class = "profile-pic">
-            <img class="round-image" src="${self.image}" alt="${self.name}">
+            <img class="round-image" src=${"./images/Bill.jpg"} alt="${self.name}">
         </div>
         <div class = "home-top-info">
             <h2>${self.name}</h2>

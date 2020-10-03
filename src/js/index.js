@@ -8,31 +8,29 @@ import * as homeView from './views/homeView';
 import * as oppView from './views/oppView';
 
 
+
 //experimental area
 
 
-const state = {};
-state.home = new Home("BenWei_Lu");
-state.opp = new Opp("Ishmael");
-state.contacts = new Contacts("chat");
-state.image = "../images/kerwin.jpg";
-state.home.collapsed = false;
-state.menuCollapsed = false;
 
 
-const controlHome = async () => {
+const controlHome = async (state) => {
     //1) Get contact list(array)
+    //console.log(userId);
     await state.home.getHomeData();
-    
+
     //2) Prepare UI(optional)
     homeView.clearProfile();
     
     //3) Render UI
     homeView.renderProfile(state.home.profile);
     homeView.renderAbout(state.home.profile);
-    homeView.renderExps(state.home.profile.experience);
-    homeView.renderOpps(state.home.opp);
+    //homeView.renderExps(state.home.profile.experience);
+    //homeView.renderOpps(state.home.opp);
     console.log('home fully rendered');
+    
+ 
+    
     
     //1) Get chatHistory(array) and profile
 
@@ -41,7 +39,7 @@ const controlHome = async () => {
     //3) Render chatHistroy and profile on UI    
 };
 
-const controlOpp = async () => {
+const controlOpp = async (state) => {
     //1) Get contact list(array)
     
     await state.opp.getOppData();
@@ -50,7 +48,7 @@ const controlOpp = async () => {
     oppView.clearOpps();
 
     //3) Render contacts on UI
-    oppView.renderOpps(state.opp.result.opportunities);
+    oppView.renderOpps(state.opp.opps);
     //1) Get chatHistory(array) and profile
 
     //2) Prepare UI(clear field)
@@ -61,7 +59,7 @@ const controlOpp = async () => {
     
 };
 
-const controlContacts = async () => {
+const controlContacts = async (state) => {
     //1) Get contact list(array)
     
     await state.contacts.getContacts();
@@ -82,7 +80,7 @@ const controlContacts = async () => {
     
 };
 
-const controlChat = async (id=0) => {
+const controlChat = async (state, id=0) => {
     // render Profile UI
     await state.contacts.getContacts();
     chatView.renderProfile(state.contacts.result[id]);
@@ -123,18 +121,7 @@ const controlChat = async (id=0) => {
 
 
 
-//Collapse Menu
-elements.collapse.addEventListener('click', e => {
-    e.preventDefault();
-    const tab = e.target.closest('.collapse');
-    if (!state.menuCollapsed){
-        collapseMenu();
-    } else if (state.menuCollapsed){
-        expandMenu();
-    }
-});
-
-const collapseMenu = function() {
+const collapseMenu = function(state) {
     console.log("success");
     state.menuCollapsed = true;
     const labelled = document.querySelectorAll('.collapse-label');
@@ -145,7 +132,7 @@ const collapseMenu = function() {
     `;
 };
 
-const expandMenu = function(){
+const expandMenu = function(state){
     //console.log("success");
     state.menuCollapsed = false;
     const labelled = document.querySelectorAll('.collapse-label');
@@ -165,28 +152,11 @@ const labelExpand = function(el){
 };
 
 
-
-
-
-
-
-
-
-
-//3 main function tabs
-elements.tools.addEventListener('click', e => {
-    e.preventDefault();
-    const tab = e.target.closest('.tab');
-    console.log(tab);
-    tabSwitch(tab);
-});
-
-
-const tabSwitch = function (tab){
+const tabSwitch = async function (state,tab){
     const id = parseInt(tab.parentNode.id);
-    console.log(id);
+    console.log(state.user.name);
     if (id != 0 && id != 4){
-        screenSwitch(tab);
+        screenSwitch(state, tab);
 
         //clear
         let markup = tab.parentNode.parentNode.childNodes;
@@ -211,7 +181,7 @@ const tabSwitch = function (tab){
 };
 
 
-const screenSwitch = async function (tab){
+const screenSwitch = async function (state, tab){
     state.tab = tab.parentNode.id;
 
     clearScreen();
@@ -340,7 +310,7 @@ const screenSwitch = async function (tab){
                     </li>
                 </ul>
             </div>
-        </div>
+        </div>   
     `;
     
     const messageSetUp = `
@@ -397,7 +367,7 @@ const screenSwitch = async function (tab){
     
     if (state.tab == '1'){
        elements.container.insertAdjacentHTML('beforeend',homeSetUp);
-        await controlHome();
+        await controlHome(state);
         state.home.pending = homeView.oppStatus[0];
         state.home.accepted = homeView.oppStatus[1];
         state.home.declined = homeView.oppStatus[2];
@@ -435,13 +405,13 @@ const screenSwitch = async function (tab){
         
     }
     else if (state.tab == '2'){
-        billFunction(oppSetUp);
+        billFunction(state, oppSetUp);
     }
     else if (state.tab == '3'){
         elements.container.insertAdjacentHTML('beforeend',messageSetUp);
         //console.log("Screen fully Setup");
-        controlContacts();
-        controlChat();
+        controlContacts(state);
+        controlChat(state);
         
         document.querySelector('.contact-list').addEventListener('click', e => {
             const btn = e.target.closest('.contact-person').id;
@@ -456,18 +426,19 @@ const screenSwitch = async function (tab){
     
 };
 
-const billFunction = function(oppSetUp){
+const billFunction = async function(state, oppSetUp){
     elements.container.insertAdjacentHTML('beforeend',oppSetUp);
-    controlOpp();
+    controlOpp(state);
+    console.log("bill function started" + state.user.name);
 
     document.querySelector('.referral-box').addEventListener('click', e => {
         const btn = e.target.closest('.referral');
-        const oppQuery = `?id=${btn.id}`;
+        //const oppQuery = `?id=${btn.id}`;
         if(btn) {
             // clear right screen
             clearScreen();
             // render temp 2
-            oppView.renderDetail(state.opp.result.opportunities[btn.id]);
+            oppView.renderDetail(state.opp.opps[btn.id]);
 
             document.querySelector('.back-top').addEventListener('click', e => {
                 const btn2 = e.target.closest('.back-top');
@@ -476,20 +447,56 @@ const billFunction = function(oppSetUp){
                     // clear right screen
                     clearScreen();
                     // render temp 2
-                    billFunction(oppSetUp);
+                    billFunction(state,oppSetUp);
                 }
             });
-            
+
+            //console.log("attention: " + state.user.uid);
+            //console.log("attention: " + state.opp.opps[btn.id].data().registered[1].uid);
+            let flag = false;
+            for (let i=0; i<state.opp.opps[btn.id].data().registered.length; i++){
+                if (state.opp.opps[btn.id].data().registered[i].uid == state.user.uid){
+                    flag = true;
+                }
+            }
+            if (flag){
+                document.querySelector('.ref-request').innerHTML = `
+                <div class="ref-request" id="1">
+                    <button type="button">Request Sent!</button>
+                </div>
+                `;
+            } else {
+                document.querySelector('.ref-request').innerHTML = `
+                <div class="ref-request" id="0">
+                    <button type="button">Request a Referral</button>
+                </div>
+                `;
+            }
+
+
             document.querySelector('.ref-request').addEventListener('click', e => {
                 const btn3 = e.target.closest('.ref-request');
+                console.log("attention: "+state.opp.opps[btn.id].id);
 
                 if(btn3 && btn3.id == 0) {
+
+                    
                     // UI change
                     btn3.innerHTML = `
                         <div class="ref-request" id="1">
                             <button type="button">Request Sent!</button>
                         </div>
                     `;
+                    let tempArr = state.opp.opps[btn.id].data().registered;
+                    tempArr.push({
+                        name: state.home.profile.name,
+                        uid: state.user.uid
+                    });
+                    //console.log(tempArr);
+                    //console.log(state.opp.opps[btn.id].data().registered);
+                    db.collection('Opportunities').doc(state.opp.opps[btn.id].id).update({
+                        registered: tempArr
+                    });
                     
                       
                 } else if(btn3 && btn3.id == 1) {
@@ -498,51 +505,80 @@ const billFunction = function(oppSetUp){
                             <button type="button">Request a Referral</button>
                         </div>
                     `;
-                }
-                
-                if(btn3){
-                    $(function(){
-                        $.ajax({
-                            type: 'PUT',
-                            data:  '',
-                            contentType: 'application/json',
-                            url: `http://localhost:5000/opportunities${oppQuery}`,
-                            success: function(){
-                                console.log('opp registration success');
-                            },
-                            error: function(){
-                                console.log('opp registration failed');
-                            }
-                        });
+
+                    let tempArr = [];
+                    for (let i=0; i<state.opp.opps[btn.id].data().registered.length; i++){
+                        if (state.opp.opps[btn.id].data().registered[i].uid != state.user.uid){
+                            tempArr.push(state.opp.opps[btn.id].data().registered[i]);
+                        }
+                    }
+
+                    db.collection('Opportunities').doc(state.opp.opps[btn.id].id).update({
+                        registered: tempArr
                     });
+                    
+
                 }
+
+                state.opp.getOppData();
+
             });
         }
     });
 };
 
 const clearScreen = function(){
+    /*
     const container = document.querySelector(".container").childNodes;
+    console.log(container);
     let temp = 0;
 
     while(temp < container.length){
-        if(container[temp].nodeName == "DIV" && !container[temp].classList.contains("navigator")) {
-                elements.container.removeChild(container[temp]);
+        if(!container[temp].classList.contains("navigator")) {
+            elements.container.removeChild(container[temp]);
+            temp--;
         }
         temp++;
     }
 
     console.log("screen clear success");
+    */
+   elements.container.innerHTML = "";
 };
 
 
 
-//????????????????????????????????????????????
-tabSwitch(document.getElementById("default"));
 
+export const setUI = async function(state, user){
+    state.home = new Home(user.uid);
+    state.user = user;
+    state.opp = new Opp("Ishmael");
+    state.contacts = new Contacts("chat");
+    state.image = "../images/kerwin.jpg";
+    state.home.collapsed = false;
+    state.menuCollapsed = false;
+    //console.log(state.user.name);
+    tabSwitch(state, document.getElementById("default"));
 
+    //3 main function tabs
+    elements.tools.addEventListener('click', e => {
+        e.preventDefault();
+        const tab = e.target.closest('.tab');
+        console.log(tab);
+        tabSwitch(state,tab);
+    });
 
-
+    //Collapse Menu
+    elements.collapse.addEventListener('click', e => {
+        e.preventDefault();
+        const tab = e.target.closest('.collapse');
+        if (!state.menuCollapsed){
+            collapseMenu(state);
+        } else if (state.menuCollapsed){
+            expandMenu(state);
+        }
+    });
+};
 
 
 

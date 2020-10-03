@@ -27,13 +27,12 @@
 		const auth = firebase.auth();
 		const db = firebase.firestore();
 
-		db.settings({ timestampsInSnapshots : true });
 	</script>
 	
 	<link rel="stylesheet" type="text/css" href="css/newchat.css">
 </head>
 <body>
-	<div class="sign-in-up">
+	<div class="sign-up">
 		
 		<div class="sign-content">
 			<h4>Sign up</h4><br>
@@ -52,6 +51,29 @@
 			</form>
 		</div>		
 	</div>
+
+
+
+	<div class="log-in">
+		
+		<div class="login-content">
+			<h4>Log in</h4><br>
+			<form id="login-form">
+				<div class="login-input-field">
+					<input type="email" id="login-email" required />
+					<label for="login-email">Email address</label>
+				</div>
+				<div class="login-input-field">
+					<input type="password" id="login-password" required />
+					<label for="login-password">Choose password</label>
+				</div>
+				
+				<button class="btn yellow darken-2 z-depth-0">Sign up</button>
+				<p class="error pink-text center-align"></p>
+			</form>
+		</div>		
+	</div>
+
 	<div class="container invisible">
 		<div class="navigator">
 			<div class="tab head">
@@ -109,7 +131,7 @@
 					</div>
 					<h2 class='collapse-label'>Account Settings</h2>
 				</li>
-				<li class="tab">
+				<li class="tab" id="log-out-btn">
 					<div>
 						<ion-icon name="log-out-outline" class="small-icon"></ion-icon>
 					</div>
@@ -123,153 +145,155 @@
 				<h2 class='collapse-label'>Collapse Menu</h2>
 			</div>
 		</div>
-    
-        <!--
-		<div class="contacts">
-			<div class="search-bar">
-				<div>
-					<ion-icon name="search-outline" class="small-icon"></ion-icon>
+	
+		<div class="right-container">
+			<!--
+			<div class="contacts">
+				<div class="search-bar">
+					<div>
+						<ion-icon name="search-outline" class="small-icon"></ion-icon>
+					</div>
+					<input type="text" name="search" placeholder="Search names, chats, etc.">
 				</div>
-				<input type="text" name="search" placeholder="Search names, chats, etc.">
-			</div>
-			<ul class="contact-list">
-				//????????????????????????????????
-                <li class="contact-person">
-					<div class="person-image"><img class="round-image" src="images/Bill.jpg"></div>
-					<div class="person-info">
-						<div class="person-top">
-							<h3 class="name">Bill Ruochen Gu</h3>
-							<h3 class="time">8:30AM</h3>
+				<ul class="contact-list">
+					//????????????????????????????????
+					<li class="contact-person">
+						<div class="person-image"><img class="round-image" src="images/Bill.jpg"></div>
+						<div class="person-info">
+							<div class="person-top">
+								<h3 class="name">Bill Ruochen Gu</h3>
+								<h3 class="time">8:30AM</h3>
+							</div>
+							<h3>ok.</h3>
 						</div>
-						<h3>ok.</h3>
-					</div>
-				</li>
-                //????????????????????????????????
-			</ul>
-		</div>
-
-		<div class="chat-block">
-			<div class="profile">
-                //????????????????????????????????
-				<div class="profile-image">
-					<img class="round-image" src="images/Bill.jpg">
-				</div>
-				<div class="profile-info">
-					<h3 class="profile-name">Bill Ruochen Gu</h3>
-					<h3 class="profile-major">BS Computer Science '20</h3>
-					<h3 class="profile-career">Bill will refer you to the position of "Software Developer" at Apple.</h3>
-				</div>
-                //????????????????????????????????
+					</li>
+					//????????????????????????????????
+				</ul>
 			</div>
 
-			<div class="chat-box">
-				<div class="chat-field">
-					<ul class="chat-history">
-						//?????????????????????????????
-                        <li class="message-received">
-							<div class="message-avatar"><img class="round-image" src="images/Bill.jpg"></div>
-							<div class="message-text talk-bubble tri-right left-top">
-								<div class="talktext">
-	    							<p>Hi, Kerwin. Ning chi le me?</p>
-	  							</div>
-							</div>
-							<div class="message-empty">&nbsp;</div>
-						</li>
-						<li class="message-received">
-							<div class="message-avatar"><img class="round-image" src="images/Bill.jpg"></div>
-							<div class="message-text talk-bubble tri-right left-top">
-								<div class="talktext">
-	    							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	    							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	    							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	    							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	    							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	    							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	  							</div>
-							</div>
-							<div class="message-empty">&nbsp;</div>
-						</li>
-						<li class="message-sent">
-							<div class="message-avatar"><img class="round-image" src="images/kerwin.jpg"></div>
-							<div class="message-text talk-bubble tri-right right-top">
-								<div class="talktext">
-	    							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	    							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	    							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	    							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	    							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	    							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	  							</div>
-							</div>
-							<div class="message-empty">&nbsp;</div>
-						</li>
-						<li class="message-sent">
-							<div class="message-avatar"><img class="round-image" src="images/kerwin.jpg"></div>
-							<div class="message-text talk-bubble tri-right right-top">
-								<div class="talktext">
-	    							<p>Mei chi. Fine, thank you, and you?</p>
-	  							</div>
-							</div>
-							<div class="message-empty">&nbsp;</div>
-						</li>
-						<li class="message-received">
-							<div class="message-avatar"><img class="round-image" src="images/Bill.jpg"></div>
-							<div class="message-text talk-bubble tri-right left-top">
-								<div class="talktext">
-	    							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	    							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	    							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	    							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	    							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	    							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	  							</div>
-							</div>
-							<div class="message-empty">&nbsp;</div>
-						</li>
-                        //???????????????????????????
-					</ul>
+			<div class="chat-block">
+				<div class="profile">
+					//????????????????????????????????
+					<div class="profile-image">
+						<img class="round-image" src="images/Bill.jpg">
+					</div>
+					<div class="profile-info">
+						<h3 class="profile-name">Bill Ruochen Gu</h3>
+						<h3 class="profile-major">BS Computer Science '20</h3>
+						<h3 class="profile-career">Bill will refer you to the position of "Software Developer" at Apple.</h3>
+					</div>
+					//????????????????????????????????
 				</div>
 
-				<div class="type-field">
-
-					<ul class="tool-bar">
-						<li class="tool-icon">
-							<ion-icon name="happy-outline" class="small-icon"></ion-icon>
-						</li>
-						<li class="tool-icon">
-							<ion-icon name="image-outline" class="small-icon"></ion-icon>
-						</li>
-						<li class="tool-icon">
-							<ion-icon name="mic-outline" class="small-icon"></ion-icon>
-						</li>
-						<li class="tool-icon">
-							<ion-icon name="folder-outline" class="small-icon"></ion-icon>
-						</li>
-						<li class="tool-icon">
-							<ion-icon name="link-outline" class="small-icon"></ion-icon>
-						</li>
-						<li class="tool-icon-special">
-							&nbsp;
-						</li>
-					</ul>
-
-					<div class="input-field">
-						<input type="text" name="message-input-field">
+				<div class="chat-box">
+					<div class="chat-field">
+						<ul class="chat-history">
+							//?????????????????????????????
+							<li class="message-received">
+								<div class="message-avatar"><img class="round-image" src="images/Bill.jpg"></div>
+								<div class="message-text talk-bubble tri-right left-top">
+									<div class="talktext">
+										<p>Hi, Kerwin. Ning chi le me?</p>
+									</div>
+								</div>
+								<div class="message-empty">&nbsp;</div>
+							</li>
+							<li class="message-received">
+								<div class="message-avatar"><img class="round-image" src="images/Bill.jpg"></div>
+								<div class="message-text talk-bubble tri-right left-top">
+									<div class="talktext">
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+										tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+										quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+										consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+										cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+										proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+									</div>
+								</div>
+								<div class="message-empty">&nbsp;</div>
+							</li>
+							<li class="message-sent">
+								<div class="message-avatar"><img class="round-image" src="images/kerwin.jpg"></div>
+								<div class="message-text talk-bubble tri-right right-top">
+									<div class="talktext">
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+										tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+										quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+										consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+										cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+										proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+									</div>
+								</div>
+								<div class="message-empty">&nbsp;</div>
+							</li>
+							<li class="message-sent">
+								<div class="message-avatar"><img class="round-image" src="images/kerwin.jpg"></div>
+								<div class="message-text talk-bubble tri-right right-top">
+									<div class="talktext">
+										<p>Mei chi. Fine, thank you, and you?</p>
+									</div>
+								</div>
+								<div class="message-empty">&nbsp;</div>
+							</li>
+							<li class="message-received">
+								<div class="message-avatar"><img class="round-image" src="images/Bill.jpg"></div>
+								<div class="message-text talk-bubble tri-right left-top">
+									<div class="talktext">
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+										tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+										quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+										consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+										cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+										proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+									</div>
+								</div>
+								<div class="message-empty">&nbsp;</div>
+							</li>
+							//???????????????????????????
+						</ul>
 					</div>
 
-					<div class="button-bar">
-						<div>&nbsp;</div>
-						<input type="submit" name="send-button" class="send-btn">
+					<div class="type-field">
+
+						<ul class="tool-bar">
+							<li class="tool-icon">
+								<ion-icon name="happy-outline" class="small-icon"></ion-icon>
+							</li>
+							<li class="tool-icon">
+								<ion-icon name="image-outline" class="small-icon"></ion-icon>
+							</li>
+							<li class="tool-icon">
+								<ion-icon name="mic-outline" class="small-icon"></ion-icon>
+							</li>
+							<li class="tool-icon">
+								<ion-icon name="folder-outline" class="small-icon"></ion-icon>
+							</li>
+							<li class="tool-icon">
+								<ion-icon name="link-outline" class="small-icon"></ion-icon>
+							</li>
+							<li class="tool-icon-special">
+								&nbsp;
+							</li>
+						</ul>
+
+						<div class="input-field">
+							<input type="text" name="message-input-field">
+						</div>
+
+						<div class="button-bar">
+							<div>&nbsp;</div>
+							<input type="submit" name="send-button" class="send-btn">
+						</div>
 					</div>
 				</div>
+
 			</div>
-
+			-->
 		</div>
-        -->
 	</div>
 	
 
-<script src="js/authBundle.js"></script></body>
+<script src="js/auth.js"></script><script src="js/bundle.js"></script></body>
 
 
 

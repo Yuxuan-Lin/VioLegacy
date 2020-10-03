@@ -1,20 +1,18 @@
 export default class Home{
 	constructor(query){
 		this.query = query;
+		console.log("home created")
 	}
 
 	async getHomeData(){
 		// const proxy = 'https://cors-anywhere.herokuapp.com/';
 		try{
-            const theQuery = `?name=${this.query}`;
-            console.log(`http://localhost:5000/home${theQuery}`);
-			const profile = await fetch(`http://localhost:5000/home${theQuery}`).then((res) => res.json());
-            const opp = await fetch(`http://localhost:5000/myOpp`).then((res) => res.json());
-			this.profile = profile;
-            this.opp = opp;
-            
-            console.log(this.profile);
-            console.log(this.opp);
+			await db.collection('Profiles').doc(this.query).get().then(doc => {
+				this.profile = doc.data();
+				console.log(this.profile);
+				
+			});
+			
 		} catch (error){
 			alert(error);
 		}

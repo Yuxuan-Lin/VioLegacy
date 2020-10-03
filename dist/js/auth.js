@@ -81,10 +81,22 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/auth.js");
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./src/js/auth.js":
+/*!************************!*\
+  !*** ./src/js/auth.js ***!
+  \************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index */ \"./src/js/index.js\");\n\r\nconst state = {};\r\n/*\r\n// add admin cloud function\r\nconst adminForm = document.querySelector('.admin-actions');\r\nadminForm.addEventListener('submit', (e) => {\r\n  e.preventDefault();\r\n\r\n  const adminEmail = document.querySelector('#admin-email').value;\r\n  const addAdminRole = functions.httpsCallable('addAdminRole');\r\n  addAdminRole({ email: adminEmail }).then(result => {\r\n    console.log(result);\r\n  });\r\n});\r\n*/\r\n\r\n// listen for auth status changes\r\nauth.onAuthStateChanged(user => {\r\n    console.log('auth changed');\r\n  if (user) {\r\n    _index__WEBPACK_IMPORTED_MODULE_0__[\"setUI\"](state, user);\r\n    document.querySelector(\".container\").classList.remove(\"invisible\");\r\n    document.querySelector(\".sign-up\").classList.add(\"invisible\");\r\n    document.querySelector(\".log-in\").classList.add(\"invisible\");\r\n  }\r\n  //revise to restrict data leakage \r\n  else {\r\n    document.querySelector(\".container\").classList.add(\"invisible\");\r\n    document.querySelector(\".sign-up\").classList.remove(\"invisible\");\r\n    document.querySelector(\".log-in\").classList.remove(\"invisible\");\r\n  }\r\n});\r\n\r\n/*\r\n// create new guide\r\nconst createForm = document.querySelector('#create-form');\r\ncreateForm.addEventListener('submit', (e) => {\r\n  e.preventDefault();\r\n  db.collection('guides').add({\r\n    title: createForm.title.value,\r\n    content: createForm.content.value\r\n  }).then(() => {\r\n    // close the create modal & reset form\r\n    const modal = document.querySelector('#modal-create');\r\n    M.Modal.getInstance(modal).close();\r\n    createForm.reset();\r\n  }).catch(err => {\r\n    console.log(err.message);\r\n  });\r\n});\r\n*/\r\n\r\n\r\n// signup\r\nconst signupForm = document.querySelector('#signup-form');\r\nsignupForm.addEventListener('submit', (e) => {\r\n  e.preventDefault();\r\n  \r\n  // get user info\r\n  const email = signupForm['signup-email'].value;\r\n  const password = signupForm['signup-password'].value;\r\n\r\n  // sign up the user & add firestore data\r\n  auth.createUserWithEmailAndPassword(email, password).then(cred => {\r\n    U.userId = cred.user.uid;\r\n    console.log(U.userId);\r\n  })\r\n  .catch(err => {\r\n    signupForm.querySelector('.error').innerHTML = err.message;\r\n  });\r\n});\r\n\r\n\r\n// logout\r\nconst logout = document.querySelector('#log-out-btn');\r\nlogout.addEventListener('click', (e) => {\r\n  e.preventDefault();\r\n  auth.signOut();\r\n});\r\n\r\n\r\n\r\n// login\r\nconst loginForm = document.querySelector('#login-form');\r\nloginForm.addEventListener('submit', (e) => {\r\n  e.preventDefault();\r\n  \r\n  // get user info\r\n  const email = loginForm['login-email'].value;\r\n  const password = loginForm['login-password'].value;\r\n\r\n  // log the user in\r\n  auth.signInWithEmailAndPassword(email, password).then((cred) => {\r\n    loginForm.reset();\r\n    loginForm.querySelector('.error').innerHTML = '';\r\n  }).catch(err => {\r\n    loginForm.querySelector('.error').innerHTML = err.message;\r\n  });\r\n\r\n});\r\n\n\n//# sourceURL=webpack:///./src/js/auth.js?");
+
+/***/ }),
 
 /***/ "./src/js/index.js":
 /*!*************************!*\

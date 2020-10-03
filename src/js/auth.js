@@ -1,3 +1,5 @@
+import * as index from './index';
+const state = {};
 /*
 // add admin cloud function
 const adminForm = document.querySelector('.admin-actions');
@@ -14,12 +16,18 @@ adminForm.addEventListener('submit', (e) => {
 
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
-    console.log('nmsl')
+    console.log('auth changed');
   if (user) {
+    index.setUI(state, user);
     document.querySelector(".container").classList.remove("invisible");
-  } else {
-    setupUI();
-    setupGuides([]);
+    document.querySelector(".sign-up").classList.add("invisible");
+    document.querySelector(".log-in").classList.add("invisible");
+  }
+  //revise to restrict data leakage 
+  else {
+    document.querySelector(".container").classList.add("invisible");
+    document.querySelector(".sign-up").classList.remove("invisible");
+    document.querySelector(".log-in").classList.remove("invisible");
   }
 });
 
@@ -53,21 +61,25 @@ signupForm.addEventListener('submit', (e) => {
   const password = signupForm['signup-password'].value;
 
   // sign up the user & add firestore data
-  auth.createUserWithEmailAndPassword(email, password).then(cred => console.log(cred.user))
+  auth.createUserWithEmailAndPassword(email, password).then(cred => {
+    U.userId = cred.user.uid;
+    console.log(U.userId);
+  })
   .catch(err => {
     signupForm.querySelector('.error').innerHTML = err.message;
   });
 });
 
+
 // logout
-const logout = document.querySelector('#logout');
+const logout = document.querySelector('#log-out-btn');
 logout.addEventListener('click', (e) => {
   e.preventDefault();
   auth.signOut();
 });
 
 
-/*
+
 // login
 const loginForm = document.querySelector('#login-form');
 loginForm.addEventListener('submit', (e) => {
@@ -79,9 +91,6 @@ loginForm.addEventListener('submit', (e) => {
 
   // log the user in
   auth.signInWithEmailAndPassword(email, password).then((cred) => {
-    // close the signup modal & reset form
-    const modal = document.querySelector('#modal-login');
-    M.Modal.getInstance(modal).close();
     loginForm.reset();
     loginForm.querySelector('.error').innerHTML = '';
   }).catch(err => {
@@ -89,4 +98,3 @@ loginForm.addEventListener('submit', (e) => {
   });
 
 });
-*/

@@ -3,7 +3,7 @@ export const elements = {
     chatHistory: document.querySelector('.chat-history'),
     profile: document.querySelector('.profile'),
     tools: document.querySelector('.tools'),
-    container: document.querySelector('.container'),
+    container: document.querySelector('.right-container'),
     collapse: document.querySelector('.collapse'),
     navi: document.querySelector('.navigator')
 };
