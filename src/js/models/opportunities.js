@@ -9,6 +9,9 @@ export default class Opportunities{
 			await db.collection('Opportunities').get().then(snapshot => {
 				this.opps = snapshot.docs;
 				//console.log(snapshot.docs[0].id);
+				this.opps.forEach(opp => {
+					console.log(opp.id);
+				})
 			})
 			
 			console.log(this.opps[0].data());

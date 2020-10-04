@@ -49,7 +49,8 @@ export const renderExps = experiences => {
 };
 
 export let oppStatus = [0,0,0];
-export const renderOpp = opp => {
+export const renderOpp = (profile,opp,i) => {
+
     let markup = `
         <li class = "opp-column-item">
             <div class="opp-item-left">
@@ -58,7 +59,10 @@ export const renderOpp = opp => {
             </div>
     `;
     
-    if (opp.status == "Pending") {
+    let isAccepted = false;
+    let isDeclined = false;
+    
+    if (profile.myOpps[i].status == "pending") {
         oppStatus[0]++;
         markup += `
             <div class="opp-item-right">
@@ -74,7 +78,7 @@ export const renderOpp = opp => {
         <hr>
     `;
     }
-    else if(opp.status == "Accepted") {
+    else if (profile.myOpps[i].status == "accepted") {
         oppStatus[1]++;
         markup += `
             <div class="opp-item-right">
@@ -82,7 +86,7 @@ export const renderOpp = opp => {
                     <ion-icon name="checkmark-circle-outline" class="big-icon green"></ion-icon>
                 </div>
                 <div class="opp-item-status">
-                    <h4>Si Li has accepted your request. You may soon receive an email from [Company Name]. If not, you can message Si Li.</h4>
+                    <h4>${opp.alumni.name} has accepted your request. You may soon receive an email from ${opp.company}.</h4>
                 </div>
             </div>
         </li>
@@ -98,7 +102,7 @@ export const renderOpp = opp => {
                     <ion-icon name="close-circle-outline" class="big-icon red"></ion-icon>
                 </div>
                 <div class="opp-item-status">
-                    <h4>Wu Zhao has declined your request.</h4>
+                    <h4>${opp.alumni.name} has declined your request.</h4>
                 </div>
             </div>
         </li>
@@ -109,9 +113,16 @@ export const renderOpp = opp => {
      document.querySelector('.opp-column').insertAdjacentHTML('beforeend',markup);
 };
 
-export const renderOpps = opps => {
-    opps.forEach(renderOpp);
-    console.log("oppStatus: " + oppStatus);
+export const renderOpps = async (profile,opps) => {
+    //console.log(await db.collection('Opportunities').doc('6WWXIkveZkOEUYoEyRdG').get().data());
+    for (let i=0; i<profile.myOpps.length; i++){
+        opps.forEach(opp => {
+            if (opp.id == profile.myOpps[i].uid){
+                renderOpp(profile,opp.data(),i);
+            }
+        })
+        
+    }
 };
 
 

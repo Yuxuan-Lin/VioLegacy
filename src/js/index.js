@@ -1,6 +1,6 @@
 import Home from './models/home';
 import Opp from './models/opportunities';
-import Contacts from './models/contacts';
+import Messages from './models/messages';
 import {elements} from './views/base';
 import * as contactsView from './views/contactsView'; 
 import * as chatView from './views/chatView';
@@ -18,6 +18,7 @@ const controlHome = async (state) => {
     //1) Get contact list(array)
     //console.log(userId);
     await state.home.getHomeData();
+    await state.opp.getOppData();
 
     //2) Prepare UI(optional)
     homeView.clearProfile();
@@ -26,7 +27,7 @@ const controlHome = async (state) => {
     homeView.renderProfile(state.home.profile);
     homeView.renderAbout(state.home.profile);
     //homeView.renderExps(state.home.profile.experience);
-    //homeView.renderOpps(state.home.opp);
+    homeView.renderOpps(state.home.profile,state.opp.opps);
     console.log('home fully rendered');
     
  
@@ -59,62 +60,17 @@ const controlOpp = async (state) => {
     
 };
 
-const controlContacts = async (state) => {
-    //1) Get contact list(array)
-    
-    await state.contacts.getContacts();
-    
-    //2) Prepare UI(optional)
-
-    //3) Render contacts on UI
-    contactsView.renderContacts(state.contacts.result);
-
-
-    //1) Get chatHistory(array) and profile
-
-    //2) Prepare UI(clear field)
-
-    //3) Render chatHistroy and profile on UI
-    
-    
-    
-};
-
-const controlChat = async (state, id=0) => {
+const controlMessages = async (state, id=0) => {
     // render Profile UI
-    await state.contacts.getContacts();
-    chatView.renderProfile(state.contacts.result[id]);
+    await state.messages.getMessages();
+
+    contactsView.renderContacts(state.messages.chatData, state.home.profile, state.user.uid);
+    chatView.renderProfile(state.messages.chatData, state.home.profile, state.user.uid);
     
     // render Chat UI
     chatView.renderChats(state.contacts.result[id].profile.image, state.image, state.contacts.result[id].chatHistory);
     
-    $(function(){
-        $('#the-btn').click(function(e){
-            //e.preventDefault();
-            console.log('the button clicked.');
-            
-            const message = {};
-            message.content = $('#type-box').val();
-            //console.log($('#type-box'));
-            //console.log(message.content);
-            
-            if (message.content){
-                $.ajax({
-                    type: 'POST',
-                    data:  JSON.stringify(message),
-                    contentType: 'application/json',
-                    url: 'http://localhost:5000/',
-                    success: function(){
-                        console.log('successssssss');
-                    },
-                    error: function(){
-                        console.log('failed');
-                    }
-                });
-            }
-            
-        });  
-    });
+    
 };
 
 
@@ -410,8 +366,7 @@ const screenSwitch = async function (state, tab){
     else if (state.tab == '3'){
         elements.container.insertAdjacentHTML('beforeend',messageSetUp);
         //console.log("Screen fully Setup");
-        controlContacts(state);
-        controlChat(state);
+        controlMessages(state);
         
         document.querySelector('.contact-list').addEventListener('click', e => {
             const btn = e.target.closest('.contact-person').id;
@@ -551,9 +506,10 @@ const clearScreen = function(){
 
 export const setUI = async function(state, user){
     state.home = new Home(user.uid);
+    //console.log(user.uid);
     state.user = user;
     state.opp = new Opp("Ishmael");
-    state.contacts = new Contacts("chat");
+    state.messages = new Messages("messages");
     state.image = "../images/kerwin.jpg";
     state.home.collapsed = false;
     state.menuCollapsed = false;

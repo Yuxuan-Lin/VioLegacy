@@ -5,7 +5,11 @@ export const clearChat = () => {
     document.querySelector('.profile').innerHTML = '';
 };
 
-export const renderProfile = contact => {
+export const renderProfile = (chatData,profile,uid) => {
+    chatData.forEach(doc => {        
+        renderContact(doc.data(), (doc.data().chatter[0].uid == profile.uid) ? 0 : 1);        
+    });
+    
     const markup = `
         <div class="profile-image">
             <img class="round-image" src="${contact.profile.image}">
