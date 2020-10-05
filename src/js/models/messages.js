@@ -16,4 +16,31 @@ export default class Messages{
 			alert(error);
 		}
 	}
+
+	async getAlumniProfile(uid){
+		try{
+			console.log(uid);
+			await db.collection('Profiles').doc(uid).get().then(doc => {
+				this.alumniProfile = doc.data();
+				console.log(doc.data());
+			})
+		} catch (error){
+			alert(error);
+		}
+	}
+
+	async sendMessage(message, chatId, sender){
+		try{
+			await db.collection('Messages').doc(chatId).updateData({
+				history: firebase.firestore.FieldValue.arrayUnion({
+					content: message,
+					senderID: sender,
+					time: "I am the best"
+				})
+			})
+
+		} catch (error) {
+			alert(error);
+		}
+	}
 }

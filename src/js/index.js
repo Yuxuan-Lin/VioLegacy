@@ -60,18 +60,41 @@ const controlOpp = async (state) => {
     
 };
 
-const controlMessages = async (state, id=0) => {
+const controlContacts = async (state) => {
     // render Profile UI
     await state.messages.getMessages();
 
-    contactsView.renderContacts(state.messages.chatData, state.home.profile, state.user.uid);
-    chatView.renderProfile(state.messages.chatData, state.home.profile, state.user.uid);
+    contactsView.renderContacts(state.messages.chatData, state.user.uid);
+};
+
+const controlChat = async (state,chatId=0) => {
+    // render Profile UI
+    await state.messages.getMessages();
+
+    // find alumni profile
+    let chatterUid;
+
+    state.messages.chatData.forEach(doc => {     
+        //console.log(state.user.uid);
+        if (doc.data().chatter[0].uid == state.user.uid || doc.data().chatter[1].uid == state.user.uid){
+            if (doc.data().chatter[0].uid == state.user.uid){               
+                chatterUid = doc.data().chatter[1].uid;
+            } else {
+                chatterUid = doc.data().chatter[0].uid;
+            }
+        }
+    });
+    //console.log(chatterUid);
+    await state.messages.getAlumniProfile(chatterUid);
+
+    chatView.renderProfile(state.messages.alumniProfile);
     
     // render Chat UI
-    chatView.renderChats(state.contacts.result[id].profile.image, state.image, state.contacts.result[id].chatHistory);
+    state.messages.selfPos = chatView.renderChats(state.messages.chatData,state.user.uid);
     
     
 };
+
 
 
 
@@ -110,7 +133,7 @@ const labelExpand = function(el){
 
 const tabSwitch = async function (state,tab){
     const id = parseInt(tab.parentNode.id);
-    console.log(state.user.name);
+    //console.log(state.user.name);
     if (id != 0 && id != 4){
         screenSwitch(state, tab);
 
@@ -307,7 +330,7 @@ const screenSwitch = async function (state, tab){
                         </li>
                     </ul>
                     <div class="input-field">
-                        <input type="text" name="message-input-field" id="type-box">
+                        <input type="textarea" name="message-input-field" id="type-box">
                     </div>
                     <div class="button-bar">
                         <div>&nbsp;</div>
@@ -366,17 +389,38 @@ const screenSwitch = async function (state, tab){
     else if (state.tab == '3'){
         elements.container.insertAdjacentHTML('beforeend',messageSetUp);
         //console.log("Screen fully Setup");
-        controlMessages(state);
-        
+        controlContacts(state);
         document.querySelector('.contact-list').addEventListener('click', e => {
             const btn = e.target.closest('.contact-person').id;
+            state.messages.currentChatId = btn;
             if (btn) {
                 chatView.clearChat();
-                controlChat(btn);
+                controlChat(state,btn);
                 //searchView.clearResults();
                 //searchView.renderResults(state.search.result, goToPage);
             }
         });
+
+        console.log("submit: ");
+        console.log(document.querySelector('#type-box'));
+        
+        /*
+        document.querySelector('.type-field').addEventListener('click', e => {
+            const btn = e.target.closest('#the-btn');
+            console.log(btn);
+
+            if (btn){
+                
+                const message = btn.parentNode.childNodes[1];
+                console.log(message);
+                state.messages.sendMessage(message, state.messages.currentChatId, state.messages.selfPos);
+            }
+            
+
+        });
+        */
+
+
     }
     
 };
