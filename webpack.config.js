@@ -16,7 +16,7 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
-			template:'./src/newchat.html'
+			template:'./src/master.html'
 		}),
 	]
 };
