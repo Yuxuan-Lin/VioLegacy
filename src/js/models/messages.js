@@ -1,4 +1,5 @@
 //import axios from 'axios';
+import {db} from '../firebaseConfig';
 
 export default class Messages{
 	constructor(query){

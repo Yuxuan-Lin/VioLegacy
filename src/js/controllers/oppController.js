@@ -1,6 +1,7 @@
 import Opp from '../models/opportunities';
 import {elements} from '../views/base';
 import * as oppView from '../views/oppView';
+import {db} from '../firebaseConfig';
 
 
 const clearScreen = function(){

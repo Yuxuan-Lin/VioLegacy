@@ -1,3 +1,5 @@
+import {db} from '../firebaseConfig';
+
 export default class Home{
 	constructor(query){
 		this.query = query;

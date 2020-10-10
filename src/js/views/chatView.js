@@ -1,4 +1,5 @@
 import {elements} from './base';
+import {db} from '../firebaseConfig';
 
 export const clearChat = () => {
     document.querySelector('.chat-history').innerHTML = '';

@@ -1,4 +1,7 @@
 import * as index from './index';
+import { auth, db } from './firebaseConfig';
+import uploadFile from './firebaseStorage'
+
 const state = {};
 /*
 // add admin cloud function
@@ -84,7 +87,7 @@ logout.addEventListener('click', (e) => {
 const loginForm = document.querySelector('#login-form');
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  
+
   // get user info
   const email = loginForm['login-email'].value;
   const password = loginForm['login-password'].value;
@@ -96,5 +99,13 @@ loginForm.addEventListener('submit', (e) => {
   }).catch(err => {
     loginForm.querySelector('.error').innerHTML = err.message;
   });
-
 });
+
+document.querySelector('#file-upload').addEventListener('submit', (e) => {
+  // e.preventDefault()
+  console.log("test")
+  // console.log(fileUpload['selected-file'])
+  const file = fileUpload['selected-file'].value
+  console.log(file)
+  // uploadFile(file, new Date().toString())
+})
