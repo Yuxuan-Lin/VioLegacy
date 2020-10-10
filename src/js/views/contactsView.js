@@ -5,7 +5,7 @@ const renderContact = (doc,i) => {
     const markup = `
         <li class="contact-person" id="${doc.id}">
             <div class="person-image">
-                <img class="round-image" src=${"./images/Bill.jpg"} alt="${doc.data().chatter[i].name}">
+                <img class="round-image" src="./images/Bill.jpg" alt="${doc.data().chatter[i].name}">
             </div>
             <div class="person-info">
                 <div class="person-top">
@@ -23,7 +23,7 @@ const renderContact = (doc,i) => {
 export const renderContacts = (chatData,uid) => {
     chatData.forEach(doc => {
         if (doc.data().chatter[0].uid == uid || doc.data().chatter[1].uid == uid){
-            renderContact(doc, (doc.data().chatter[0].uid == uid) ? 0 : 1);
+            renderContact(doc, (doc.data().chatter[0].uid == uid) ? 1 : 0);
         }
     });
 };

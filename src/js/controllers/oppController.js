@@ -3,7 +3,10 @@ import {elements} from '../views/base';
 import * as oppView from '../views/oppView';
 
 
-
+const clearScreen = function(){
+    elements.container.innerHTML = "";
+ };
+ 
 
 
 export const controlOpp = async (state) => {
