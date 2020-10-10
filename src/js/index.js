@@ -1,7 +1,6 @@
 import Home from './models/home';
 import Opp from './models/opportunities';
-import Contacts from './models/contacts';
-import Chat from './models/chat';
+import Messages from './models/messages';
 import {elements} from './views/base';
 import * as contactsView from './views/contactsView'; 
 import * as chatView from './views/chatView';
@@ -9,31 +8,30 @@ import * as homeView from './views/homeView';
 import * as oppView from './views/oppView';
 
 
+
 //experimental area
 
 
-const state = {};
-state.home = new Home("whatever");
-state.opp = new Opp("Ishmael");
-state.contacts = new Contacts("chat");
-state.image = "../images/kerwin.jpg";
-state.home.collapsed = false;
-state.menuCollapsed = false;
 
 
-const controlHome = async () => {
+const controlHome = async (state) => {
     //1) Get contact list(array)
+    //console.log(userId);
     await state.home.getHomeData();
-    
+    await state.opp.getOppData();
+
     //2) Prepare UI(optional)
     homeView.clearProfile();
     
     //3) Render UI
-    homeView.renderProfile(state.home.result);
-    homeView.renderAbout(state.home.result);
-    homeView.renderExps(state.home.result.profile.experience);
-    homeView.renderOpps(state.home.result.opportunities);
+    homeView.renderProfile(state.home.profile);
+    homeView.renderAbout(state.home.profile);
+    //homeView.renderExps(state.home.profile.experience);
+    homeView.renderOpps(state.home.profile,state.opp.opps);
     console.log('home fully rendered');
+    
+ 
+    
     
     //1) Get chatHistory(array) and profile
 
@@ -42,7 +40,7 @@ const controlHome = async () => {
     //3) Render chatHistroy and profile on UI    
 };
 
-const controlOpp = async () => {
+const controlOpp = async (state) => {
     //1) Get contact list(array)
     
     await state.opp.getOppData();
@@ -51,7 +49,7 @@ const controlOpp = async () => {
     oppView.clearOpps();
 
     //3) Render contacts on UI
-    oppView.renderOpps(state.opp.result.opportunities);
+    oppView.renderOpps(state.opp.opps);
     //1) Get chatHistory(array) and profile
 
     //2) Prepare UI(clear field)
@@ -62,53 +60,48 @@ const controlOpp = async () => {
     
 };
 
-const controlContacts = async () => {
-    //1) Get contact list(array)
-    
-    await state.contacts.getContacts();
-    
-    //2) Prepare UI(optional)
-
-    //3) Render contacts on UI
-    contactsView.renderContacts(state.contacts.result);
-
-
-    //1) Get chatHistory(array) and profile
-
-    //2) Prepare UI(clear field)
-
-    //3) Render chatHistroy and profile on UI
-    
-    
-    
-};
-
-const controlChat = async (id=0) => {
+const controlContacts = async (state) => {
     // render Profile UI
-    await state.contacts.getContacts();
-    chatView.renderProfile(state.contacts.result[id]);
+    await state.messages.getMessages();
+
+    contactsView.renderContacts(state.messages.chatData, state.user.uid);
+};
+
+const controlChat = async (state,chatId=0) => {
+    // render Profile UI
+    await state.messages.getMessages();
+
+    // find alumni profile
+    let chatterUid;
+
+    state.messages.chatData.forEach(doc => {     
+        //console.log(state.user.uid);
+        if (doc.data().chatter[0].uid == state.user.uid || doc.data().chatter[1].uid == state.user.uid){
+            if (doc.data().chatter[0].uid == state.user.uid){               
+                chatterUid = doc.data().chatter[1].uid;
+            } else {
+                chatterUid = doc.data().chatter[0].uid;
+            }
+        }
+    });
+    //console.log(chatterUid);
+    await state.messages.getAlumniProfile(chatterUid);
+
+    chatView.renderProfile(state.messages.alumniProfile);
     
     // render Chat UI
-    chatView.renderChats(state.contacts.result[id].profile.image, state.image, state.contacts.result[id].chatHistory);
+    state.messages.selfPos = chatView.renderChats(state.messages.chatData,state.user.uid);
+    
+    
 };
 
 
 
 
 
-//Collapse Menu
-elements.collapse.addEventListener('click', e => {
-    e.preventDefault();
-    const tab = e.target.closest('.collapse');
-    if (!state.menuCollapsed){
-        collapseMenu();
-    } else if (state.menuCollapsed){
-        expandMenu();
-    }
-});
 
-const collapseMenu = function() {
-    //console.log("success");
+const collapseMenu = function(state) {
+    console.log("success");
     state.menuCollapsed = true;
     const labelled = document.querySelectorAll('.collapse-label');
     labelled.forEach(labelCollapse);
@@ -118,7 +111,7 @@ const collapseMenu = function() {
     `;
 };
 
-const expandMenu = function(){
+const expandMenu = function(state){
     //console.log("success");
     state.menuCollapsed = false;
     const labelled = document.querySelectorAll('.collapse-label');
@@ -138,28 +131,11 @@ const labelExpand = function(el){
 };
 
 
-
-
-
-
-
-
-
-
-//3 main function tabs
-elements.tools.addEventListener('click', e => {
-    e.preventDefault();
-    const tab = e.target.closest('.tab');
-    console.log(tab);
-    tabSwitch(tab);
-});
-
-
-const tabSwitch = function (tab){
+const tabSwitch = async function (state,tab){
     const id = parseInt(tab.parentNode.id);
-    console.log(id);
+    //console.log(state.user.name);
     if (id != 0 && id != 4){
-        screenSwitch(tab);
+        screenSwitch(state, tab);
 
         //clear
         let markup = tab.parentNode.parentNode.childNodes;
@@ -184,7 +160,7 @@ const tabSwitch = function (tab){
 };
 
 
-const screenSwitch = async function (tab){
+const screenSwitch = async function (state, tab){
     state.tab = tab.parentNode.id;
 
     clearScreen();
@@ -313,7 +289,7 @@ const screenSwitch = async function (tab){
                     </li>
                 </ul>
             </div>
-        </div>
+        </div>   
     `;
     
     const messageSetUp = `
@@ -354,11 +330,11 @@ const screenSwitch = async function (tab){
                         </li>
                     </ul>
                     <div class="input-field">
-                        <input type="text" name="message-input-field">
+                        <input type="textarea" name="message-input-field" id="type-box">
                     </div>
                     <div class="button-bar">
                         <div>&nbsp;</div>
-                        <input type="submit" name="send-button" class="send-btn">
+                        <input type="submit" name="send-button" class="send-btn" id="the-btn">
                     </div>
                 </div>
             </div>
@@ -370,7 +346,7 @@ const screenSwitch = async function (tab){
     
     if (state.tab == '1'){
        elements.container.insertAdjacentHTML('beforeend',homeSetUp);
-        await controlHome();
+        await controlHome(state);
         state.home.pending = homeView.oppStatus[0];
         state.home.accepted = homeView.oppStatus[1];
         state.home.declined = homeView.oppStatus[2];
@@ -408,39 +384,60 @@ const screenSwitch = async function (tab){
         
     }
     else if (state.tab == '2'){
-        billFunction(oppSetUp);
+        billFunction(state, oppSetUp);
     }
     else if (state.tab == '3'){
         elements.container.insertAdjacentHTML('beforeend',messageSetUp);
         //console.log("Screen fully Setup");
-        controlContacts();
-        controlChat();
-        
+        controlContacts(state);
         document.querySelector('.contact-list').addEventListener('click', e => {
             const btn = e.target.closest('.contact-person').id;
+            state.messages.currentChatId = btn;
             if (btn) {
                 chatView.clearChat();
-                controlChat(btn);
+                controlChat(state,btn);
                 //searchView.clearResults();
                 //searchView.renderResults(state.search.result, goToPage);
             }
         });
+
+        console.log("submit: ");
+        console.log(document.querySelector('#type-box'));
+        
+        /*
+        document.querySelector('.type-field').addEventListener('click', e => {
+            const btn = e.target.closest('#the-btn');
+            console.log(btn);
+
+            if (btn){
+                
+                const message = btn.parentNode.childNodes[1];
+                console.log(message);
+                state.messages.sendMessage(message, state.messages.currentChatId, state.messages.selfPos);
+            }
+            
+
+        });
+        */
+
+
     }
     
 };
 
-const billFunction = function(oppSetUp){
+const billFunction = async function(state, oppSetUp){
     elements.container.insertAdjacentHTML('beforeend',oppSetUp);
-    controlOpp();
+    controlOpp(state);
+    console.log("bill function started" + state.user.name);
 
     document.querySelector('.referral-box').addEventListener('click', e => {
         const btn = e.target.closest('.referral');
-
+        //const oppQuery = `?id=${btn.id}`;
         if(btn) {
             // clear right screen
             clearScreen();
             // render temp 2
-            oppView.renderDetail(state.opp.result.opportunities[btn.id]);
+            oppView.renderDetail(state.opp.opps[btn.id]);
 
             document.querySelector('.back-top').addEventListener('click', e => {
                 const btn2 = e.target.closest('.back-top');
@@ -449,54 +446,139 @@ const billFunction = function(oppSetUp){
                     // clear right screen
                     clearScreen();
                     // render temp 2
-                    billFunction(oppSetUp);
+                    billFunction(state,oppSetUp);
                 }
             });
-            
+
+            //console.log("attention: " + state.user.uid);
+            //console.log("attention: " + state.opp.opps[btn.id].data().registered[1].uid);
+            let flag = false;
+            for (let i=0; i<state.opp.opps[btn.id].data().registered.length; i++){
+                if (state.opp.opps[btn.id].data().registered[i].uid == state.user.uid){
+                    flag = true;
+                }
+            }
+            if (flag){
+                document.querySelector('.ref-request').innerHTML = `
+                <div class="ref-request" id="1">
+                    <button type="button">Request Sent!</button>
+                </div>
+                `;
+            } else {
+                document.querySelector('.ref-request').innerHTML = `
+                <div class="ref-request" id="0">
+                    <button type="button">Request a Referral</button>
+                </div>
+                `;
+            }
+
+
             document.querySelector('.ref-request').addEventListener('click', e => {
                 const btn3 = e.target.closest('.ref-request');
+                console.log("attention: "+state.opp.opps[btn.id].id);
 
                 if(btn3 && btn3.id == 0) {
+
+                    
                     // UI change
                     btn3.innerHTML = `
                         <div class="ref-request" id="1">
                             <button type="button">Request Sent!</button>
                         </div>
                     `;
+                    let tempArr = state.opp.opps[btn.id].data().registered;
+                    tempArr.push({
+                        name: state.home.profile.name,
+                        uid: state.user.uid
+                    });
+                    //console.log(tempArr);
+                    //console.log(state.opp.opps[btn.id].data().registered);
+                    db.collection('Opportunities').doc(state.opp.opps[btn.id].id).update({
+                        registered: tempArr
+                    });
+                    
+                      
                 } else if(btn3 && btn3.id == 1) {
                     btn3.innerHTML = `
                         <div class="ref-request" id="0">
                             <button type="button">Request a Referral</button>
                         </div>
                     `;
+
+                    let tempArr = [];
+                    for (let i=0; i<state.opp.opps[btn.id].data().registered.length; i++){
+                        if (state.opp.opps[btn.id].data().registered[i].uid != state.user.uid){
+                            tempArr.push(state.opp.opps[btn.id].data().registered[i]);
+                        }
+                    }
+
+                    db.collection('Opportunities').doc(state.opp.opps[btn.id].id).update({
+                        registered: tempArr
+                    });
+                    
+
                 }
+
+                state.opp.getOppData();
+
             });
         }
     });
 };
 
 const clearScreen = function(){
+    /*
     const container = document.querySelector(".container").childNodes;
+    console.log(container);
     let temp = 0;
 
     while(temp < container.length){
-        if(container[temp].nodeName == "DIV" && !container[temp].classList.contains("navigator")) {
-                elements.container.removeChild(container[temp]);
+        if(!container[temp].classList.contains("navigator")) {
+            elements.container.removeChild(container[temp]);
+            temp--;
         }
         temp++;
     }
 
     console.log("screen clear success");
+    */
+   elements.container.innerHTML = "";
 };
 
 
 
-//????????????????????????????????????????????
-tabSwitch(document.getElementById("default"));
 
+export const setUI = async function(state, user){
+    state.home = new Home(user.uid);
+    //console.log(user.uid);
+    state.user = user;
+    state.opp = new Opp("Ishmael");
+    state.messages = new Messages("messages");
+    state.image = "../images/kerwin.jpg";
+    state.home.collapsed = false;
+    state.menuCollapsed = false;
+    //console.log(state.user.name);
+    tabSwitch(state, document.getElementById("default"));
 
+    //3 main function tabs
+    elements.tools.addEventListener('click', e => {
+        e.preventDefault();
+        const tab = e.target.closest('.tab');
+        console.log(tab);
+        tabSwitch(state,tab);
+    });
 
-
+    //Collapse Menu
+    elements.collapse.addEventListener('click', e => {
+        e.preventDefault();
+        const tab = e.target.closest('.collapse');
+        if (!state.menuCollapsed){
+            collapseMenu(state);
+        } else if (state.menuCollapsed){
+            expandMenu(state);
+        }
+    });
+};
 
 
 

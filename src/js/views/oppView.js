@@ -5,14 +5,14 @@ export const clearOpps = () => {
 
 let counter = 0;
 
-export const renderOpp = (opp) => {
+export const renderOpp = (opp,id) => {
     const markup = `
-        <li class="referral" id='${opp.id}'>
-            <h3 class='opp-category'>${opp.category}</h3>
+        <li class="referral" id='${id}'>
+            <h3 class='opp-category'>${opp.data().category}</h3>
             <div>
-                <h2>${opp.title}</h2>
-                <h3>${opp.company}</h3>
-                <h3 class="opp-alumni">from ${opp.alumni}</h3>
+                <h2>${opp.data().title}</h2>
+                <h3>${opp.data().company}</h3>
+                <h3 class="opp-alumni">from ${opp.data().alumni.name}</h3>
             </div>
         </li>
     `;
@@ -24,12 +24,23 @@ export const renderOpp = (opp) => {
 };
 
 export const renderOpps = opps => {
+    /*
+    const arr = [];
+    for (const property in opps){
+        opps[property]["uid"] = property;
+        console.log(opps[0].data());
+        console.log(property);
+        arr.push(opps[property]);
+    }
+    */
     for (let i=0; i<Math.ceil(opps.length/3); i++){
         const markup = `<ul class="referral-row" id="row-${i}"></ul>`;
         document.querySelector('.referral-box').insertAdjacentHTML('beforeend',markup);
     }
     
-    opps.forEach(renderOpp);
+    for (let j=0; j<opps.length; j++) {
+        renderOpp(opps[j],j);
+    }
 };
 
 export const renderDetail = opp => {
@@ -46,9 +57,9 @@ export const renderDetail = opp => {
             
             <div class="detail-mid">
                 <div class="ref-info">
-                    <h1>${opp.title}</h1>
-                    <h3>${opp.company}</h3>
-                    <h4>Posted by ${opp.alumni}</h4>
+                    <h1>${opp.data().title}</h1>
+                    <h3>${opp.data().company}</h3>
+                    <h4>Posted by ${opp.data().alumni.name}</h4>
                 </div>
                 <div class="ref-request">
                     <button type="button">Request a Referral</button>
@@ -57,19 +68,19 @@ export const renderDetail = opp => {
             <ul class="ref-descriptions">
                 <li class="ref-description">
                     <h3>Info</h3>
-                    <h4>${opp.description}</h4>
+                    <h4>${opp.data().description}</h4>
                 </li>
                 <li class="ref-description">
                     <h3>Info</h3>
-                    <h4>${opp.description}</h4>
+                    <h4>${opp.data().description}</h4>
                 </li>
                 <li class="ref-description">
                     <h3>Info</h3>
-                    <h4>${opp.description}</h4>
+                    <h4>${opp.data().description}</h4>
                 </li>
             </ul>
         </div>
     `;
     
-    document.querySelector(`.container`).insertAdjacentHTML('beforeend',markup);
+    document.querySelector(`.right-container`).insertAdjacentHTML('beforeend',markup);
 };

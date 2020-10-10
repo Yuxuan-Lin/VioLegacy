@@ -38,12 +38,19 @@
     ]
 }
 
-//"/opportunities" GET endpoint
-//Params
-// omitName must be true for a request from junior and must be false for a request from senior
-name=str       //A student's name to filter on
-omitName=bool  //If true, removes any opportunity with name given above, if false, only returns opportunities with name given above
-category=str   //Only returns opportunities with this category; only works if omitName is true
+// "/opportunities" GET endpoint
+// Params
+// omitName must be true for a request from junior and must be false for a request from senior.
+
+name=str       
+//A student's name to filter on.
+
+omitName=bool  
+//If true, removes any opportunity with name given above, if false, only returns opportunities with name given above.
+
+category=str   
+//Only returns opportunities with this category; only works if omitName is true.
+
 //Resource
 {
     "opportunities":[
@@ -79,3 +86,117 @@ category=str   //Only returns opportunities with this category; only works if om
         }
     ]
 }
+
+
+
+// "/myOpp" GET endpoint
+// Param
+
+name = str
+// /myOpp get request would need to know the name of user and use it to search in the database for his/her registered opportunities.
+// /myOpp would include all the opportunites the user has registered for, including accepted and declined status.
+
+//Resource
+{
+    "opportunities":[
+        {
+            "category":str,
+            "title": str,
+            "company": str,
+            "alumni": str,
+            "deadline": datetime,      //Here is the deadline of the opportunity
+            "limit": int,              //Here is the max number of spot for juniors to be accepted
+            "registered" : [str, ...], //Here is the name of all the juniors that registered for this opportunity
+            "accepted" : [str, ...],   //Here is the name of all the juniors that registered and was accepted for further conversation
+            "declined" : [str, ...],   //Here is the name of all that got rejected
+            "description": str
+        },
+        ...
+    ]
+}
+//Example
+{
+    "opportunities":[
+        {
+            "category":"Science",
+            "title": "Data Analyst",
+            "company": "Microsoft",
+            "alumni": "Bill Gu",
+            "deadline": "18:30 2020/08/19",
+            "limit": 3,
+            "registered" : [],
+            "accepted" : ["Bill Gu",],
+            "declined" : ["Alice Wang"],
+            "description": "Deserunt culpa excepteur in minim consectetur adipisicing minim et pariatur anim minim. Enim eu reprehenderit pariatur veniam enim duis dolore nulla dolor veniam labore proident. Nisi aliqua ut nulla ad veniam adipisicing eiusmod dolore reprehenderit incididunt ipsum adipisicing labore sunt."
+        }
+    ]
+}
+
+
+//"/opportunities" POST endpoint
+//Params
+id = str
+isRegistered = bool
+
+//Example, yet to update, old version
+//BenWei Lu post request to register on this opportunity
+//Bill Gu post request to unregister from this opportunity
+{
+    "opportunities":[
+        {
+            "category":"Science",
+            "title": "Data Analyst",
+            "company": "Microsoft",
+            "alumni": "Bill Gu",
+            "deadline": "18:30 2020/08/19",
+            "limit": 3,
+            "registered" : ["Bill Gu","Alice Wang"], //yet to include BenWei Lu, yet to remove Bill Gu
+            
+            "accepted" : ["Bill Gu"], //yet to remove Bill Gu
+            "declined" : ["Alice Wang"],
+            "description": "Deserunt culpa excepteur in minim consectetur adipisicing minim et pariatur anim minim. Enim eu reprehenderit pariatur veniam enim duis dolore nulla dolor veniam labore proident. Nisi aliqua ut nulla ad veniam adipisicing eiusmod dolore reprehenderit incididunt ipsum adipisicing labore sunt."
+        }
+    ]
+}
+
+//Example, registration update, new version
+//BenWei Lu successfully registered.
+//Bill Gu successfully unregistered.
+{
+    "opportunities":[
+        {
+            "category":"Science",
+            "title": "Data Analyst",
+            "company": "Microsoft",
+            "alumni": "Bill Gu",
+            "deadline": "18:30 2020/08/19",
+            "limit": 3,
+            "registered" : ["Alice Wang","BenWei Lu"], //BenWei Lu added, Bill Gu withdrawed.
+            
+            "accepted" : [], //Bill Gu withdrawed
+            "declined" : ["Alice Wang"],
+            "description": "Deserunt culpa excepteur in minim consectetur adipisicing minim et pariatur anim minim. Enim eu reprehenderit pariatur veniam enim duis dolore nulla dolor veniam labore proident. Nisi aliqua ut nulla ad veniam adipisicing eiusmod dolore reprehenderit incididunt ipsum adipisicing labore sunt."
+        }
+    ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
