@@ -339,7 +339,7 @@
 	top: 0px;
 	bottom: auto;
 	border: 22px solid;
-	border-color: rgb(230,230,230) transparent transparent transparent;
+	border-color: rgb(230, 230, 230) transparent transparent transparent;
 }
 
 .type-field{
@@ -747,4 +747,28 @@
 
 .log-in{
 	margin-left:40vw;
+}
+
+
+.search-result-person{
+	display:flex;
+	padding:1vw;
+	border-top: 1px solid #808080;
+}
+
+.search-result-person:hover{
+	background-color: #F1F1F1;
+}
+
+.person-name{
+	flex: 1 0 auto;
+	align-self: center;
+}
+
+.search-results{
+	border: 5px black solid;
+}
+
+.search-btn:hover{
+	color: #CCA2D8;
 }
