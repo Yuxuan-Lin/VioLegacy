@@ -29,16 +29,17 @@ export default class Messages{
 		}
 	}
 
-	async sendMessage(message, chatId, sender){
+	async sendMessage(message, chatId, sender, now){
 		try{
-			await db.collection('Messages').doc(chatId).updateData({
+			
+			await db.collection('Messages').doc(chatId).update({
 				history: firebase.firestore.FieldValue.arrayUnion({
 					content: message,
 					senderID: sender,
-					time: "I am the best"
+					time: now
 				})
-			})
-
+			});
+			console.log("update success")
 		} catch (error) {
 			alert(error);
 		}

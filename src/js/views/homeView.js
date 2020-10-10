@@ -27,7 +27,6 @@ export const renderAbout = self => {
         <h3>About</h3>
         <h4>${self.about}</h4>
     `;
-    
     document.querySelector('.about').insertAdjacentHTML('beforeend',markup);
 };
 
