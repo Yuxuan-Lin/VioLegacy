@@ -17,7 +17,7 @@ export const controlChat = async (state,chatId, chatterUid) => {
     
     // render Chat UI
     await state.messages.getMessages(chatId);
-    chatView.renderChats(state.messages.history,state.user.uid,state.messages.selfPos);
+    chatView.renderChats(state.messages.history);
 };
 
 export const messageScreen = (state) => {
@@ -76,7 +76,7 @@ export const messageScreen = (state) => {
     controlContacts(state);
     document.querySelector('.contact-list').addEventListener('click', e => {
         const btn = e.target.closest('.contact-person').id;
-        state.messages.currentChatId = btn;
+        state.messages.currentChatId = btn.split(";")[0];
         if (btn) {
             chatView.clearChat();
             controlChat(state, btn.split(";")[0], btn.split(";")[1]);

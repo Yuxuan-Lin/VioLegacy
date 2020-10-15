@@ -35,13 +35,13 @@ export default class Messages{
 	async getMessages(chatId) {
 		try{
 			let snapshot = await db.collection('Messages').doc(chatId).get();
-			const pos = this.getPos(snapshot.data().chatterIds);
+			this.selfPos = this.getPos(snapshot.data().chatterIds);
 			
 			snapshot = await db.collection('Messages').doc(chatId)
-														 .collection('history').get()
+														 .collection('history').orderBy('time').get()
 			this.history = snapshot.docs.map(doc => {
 				const message = doc.data();
-				return message.senderId == pos ? Object.assign(message, {mine: true}) : message
+				return message.senderId == this.selfPos ? Object.assign(message, {mine: true}) : message
 			})
 		} catch (error){
 			alert(error);
@@ -63,12 +63,10 @@ export default class Messages{
 	async sendMessage(message, chatId, sender, now){
 		try{
 			
-			await db.collection('Messages').doc(chatId).update({
-				history: firebase.firestore.FieldValue.arrayUnion({
-					content: message,
-					senderID: sender,
-					time: now
-				})
+			await db.collection('Messages').doc(chatId).collection('history').add({
+				content: message,
+				senderID: sender,
+				time: now
 			});
 			console.log("update success")
 		} catch (error) {
