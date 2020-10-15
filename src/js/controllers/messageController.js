@@ -11,7 +11,7 @@ export const controlContacts = async (state) => {
     contactsView.renderContacts(state.messages.chatData, state.user.uid);
 };
 
-export const controlChat = async (state,chatId=0) => {
+export const controlChat = async (state,chatId) => {
     // render Profile UI
     await state.messages.getMessages();
 
@@ -152,6 +152,8 @@ export const messageScreen = async (state) => {
         if(btn){
             const searchContent = btn.parentNode.childNodes[3].value;
             await state.messages.getSearchResults(searchContent);
+            console.log(state.messages.searchRes);
+            contactsView.renderSearchResults(state.messages.searchRes);
             searchResUI.classList.remove("invisible");
         }
 

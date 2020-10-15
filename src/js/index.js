@@ -2,14 +2,13 @@ import Home from './models/home';
 import Opp from './models/opportunities';
 import Messages from './models/messages';
 import {elements} from './views/base';
-import * as contactsView from './views/contactsView'; 
-import * as chatView from './views/chatView';
-import * as homeView from './views/homeView';
-import * as oppView from './views/oppView';
+import * as signUpView from './views/signUpView'; 
+
 
 import * as homeControl from './controllers/homeController';
 import * as oppControl from './controllers/oppController';
 import * as messageControl from './controllers/messageController';
+
 
 
 const collapseMenu = function(state) {
@@ -133,13 +132,7 @@ export const setUI = async function(state, user){
     });
 };
 
-
-
-
-
-
-
-
+signUpView.setSignUpUI();
 
 
 

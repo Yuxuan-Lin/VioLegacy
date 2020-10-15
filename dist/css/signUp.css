@@ -1,0 +1,216 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;	
+}
+
+.invisible{
+    display: none;
+}
+
+.signUp-container{
+    margin: 5vh 15vw;
+}
+
+.signUp-header{
+    display:flex;
+	padding: 20px 0;
+	padding-left: 2vw;
+	align-items: center;
+}
+
+.signUp-header div{
+	flex: 0 1 20%;
+	margin-right: 1vw;
+}
+
+.signUp-header h2{
+	flex: 1 0 auto;
+	padding: auto 0;
+}
+
+.signUp-small-container{
+    display: flex;
+    margin: 0 15vw;
+    align-items: center;
+    flex-direction: column;
+}
+
+.progression{
+    list-style: none;
+    color: black;
+    display: flex;
+    align-items:center;
+    margin-top: 3vh;
+    margin-bottom: 7vh;
+    flex: 0 1 auto;
+}
+
+.progression li{
+    margin-right: 2vw;
+    align-items:center;
+}
+
+.basic-info ul{
+    list-style: none;
+    align-items: center;
+}
+
+.basic-info-1st-line{
+    display:flex;
+    margin-bottom: 2vh;
+}
+
+.signUp-input-temp{
+    width: 80% auto;
+    margin-bottom: 2vh;
+    align-items:center;
+}
+
+.signUp-input-temp h4{
+    margin-bottom: 1vh;
+    align-items:center;
+}
+
+.signUp-input-temp input{
+    align-items:center;
+    border: 2px #CCA2D8 solid;
+    border-radius: 20px;
+    height: 4vh;
+    width: 30vw;
+}
+
+.first-item{
+    width: 14vw;
+    flex: 1 0 45%;
+    margin-right: 10%;
+}
+
+.second-item{
+    width: 14vw;
+    flex: 1 0 45%;
+}
+
+.first-item input,.second-item input{
+    margin-top: 1vh;
+    width:100%;
+    border: 2px #CCA2D8 solid;
+    border-radius: 20px;
+    height: 4vh;
+}
+
+.next-step{
+    margin-top: 3vh;
+    border:none;
+    background-color: #CCA2D8;
+    color: white;
+    font-weight: bold;
+    font-size: 150%;
+    padding: 1vh 3vw;
+    border-radius: 30px;
+}
+
+#sign-up-btn{
+    padding: 1vh 10vw;
+}
+
+.signUp-about input{
+    height: 15vh;
+}
+
+.job-header{
+    height: 3vh;
+    display: flex;
+    margin-bottom: 3vh;
+    align-items: center;
+}   
+
+.job-header hr{
+    display:table-cell;
+    flex: 0 1 40%;
+    height: 0px;
+}
+
+.job-header h3{
+    flex: 1 0 auto;
+    text-align: center;
+}
+
+.signUp-experience ul{
+    list-style: none;
+}
+
+.checkbox{
+    display:flex;
+    align-items: center;
+    margin-bottom: 3vh;
+}
+
+.checkbox input{
+    flex: 0 1 10%;
+    height: 25px;
+    width: 25px;
+    left: 495px;
+    top: 421px;
+    color: #CCA2D8;
+}
+
+.checkbox input:checked{
+    background-color: #CCA2D8;
+}
+
+.checkbox h4{
+    flex: 1 0 auto;
+}
+
+.start-end{
+    display:flex;
+}
+
+.start-date{
+    margin-right: 5%;
+}
+
+.date-template{
+    flex: 1 0 45%;
+}
+
+.date-template h4{
+    margin-bottom: 1vh;
+}
+
+.date-template input{
+    width: 14vw;
+}
+
+.description input{
+    height: 15vh;
+}
+
+.signUp-experience{
+    flex-direction: column;
+    align-items:center;
+}
+
+.add-another-job{
+    border:none;
+    background-color: transparent;
+    color: #CCA2D8;
+    text-decoration: underline;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    padding: 0 1vw;
+    outline: none;
+}
+
+input,
+select,
+textarea,
+button {
+    padding: 0 1vw;
+    outline: none;
+}

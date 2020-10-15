@@ -28,3 +28,16 @@ export const renderContacts = (chatData,uid) => {
     });
 };
 
+export const renderSearchRes = (profile) => {
+    const markup = `
+        <li class="search-result-person">
+            <div class="person-image"><img class="round-image" src="images/Bill.jpg"></div>
+            <h3 class="person-name">${profile.name}</h3>
+        </li>
+    `;
+    document.querySelector('.search-results').insertAdjacentHTML('beforeend',markup);
+}
+
+export const renderSearchResults = (profileArr) => {
+    profileArr.forEach(renderSearchRes);
+}

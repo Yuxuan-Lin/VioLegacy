@@ -17,58 +17,69 @@ adminForm.addEventListener('submit', (e) => {
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
     console.log('auth changed');
+    //console.log(user.additionalUserInfo.isNewUser);
   if (user) {
     index.setUI(state, user);
+    //index.setSignUpUI();
     document.querySelector(".container").classList.remove("invisible");
-    document.querySelector(".sign-up").classList.add("invisible");
+    document.querySelector(".signUp-container").classList.add("invisible");
     document.querySelector(".log-in").classList.add("invisible");
   }
   //revise to restrict data leakage 
   else {
     document.querySelector(".container").classList.add("invisible");
-    document.querySelector(".sign-up").classList.remove("invisible");
+    document.querySelector(".signUp-container").classList.remove("invisible");
     document.querySelector(".log-in").classList.remove("invisible");
   }
 });
 
-/*
-// create new guide
-const createForm = document.querySelector('#create-form');
-createForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  db.collection('guides').add({
-    title: createForm.title.value,
-    content: createForm.content.value
-  }).then(() => {
-    // close the create modal & reset form
-    const modal = document.querySelector('#modal-create');
-    M.Modal.getInstance(modal).close();
-    createForm.reset();
-  }).catch(err => {
-    console.log(err.message);
-  });
-});
-*/
-
 
 // signup
-const signupForm = document.querySelector('#signup-form');
-signupForm.addEventListener('submit', (e) => {
+const signUpBtn = document.querySelector('#sign-up-btn');
+signUpBtn.addEventListener('click', (e) => {
   e.preventDefault();
   
   // get user info
-  const email = signupForm['signup-email'].value;
-  const password = signupForm['signup-password'].value;
+  const email = document.querySelector('#signUp-email').value;
+  const password = document.querySelector('#signUp-password').value;
+  const about = document.querySelector('#about-area').value;
+  const major = document.querySelector('#major').value;
+  const firstName = document.querySelector('#first-name').value;
+  const lastName = document.querySelector('#last-name').value;
+  const year = document.querySelector('#year').value;
+
+  console.log(about);
+
 
   // sign up the user & add firestore data
   auth.createUserWithEmailAndPassword(email, password).then(cred => {
-    U.userId = cred.user.uid;
-    console.log(U.userId);
+    state.userId = cred.user.uid;
+    //console.log(cred.additionalUserInfo.isNewUser);
+    db.collection("Profiles").doc(state.userId).set({
+      about: about,
+      major: major,
+      name: firstName + " " + lastName,
+      year: year,
+      myOpps: []
+    })
+    email.value = "";
+    password.value = "";
+    about.value = "";
+    major.value = "";
+    firstName.value = "";
+    lastName.value = "";
+    year.value = "";
   })
   .catch(err => {
-    signupForm.querySelector('.error').innerHTML = err.message;
+    alert(err);
   });
+
+
+
+  //add document profile to firestore
+  
 });
+
 
 
 // logout
