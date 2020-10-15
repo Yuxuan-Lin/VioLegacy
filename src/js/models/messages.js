@@ -1,16 +1,47 @@
-//import axios from 'axios';
-
 export default class Messages{
-	constructor(query){
-		this.query = query;
+	constructor(uid){
+		this.uid = uid;
 	}
 
-	async getMessages(){
-		// const proxy = 'https://cors-anywhere.herokuapp.com/';
+	getPos(chatterIds) {
+		for (let i = 0; i < chatterIds.length; ++i) {
+			if (chatterIds[i] == this.uid) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	async getContacts(){
 		try{
-			await db.collection('Messages').get().then(snapshot => {
-				this.chatData = snapshot.docs;
-				//console.log(snapshot.docs[0].id);
+			const snapshot = await db.collection('Messages')
+							 								 .where("chatterIds", "array-contains", this.uid)
+							 								 .get()
+			this.contacts = snapshot.docs.map(doc => {
+				const data = doc.data();
+				const pos = this.getPos(data.chatterIds);
+				const otherPos = (pos + 1) % 2;
+				return {
+					id: doc.id,
+					chatterName: data.chatters[otherPos],
+					chatterUid: data.chatterIds[otherPos]
+				}
+			})
+		} catch (error){
+			alert(error);
+		}
+	}
+
+	async getMessages(chatId) {
+		try{
+			let snapshot = await db.collection('Messages').doc(chatId).get();
+			const pos = this.getPos(snapshot.data().chatterIds);
+			
+			snapshot = await db.collection('Messages').doc(chatId)
+														 .collection('history').get()
+			this.history = snapshot.docs.map(doc => {
+				const message = doc.data();
+				return message.senderId == pos ? Object.assign(message, {mine: true}) : message
 			})
 		} catch (error){
 			alert(error);

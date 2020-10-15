@@ -53,17 +53,9 @@ const renderChat = (message, isRight) => {
     document.querySelector('.chat-history').insertAdjacentHTML('beforeend',markup);
 };
 
-export const renderChats = (chatData,uid,selfPos) => {
-
-    chatData.forEach(doc => {
-        if (doc.data().chatter[0].uid == uid || doc.data().chatter[1].uid == uid){
-
-            doc.data().history.forEach( message => {                
-                renderChat(message, selfPos == message.senderID);
-            });
-
-            return 1;
-        }
+export const renderChats = (history) => {
+    history.forEach(message => {
+        renderChat(message, message.mine);
     });
 
     //messages.forEach(el => renderChat(imageLeft, imageRight, el));
