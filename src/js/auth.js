@@ -1,4 +1,5 @@
 import * as index from './index';
+import * as signUpView from './views/signUpView'; 
 const state = {};
 /*
 // add admin cloud function
@@ -16,11 +17,12 @@ adminForm.addEventListener('submit', (e) => {
 
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
-    console.log('auth changed');
+    console.log('auth changed. User: ' + user);
     //console.log(user.additionalUserInfo.isNewUser);
   if (user) {
     index.setUI(state, user);
     //index.setSignUpUI();
+    
     document.querySelector(".container").classList.remove("invisible");
     document.querySelector(".signUp-container").classList.add("invisible");
     document.querySelector(".log-in").classList.add("invisible");
@@ -30,6 +32,7 @@ auth.onAuthStateChanged(user => {
     document.querySelector(".container").classList.add("invisible");
     document.querySelector(".signUp-container").classList.remove("invisible");
     document.querySelector(".log-in").classList.remove("invisible");
+    signUpView.setSignUpUI();
   }
 });
 
@@ -40,26 +43,25 @@ signUpBtn.addEventListener('click', (e) => {
   e.preventDefault();
   
   // get user info
-  const email = document.querySelector('#signUp-email').value;
-  const password = document.querySelector('#signUp-password').value;
-  const about = document.querySelector('#about-area').value;
-  const major = document.querySelector('#major').value;
-  const firstName = document.querySelector('#first-name').value;
-  const lastName = document.querySelector('#last-name').value;
-  const year = document.querySelector('#year').value;
+  const email = document.querySelector('#signUp-email');
+  const password = document.querySelector('#signUp-password');
+  const about = document.querySelector('#about-area');
+  const major = document.querySelector('#major');
+  const firstName = document.querySelector('#first-name');
+  const lastName = document.querySelector('#last-name');
+  const year = document.querySelector('#year');
 
-  console.log(about);
 
 
   // sign up the user & add firestore data
-  auth.createUserWithEmailAndPassword(email, password).then(cred => {
+  auth.createUserWithEmailAndPassword(email.value, password.value).then(cred => {
     state.userId = cred.user.uid;
     //console.log(cred.additionalUserInfo.isNewUser);
     db.collection("Profiles").doc(state.userId).set({
-      about: about,
-      major: major,
-      name: firstName + " " + lastName,
-      year: year,
+      about: about.value,
+      major: major.value,
+      name: firstName.value + " " + lastName.value,
+      year: year.value,
       myOpps: []
     })
     email.value = "";

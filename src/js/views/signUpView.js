@@ -8,6 +8,12 @@ export const setSignUpUI = function(){
     const nextStepBtn = document.querySelector("#next-step-btn");
     const signUpBtn = document.querySelector("#sign-up-btn");
     const addJobBtn = document.querySelector(".add-another-job");
+    const checkbox = document.querySelector("#current-in-role");
+    const endDateInput = document.querySelector("#end-date");
+    const presentBox = document.querySelector("#present-box");
+
+
+
 
     
     
@@ -59,12 +65,25 @@ export const setSignUpUI = function(){
         e.preventDefault();
         page++;
         setUIwithPage(page);
+        console.log("next page");
     });
 
     prevStepBtn.addEventListener('click',e => {
         e.preventDefault();
         page--;
         setUIwithPage(page);
+        console.log("previous page");
+    });
+
+    checkbox.addEventListener('change',e => {
+        e.preventDefault();
+        if (checkbox.checked == true){
+            presentBox.classList.remove("invisible");
+            endDateInput.classList.add("invisible");
+          } else {
+            presentBox.classList.add("invisible");
+            endDateInput.classList.remove("invisible");
+          }
     });
 
     addJobBtn.addEventListener('click',e => {

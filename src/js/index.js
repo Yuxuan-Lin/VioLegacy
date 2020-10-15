@@ -2,7 +2,6 @@ import Home from './models/home';
 import Opp from './models/opportunities';
 import Messages from './models/messages';
 import {elements} from './views/base';
-import * as signUpView from './views/signUpView'; 
 
 
 import * as homeControl from './controllers/homeController';
@@ -19,7 +18,6 @@ const collapseMenu = function(state) {
     elements.navi.classList.add('collapsed-navigator');
     document.querySelector('.collapse-icon').innerHTML = `
         <ion-icon name="arrow-forward-outline" class="small-icon"></ion-icon>
-        .
     `;
 };
 
@@ -131,9 +129,6 @@ export const setUI = async function(state, user){
         }
     });
 };
-
-signUpView.setSignUpUI();
-
 
 
 

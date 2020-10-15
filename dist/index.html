@@ -32,25 +32,114 @@
 	<link rel="stylesheet" type="text/css" href="css/violegacy.css">
 </head>
 <body>
-	<div class="sign-up">
-		
-		<div class="sign-content">
-			<h4>Sign up</h4><br>
-			<form id="signup-form">
-				<div class="signup-input-field">
-					<input type="email" id="signup-email" required />
-					<label for="signup-email">Email address</label>
-				</div>
-				<div class="signup-input-field">
-					<input type="password" id="signup-password" required />
-					<label for="signup-password">Choose password</label>
-				</div>
-				
-				<button class="btn yellow darken-2 z-depth-0">Sign up</button>
-				<p class="error pink-text center-align"></p>
-			</form>
-		</div>		
-	</div>
+	<div class="signUp-container">
+        <div class="signUp-header">
+            <div>
+                <img src="./images/logo.png"></img>
+            </div>
+        </div>
+        
+        <div class="signUp-small-container">
+            <ul class="progression">
+                <li><h3>Basic Information</h3></li>
+                <li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
+                <li><h3>About</h3></li>
+                <li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
+                <li><h3>Experience</h3></li>
+            </ul>
+            <div class="basic-info">
+                <ul>
+                    <li class="basic-info-1st-line">
+                        <div class="first-item">
+                            <h4>First Name</h4>
+                            <input type="text" id="first-name" required />
+                        </div>
+                        <div class="second-item">
+                            <h4>Last Name</h4>
+                            <input type="text" id="last-name" required />
+                        </div>
+					</li>
+					<li>
+                        <div class="signUp-input-temp">
+                            <h4>Email</h4>
+                            <input type="email" id="signUp-email" required />
+                        </div>
+					</li>
+					<li>
+                        <div class="signUp-input-temp">
+                            <h4>Password</h4>
+                            <input type="password" id="signUp-password" required />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="signUp-input-temp">
+                            <h4>Major</h4>
+                            <input type="text" id="major" required />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="signUp-input-temp">
+                            <h4>Year</h4>
+                            <input type="text" id="year" required />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="signUp-about signUp-input-temp">
+                <h4>About</h4>
+                <input type="textarea" id="about-area" required />
+            </div>
+            <div class="signUp-experience">
+                <ul class="signUp-experiences">
+                    <li class="experience-template">
+                        <div class="job-header">
+                            <hr>
+                            <h3>Job 1</h3>
+                            <hr>
+                        </div>
+                        <div class="signUp-input-temp">
+                            <h4>Job Title</h4>
+                            <input type="text" id="job-title" required />
+                        </div>
+                        <div class="signUp-input-temp">
+                            <h4>Company</h4>
+                            <input type="text" id="company" required />
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" id="current-in-role">
+                            <h4 >I am currently working on this role.</h4>
+                        </div>
+                        <div class="start-end">
+                            <div class="start-date date-template signUp-input-temp">
+                                <h4>Start Date</h4>
+                                <input type="date" id="start-date" required />
+                            </div>
+                            <div class="end-date date-template signUp-input-temp">
+                                <h4>End Date</h4>
+								<input type="date" id="end-date" required />
+								<div id="present-box" class="invisible">
+									<h3 id="in-roll-text">Present</h3>
+								</div>
+                            </div>
+                        </div>
+                        <div class="description signUp-input-temp">
+                            <h4>Description</h4>
+                            <input type="textarea" id="description" required />
+                        </div>
+                    </li>
+                </ul>
+                <button class="add-another-job">Add Another Job</button>
+            </div>
+
+			<div class="step-btns
+			">
+				<button class="next-step" id="previous-step-btn">Previous Step</button>
+            	<button class="next-step" id="next-step-btn">Next Step</button>
+			</div>
+			
+            <button class="next-step" id="sign-up-btn">Sign Up</button>
+        </div>
+    </div>
 
 
 
@@ -68,7 +157,7 @@
 					<label for="login-password">Choose password</label>
 				</div>
 				
-				<button class="btn yellow darken-2 z-depth-0">Sign up</button>
+				<button class="btn yellow darken-2 z-depth-0">Sign in</button>
 				<p class="error pink-text center-align"></p>
 			</form>
 		</div>		
