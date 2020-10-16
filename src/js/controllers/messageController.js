@@ -51,7 +51,7 @@ export const controlChat = async (state,chatId=0) => {
     
 };
 
-export const messageScreen = async (state) => {
+export const messageScreen = (state) => {
     const messageSetUp = `
         <div class="contacts">
             <div class="search-bar">
