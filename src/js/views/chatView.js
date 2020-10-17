@@ -53,9 +53,3 @@ export const renderChat = (message, isRight) => {
     
     document.querySelector('.chat-history').insertAdjacentHTML('beforeend',markup);
 };
-
-export const renderChats = (history) => {
-    history.forEach(message => {
-        renderChat(message, message.mine);
-    });
-};
