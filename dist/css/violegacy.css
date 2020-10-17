@@ -799,6 +799,10 @@
     margin: 4vh 15vw;
 }
 
+.login-container{
+    margin: 4vh 15vw;
+}
+
 .signUp-header{
     display:flex;
 	padding: 20px 0;
@@ -931,6 +935,13 @@
 }
 
 #finish-btn{
+    margin-top:4vh;
+	font-size:150%;
+	width:15vw;
+    padding: 1vh 0;
+}
+
+#Log-in-btn{
     margin-top:4vh;
 	font-size:150%;
 	width:15vw;

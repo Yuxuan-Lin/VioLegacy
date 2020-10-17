@@ -1,40 +1,33 @@
 import * as index from './index';
 import * as officialView from './views/officialView'; 
-const state = {};
-/*
-// add admin cloud function
-const adminForm = document.querySelector('.admin-actions');
-adminForm.addEventListener('submit', (e) => {
-  e.preventDefault();
 
-  const adminEmail = document.querySelector('#admin-email').value;
-  const addAdminRole = functions.httpsCallable('addAdminRole');
-  addAdminRole({ email: adminEmail }).then(result => {
-    console.log(result);
-  });
-});
-*/
+
+
+const state = {};
+
+
+
 
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
-    console.log('auth changed. User: ' + user);
-    //console.log(user.additionalUserInfo.isNewUser);
   if (user) {
     index.setUI(state, user);
-    //index.setSignUpUI();
     
     document.querySelector(".container").classList.remove("invisible");
     document.querySelector(".signUp-container").classList.add("invisible");
-    document.querySelector(".log-in").classList.add("invisible");
+    document.querySelector(".login-container").classList.add("invisible");
   }
   //revise to restrict data leakage 
   else {
     document.querySelector(".container").classList.add("invisible");
     document.querySelector(".signUp-container").classList.add("invisible");
-    document.querySelector(".log-in").classList.add("invisible");
+    document.querySelector(".login-container").classList.add("invisible");
     officialView.setOfficialUI();
   }
 });
+
+
+
 
 
 // signup
@@ -50,8 +43,6 @@ signUpBtn.addEventListener('click', (e) => {
   const firstName = document.querySelector('#first-name');
   const lastName = document.querySelector('#last-name');
   const year = document.querySelector('#year');
-
-
 
   // sign up the user & add firestore data
   auth.createUserWithEmailAndPassword(email.value, password.value).then(cred => {
@@ -76,11 +67,10 @@ signUpBtn.addEventListener('click', (e) => {
     alert(err);
   });
 
-
-
-  //add document profile to firestore
-  
 });
+
+
+
 
 
 
@@ -93,21 +83,23 @@ logout.addEventListener('click', (e) => {
 
 
 
+
+
+
 // login
-const loginForm = document.querySelector('#login-form');
-loginForm.addEventListener('submit', (e) => {
+const LogInBtn = document.querySelector('#log-in-btn');
+LogInBtn.addEventListener('click', (e) => {
   e.preventDefault();
   
-  // get user info
-  const email = loginForm['login-email'].value;
-  const password = loginForm['login-password'].value;
+  // get user info DOM
+  const email = document.querySelector('#login-email');
+  const password = document.querySelector('#login-password');
 
-  // log the user in
-  auth.signInWithEmailAndPassword(email, password).then((cred) => {
-    loginForm.reset();
-    loginForm.querySelector('.error').innerHTML = '';
+  // sign up the user & add firestore data
+  auth.signInWithEmailAndPassword(email.value, password.value).then((cred) => {
+    email.value = "";
+    password.value = "";
   }).catch(err => {
-    loginForm.querySelector('.error').innerHTML = err.message;
-  });
-
+    alert(err);
+  });  
 });

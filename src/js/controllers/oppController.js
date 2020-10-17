@@ -111,7 +111,6 @@ export const oppScreen = async function(state){
 
     elements.container.insertAdjacentHTML('beforeend',oppSetUp);
     controlOpp(state);
-    console.log("bill function started" + state.user.name);
 
     document.querySelector('.referral-box').addEventListener('click', e => {
         const btn = e.target.closest('.referral');

@@ -43,7 +43,11 @@
     </div>
 
 	
-	
+
+
+
+
+
 	<div class="signUp-container invisible">
         <div class="signUp-header">
             <div>
@@ -154,25 +158,45 @@
 
 
 
-	<div class="log-in invisible">
-		
-		<div class="login-content">
-			<h4>Log in</h4><br>
-			<form id="login-form">
-				<div class="login-input-field">
-					<input type="email" id="login-email" required />
-					<label for="login-email">Email address</label>
-				</div>
-				<div class="login-input-field">
-					<input type="password" id="login-password" required />
-					<label for="login-password">Choose password</label>
-				</div>
-				
-				<button class="btn yellow darken-2 z-depth-0">Sign in</button>
-				<p class="error pink-text center-align"></p>
-			</form>
-		</div>		
+
+
+	<div class="login-container invisible">
+		<div class="signUp-header">
+            <div>
+                <img src="./images/logo.png"></img>
+            </div>
+        </div>
+        
+        <div class="signUp-small-container">
+            <ul class="progression">
+                <li><h3>Log In</h3></li>
+            </ul>
+            <div class="basic-info">
+                <ul>
+					<li>
+                        <div class="signUp-input-temp">
+                            <h4>Email</h4>
+                            <input type="email" id="login-email" required />
+                        </div>
+					</li>
+					<li>
+                        <div class="signUp-input-temp">
+                            <h4>Password</h4>
+                            <input type="password" id="login-password" required />
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+			
+            <button class="next-step" id="log-in-btn">Log In</button>
+        </div>
 	</div>
+
+
+
+
+
 
 	<div class="container invisible">
 		<div class="navigator">

@@ -5,7 +5,7 @@ export const setOfficialUI = function(){
     const officialSignUpBtn = document.querySelector(".official-sign-up");
     const officialLogInBtn = document.querySelector(".official-log-in");
     const signUpContainer = document.querySelector(".signUp-container");
-    const logInContainer = document.querySelector(".log-in");
+    const logInContainer = document.querySelector(".login-container");
 
     officialContainer.classList.remove("invisible");
 
@@ -22,3 +22,26 @@ export const setOfficialUI = function(){
         logInContainer.classList.remove("invisible");
     });
 }
+
+
+
+
+
+
+const LogInBtn = document.querySelector('#log-in-btn');
+LogInBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  
+  // get user info DOM
+  const email = document.querySelector('#login-email');
+  const password = document.querySelector('#login-password');
+  
+
+  // sign up the user & add firestore data
+  auth.signInWithEmailAndPassword(email.value, password.value).then((cred) => {
+    email.value = "";
+    password.value = "";
+  }).catch(err => {
+    alert(err);
+  });  
+});
