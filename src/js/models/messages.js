@@ -9,7 +9,7 @@ export default class Messages{
 				return i;
 			}
 		}
-		return -1;
+		throw Error("Cannot get position in a chat that I am not part of")
 	}
 
 	async getContacts(){
