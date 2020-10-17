@@ -1,7 +1,6 @@
 export default class Messages{
 	constructor(uid){
-		this.uid = "6eWQQH2Xz4QD9hSVAyht8ED3KDO2";
-		this.firstRender = true;
+		this.uid = uid;
 	}
 
 	getPos(chatterIds) {
@@ -15,7 +14,7 @@ export default class Messages{
 
 	async getContacts(){
 		try{
-			const snapshot = await db.collection('NewMessages')
+			const snapshot = await db.collection('Messages')
 							 								 .where("chatterIds", "array-contains", this.uid)
 							 								 .get()
 			this.contacts = snapshot.docs.map(doc => {
@@ -35,10 +34,10 @@ export default class Messages{
 
 	async getMessages(chatId) {
 		try{
-			let snapshot = await db.collection('NewMessages').doc(chatId).get();
+			let snapshot = await db.collection('Messages').doc(chatId).get();
 			this.selfPos = this.getPos(snapshot.data().chatterIds);
 			
-			snapshot = await db.collection('NewMessages').doc(chatId).collection('history').orderBy('time').get()
+			snapshot = await db.collection('Messages').doc(chatId).collection('history').orderBy('time').get()
 			this.history = snapshot.docs.map(doc => {
 				const message = doc.data();
 				return message.senderId == this.selfPos ? Object.assign(message, {mine: true}) : message
@@ -50,25 +49,21 @@ export default class Messages{
 
 	async getAlumniProfile(uid){
 		try{
-			console.log(uid);
 			await db.collection('Profiles').doc(uid).get().then(doc => {
 				this.alumniProfile = doc.data();
-				console.log(doc.data());
 			})
 		} catch (error){
 			alert(error);
 		}
 	}
 
-	async sendMessage(message, chatId, sender, now){
+	async sendMessage(message, chatId, now){
 		try{
-			
-			await db.collection('NewMessages').doc(chatId).collection('history').add({
+			await db.collection('Messages').doc(chatId).collection('history').add({
 				content: message,
-				senderID: sender,
+				senderId: this.selfPos,
 				time: now
 			});
-			console.log("update success")
 		} catch (error) {
 			alert(error);
 		}
@@ -89,9 +84,12 @@ export default class Messages{
 	}
 
 	async getUpdates(chatId, renderChatFn) {
-		db.collection('NewMessages').doc(chatId).collection('history').onSnapshot(snapshot => {
+		if (this.unsubscribe) {
+			this.unsubscribe();
+		}
+		this.firstRender = true;
+		this.unsubscribe = db.collection('Messages').doc(chatId).collection('history').onSnapshot(snapshot => {
 			let changes = snapshot.docChanges();
-			console.log("Snapshot captured", changes[0].doc.data());
 			if (this.firstRender) {
 				this.firstRender = false;
 			}
@@ -99,10 +97,9 @@ export default class Messages{
 				changes.forEach(change => {
 					let doc = change.doc;
 					const message = doc.data();
-					console.log(message)
-					renderChatFn(message, this.selfPos ? true : false);
+					renderChatFn(message, this.selfPos == 0 ? true : false);
 				});
 			}
-	})
+		})
 	}
 }

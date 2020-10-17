@@ -110,7 +110,7 @@ export const messageScreen = (state) => {
             const message = btn.parentNode.parentNode.childNodes[3].childNodes[1].value;
             //console.log(message);
             //console.log(state.messages.selfPos);
-            state.messages.sendMessage(message, state.messages.currentChatId, state.messages.selfPos,now);
+            state.messages.sendMessage(message, state.messages.currentChatId,now);
         }
         
     });
