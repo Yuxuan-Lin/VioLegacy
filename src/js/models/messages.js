@@ -44,4 +44,19 @@ export default class Messages{
 			alert(error);
 		}
 	}
+
+	async getSearchResults(searchContent) {
+		let arr = [];
+		try{
+			await db.collection("Profiles").where("name", "==", searchContent).get().then(function(querySnapshot) {
+        			querySnapshot.forEach(function(doc) {
+            				arr.push(doc.data());
+				});
+			});
+			this.searchRes = arr;
+		} catch(error){
+			alert(error);
+		}
+	}
+
 }

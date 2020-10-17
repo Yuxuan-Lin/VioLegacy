@@ -25,9 +25,9 @@ const renderChat = (message, isRight) => {
     let markup;
     if (isRight){
         markup = `
-            <li class="message-received">
+            <li class="message-sent">
                 <div class="message-avatar"><img class="round-image" src="./images/Bill.jpg"></div>
-                <div class="message-text talk-bubble tri-right left-top">
+                <div class="message-text talk-bubble tri-right right-top">
                     <div class="talktext">
                         <p>${message.content}</p>
                     </div>
@@ -35,11 +35,12 @@ const renderChat = (message, isRight) => {
                 <div class="message-empty">&nbsp;</div>
             </li>
         `;
+        
     } else {
         markup = `
-            <li class="message-sent">
+            <li class="message-received">
                 <div class="message-avatar"><img class="round-image" src="./images/Bill.jpg"></div>
-                <div class="message-text talk-bubble tri-right right-top">
+                <div class="message-text talk-bubble tri-right left-top">
                     <div class="talktext">
                         <p>${message.content}</p>
                     </div>
@@ -53,18 +54,24 @@ const renderChat = (message, isRight) => {
     document.querySelector('.chat-history').insertAdjacentHTML('beforeend',markup);
 };
 
-export const renderChats = (chatData,uid,selfPos) => {
-
-    chatData.forEach(doc => {
-        if (doc.data().chatter[0].uid == uid || doc.data().chatter[1].uid == uid){
-
-            doc.data().history.forEach( message => {                
-                renderChat(message, selfPos == message.senderID);
-            });
-
-            return 1;
-        }
-    });
-
-    //messages.forEach(el => renderChat(imageLeft, imageRight, el));
+export const renderChats = (chatData,uid,selfPos,state) => {
+    db.collection("Messages").onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        console.log(changes[0].doc.data());
+        changes.forEach(change => {
+            let doc = change.doc;
+            if (doc.data().chatter[0].uid == uid || doc.data().chatter[1].uid == uid){
+                if (state.messages.firstRender) {
+                    doc.data().history.forEach( message => {                
+                        renderChat(message, selfPos == message.senderID);
+                    });
+                    state.messages.firstRender = false;
+                }
+                else{
+                    const message = doc.data().history[doc.data().history.length - 1];
+                    renderChat(message, selfPos == message.senderID);
+                }
+            }
+        });
+    })
 };
