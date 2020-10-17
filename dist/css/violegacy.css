@@ -425,8 +425,13 @@
     display:flex;
 }
 
+.home-top-profile{
+    flex: 0 1 93%;
+    display:flex;
+}
+
 .profile-pic{
-    flex: 0 1 7%;
+    flex: 0 1 12%;
     align-self: center;
 }
 
@@ -455,6 +460,7 @@
     flex:0 1 7%;
     align-self: center;
 }
+
 
 .good-line{
     margin: 2vh 0;
@@ -811,10 +817,13 @@
 }
 
 .signUp-small-container{
+    opacity: 1.0;
+    background-color: white;
     display: flex;
     margin: 0 15vw;
     align-items: center;
     flex-direction: column;
+    padding: 3vh;
 }
 
 .progression{
@@ -916,6 +925,13 @@
 
 #sign-up-btn{
 	margin-top:4vh;
+	font-size:150%;
+	width:15vw;
+    padding: 1vh 0;
+}
+
+#finish-btn{
+    margin-top:4vh;
 	font-size:150%;
 	width:15vw;
     padding: 1vh 0;
@@ -1048,3 +1064,60 @@ button{
 button:hover{
 	outline:none;
 }
+
+
+.official-container{
+    margin: 5vh;
+}
+
+.SignUp-Login{
+    display:flex;
+    height:6vh;
+    width:30vw;
+}
+
+.official-sign-up{
+    flex: 1 1 45%;
+    border: none;
+    border-radius: 3vh;
+    background-color: #CCA2D8;
+    color: white;
+    font-weight: bold;
+    font-size: 150%;
+
+    margin-right: 10%;
+}
+
+.official-sign-up:hover{
+    background-color: #c98eda;
+}
+
+.official-log-in{
+    flex: 1 1 45%;
+    border-style: solid;
+    border-color: #CCA2D8;
+    border-width: 5px;
+    border-radius: 3vh;
+    background-color: white;
+    color: #CCA2D8;
+    font-weight: bold;
+    font-size: 150%;
+}
+
+.official-log-in:hover{
+    border-color: #c98eda;
+    color:#c98eda;
+}
+
+/* experimental area*/
+.laputa{
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: 100%;
+    background-color: rgba(1,1,1,0.5);
+    height: 100vh;
+    overflow-y: scroll;
+    padding: 4vh 15vw;
+}
+

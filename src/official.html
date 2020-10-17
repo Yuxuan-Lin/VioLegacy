@@ -1,19 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sign Up Page</title>
-	<link rel="stylesheet" type="text/css" href="../dist/css/signUp.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../dist/css/violegacy.css">
 </head>
 <body>
-
-
-    <div class="signUp-container invisible">
-        <div class="signUp-header">
-            <div>
-                <img src="./images/logo.png"></img>
-            </div>
-        </div>
-        
+    <div class="overarch">
+    <h1>Expeeriment</h1>
+    <div class="laputa">
         <div class="signUp-small-container">
             <ul class="progression">
                 <li><h3>Basic Information</h3></li>
@@ -33,7 +29,7 @@
                             <h4>Last Name</h4>
                             <input type="text" id="last-name" required />
                         </div>
-                    </li>
+					</li>
                     <li>
                         <div class="signUp-input-temp">
                             <h4>Major</h4>
@@ -53,7 +49,7 @@
                 <input type="textarea" id="about-area" required />
             </div>
             <div class="signUp-experience">
-                <ul>
+                <ul class="signUp-experiences">
                     <li class="experience-template">
                         <div class="job-header">
                             <hr>
@@ -70,7 +66,7 @@
                         </div>
                         <div class="checkbox">
                             <input type="checkbox" id="current-in-role">
-                            <h4>I am currently working on this role.</h4>
+                            <h4 >I am currently working on this role.</h4>
                         </div>
                         <div class="start-end">
                             <div class="start-date date-template signUp-input-temp">
@@ -79,8 +75,10 @@
                             </div>
                             <div class="end-date date-template signUp-input-temp">
                                 <h4>End Date</h4>
-                                <input type="date" id="start-date" required />
-                                <h4 class="invisible">Present</h4>
+								<input type="date" id="end-date" required />
+								<div id="present-box" class="invisible">
+									<h3 id="in-roll-text">Present</h3>
+								</div>
                             </div>
                         </div>
                         <div class="description signUp-input-temp">
@@ -92,10 +90,15 @@
                 <button class="add-another-job">Add Another Job</button>
             </div>
 
-            <button class="next-step">Next Step</button>
+			<div class="step-btns
+			">
+				<button class="next-step" id="previous-step-btn">Previous Step</button>
+            	<button class="next-step" id="next-step-btn">Next Step</button>
+			</div>
+			
             <button class="next-step" id="sign-up-btn">Sign Up</button>
         </div>
     </div>
+    </div>
 </body>
-<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 </html>

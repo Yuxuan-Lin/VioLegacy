@@ -18,7 +18,6 @@ export const setSignUpUI = function(){
     
     
     const setUIwithPage = function(page){
-        
         switch(page) {
             case 0:
                 //basicInfo: visible       signUpAbout: invisible      signUpExperience: invisible
@@ -55,8 +54,8 @@ export const setSignUpUI = function(){
                 break;
             default:
                 //default
-          }
-    }
+        }
+    };
 
 
     setUIwithPage(page);
@@ -128,5 +127,5 @@ export const setSignUpUI = function(){
         document.querySelector(`.signUp-experiences`).insertAdjacentHTML('beforeend',addJobMarkUp);
     });
 
-    console.log("Sign Up Page Set Up");
+    console.log("Sign Up Page Set Up completed");
 }

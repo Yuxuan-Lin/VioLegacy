@@ -1,5 +1,5 @@
 import * as index from './index';
-import * as signUpView from './views/signUpView'; 
+import * as officialView from './views/officialView'; 
 const state = {};
 /*
 // add admin cloud function
@@ -30,9 +30,9 @@ auth.onAuthStateChanged(user => {
   //revise to restrict data leakage 
   else {
     document.querySelector(".container").classList.add("invisible");
-    document.querySelector(".signUp-container").classList.remove("invisible");
-    document.querySelector(".log-in").classList.remove("invisible");
-    signUpView.setSignUpUI();
+    document.querySelector(".signUp-container").classList.add("invisible");
+    document.querySelector(".log-in").classList.add("invisible");
+    officialView.setOfficialUI();
   }
 });
 

@@ -33,6 +33,12 @@ export const homeScreen = async (state) => {
         <div class = "home-main">
             <div class = "home-profile">
                 <div class = "home-top">
+                    <div class="home-top-profile">
+
+                    </div>
+                    <div class="home-top-icon">
+                        <ion-icon name="pencil-outline" class="big-icon"></ion-icon>
+                    </div>
                 </div>
                 
                 <hr class="good-line">
@@ -77,7 +83,7 @@ export const homeScreen = async (state) => {
     `;
     
     elements.container.insertAdjacentHTML('beforeend',homeSetUp);
-    await controlHome(state);
+    controlHome(state);
     state.home.pending = homeView.oppStatus[0];
     state.home.accepted = homeView.oppStatus[1];
     state.home.declined = homeView.oppStatus[2];
@@ -111,6 +117,20 @@ export const homeScreen = async (state) => {
                 state.home.collapsed = true;
             }
         }
+    });
+
+    document.querySelector(".home-top-icon").addEventListener('click',(e)=>{
+        e.preventDefault();
+        document.querySelector('.laputa').classList.remove('invisible');
+
+        homeView.setEditUI(state);
+
+        state.home.finishBtn.addEventListener('click',e => {
+            e.preventDefault();
+            state.home.sendEditedProfile(state);
+            state.home.laputa.classList.add("invisible");
+            controlHome(state);
+        });
     });
     
 }

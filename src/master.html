@@ -32,7 +32,19 @@
 	<link rel="stylesheet" type="text/css" href="css/violegacy.css">
 </head>
 <body>
-	<div class="signUp-container">
+	<div class="official-container invisible">
+        <div>
+            <img src="./images/logo.png"></img>
+        </div>
+        <div class="SignUp-Login">
+            <button class="official-sign-up">Sign Up</button>
+            <button class="official-log-in">Log in</button>
+        </div>
+    </div>
+
+	
+	
+	<div class="signUp-container invisible">
         <div class="signUp-header">
             <div>
                 <img src="./images/logo.png"></img>
@@ -131,8 +143,7 @@
                 <button class="add-another-job">Add Another Job</button>
             </div>
 
-			<div class="step-btns
-			">
+			<div class="step-btns">
 				<button class="next-step" id="previous-step-btn">Previous Step</button>
             	<button class="next-step" id="next-step-btn">Next Step</button>
 			</div>
@@ -143,7 +154,7 @@
 
 
 
-	<div class="log-in">
+	<div class="log-in invisible">
 		
 		<div class="login-content">
 			<h4>Log in</h4><br>
@@ -235,6 +246,94 @@
 			</div>
 		</div>
 	
+		
+		<!-- This is for home edit -->
+		<div class="laputa invisible">
+			<div class="signUp-small-container">
+				<ul class="progression">
+					<li><h3>Basic Information</h3></li>
+					<li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
+					<li><h3>About</h3></li>
+					<li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
+					<li><h3>Experience</h3></li>
+				</ul>
+				<div class="basic-info">
+					<ul>
+						<li class="basic-info-1st-line">
+							<div class="first-item">
+								<h4>First Name</h4>
+								<input type="text" id="laputa-first-name" required />
+							</div>
+							<div class="second-item">
+								<h4>Last Name</h4>
+								<input type="text" id="laputa-last-name" required />
+							</div>
+						</li>
+						<li>
+							<div class="signUp-input-temp">
+								<h4>Major</h4>
+								<input type="text" id="laputa-major" required />
+							</div>
+						</li>
+						<li>
+							<div class="signUp-input-temp">
+								<h4>Year</h4>
+								<input type="text" id="laputa-year" required />
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="signUp-about signUp-input-temp">
+					<h4>About</h4>
+					<input type="textarea" id="laputa-about-area" required />
+				</div>
+				<div class="signUp-experience">
+					<ul class="signUp-experiences">
+						<li class="experience-template">
+							<div class="job-header">
+								<hr>
+								<h3>Job 1</h3>
+								<hr>
+							</div>
+							<div class="signUp-input-temp">
+								<h4>Job Title</h4>
+								<input type="text" id="laputa-job-title" required />
+							</div>
+							<div class="signUp-input-temp">
+								<h4>Company</h4>
+								<input type="text" id="laputa-company" required />
+							</div>
+							<div class="checkbox">
+								<input type="checkbox" id="laputa-current-in-role">
+								<h4 >I am currently working on this role.</h4>
+							</div>
+							<div class="start-end">
+								<div class="start-date date-template signUp-input-temp">
+									<h4>Start Date</h4>
+									<input type="date" id="laputa-start-date" required />
+								</div>
+								<div class="end-date date-template signUp-input-temp">
+									<h4>End Date</h4>
+									<input type="date" id="laputa-end-date" required />
+									<div id="present-box" class="invisible">
+										<h3 id="in-roll-text">Present</h3>
+									</div>
+								</div>
+							</div>
+							<div class="description signUp-input-temp">
+								<h4>Description</h4>
+								<input type="textarea" id="laputa-description" required />
+							</div>
+						</li>
+					</ul>
+					<button class="add-another-job">Add Another Job</button>
+				</div>
+				
+				<button class="next-step" id="finish-btn">Finish</button>
+			</div>
+		</div>
+
+
 		<div class="right-container">
 			<!--
 			<div class="contacts">
