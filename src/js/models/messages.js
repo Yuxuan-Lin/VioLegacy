@@ -11,11 +11,22 @@ export default class Messages{
 			await db.collection('Messages').get().then(snapshot => {
 				this.chatData = snapshot.docs;
 				//console.log(snapshot.docs[0].id);
-			})
+			});
 		} catch (error){
 			alert(error);
 		}
 	}
+
+	async getConversation(chatId){
+		try{
+			await db.collection('Messages').doc(chatId).collection('history').onSnapshot(snapshot => {
+				let changes = snapshot.docChanges();
+        		console.log(changes[0].doc.data());
+			});
+		} catch (error) {
+			alert(error);
+		}
+	};
 
 	async getAlumniProfile(uid){
 		try{

@@ -10,9 +10,9 @@ const renderContact = (doc,i) => {
             <div class="person-info">
                 <div class="person-top">
                     <h3 class="name">${doc.data().chatter[i].name}</h3>
-                    <h3 class="time">${doc.data().history[doc.data().history.length-1].time.toDate()}</h3>
+                    <h3 class="time">time</h3>
                 </div>
-                <h3>${doc.data().history[doc.data().history.length-1].content}</h3>
+                <h3>yet to render content</h3>
             </div>
         </li>
     `;
@@ -22,7 +22,9 @@ const renderContact = (doc,i) => {
 
 export const renderContacts = (chatData,uid) => {
     chatData.forEach(doc => {
+        
         if (doc.data().chatter[0].uid == uid || doc.data().chatter[1].uid == uid){
+            console.log("activated");
             renderContact(doc, (doc.data().chatter[0].uid == uid) ? 1 : 0);
         }
     });

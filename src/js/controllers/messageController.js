@@ -7,17 +7,17 @@ import * as chatView from '../views/chatView';
 export const controlContacts = async (state) => {
     // render Profile UI
     await state.messages.getMessages();
+    //console.log(state.messages.chatData.data());
 
     contactsView.renderContacts(state.messages.chatData, state.user.uid);
 };
 
 export const controlChat = async (state,chatId) => {
     // render Profile UI
-    await state.messages.getMessages();
+    await state.messages.getConversation(chatId);
 
-    // find alumni profile
+    // find and render alumni profile
     let chatterUid;
-
     state.messages.chatData.forEach(doc => {     
         //console.log(state.user.uid);
         if (doc.data().chatter[0].uid == state.user.uid || doc.data().chatter[1].uid == state.user.uid){
@@ -28,9 +28,7 @@ export const controlChat = async (state,chatId) => {
             }
         }
     });
-    //console.log(chatterUid);
     await state.messages.getAlumniProfile(chatterUid);
-
     chatView.renderProfile(state.messages.alumniProfile);
     
     // render Chat UI
@@ -111,17 +109,17 @@ export const messageScreen = async (state) => {
                 <h3 class="name">Bill Ruochen Gu</h3>
             </div>
         </li>
-    `
+    `;
 
     elements.container.insertAdjacentHTML('beforeend',messageSetUp);
     //console.log("Screen fully Setup");
     controlContacts(state);
     document.querySelector('.contact-list').addEventListener('click', e => {
-        const btn = e.target.closest('.contact-person').id;
+        const btn = e.target.closest('.contact-person');
         state.messages.currentChatId = btn;
         if (btn) {
             chatView.clearChat();
-            controlChat(state,btn);
+            controlChat(state,btn.id);
             //searchView.clearResults();
             //searchView.renderResults(state.search.result, goToPage);
         }
