@@ -24,7 +24,6 @@ export const renderContacts = (chatData,uid) => {
     chatData.forEach(doc => {
         
         if (doc.data().chatter[0].uid == uid || doc.data().chatter[1].uid == uid){
-            console.log("activated");
             renderContact(doc, (doc.data().chatter[0].uid == uid) ? 1 : 0);
         }
     });

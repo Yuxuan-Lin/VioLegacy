@@ -150,7 +150,6 @@ export const messageScreen = async (state) => {
         if(btn){
             const searchContent = btn.parentNode.childNodes[3].value;
             await state.messages.getSearchResults(searchContent);
-            console.log(state.messages.searchRes);
             contactsView.renderSearchResults(state.messages.searchRes);
             searchResUI.classList.remove("invisible");
         }
