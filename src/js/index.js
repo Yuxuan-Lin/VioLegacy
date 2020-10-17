@@ -109,6 +109,7 @@ export const setUI = async function(state, user){
     state.image = "../images/kerwin.jpg";
     state.home.collapsed = false;
     state.menuCollapsed = false;
+    state.messages.firstRender = true;
     //console.log(state.user.name);
     tabSwitch(state, document.getElementById("default"));
 

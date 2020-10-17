@@ -18,17 +18,23 @@ export const controlChat = async (state,chatId, chatterUid) => {
     // render Chat UI
     await state.messages.getMessages(chatId);
     chatView.renderChats(state.messages.history);
+
+    // get real-time updates
+    await state.messages.getUpdates(chatId, (chatView.renderChat));
 };
 
 export const messageScreen = (state) => {
     const messageSetUp = `
         <div class="contacts">
             <div class="search-bar">
-                <div>
+                <div class = "search-btn">
                     <ion-icon name="search-outline" class="small-icon"></ion-icon>
                 </div>
                 <input type="text" name="search" placeholder="Search names, chats, etc.">
             </div>
+            <ul class="search-results invisible">
+                <p> Search Results Below </p>
+			</ul>
             <ul class="contact-list"></ul>
         </div>   
         <div class="chat-block">
@@ -70,7 +76,15 @@ export const messageScreen = (state) => {
         </div>
     `;
 
-    //console.log(now)
+    const searchSetUp = `
+        <li class="search-result-person">
+            <div class="person-image"><img class="round-image" src="images/Bill.jpg"></div>
+            <div class="person-name">
+                <h3 class="name">Bill Ruochen Gu</h3>
+            </div>
+        </li>
+    `
+
     elements.container.insertAdjacentHTML('beforeend',messageSetUp);
     //console.log("Screen fully Setup");
     controlContacts(state);
@@ -84,9 +98,6 @@ export const messageScreen = (state) => {
             //searchView.renderResults(state.search.result, goToPage);
         }
     });
-
-    console.log("submit: ");
-    console.log(document.querySelector('#type-box'));
     
     
     document.querySelector('.type-field').addEventListener('click', e => {
@@ -103,4 +114,19 @@ export const messageScreen = (state) => {
         }
         
     });
+
+    const searchResUI = document.querySelector('.search-results');
+
+    document.querySelector('.search-btn').addEventListener('click', async e =>  {
+        e.preventDefault();
+        const btn = e.target.closest('.search-btn');
+        console.log(btn);
+        if(btn){
+            const searchContent = btn.parentNode.childNodes[3].value;
+            await state.messages.getSearchResults(searchContent);
+            searchResUI.classList.remove("invisible");
+        }
+
+    })
+
 };

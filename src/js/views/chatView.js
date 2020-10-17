@@ -21,13 +21,13 @@ export const renderProfile = (profile) => {
     document.querySelector('.profile').insertAdjacentHTML('beforeend',markup);
 };
 
-const renderChat = (message, isRight) => {
+export const renderChat = (message, isRight) => {
     let markup;
     if (isRight){
         markup = `
-            <li class="message-received">
+            <li class="message-sent">
                 <div class="message-avatar"><img class="round-image" src="./images/Bill.jpg"></div>
-                <div class="message-text talk-bubble tri-right left-top">
+                <div class="message-text talk-bubble tri-right right-top">
                     <div class="talktext">
                         <p>${message.content}</p>
                     </div>
@@ -35,11 +35,12 @@ const renderChat = (message, isRight) => {
                 <div class="message-empty">&nbsp;</div>
             </li>
         `;
+        
     } else {
         markup = `
-            <li class="message-sent">
+            <li class="message-received">
                 <div class="message-avatar"><img class="round-image" src="./images/Bill.jpg"></div>
-                <div class="message-text talk-bubble tri-right right-top">
+                <div class="message-text talk-bubble tri-right left-top">
                     <div class="talktext">
                         <p>${message.content}</p>
                     </div>
@@ -57,6 +58,4 @@ export const renderChats = (history) => {
     history.forEach(message => {
         renderChat(message, message.mine);
     });
-
-    //messages.forEach(el => renderChat(imageLeft, imageRight, el));
 };
