@@ -14,9 +14,7 @@ export default class Messages{
 
 	async getContacts(){
 		try{
-			const snapshot = await db.collection('Messages')
-							 								 .where("chatterIds", "array-contains", this.uid)
-							 								 .get()
+			const snapshot = await db.collection('Messages').where("chatterIds", "array-contains", this.uid).get()
 			this.contacts = snapshot.docs.map(doc => {
 				const data = doc.data();
 				const pos = this.getPos(data.chatterIds);
