@@ -16,11 +16,7 @@ export const controlChat = async (state,chatId, chatterUid) => {
     chatView.renderProfile(state.messages.alumniProfile);
     
     // render Chat UI
-    await state.messages.getMessages(chatId);
-    chatView.renderChats(state.messages.history);
-
-    // get real-time updates
-    await state.messages.getUpdates(chatId, (chatView.renderChat));
+    await state.messages.getMessages(chatId, chatView.renderChat);
 };
 
 export const messageScreen = (state) => {

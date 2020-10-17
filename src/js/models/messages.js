@@ -32,15 +32,21 @@ export default class Messages{
 		}
 	}
 
-	async getMessages(chatId) {
+	async getMessages(chatId, renderChatFn) {
 		try{
-			let snapshot = await db.collection('Messages').doc(chatId).get();
+			const snapshot = await db.collection('Messages').doc(chatId).get();
 			this.selfPos = this.getPos(snapshot.data().chatterIds);
 			
-			snapshot = await db.collection('Messages').doc(chatId).collection('history').orderBy('time').get()
-			this.history = snapshot.docs.map(doc => {
-				const message = doc.data();
-				return message.senderId == this.selfPos ? Object.assign(message, {mine: true}) : message
+			// Detaches update listener when opening new chat
+			if (this.unsubscribe) {
+				this.unsubscribe();
+			}
+			this.unsubscribe = db.collection('Messages').doc(chatId).collection('history').orderBy('time').onSnapshot(snapshot => {
+				const changes = snapshot.docChanges();
+				changes.forEach(change => {
+					const message = change.doc.data();
+					renderChatFn(message, this.selfPos == message.senderId ? true : false);
+				});
 			})
 		} catch (error){
 			alert(error);
@@ -81,25 +87,5 @@ export default class Messages{
 		} catch(error){
 			alert(error);
 		}
-	}
-
-	async getUpdates(chatId, renderChatFn) {
-		if (this.unsubscribe) {
-			this.unsubscribe();
-		}
-		this.firstRender = true;
-		this.unsubscribe = db.collection('Messages').doc(chatId).collection('history').onSnapshot(snapshot => {
-			let changes = snapshot.docChanges();
-			if (this.firstRender) {
-				this.firstRender = false;
-			}
-			else{
-				changes.forEach(change => {
-					let doc = change.doc;
-					const message = doc.data();
-					renderChatFn(message, this.selfPos == 0 ? true : false);
-				});
-			}
-		})
 	}
 }
