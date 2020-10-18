@@ -102,7 +102,7 @@ export const setUI = async function(state, user){
     //console.log(user.uid);
     state.user = user;
     state.opp = new Opp("Ishmael");
-    state.messages = new Messages("messages");
+    state.messages = new Messages(user.uid);
     state.image = "../images/kerwin.jpg";
     state.home.collapsed = false;
     state.menuCollapsed = false;

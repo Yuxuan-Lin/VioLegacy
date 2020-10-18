@@ -1,56 +1,73 @@
-//import axios from 'axios';
-
 export default class Messages{
-	constructor(query){
-		this.query = query;
+	constructor(uid){
+		this.uid = uid;
 	}
 
-	async getMessages(){
-		// const proxy = 'https://cors-anywhere.herokuapp.com/';
+	getPos(chatterIds) {
+		for (let i = 0; i < chatterIds.length; ++i) {
+			if (chatterIds[i] == this.uid) {
+				return i;
+			}
+		}
+		throw Error("Cannot get position in a chat that I am not part of")
+	}
+
+	async getContacts(){
 		try{
-			await db.collection('Messages').get().then(snapshot => {
-				this.chatData = snapshot.docs;
-				//console.log(snapshot.docs[0].id);
+			const snapshot = await db.collection('Messages').where("chatterIds", "array-contains", this.uid).get();
+			this.contacts = snapshot.docs.map(doc => {
+				const data = doc.data();
+				const pos = this.getPos(data.chatterIds);
+				const otherPos = (pos + 1) % 2;
+				return {
+					id: doc.id,
+					chatterName: data.chatters[otherPos],
+					chatterUid: data.chatterIds[otherPos]
+				}
 			});
 		} catch (error){
 			alert(error);
 		}
 	}
 
-	async getConversation(chatId){
+	async getMessages(chatId, renderChatFn) {
 		try{
-			await db.collection('Messages').doc(chatId).collection('history').onSnapshot(snapshot => {
-				let changes = snapshot.docChanges();
-        		console.log(changes[0].doc.data());
-			});
-		} catch (error) {
-			alert(error);
-		}
-	};
-
-	async getAlumniProfile(uid){
-		try{
-			console.log(uid);
-			await db.collection('Profiles').doc(uid).get().then(doc => {
-				this.alumniProfile = doc.data();
-				console.log(doc.data());
+			const snapshot = await db.collection('Messages').doc(chatId).get();
+			this.selfPos = this.getPos(snapshot.data().chatterIds);
+			
+			// Detaches update listener when opening new chat
+			if (this.unsubscribe) {
+				this.unsubscribe();
+			}
+			this.unsubscribe = await db.collection('Messages').doc(chatId).collection('history').orderBy('time').onSnapshot(snapshot => {
+				const changes = snapshot.docChanges();
+				changes.forEach(change => {
+					const message = change.doc.data();
+					renderChatFn(message, this.selfPos == message.senderID ? true : false);
+				});
 			})
 		} catch (error){
 			alert(error);
 		}
 	}
 
-	async sendMessage(message, chatId, sender, now){
+	async getAlumniProfile(uid){
 		try{
-			
-			await db.collection('Messages').doc(chatId).update({
-				history: firebase.firestore.FieldValue.arrayUnion({
-					content: message,
-					senderID: sender,
-					time: now
-				})
+			await db.collection('Profiles').doc(uid).get().then(doc => {
+				this.alumniProfile = doc.data();
+			})
+		} catch (error){
+			alert(error);
+		}
+	}
+
+	async sendMessage(message, chatId, now){
+		try{
+			await db.collection('Messages').doc(chatId).collection('history').add({
+				content: message,
+				senderID: this.selfPos,
+				time: now
 			});
-			console.log("update success")
 		} catch (error) {
 			alert(error);
 		}
@@ -60,8 +77,11 @@ export default class Messages{
 		let arr = [];
 		try{
 			await db.collection("Profiles").where("name", "==", searchContent).get().then(function(querySnapshot) {
-        		querySnapshot.forEach(function(doc) {
-            		arr.push(doc.data());
+				querySnapshot.forEach(function(doc) {
+					arr.push({
+						data:doc.data(),
+						id: doc.id
+					});
 				});
 			});
 			this.searchRes = arr;
@@ -70,4 +90,29 @@ export default class Messages{
 		}
 	}
 
+	async doesChatExists(uid){
+		try{
+			const chats = await db.collection("Messages").where("chatterIds","array-contains",uid).get();
+			chats.forEach(chat => {
+				if(chat.data()){
+					console.log(chat.data());
+					this.chatExists = true;
+				}
+			});
+			//console.log(this.chatExists);
+		} catch(error){
+			alert(error);
+		}
+	}
+
+	async createNewChat(chatterId,chatter,myName){
+		try{
+			await db.collection('Messages').add({
+				chatterIds:[this.uid,chatterId],
+				chatters:[myName,chatter]
+			});
+		} catch(error){
+			alert(error);
+		}
+	}
 }

@@ -35,9 +35,8 @@ export const renderExp = experience => {
         <li class="my-exp">
             <h2>${experience.title}</h2>
             <h4>${experience.company}</h4>
-            <h4>${experience.time} and ${experience.location}</h4>
-            <h4>${experience.description}
-            </h4>
+            <h4>${experience.startTime.toDate()}</h4>
+            <h4>${experience.description}</h4>
         </li>
     `;
      document.querySelector('.experience').insertAdjacentHTML('beforeend',markup);

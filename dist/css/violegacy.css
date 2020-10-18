@@ -1078,11 +1078,12 @@ button:hover{
 
 
 .official-container{
-    margin: 5vh;
+    margin: 30vh 35vw;
 }
 
 .SignUp-Login{
     display:flex;
+    margin-top: 5vh;
     height:6vh;
     width:30vw;
 }

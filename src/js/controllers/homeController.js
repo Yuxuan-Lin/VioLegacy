@@ -8,6 +8,7 @@ export const controlHome = async (state) => {
     //console.log(userId);
     await state.home.getHomeData();
     await state.opp.getOppData();
+    state.user.name = state.home.profile.name;
 
     //2) Prepare UI(optional)
     homeView.clearProfile();
@@ -15,7 +16,7 @@ export const controlHome = async (state) => {
     //3) Render UI
     homeView.renderProfile(state.home.profile);
     homeView.renderAbout(state.home.profile);
-    //homeView.renderExps(state.home.profile.experience);
+    homeView.renderExps(state.home.profile.experience);
     homeView.renderOpps(state.home.profile,state.opp.opps);
     console.log('home fully rendered');
     
@@ -34,7 +35,6 @@ export const homeScreen = async (state) => {
             <div class = "home-profile">
                 <div class = "home-top">
                     <div class="home-top-profile">
-
                     </div>
                     <div class="home-top-icon">
                         <ion-icon name="pencil-outline" class="big-icon"></ion-icon>

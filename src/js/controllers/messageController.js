@@ -6,50 +6,21 @@ import * as chatView from '../views/chatView';
 
 export const controlContacts = async (state) => {
     // render Profile UI
-    await state.messages.getMessages();
-    //console.log(state.messages.chatData.data());
-
-    contactsView.renderContacts(state.messages.chatData, state.user.uid);
+    await state.messages.getContacts();
+    console.log(state.messages.contacts);
+    contactsView.renderContacts(state.messages.contacts, state.user.uid);
 };
 
-export const controlChat = async (state,chatId) => {
+export const controlChat = async (state,chatId,chatterUid) => {
     // render Profile UI
-    await state.messages.getConversation(chatId);
-
-    // find and render alumni profile
-    let chatterUid;
-    state.messages.chatData.forEach(doc => {     
-        //console.log(state.user.uid);
-        if (doc.data().chatter[0].uid == state.user.uid || doc.data().chatter[1].uid == state.user.uid){
-            if (doc.data().chatter[0].uid == state.user.uid){               
-                chatterUid = doc.data().chatter[1].uid;
-            } else {
-                chatterUid = doc.data().chatter[0].uid;
-            }
-        }
-    });
     await state.messages.getAlumniProfile(chatterUid);
     chatView.renderProfile(state.messages.alumniProfile);
     
     // render Chat UI
-    state.messages.chatData.forEach(doc => {
-        if (doc.data().chatter[0].uid == state.user.uid || doc.data().chatter[1].uid == state.user.uid){
-            if(doc.data().chatter[0].uid == state.user.uid){
-                state.messages.selfPos = 0;
-            }
-            else{
-                state.messages.selfPos = 1;
-            }
-        }
-    });
-
-    chatView.renderChats(state.messages.chatData,state.user.uid,state.messages.selfPos,state);
-    //state.messages.selfPos = chatView.renderChats(state.messages.chatData,state.user.uid);
-    //console.log(state.messages.selfPos)
-    
+    await state.messages.getMessages(chatId, chatView.renderChat);
 };
 
-export const messageScreen = async (state) => {
+export const messageScreen = (state) => {
     const messageSetUp = `
         <div class="contacts">
             <div class="search-bar">
@@ -69,7 +40,7 @@ export const messageScreen = async (state) => {
                 <div class="chat-field">
                     <ul class="chat-history"></ul>
                 </div>
-                <div class="type-field">
+                <div class="type-field invisible">
                     <ul class="tool-bar">
                         <li class="tool-icon">
                             <ion-icon name="happy-outline" class="small-icon"></ion-icon>
@@ -115,11 +86,12 @@ export const messageScreen = async (state) => {
     //console.log("Screen fully Setup");
     controlContacts(state);
     document.querySelector('.contact-list').addEventListener('click', e => {
-        const btn = e.target.closest('.contact-person');
-        state.messages.currentChatId = btn;
+        const btn = e.target.closest('.contact-person').id;
+        state.messages.currentChatId = btn.split(";")[0];
         if (btn) {
+            document.querySelector('.type-field').classList.remove('invisible');
             chatView.clearChat();
-            controlChat(state,btn.id);
+            controlChat(state, btn.split(";")[0], btn.split(";")[1]);
             //searchView.clearResults();
             //searchView.renderResults(state.search.result, goToPage);
         }
@@ -129,16 +101,17 @@ export const messageScreen = async (state) => {
     document.querySelector('.type-field').addEventListener('click', e => {
         e.preventDefault();
         const btn = e.target.closest('#the-btn');
-        console.log(btn);
 
         if (btn){
-            const now = new firebase.firestore.Timestamp.now().toDate();
-            const message = btn.parentNode.parentNode.childNodes[3].childNodes[1].value;
-            //console.log(message);
-            //console.log(state.messages.selfPos);
-            state.messages.sendMessage(message, state.messages.currentChatId, state.messages.selfPos,now);
-        }
-        
+            const typeBox = btn.parentNode.parentNode.childNodes[3].childNodes[1];
+            if (typeBox.value){
+                const now = new firebase.firestore.Timestamp.now().toDate();
+                const message = typeBox.value;
+                state.messages.sendMessage(message, state.messages.currentChatId,now);
+                typeBox.value = '';
+                document.body.scrollTop = document.body.scrollHeight;
+            }
+        }        
     });
 
     const searchResUI = document.querySelector('.search-results');
@@ -146,15 +119,28 @@ export const messageScreen = async (state) => {
     document.querySelector('.search-btn').addEventListener('click', async e =>  {
         e.preventDefault();
         const btn = e.target.closest('.search-btn');
-        console.log(btn);
         if(btn){
             const searchContent = btn.parentNode.childNodes[3].value;
             await state.messages.getSearchResults(searchContent);
-            console.log(state.messages.searchRes);
             contactsView.renderSearchResults(state.messages.searchRes);
             searchResUI.classList.remove("invisible");
         }
 
     })
 
+    searchResUI.addEventListener('click', async e=>{
+        const btn = e.target.closest('.search-result-person');
+        const chatter = btn.parentNode.parentNode.childNodes[1].childNodes[3].value;
+        console.log(chatter);
+
+        if (btn){
+            state.messages.chatExists = false;
+            await state.messages.doesChatExists(btn.id);
+            if (state.messages.chatExists){
+                alert("Conversation between you and search target already exists.");
+            } else {
+                //await state.messages.createNewChat(btn.id,chatter,state.user.name);
+            }
+        }
+    });
 };
