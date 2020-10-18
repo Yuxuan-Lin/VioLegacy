@@ -32,7 +32,7 @@
 
 .collapsed-navigator{
 	flex: 0 1 5.5%;
-	width: 13%;
+	width: 7%;
 }
 
 .contacts{
@@ -52,7 +52,7 @@
 .head div img{
     height: 5vh;
 	align-self: center;
-	padding-left: 1vw;
+	padding-left: 0;
 }
 
 .head h2{
@@ -62,12 +62,12 @@
 }
 
 .helps{
-	margin-top: 3vh;
+	margin-top: 9vh;
 }
 
 .tab{
 	display: flex;
-	padding: 3vh 9vw 3vh 3vw;
+	padding: 3vh 5vw 3vh 1.5vw;
 	align-items: center;
 	font-size: 150%;
 }
