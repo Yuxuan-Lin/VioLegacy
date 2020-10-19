@@ -1,5 +1,6 @@
 import * as index from './index';
 import * as officialView from './views/officialView'; 
+import {elements} from './views/base';
 
 
 
@@ -11,8 +12,8 @@ const state = {};
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
   if (user) {
+    //index.cleanUp(state);
     index.setUI(state, user);
-    
     document.querySelector(".container").classList.remove("invisible");
     document.querySelector(".signUp-container").classList.add("invisible");
     document.querySelector(".login-container").classList.add("invisible");

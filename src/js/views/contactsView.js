@@ -1,6 +1,6 @@
 import {elements} from './base';
 
-const renderContact = (doc) => {
+export const renderContact = (doc) => {
     const markup = `
         <li class="contact-person" id="${doc.id+';'+doc.chatterUid}">
             <div class="person-image">
@@ -39,3 +39,7 @@ export const renderSearchResults = (profileArr) => {
     document.querySelector('.search-results').innerHTML = `<p> Search Results Below </p>`;
     profileArr.forEach(renderSearchRes);
 };
+
+export const removeSearchResults = () => {
+    document.querySelector('.search-results').innerHTML = ``;
+}

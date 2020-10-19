@@ -12,8 +12,9 @@ export default class Messages{
 		throw Error("Cannot get position in a chat that I am not part of")
 	}
 
-	async getContacts(){
+	async getContacts(renderContactFn){
 		try{
+			/*
 			const snapshot = await db.collection('Messages').where("chatterIds", "array-contains", this.uid).get();
 			this.contacts = snapshot.docs.map(doc => {
 				const data = doc.data();
@@ -25,6 +26,26 @@ export default class Messages{
 					chatterUid: data.chatterIds[otherPos]
 				}
 			});
+			*/
+			await db.collection('Messages').where("chatterIds", "array-contains", this.uid).onSnapshot(snapshot => {
+				const changes = snapshot.docChanges();
+				changes.forEach(change => {
+					const data = change.doc.data();
+					const pos = this.getPos(data.chatterIds);
+					const otherPos = (pos + 1) % 2;
+					const contact = {
+						id: change.doc.id,
+						chatterName: data.chatters[otherPos],
+						chatterUid: data.chatterIds[otherPos] 
+					}
+					renderContactFn(contact);
+				});
+			})
+
+
+
+
+
 		} catch (error){
 			alert(error);
 		}
@@ -43,7 +64,7 @@ export default class Messages{
 				const changes = snapshot.docChanges();
 				changes.forEach(change => {
 					const message = change.doc.data();
-					renderChatFn(message, this.selfPos == message.senderID ? true : false);
+					renderChatFn(message, this.selfPos == message.senderID);
 				});
 			})
 		} catch (error){
@@ -90,16 +111,15 @@ export default class Messages{
 		}
 	}
 
-	async doesChatExists(uid){
+	async doesChatExists(targetUid,selfUid){
 		try{
-			const chats = await db.collection("Messages").where("chatterIds","array-contains",uid).get();
+			const chats = await db.collection("Messages").where("chatterIds","array-contains",selfUid).get();
 			chats.forEach(chat => {
-				if(chat.data()){
+				if(chat.data().chatterIds[0] == targetUid || chat.data().chatterIds[1] == targetUid){
 					console.log(chat.data());
 					this.chatExists = true;
 				}
 			});
-			//console.log(this.chatExists);
 		} catch(error){
 			alert(error);
 		}

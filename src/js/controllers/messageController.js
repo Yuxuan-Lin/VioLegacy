@@ -6,9 +6,8 @@ import * as chatView from '../views/chatView';
 
 export const controlContacts = async (state) => {
     // render Profile UI
-    await state.messages.getContacts();
-    console.log(state.messages.contacts);
-    contactsView.renderContacts(state.messages.contacts, state.user.uid);
+    await state.messages.getContacts(contactsView.renderContact);
+    //contactsView.renderContacts(state.messages.contacts, state.user.uid);
 };
 
 export const controlChat = async (state,chatId,chatterUid) => {
@@ -130,17 +129,20 @@ export const messageScreen = (state) => {
 
     searchResUI.addEventListener('click', async e=>{
         const btn = e.target.closest('.search-result-person');
-        const chatter = btn.parentNode.parentNode.childNodes[1].childNodes[3].value;
+        const chatter = btn.parentNode.parentNode.childNodes[1].childNodes[3];
         console.log(chatter);
 
         if (btn){
             state.messages.chatExists = false;
-            await state.messages.doesChatExists(btn.id);
+            await state.messages.doesChatExists(btn.id,state.user.uid);
             if (state.messages.chatExists){
                 alert("Conversation between you and search target already exists.");
             } else {
-                //await state.messages.createNewChat(btn.id,chatter,state.user.name);
+                await state.messages.createNewChat(btn.id,chatter.value,state.user.name);
             }
         }
+        searchResUI.classList.add("invisible");
+        contactsView.removeSearchResults();
+        chatter.value = "";
     });
 };
