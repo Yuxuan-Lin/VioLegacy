@@ -21,7 +21,7 @@ export const renderProfile = (profile) => {
     document.querySelector('.profile').insertAdjacentHTML('beforeend',markup);
 };
 
-const renderChat = (message, isRight) => {
+export const renderChat = (message, isRight) => {
     let markup;
     if (isRight){
         markup = `
@@ -52,26 +52,4 @@ const renderChat = (message, isRight) => {
     
     
     document.querySelector('.chat-history').insertAdjacentHTML('beforeend',markup);
-};
-
-export const renderChats = (chatData,uid,selfPos,state) => {
-    db.collection("Messages").onSnapshot(snapshot => {
-        let changes = snapshot.docChanges();
-        console.log(changes[0].doc.data());
-        changes.forEach(change => {
-            let doc = change.doc;
-            if (doc.data().chatter[0].uid == uid || doc.data().chatter[1].uid == uid){
-                if (state.messages.firstRender) {
-                    doc.data().history.forEach( message => {                
-                        renderChat(message, selfPos == message.senderID);
-                    });
-                    state.messages.firstRender = false;
-                }
-                else{
-                    const message = doc.data().history[doc.data().history.length - 1];
-                    renderChat(message, selfPos == message.senderID);
-                }
-            }
-        });
-    })
 };

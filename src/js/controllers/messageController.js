@@ -6,49 +6,17 @@ import * as chatView from '../views/chatView';
 
 export const controlContacts = async (state) => {
     // render Profile UI
-    await state.messages.getMessages();
-
-    contactsView.renderContacts(state.messages.chatData, state.user.uid);
+    await state.messages.getContacts();
+    contactsView.renderContacts(state.messages.contacts, state.user.uid);
 };
 
-export const controlChat = async (state,chatId=0) => {
+export const controlChat = async (state,chatId, chatterUid) => {
     // render Profile UI
-    await state.messages.getMessages();
-
-    // find alumni profile
-    let chatterUid;
-
-    state.messages.chatData.forEach(doc => {     
-        //console.log(state.user.uid);
-        if (doc.data().chatter[0].uid == state.user.uid || doc.data().chatter[1].uid == state.user.uid){
-            if (doc.data().chatter[0].uid == state.user.uid){               
-                chatterUid = doc.data().chatter[1].uid;
-            } else {
-                chatterUid = doc.data().chatter[0].uid;
-            }
-        }
-    });
-    //console.log(chatterUid);
     await state.messages.getAlumniProfile(chatterUid);
-
     chatView.renderProfile(state.messages.alumniProfile);
     
     // render Chat UI
-    state.messages.chatData.forEach(doc => {
-        if (doc.data().chatter[0].uid == state.user.uid || doc.data().chatter[1].uid == state.user.uid){
-            if(doc.data().chatter[0].uid == state.user.uid){
-                state.messages.selfPos = 0;
-            }
-            else{
-                state.messages.selfPos = 1;
-            }
-        }
-    });
-
-    chatView.renderChats(state.messages.chatData,state.user.uid,state.messages.selfPos,state);
-    //state.messages.selfPos = chatView.renderChats(state.messages.chatData,state.user.uid);
-    //console.log(state.messages.selfPos)
-    
+    await state.messages.getMessages(chatId, chatView.renderChat);
 };
 
 export const messageScreen = (state) => {
@@ -118,10 +86,10 @@ export const messageScreen = (state) => {
     controlContacts(state);
     document.querySelector('.contact-list').addEventListener('click', e => {
         const btn = e.target.closest('.contact-person').id;
-        state.messages.currentChatId = btn;
+        state.messages.currentChatId = btn.split(";")[0];
         if (btn) {
             chatView.clearChat();
-            controlChat(state,btn);
+            controlChat(state, btn.split(";")[0], btn.split(";")[1]);
             //searchView.clearResults();
             //searchView.renderResults(state.search.result, goToPage);
         }
@@ -138,7 +106,7 @@ export const messageScreen = (state) => {
             const message = btn.parentNode.parentNode.childNodes[3].childNodes[1].value;
             //console.log(message);
             //console.log(state.messages.selfPos);
-            state.messages.sendMessage(message, state.messages.currentChatId, state.messages.selfPos,now);
+            state.messages.sendMessage(message, state.messages.currentChatId,now);
         }
         
     });
