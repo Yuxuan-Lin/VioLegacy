@@ -49,8 +49,8 @@ export const renderChat = (message, isRight) => {
             </li>
         `;
     }
-
     document.querySelector('.chat-history').insertAdjacentHTML('beforeend',markup);
     const chatField = document.querySelector('.chat-field');
     chatField.scrollTop = chatField.scrollHeight;
 };
+
