@@ -3,10 +3,7 @@ import * as officialView from './views/officialView';
 import {elements} from './views/base';
 
 
-
 const state = {};
-
-
 
 
 // listen for auth status changes
@@ -26,9 +23,6 @@ auth.onAuthStateChanged(user => {
     officialView.setOfficialUI();
   }
 });
-
-
-
 
 
 // signup
@@ -71,20 +65,12 @@ signUpBtn.addEventListener('click', (e) => {
 });
 
 
-
-
-
-
 // logout
 const logout = document.querySelector('#log-out-btn');
 logout.addEventListener('click', (e) => {
   e.preventDefault();
   auth.signOut();
 });
-
-
-
-
 
 
 // login
