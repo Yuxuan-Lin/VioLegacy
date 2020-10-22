@@ -42,7 +42,7 @@ export default class Messages{
 			if (this.unsubscribe) {
 				this.unsubscribe();
 			}
-			this.unsubscribe = await db.collection('Messages').doc(chatId).collection('history').orderBy('time').onSnapshot(snapshot => {
+			this.unsubscribe = db.collection('Messages').doc(chatId).collection('history').orderBy('time').onSnapshot(snapshot => {
 				const changes = snapshot.docChanges();
 				changes.forEach(change => {
 					const message = change.doc.data();
