@@ -74,8 +74,8 @@ logout.addEventListener('click', (e) => {
 
 
 // login
-const LogInBtn = document.querySelector('#log-in-btn');
-LogInBtn.addEventListener('click', (e) => {
+const logInBtn = document.querySelector('#log-in-btn');
+logInBtn.addEventListener('click', (e) => {
   e.preventDefault();
   
   // get user info DOM
