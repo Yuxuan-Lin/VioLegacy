@@ -138,12 +138,3 @@ export const setUI = async function(state, user){
     });
 
 };
-
-const cleanUp = function(){
-    document.querySelector(".contact-list").innerHTML = '';
-};
-
-
-
-
-
