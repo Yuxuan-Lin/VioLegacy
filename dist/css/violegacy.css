@@ -1076,7 +1076,19 @@ button:hover{
 
 
 .official-container{
-    margin: 30vh 35vw;
+    position:relative;
+    padding: 10vh 0 10vh 25vw;
+}
+
+.NYU-map{
+    position:absolute;
+    top: 0;
+    right: 0;
+}
+
+.official-cover{
+    height:35vh;
+    margin-top: 5vh;
 }
 
 .SignUp-Login{
@@ -1231,4 +1243,3 @@ button:hover{
       width: 8vw;
       margin: 1vh 0;
   }
-
