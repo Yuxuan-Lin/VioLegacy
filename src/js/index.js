@@ -20,7 +20,6 @@ const collapseMenu = function(state) {
     elements.navi.classList.add('collapsed-navigator');
     document.querySelector('.collapse-icon').innerHTML = `
         <ion-icon name="arrow-forward-outline" class="small-icon"></ion-icon>
-        .
     `;
 };
 
