@@ -68,22 +68,22 @@ export const oppScreen = async function(state){
         </div>   
     `;
 
-    const billFunction = (state) => {
+    const billFunction = async (state) => {
         elements.container.insertAdjacentHTML('beforeend',oppSetUp);
         controlOpp(state);
 
-        document.querySelector('.referral-box').addEventListener('click', e => {
+        document.querySelector('.referral-box').addEventListener('click', async e => {
             const btn = e.target.closest('.referral');
             if(btn) {
                 // clear right screen
                 clearScreen();
                 // render temp 2
-                oppView.renderDetail(state.opp.opps[btn.id]);
+                oppView.renderDetail(state.opp.opps[btn.value]);
 
-                document.querySelector('.back-top').addEventListener('click', e => {
+                document.querySelector('.back-top').addEventListener('click', async e => {
                     const btn2 = e.target.closest('.back-top');
 
-                    if(btn) {
+                    if(btn2) {
                         // clear right screen
                         clearScreen();
                         // render temp 2
@@ -92,13 +92,10 @@ export const oppScreen = async function(state){
                 });
 
                 //console.log("attention: " + state.user.uid);
-                //console.log("attention: " + state.opp.opps[btn.id].data().registered[1].uid);
-                let flag = false;
-                for (let i=0; i<state.opp.opps[btn.id].data().registered.length; i++){
-                    if (state.opp.opps[btn.id].data().registered[i].uid == state.user.uid){
-                        flag = true;
-                    }
-                }
+                //console.log("attention: " + state.opp.opps[btn.value].data().registered[1].uid);
+                await state.opp.isRegistered(state.user.uid, btn.id);
+                let flag = state.opp.flag;
+                console.log(flag);
                 if (flag){
                     document.querySelector('.ref-request').innerHTML = `
                     <div class="ref-request" id="1">
@@ -114,9 +111,9 @@ export const oppScreen = async function(state){
                 }
 
 
-                document.querySelector('.ref-request').addEventListener('click', e => {
+                document.querySelector('.ref-request').addEventListener('click', async e => {
                     const btn3 = e.target.closest('.ref-request');
-                    console.log("attention: "+state.opp.opps[btn.id].id);
+                    console.log("attention: "+state.opp.opps[btn.value].id);
 
                     if(btn3 && btn3.id == 0) {
 
@@ -127,16 +124,9 @@ export const oppScreen = async function(state){
                                 <button type="button">Request Sent!</button>
                             </div>
                         `;
-                        let tempArr = state.opp.opps[btn.id].data().registered;
-                        tempArr.push({
-                            name: state.home.profile.name,
-                            uid: state.user.uid
-                        });
-                        //console.log(tempArr);
-                        //console.log(state.opp.opps[btn.id].data().registered);
-                        db.collection('Opportunities').doc(state.opp.opps[btn.id].id).update({
-                            registered: tempArr
-                        });
+                        
+                        await state.opp.register(state, btn.id);
+                        await state.home.registerOpp(state.user.uid, btn.id);
                         
                         
                     } else if(btn3 && btn3.id == 1) {
@@ -146,21 +136,13 @@ export const oppScreen = async function(state){
                             </div>
                         `;
 
-                        let tempArr = [];
-                        for (let i=0; i<state.opp.opps[btn.id].data().registered.length; i++){
-                            if (state.opp.opps[btn.id].data().registered[i].uid != state.user.uid){
-                                tempArr.push(state.opp.opps[btn.id].data().registered[i]);
-                            }
-                        }
-
-                        db.collection('Opportunities').doc(state.opp.opps[btn.id].id).update({
-                            registered: tempArr
-                        });
+                        await state.opp.unRegister(state, btn.id);
+                        await state.home.unRegisterOpp(state.user.uid, btn.id);
                         
 
                     }
 
-                    state.opp.getOppData();
+                    //state.opp.getOppData();
 
                 });
             }

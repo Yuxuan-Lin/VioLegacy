@@ -5,9 +5,9 @@ export const clearOpps = () => {
 
 let counter = 0;
 
-export const renderOpp = (opp,id) => {
+export const renderOpp = (opp,tag,oppId) => {
     const markup = `
-        <li class="referral" id='${id}'>
+        <li class="referral" id='${oppId}' value="${tag}">
             <h3 class='opp-category'>${opp.data().category}</h3>
             <div>
                 <h2>${opp.data().title}</h2>
@@ -26,12 +26,12 @@ export const renderOpp = (opp,id) => {
 export const renderOpps = opps => {
   
     for (let i=0; i<Math.ceil(opps.length/3); i++){
-        const markup = `<ul class="referral-row" id="row-${i}"></ul>`;
+        const markup = `<ol class="referral-row" id="row-${i}"></ol>`;
         document.querySelector('.referral-box').insertAdjacentHTML('beforeend',markup);
     }
     
     for (let j=0; j<opps.length; j++) {
-        renderOpp(opps[j],j);
+        renderOpp(opps[j],j,opps[j].id);
     }
 };
 

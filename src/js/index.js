@@ -88,6 +88,34 @@ const screenSwitch = async function (state, tab){
     
 };
 
+const renderAccountSettings = async function(){
+    clearScreen();
+    const AccountSettingsSetUp = `
+        <div class="account-settings-container">
+            <div class="career-status">
+                <h3 class="setting-header"><b>Your Career Status</b></h3>
+                <p>The VioLegacy functions are customized for your current career status. You can always change it here and your data for each status will be saved. </p>
+                <label class="checkbox-template">I’m looking for jobs.
+                    <input type="radio" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="checkbox-template">I'm providing jobs.
+                    <input type="radio" name="radio">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class="account-management">
+                <h3 class="setting-header">Account Management</h3>
+                <button class="account-management-btn">Change Password</button>
+                <button class="account-management-btn">Log Out</button>
+            </div>
+        </div>
+    `;
+    
+    elements.container.insertAdjacentHTML('beforeend',AccountSettingsSetUp);
+}
+
+
 
 
 export const clearScreen = function(){
@@ -126,6 +154,13 @@ export const setUI = async function(state, user){
         tabSwitch(state,tab);
     });
 
+    //Account Settings
+    document.querySelector('#account-settings').addEventListener('click', e => {
+        e.preventDefault();
+        const tab = e.target.closest('.tab');
+        renderAccountSettings();
+    });
+
     //Collapse Menu
     document.querySelector('.collapse').addEventListener('click', e => {
         e.preventDefault();
@@ -137,10 +172,6 @@ export const setUI = async function(state, user){
         }
     });
 
-};
-
-const cleanUp = function(){
-    document.querySelector(".contact-list").innerHTML = '';
 };
 
 

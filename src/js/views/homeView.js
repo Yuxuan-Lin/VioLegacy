@@ -47,7 +47,7 @@ export const renderExps = experiences => {
 };
 
 export let oppStatus = [0,0,0];
-export const renderOpp = (profile,opp,i) => {
+export const renderOpp = (myOpp,opp) => {
 
     let markup = `
         <li class = "opp-column-item">
@@ -57,10 +57,10 @@ export const renderOpp = (profile,opp,i) => {
             </div>
     `;
     
-    let isAccepted = false;
-    let isDeclined = false;
+    //let isAccepted = false;
+    //let isDeclined = false;
     
-    if (profile.myOpps[i].status == "pending") {
+    if (myOpp.status == "pending") {
         oppStatus[0]++;
         markup += `
             <div class="opp-item-right">
@@ -76,7 +76,7 @@ export const renderOpp = (profile,opp,i) => {
         <hr>
     `;
     }
-    else if (profile.myOpps[i].status == "accepted") {
+    else if (myOpp.status == "accepted") {
         oppStatus[1]++;
         markup += `
             <div class="opp-item-right">
@@ -111,15 +111,17 @@ export const renderOpp = (profile,opp,i) => {
      document.querySelector('.opp-column').insertAdjacentHTML('beforeend',markup);
 };
 
-export const renderOpps = async (profile,opps) => {
-    for (let i=0; i<profile.myOpps.length; i++){
+export const renderOpps = async (myOpps,opps) => {
+    oppStatus = [0,0,0];
+    myOpps.forEach(myOpp => {
         opps.forEach(opp => {
-            if (opp.id == profile.myOpps[i].uid){
-                renderOpp(profile,opp.data(),i);
+            if(myOpp.data().oppId == opp.id) {
+                console.log(opp);
+                renderOpp(myOpp.data(), opp.data());
             }
         })
-        
-    }
+    })
+    
 };
 
 

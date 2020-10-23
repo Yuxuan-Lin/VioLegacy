@@ -8,6 +8,7 @@ export const controlHome = async (state) => {
     //console.log(userId);
     await state.home.getHomeData();
     await state.opp.getOppData();
+    await state.home.getMyOpps(state.user.uid);
     state.user.name = state.home.profile.name;
 
     //2) Prepare UI(optional)
@@ -17,7 +18,7 @@ export const controlHome = async (state) => {
     homeView.renderProfile(state.home.profile);
     homeView.renderAbout(state.home.profile);
     homeView.renderExps(state.home.profile.experience);
-    homeView.renderOpps(state.home.profile,state.opp.opps);
+    homeView.renderOpps(state.home.myOpps,state.opp.opps);
     console.log('home fully rendered');
     
     //1) Get chatHistory(array) and profile
