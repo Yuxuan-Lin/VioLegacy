@@ -182,6 +182,17 @@ export const setUI = async function(state, user){
                     tabSwitch(state, document.getElementById("default"));
                 }
             });
+
+            //???????????????????????????????????????????????????????????????
+            document.querySelector("#uploader").addEventListener('click', e => {
+                e.preventDefault();
+                const uploadBtn = e.target.closest('#uploader');
+
+                if(uploadBtn){
+
+                }
+            });
+            
             document.querySelector("#junior-btn").addEventListener('change', e => {
                 e.preventDefault();
                 const btn = e.target.closest('#junior-btn');
