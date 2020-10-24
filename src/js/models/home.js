@@ -60,9 +60,20 @@ export default class Home{
 		try{
 			await db.collection('Profiles').doc(userId).collection("myOpps").get().then(docs => {
 				this.myOpps = docs;
-			})
+			});
 		} catch (error) {
 			alert("getMyOpps: " + error);
+		}
+	}
+
+	async seniorGetOpps(userId){
+		//console.log(userId);
+		try{			
+			await db.collection('NewOpportunities').where("alumniId", "==", userId).get().then(docs => {
+				this.seniorOpps = docs;
+			});			
+		} catch (error) {
+			alert("seniorGetOpps: " + error);
 		}
 	}
 }

@@ -80,7 +80,11 @@ const screenSwitch = async function (state, tab){
         homeControl.homeScreen(state);
     }
     else if (state.tab == '2'){
-        oppControl.oppScreen(state);
+        if (state.user.isSenior){
+            console.log("senior decision page start");
+        } else {
+            oppControl.oppScreen(state);
+        }        
     }
     else if (state.tab == '3'){
         messageControl.messageScreen(state);
@@ -88,18 +92,18 @@ const screenSwitch = async function (state, tab){
     
 };
 
-const renderAccountSettings = async function(){
+const renderAccountSettings = async function(state){
     clearScreen();
     const AccountSettingsSetUp = `
         <div class="account-settings-container">
             <div class="career-status">
                 <h3 class="setting-header"><b>Your Career Status</b></h3>
                 <p>The VioLegacy functions are customized for your current career status. You can always change it here and your data for each status will be saved. </p>
-                <label class="checkbox-template">I’m looking for jobs.
-                    <input type="radio" checked="checked" name="radio">
+                <label class="checkbox-template" id="junior-btn">I’m looking for jobs.
+                    <input type="radio" checked="unchecked" name="radio">
                     <span class="checkmark"></span>
                 </label>
-                <label class="checkbox-template">I'm providing jobs.
+                <label class="checkbox-template" id="senior-btn">I'm providing jobs.
                     <input type="radio" name="radio">
                     <span class="checkmark"></span>
                 </label>
@@ -107,12 +111,18 @@ const renderAccountSettings = async function(){
             <div class="account-management">
                 <h3 class="setting-header">Account Management</h3>
                 <button class="account-management-btn">Change Password</button>
+                <button class="account-management-btn" id="uploader">Upload Resume</button>
                 <button class="account-management-btn">Log Out</button>
             </div>
         </div>
     `;
     
     elements.container.insertAdjacentHTML('beforeend',AccountSettingsSetUp);
+
+    if(state.user.isSenior){
+        document.querySelector("#senior-btn").childNodes[1].checked = true;
+        document.querySelector("#junior-btn").childNodes[1].checked = false;
+    }
 }
 
 
@@ -129,6 +139,7 @@ export const setUI = async function(state, user){
     state.home = new Home(user.uid);
     //console.log(user.uid);
     state.user = user;
+    state.user.isSenior = false;
     state.opp = new Opp("Ishmael");
     state.messages = new Messages(user.uid);
     state.image = "../images/kerwin.jpg";
@@ -158,7 +169,31 @@ export const setUI = async function(state, user){
     document.querySelector('#account-settings').addEventListener('click', e => {
         e.preventDefault();
         const tab = e.target.closest('.tab');
-        renderAccountSettings();
+
+        if (tab){
+            renderAccountSettings(state);
+            document.querySelector("#senior-btn").addEventListener('change', e => {
+                e.preventDefault();
+                const btn = e.target.closest('#senior-btn');
+
+                if (btn){
+                    document.querySelector("#opp-decision").textContent = 'Decision';
+                    state.user.isSenior = true;
+                    tabSwitch(state, document.getElementById("default"));
+                }
+            });
+            document.querySelector("#junior-btn").addEventListener('change', e => {
+                e.preventDefault();
+                const btn = e.target.closest('#junior-btn');
+
+                if (btn){
+                    document.querySelector("#opp-decision").textContent = 'Opportunities';
+                    state.user.isSenior = false;
+                    tabSwitch(state, document.getElementById("default"));
+                }
+            });                                    
+        }
+        
     });
 
     //Collapse Menu

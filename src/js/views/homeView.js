@@ -1,10 +1,14 @@
 import { homeScreen } from "../controllers/homeController";
 
-export const clearProfile = () => {
+export const clearProfile = (isSenior) => {
     document.querySelector('.home-top-profile').innerHTML = '';
     document.querySelector('.about').innerHTML = '';
     document.querySelector('.experience').innerHTML = '';
-    document.querySelector('.opp-column').innerHTML = '';
+    if (isSenior){
+        document.querySelector('.referral-box').innerHTML = '';
+    } else {
+        document.querySelector('.opp-column').innerHTML = '';
+    }
 };
 
 
@@ -116,7 +120,7 @@ export const renderOpps = async (myOpps,opps) => {
     myOpps.forEach(myOpp => {
         opps.forEach(opp => {
             if(myOpp.data().oppId == opp.id) {
-                console.log(opp);
+                //console.log(opp);
                 renderOpp(myOpp.data(), opp.data());
             }
         })
@@ -165,13 +169,7 @@ export const setEditUI = (state) => {
     state.home.firstName.value = state.home.profile.name.split(" ")[0];
     state.home.lastName.value = state.home.profile.name.split(" ")[1];
     state.home.year.value = state.home.profile.year;
-
-}
-
-
-
-
-
+};
 
 
 
