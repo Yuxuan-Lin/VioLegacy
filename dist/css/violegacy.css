@@ -40,6 +40,7 @@
 }
 
 .head{
+	height:10vh;
 	display:flex;
 	margin-top: 1vh;
 }
@@ -62,15 +63,17 @@
 
 .tools{
 	margin-top: 3vh;
+	height:30vh;
 }
 
 .helps{
 	margin-top: 3vh;
+	height:20vh;
 }
 
 .tab{
 	display:flex;
-	padding: 20px 0;
+	padding: 1.5vh 0;
 	padding-left: 2vw;
 	align-items: center;
 }
@@ -81,7 +84,7 @@
 
 
 .tab div{
-	flex: 0 1 20%;
+	flex: 0 0 4vw;
 	padding-right: 1vw;
 }
 
@@ -136,11 +139,12 @@
 }
 
 .collapse h2{
-	font-size: 200%;
+	font-size: 150%;
 }
 
 .collapse{
-	margin-top: 3vw;
+	margin-top:5vh;
+	height: 10vh;
 }
 
 .contact-list{
@@ -421,8 +425,13 @@
     display:flex;
 }
 
+.home-top-profile{
+    flex: 0 1 93%;
+    display:flex;
+}
+
 .profile-pic{
-    flex: 0 1 7%;
+    flex: 0 1 8%;
     align-self: center;
 }
 
@@ -451,6 +460,7 @@
     flex:0 1 7%;
     align-self: center;
 }
+
 
 .good-line{
     margin: 2vh 0;
@@ -771,4 +781,501 @@
 
 .search-btn:hover{
 	color: #CCA2D8;
+}
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;	
+}
+
+.invisible{
+    display: none;
+}
+
+.signUp-container{
+    margin: 4vh 15vw;
+}
+
+.login-container{
+    margin: 4vh 15vw;
+}
+
+.signUp-header{
+    display:flex;
+	padding: 20px 0;
+	padding-left: 2vw;
+	align-items: center;
+}
+
+.signUp-header div{
+	flex: 0 1 20%;
+	margin-right: 1vw;
+}
+
+.signUp-header h2{
+	flex: 1 0 auto;
+	padding: auto 0;
+}
+
+.signUp-small-container{
+    opacity: 1.0;
+    background-color: white;
+    display: flex;
+    margin: 0 15vw;
+    align-items: center;
+    flex-direction: column;
+    padding: 3vh;
+}
+
+.progression{
+    list-style: none;
+    color: black;
+    display: flex;
+    align-items:center;
+	margin-top: 3vh;
+    margin-bottom: 0;
+    flex: 0 1 auto;
+}
+
+.progression li{
+    margin-right: 2vw;
+    align-items:center;
+}
+
+.basic-info{
+	margin-top: 7vh;
+}
+
+
+.basic-info ul{
+    list-style: none;
+    align-items: center;
+}
+
+.basic-info-1st-line{
+    display:flex;
+    margin-bottom: 2vh;
+}
+
+.signUp-input-temp{
+    width: 80% auto;
+    margin-bottom: 2vh;
+    align-items:center;
+}
+
+.signUp-input-temp h4{
+    margin-bottom: 1vh;
+    align-items:center;
+}
+
+.signUp-input-temp input{
+    align-items:center;
+    border: 2px #CCA2D8 solid;
+    border-radius: 20px;
+    height: 4vh;
+    width: 30vw;
+}
+
+.first-item{
+    width: 14vw;
+    flex: 1 0 45%;
+    margin-right: 10%;
+}
+
+.second-item{
+    width: 14vw;
+    flex: 1 0 45%;
+}
+
+.first-item input,.second-item input{
+    margin-top: 1vh;
+    width:100%;
+    border: 2px #CCA2D8 solid;
+    border-radius: 20px;
+    height: 4vh;
+}
+
+
+
+
+.step-btns{
+	display:flex;
+}
+
+
+.next-step{
+    margin-top: 2vh;
+    border:none;
+    background-color: #CCA2D8;
+    color: white;
+    font-weight: bold;
+    font-size: 100%;
+	padding: 1vh 0vw;
+	width: 10vw;
+    border-radius: 30px;
+}
+
+.next-step:hover{
+	background-color: #c88fd8;
+	padding: 1vh 0vw;
+}
+
+#next-step-btn{
+    margin-left: 2vw;
+}
+
+#sign-up-btn{
+	margin-top:4vh;
+	font-size:150%;
+	width:15vw;
+    padding: 1vh 0;
+}
+
+#finish-btn{
+    margin-top:4vh;
+	font-size:150%;
+	width:15vw;
+    padding: 1vh 0;
+}
+
+#Log-in-btn{
+    margin-top:4vh;
+	font-size:150%;
+	width:15vw;
+    padding: 1vh 0;
+}
+
+.signUp-about{
+	margin-top: 7vh;
+}
+
+.signUp-about input{
+    height: 15vh;
+}
+
+
+
+.job-header{
+    height: 2vh;
+    display: flex;
+	margin-bottom: 1vh;
+	margin-top: 5vh;
+    align-items: center;
+}   
+
+.job-header hr{
+    display:table-cell;
+    flex: 0 1 40%;
+    height: 0px;
+}
+
+.job-header h3{
+    flex: 1 0 auto;
+    text-align: center;
+}
+
+.signUp-experience ul{
+	margin-top: 2vh;
+    list-style: none;
+}
+
+.checkbox{
+    display:flex;
+    align-items: center;
+    margin-bottom: 3vh;
+}
+
+.checkbox input{
+    flex: 0 1 10%;
+    height: 25px;
+    width: 25px;
+    left: 495px;
+    top: 421px;
+    color: #CCA2D8;
+}
+
+.checkbox input:checked{
+    background-color: #CCA2D8;
+}
+
+.checkbox h4{
+    flex: 1 0 auto;
+}
+
+.start-end{
+    display:flex;
+}
+
+.start-date{
+    margin-right: 5%;
+}
+
+.date-template{
+    flex: 1 0 45%;
+}
+
+.date-template h4{
+    margin-bottom: 1vh;
+}
+
+#present-box{
+	height:4vh;
+}
+
+#in-roll-text{
+	height: 4vh;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.date-template input{
+    width: 14vw;
+}
+
+.description input{
+    height: 12vh;
+}
+
+.signUp-experience{
+    flex-direction: column;
+    align-items:center;
+}
+
+.add-another-job{
+    border:none;
+    background-color: transparent;
+    color: #CCA2D8;
+}
+
+.add-another-job:hover{
+	color:#c47cd8;
+	text-decoration: underline;
+}
+
+input:focus,
+textarea:focus{
+    padding: 0 1vw;
+    outline: none;
+}
+
+input,
+textarea
+{
+    padding: 0 1vw;
+    outline: none;
+}
+
+button{
+	outline:none;
+}
+
+button:hover{
+	outline:none;
+}
+
+
+.official-container{
+    position:relative;
+    padding: 10vh 0 10vh 25vw;
+}
+
+.NYU-map{
+    position:absolute;
+    top: 0;
+    right: 0;
+}
+
+.official-cover{
+    z-index: 0;
+    height:35vh;
+    margin-top: 5vh;
+}
+
+.SignUp-Login{
+    display:flex;
+    margin-top: 5vh;
+    height:6vh;
+    width:30vw;
+}
+
+.official-sign-up{
+    flex: 1 1 45%;
+    border: none;
+    border-radius: 3vh;
+    background-color: #CCA2D8;
+    color: white;
+    font-weight: bold;
+    font-size: 150%;
+
+    margin-right: 10%;
+}
+
+.official-sign-up:hover{
+    background-color: #c98eda;
+}
+
+.official-log-in{
+    flex: 1 1 45%;
+    border-style: solid;
+    border-color: #CCA2D8;
+    border-width: 5px;
+    border-radius: 3vh;
+    background-color: white;
+    color: #CCA2D8;
+    font-weight: bold;
+    font-size: 150%;
+}
+
+.official-log-in:hover{
+    border-color: #c98eda;
+    color:#c98eda;
+}
+
+.laputa{
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: 100%;
+    background-color: rgba(1,1,1,0.5);
+    height: 100vh;
+    overflow-y: scroll;
+    padding: 4vh 15vw;
+}
+
+/*Account Settings CSS below. */
+
+.account-settings-container{
+    margin: 5vh 10vw;
+    font-size: 150%;
+}
+
+.setting-header{
+    font-weight: bold;
+    margin: 2vh 0;
+}
+
+.career-status p{
+    font-size: 75%;
+    margin: 2vh 0;
+}
+
+.career-status-choice{
+    display:flex;
+}
+
+.career-status-choice input{
+    flex: 0 1 10%;
+}
+
+.career-status-choice p{
+    flex: 1 0 auto;
+}
+
+.checkbox-template {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+  
+  /* Hide the browser's default radio button */
+.checkbox-template input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+  
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+  
+/* On mouse-over, add a grey background color */
+.checkbox-template:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+  
+/* When the radio button is checked, add a blue background */
+.checkbox-template input:checked ~ .checkmark {
+    background-color: #CCA2D8;
+}
+  
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Show the indicator (dot/circle) when checked */
+.checkbox-template input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.checkbox-template .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+  
+
+.account-management-btn{
+    display:block;
+    border: 2px #CCA2D8 solid;
+    background-color: white;
+    color: #CCA2D8;
+    padding: 1vh 1vw;
+    width: 8vw;
+    margin: 1vh 0;
+}
+
+.alumni-opp-top-bar{
+    display:flex;
+    margin: 0 2vw;
+}
+
+.alumni-opp-top-bar h2{
+    flex: 0 1 50%;
+}
+
+.alumni-opp-top-bar h4{
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.add-referral-template{
+    margin:3vh;
+    flex:0 1 25%;
+    border: 0.5vh dashed grey;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-referral-template div{
+    color: grey;
+    font-size: 600%;
+}
+
+.alumni-opp-container{
+    margin-top: 5vh;
 }
