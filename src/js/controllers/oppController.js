@@ -68,7 +68,7 @@ export const oppScreen = async function(state){
         </div>   
     `;
 
-    const renderOppScreen = (state) => {
+    const setUpOppScreen = (state) => {
         elements.container.insertAdjacentHTML('beforeend',oppSetUp);
         controlOpp(state);
 
@@ -87,7 +87,7 @@ export const oppScreen = async function(state){
                         // clear right screen
                         clearScreen();
                         // render temp 2
-                        renderOppScreen(state,oppSetUp);
+                        setUpOppScreen(state,oppSetUp);
                     }
                 });
 
@@ -168,5 +168,5 @@ export const oppScreen = async function(state){
     }
 
 
-    billFunction(state);
+    setUpOppScreen(state);
 };
