@@ -24,15 +24,7 @@ export const renderOpp = (opp,id) => {
 };
 
 export const renderOpps = opps => {
-    /*
-    const arr = [];
-    for (const property in opps){
-        opps[property]["uid"] = property;
-        console.log(opps[0].data());
-        console.log(property);
-        arr.push(opps[property]);
-    }
-    */
+  
     for (let i=0; i<Math.ceil(opps.length/3); i++){
         const markup = `<ul class="referral-row" id="row-${i}"></ul>`;
         document.querySelector('.referral-box').insertAdjacentHTML('beforeend',markup);

@@ -1,73 +1,67 @@
 import * as index from './index';
-const state = {};
-/*
-// add admin cloud function
-const adminForm = document.querySelector('.admin-actions');
-adminForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+import * as officialView from './views/officialView'; 
+import {elements} from './views/base';
 
-  const adminEmail = document.querySelector('#admin-email').value;
-  const addAdminRole = functions.httpsCallable('addAdminRole');
-  addAdminRole({ email: adminEmail }).then(result => {
-    console.log(result);
-  });
-});
-*/
+
+const state = {};
+
 
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
-    console.log('auth changed');
   if (user) {
+    //index.cleanUp(state);
     index.setUI(state, user);
     document.querySelector(".container").classList.remove("invisible");
-    document.querySelector(".sign-up").classList.add("invisible");
-    document.querySelector(".log-in").classList.add("invisible");
+    document.querySelector(".signUp-container").classList.add("invisible");
+    document.querySelector(".login-container").classList.add("invisible");
   }
   //revise to restrict data leakage 
   else {
     document.querySelector(".container").classList.add("invisible");
-    document.querySelector(".sign-up").classList.remove("invisible");
-    document.querySelector(".log-in").classList.remove("invisible");
+    document.querySelector(".signUp-container").classList.add("invisible");
+    document.querySelector(".login-container").classList.add("invisible");
+    officialView.setOfficialUI();
   }
 });
 
-/*
-// create new guide
-const createForm = document.querySelector('#create-form');
-createForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  db.collection('guides').add({
-    title: createForm.title.value,
-    content: createForm.content.value
-  }).then(() => {
-    // close the create modal & reset form
-    const modal = document.querySelector('#modal-create');
-    M.Modal.getInstance(modal).close();
-    createForm.reset();
-  }).catch(err => {
-    console.log(err.message);
-  });
-});
-*/
-
 
 // signup
-const signupForm = document.querySelector('#signup-form');
-signupForm.addEventListener('submit', (e) => {
+const signUpBtn = document.querySelector('#sign-up-btn');
+signUpBtn.addEventListener('click', (e) => {
   e.preventDefault();
   
   // get user info
-  const email = signupForm['signup-email'].value;
-  const password = signupForm['signup-password'].value;
+  const email = document.querySelector('#signUp-email');
+  const password = document.querySelector('#signUp-password');
+  const about = document.querySelector('#about-area');
+  const major = document.querySelector('#major');
+  const firstName = document.querySelector('#first-name');
+  const lastName = document.querySelector('#last-name');
+  const year = document.querySelector('#year');
 
   // sign up the user & add firestore data
-  auth.createUserWithEmailAndPassword(email, password).then(cred => {
-    U.userId = cred.user.uid;
-    console.log(U.userId);
+  auth.createUserWithEmailAndPassword(email.value, password.value).then(cred => {
+    state.userId = cred.user.uid;
+    //console.log(cred.additionalUserInfo.isNewUser);
+    db.collection("Profiles").doc(state.userId).set({
+      about: about.value,
+      major: major.value,
+      name: firstName.value + " " + lastName.value,
+      year: year.value,
+      myOpps: []
+    })
+    email.value = "";
+    password.value = "";
+    about.value = "";
+    major.value = "";
+    firstName.value = "";
+    lastName.value = "";
+    year.value = "";
   })
   .catch(err => {
-    signupForm.querySelector('.error').innerHTML = err.message;
+    alert(err);
   });
+
 });
 
 
@@ -79,22 +73,20 @@ logout.addEventListener('click', (e) => {
 });
 
 
-
 // login
-const loginForm = document.querySelector('#login-form');
-loginForm.addEventListener('submit', (e) => {
+const logInBtn = document.querySelector('#log-in-btn');
+logInBtn.addEventListener('click', (e) => {
   e.preventDefault();
   
-  // get user info
-  const email = loginForm['login-email'].value;
-  const password = loginForm['login-password'].value;
+  // get user info DOM
+  const email = document.querySelector('#login-email');
+  const password = document.querySelector('#login-password');
 
-  // log the user in
-  auth.signInWithEmailAndPassword(email, password).then((cred) => {
-    loginForm.reset();
-    loginForm.querySelector('.error').innerHTML = '';
+  // sign up the user & add firestore data
+  auth.signInWithEmailAndPassword(email.value, password.value).then((cred) => {
+    email.value = "";
+    password.value = "";
   }).catch(err => {
-    loginForm.querySelector('.error').innerHTML = err.message;
-  });
-
+    alert(err);
+  });  
 });

@@ -32,47 +32,171 @@
 	<link rel="stylesheet" type="text/css" href="css/violegacy.css">
 </head>
 <body>
-	<div class="sign-up">
-		
-		<div class="sign-content">
-			<h4>Sign up</h4><br>
-			<form id="signup-form">
-				<div class="signup-input-field">
-					<input type="email" id="signup-email" required />
-					<label for="signup-email">Email address</label>
-				</div>
-				<div class="signup-input-field">
-					<input type="password" id="signup-password" required />
-					<label for="signup-password">Choose password</label>
-				</div>
-				
-				<button class="btn yellow darken-2 z-depth-0">Sign up</button>
-				<p class="error pink-text center-align"></p>
-			</form>
-		</div>		
+	<div class="official-container invisible">
+        <div>
+            <img src="./images/logo.png"></img>
+        </div>
+        <div class="SignUp-Login">
+            <button class="official-sign-up">Sign Up</button>
+            <button class="official-log-in">Log in</button>
+        </div>
+    </div>
+
+	
+
+
+
+
+
+	<div class="signUp-container invisible">
+        <div class="signUp-header">
+            <div>
+                <img src="./images/logo.png"></img>
+            </div>
+        </div>
+        
+        <div class="signUp-small-container">
+            <ul class="progression">
+                <li><h3>Basic Information</h3></li>
+                <li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
+                <li><h3>About</h3></li>
+                <li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
+                <li><h3>Experience</h3></li>
+            </ul>
+            <div class="basic-info">
+                <ul>
+                    <li class="basic-info-1st-line">
+                        <div class="first-item">
+                            <h4>First Name</h4>
+                            <input type="text" id="first-name" required />
+                        </div>
+                        <div class="second-item">
+                            <h4>Last Name</h4>
+                            <input type="text" id="last-name" required />
+                        </div>
+					</li>
+					<li>
+                        <div class="signUp-input-temp">
+                            <h4>Email</h4>
+                            <input type="email" id="signUp-email" required />
+                        </div>
+					</li>
+					<li>
+                        <div class="signUp-input-temp">
+                            <h4>Password</h4>
+                            <input type="password" id="signUp-password" required />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="signUp-input-temp">
+                            <h4>Major</h4>
+                            <input type="text" id="major" required />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="signUp-input-temp">
+                            <h4>Year</h4>
+                            <input type="text" id="year" required />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="signUp-about signUp-input-temp">
+                <h4>About</h4>
+                <input type="textarea" id="about-area" required />
+            </div>
+            <div class="signUp-experience">
+                <ul class="signUp-experiences">
+                    <li class="experience-template">
+                        <div class="job-header">
+                            <hr>
+                            <h3>Job 1</h3>
+                            <hr>
+                        </div>
+                        <div class="signUp-input-temp">
+                            <h4>Job Title</h4>
+                            <input type="text" id="job-title" required />
+                        </div>
+                        <div class="signUp-input-temp">
+                            <h4>Company</h4>
+                            <input type="text" id="company" required />
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" id="current-in-role">
+                            <h4 >I am currently working on this role.</h4>
+                        </div>
+                        <div class="start-end">
+                            <div class="start-date date-template signUp-input-temp">
+                                <h4>Start Date</h4>
+                                <input type="date" id="start-date" required />
+                            </div>
+                            <div class="end-date date-template signUp-input-temp">
+                                <h4>End Date</h4>
+								<input type="date" id="end-date" required />
+								<div id="present-box" class="invisible">
+									<h3 id="in-roll-text">Present</h3>
+								</div>
+                            </div>
+                        </div>
+                        <div class="description signUp-input-temp">
+                            <h4>Description</h4>
+                            <input type="textarea" id="description" required />
+                        </div>
+                    </li>
+                </ul>
+                <button class="add-another-job">Add Another Job</button>
+            </div>
+
+			<div class="step-btns">
+				<button class="next-step" id="previous-step-btn">Previous Step</button>
+            	<button class="next-step" id="next-step-btn">Next Step</button>
+			</div>
+			
+            <button class="next-step" id="sign-up-btn">Sign Up</button>
+        </div>
+    </div>
+
+
+
+
+
+	<div class="login-container invisible">
+		<div class="signUp-header">
+            <div>
+                <img src="./images/logo.png"></img>
+            </div>
+        </div>
+        
+        <div class="signUp-small-container">
+            <ul class="progression">
+                <li><h3>Log In</h3></li>
+            </ul>
+            <div class="basic-info">
+                <ul>
+					<li>
+                        <div class="signUp-input-temp">
+                            <h4>Email</h4>
+                            <input type="email" id="login-email" required />
+                        </div>
+					</li>
+					<li>
+                        <div class="signUp-input-temp">
+                            <h4>Password</h4>
+                            <input type="password" id="login-password" required />
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+			
+            <button class="next-step" id="log-in-btn">Log In</button>
+        </div>
 	</div>
 
 
 
-	<div class="log-in">
-		
-		<div class="login-content">
-			<h4>Log in</h4><br>
-			<form id="login-form">
-				<div class="login-input-field">
-					<input type="email" id="login-email" required />
-					<label for="login-email">Email address</label>
-				</div>
-				<div class="login-input-field">
-					<input type="password" id="login-password" required />
-					<label for="login-password">Choose password</label>
-				</div>
-				
-				<button class="btn yellow darken-2 z-depth-0">Sign up</button>
-				<p class="error pink-text center-align"></p>
-			</form>
-		</div>		
-	</div>
+
+
 
 	<div class="container invisible">
 		<div class="navigator">
@@ -146,159 +270,96 @@
 			</div>
 		</div>
 	
-		<div class="right-container">
-			<!--
-			<div class="contacts">
-				<div class="search-bar">
-					<div>
-						<ion-icon name="search-outline" class="small-icon"></ion-icon>
-					</div>
-					<input type="text" name="search" placeholder="Search names, chats, etc.">
-				</div>
-
-				<ul class="search-results">
-					<li class="search-result-person">
-						<div class="person-image"><img class="round-image" src="images/Bill.jpg"></div>
-						<h3 class="person-name">Bill Ruochen Gu</h3>
-					</li>
+		
+		<!-- This is for home edit -->
+		<div class="laputa invisible">
+			<div class="signUp-small-container">
+				<ul class="progression">
+					<li><h3>Basic Information</h3></li>
+					<li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
+					<li><h3>About</h3></li>
+					<li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
+					<li><h3>Experience</h3></li>
 				</ul>
-				
-
-
-				<ul class="contact-list">
-					//????????????????????????????????
-					<li class="contact-person">
-						<div class="person-image"><img class="round-image" src="images/Bill.jpg"></div>
-						<div class="person-info">
-							<div class="person-top">
-								<h3 class="name">Bill Ruochen Gu</h3>
-								<h3 class="time">8:30AM</h3>
+				<div class="basic-info">
+					<ul>
+						<li class="basic-info-1st-line">
+							<div class="first-item">
+								<h4>First Name</h4>
+								<input type="text" id="laputa-first-name" required />
 							</div>
-							<h3>ok.</h3>
-						</div>
-					</li>
-					//????????????????????????????????
-				</ul>
-			</div>
-
-			<div class="chat-block">
-				<div class="profile">
-					//????????????????????????????????
-					<div class="profile-image">
-						<img class="round-image" src="images/Bill.jpg">
-					</div>
-					<div class="profile-info">
-						<h3 class="profile-name">Bill Ruochen Gu</h3>
-						<h3 class="profile-major">BS Computer Science '20</h3>
-						<h3 class="profile-career">Bill will refer you to the position of "Software Developer" at Apple.</h3>
-					</div>
-					//????????????????????????????????
+							<div class="second-item">
+								<h4>Last Name</h4>
+								<input type="text" id="laputa-last-name" required />
+							</div>
+						</li>
+						<li>
+							<div class="signUp-input-temp">
+								<h4>Major</h4>
+								<input type="text" id="laputa-major" required />
+							</div>
+						</li>
+						<li>
+							<div class="signUp-input-temp">
+								<h4>Year</h4>
+								<input type="text" id="laputa-year" required />
+							</div>
+						</li>
+					</ul>
 				</div>
-
-				<div class="chat-box">
-					<div class="chat-field">
-						<ul class="chat-history">
-							//?????????????????????????????
-							<li class="message-received">
-								<div class="message-avatar"><img class="round-image" src="images/Bill.jpg"></div>
-								<div class="message-text talk-bubble tri-right left-top">
-									<div class="talktext">
-										<p>Hi, Kerwin. Ning chi le me?</p>
-									</div>
-								</div>
-								<div class="message-empty">&nbsp;</div>
-							</li>
-							<li class="message-received">
-								<div class="message-avatar"><img class="round-image" src="images/Bill.jpg"></div>
-								<div class="message-text talk-bubble tri-right left-top">
-									<div class="talktext">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-										tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-										quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-										consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-										cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-										proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									</div>
-								</div>
-								<div class="message-empty">&nbsp;</div>
-							</li>
-							<li class="message-sent">
-								<div class="message-avatar"><img class="round-image" src="images/kerwin.jpg"></div>
-								<div class="message-text talk-bubble tri-right right-top">
-									<div class="talktext">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-										tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-										quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-										consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-										cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-										proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									</div>
-								</div>
-								<div class="message-empty">&nbsp;</div>
-							</li>
-							<li class="message-sent">
-								<div class="message-avatar"><img class="round-image" src="images/kerwin.jpg"></div>
-								<div class="message-text talk-bubble tri-right right-top">
-									<div class="talktext">
-										<p>Mei chi. Fine, thank you, and you?</p>
-									</div>
-								</div>
-								<div class="message-empty">&nbsp;</div>
-							</li>
-							<li class="message-received">
-								<div class="message-avatar"><img class="round-image" src="images/Bill.jpg"></div>
-								<div class="message-text talk-bubble tri-right left-top">
-									<div class="talktext">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-										tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-										quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-										consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-										cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-										proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									</div>
-								</div>
-								<div class="message-empty">&nbsp;</div>
-							</li>
-							//???????????????????????????
-						</ul>
-					</div>
-
-					<div class="type-field">
-
-						<ul class="tool-bar">
-							<li class="tool-icon">
-								<ion-icon name="happy-outline" class="small-icon"></ion-icon>
-							</li>
-							<li class="tool-icon">
-								<ion-icon name="image-outline" class="small-icon"></ion-icon>
-							</li>
-							<li class="tool-icon">
-								<ion-icon name="mic-outline" class="small-icon"></ion-icon>
-							</li>
-							<li class="tool-icon">
-								<ion-icon name="folder-outline" class="small-icon"></ion-icon>
-							</li>
-							<li class="tool-icon">
-								<ion-icon name="link-outline" class="small-icon"></ion-icon>
-							</li>
-							<li class="tool-icon-special">
-								&nbsp;
-							</li>
-						</ul>
-
-						<div class="input-field">
-							<input type="text" name="message-input-field">
-						</div>
-
-						<div class="button-bar">
-							<div>&nbsp;</div>
-							<input type="submit" name="send-button" class="send-btn">
-						</div>
-					</div>
+				<div class="signUp-about signUp-input-temp">
+					<h4>About</h4>
+					<input type="textarea" id="laputa-about-area" required />
 				</div>
-
+				<div class="signUp-experience">
+					<ul class="signUp-experiences">
+						<li class="experience-template">
+							<div class="job-header">
+								<hr>
+								<h3>Job 1</h3>
+								<hr>
+							</div>
+							<div class="signUp-input-temp">
+								<h4>Job Title</h4>
+								<input type="text" id="laputa-job-title" required />
+							</div>
+							<div class="signUp-input-temp">
+								<h4>Company</h4>
+								<input type="text" id="laputa-company" required />
+							</div>
+							<div class="checkbox">
+								<input type="checkbox" id="laputa-current-in-role">
+								<h4 >I am currently working on this role.</h4>
+							</div>
+							<div class="start-end">
+								<div class="start-date date-template signUp-input-temp">
+									<h4>Start Date</h4>
+									<input type="date" id="laputa-start-date" required />
+								</div>
+								<div class="end-date date-template signUp-input-temp">
+									<h4>End Date</h4>
+									<input type="date" id="laputa-end-date" required />
+									<div id="present-box" class="invisible">
+										<h3 id="in-roll-text">Present</h3>
+									</div>
+								</div>
+							</div>
+							<div class="description signUp-input-temp">
+								<h4>Description</h4>
+								<input type="textarea" id="laputa-description" required />
+							</div>
+						</li>
+					</ul>
+					<button class="add-another-job">Add Another Job</button>
+				</div>
+				
+				<button class="next-step" id="finish-btn">Finish</button>
 			</div>
-			-->
+		</div>
+
+
+		<div class="right-container">
+			
 		</div>
 	</div>
 	

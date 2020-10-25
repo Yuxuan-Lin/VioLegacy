@@ -2,14 +2,12 @@ import Home from './models/home';
 import Opp from './models/opportunities';
 import Messages from './models/messages';
 import {elements} from './views/base';
-import * as contactsView from './views/contactsView'; 
-import * as chatView from './views/chatView';
-import * as homeView from './views/homeView';
-import * as oppView from './views/oppView';
+
 
 import * as homeControl from './controllers/homeController';
 import * as oppControl from './controllers/oppController';
 import * as messageControl from './controllers/messageController';
+
 
 
 const collapseMenu = function(state) {
@@ -92,7 +90,7 @@ const screenSwitch = async function (state, tab){
 
 
 
-const clearScreen = function(){
+export const clearScreen = function(){
    elements.container.innerHTML = "";
 };
 
@@ -112,16 +110,24 @@ export const setUI = async function(state, user){
     //console.log(state.user.name);
     tabSwitch(state, document.getElementById("default"));
 
-    //3 main function tabs
-    elements.tools.addEventListener('click', e => {
+
+    //cleanse existing event listeners
+    const oldNavigator = document.querySelector('.tools');
+    const newNavigator = oldNavigator.cloneNode(true);
+    oldNavigator.parentNode.replaceChild(newNavigator, oldNavigator);
+    const oldCollapse = document.querySelector('.collapse');
+    const newCollapse = oldCollapse.cloneNode(true);
+    oldCollapse.parentNode.replaceChild(newCollapse, oldCollapse);
+
+    //3 main function tabs        
+    document.querySelector('.tools').addEventListener('click', e => {
         e.preventDefault();
         const tab = e.target.closest('.tab');
-        console.log(tab);
         tabSwitch(state,tab);
     });
 
     //Collapse Menu
-    elements.collapse.addEventListener('click', e => {
+    document.querySelector('.collapse').addEventListener('click', e => {
         e.preventDefault();
         const tab = e.target.closest('.collapse');
         if (!state.menuCollapsed){
@@ -130,18 +136,5 @@ export const setUI = async function(state, user){
             expandMenu(state);
         }
     });
+
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-

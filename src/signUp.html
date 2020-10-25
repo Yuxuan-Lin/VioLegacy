@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up Page</title>
+	<link rel="stylesheet" type="text/css" href="../dist/css/signUp.css">
+</head>
+<body>
+
+
+    <div class="signUp-container invisible">
+        <div class="signUp-header">
+            <div>
+                <img src="./images/logo.png"></img>
+            </div>
+        </div>
+        
+        <div class="signUp-small-container">
+            <ul class="progression">
+                <li><h3>Basic Information</h3></li>
+                <li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
+                <li><h3>About</h3></li>
+                <li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
+                <li><h3>Experience</h3></li>
+            </ul>
+            <div class="basic-info">
+                <ul>
+                    <li class="basic-info-1st-line">
+                        <div class="first-item">
+                            <h4>First Name</h4>
+                            <input type="text" id="first-name" required />
+                        </div>
+                        <div class="second-item">
+                            <h4>Last Name</h4>
+                            <input type="text" id="last-name" required />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="signUp-input-temp">
+                            <h4>Major</h4>
+                            <input type="text" id="major" required />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="signUp-input-temp">
+                            <h4>Year</h4>
+                            <input type="text" id="year" required />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="signUp-about signUp-input-temp">
+                <h4>About</h4>
+                <input type="textarea" id="about-area" required />
+            </div>
+            <div class="signUp-experience">
+                <ul>
+                    <li class="experience-template">
+                        <div class="job-header">
+                            <hr>
+                            <h3>Job 1</h3>
+                            <hr>
+                        </div>
+                        <div class="signUp-input-temp">
+                            <h4>Job Title</h4>
+                            <input type="text" id="job-title" required />
+                        </div>
+                        <div class="signUp-input-temp">
+                            <h4>Company</h4>
+                            <input type="text" id="company" required />
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" id="current-in-role">
+                            <h4>I am currently working on this role.</h4>
+                        </div>
+                        <div class="start-end">
+                            <div class="start-date date-template signUp-input-temp">
+                                <h4>Start Date</h4>
+                                <input type="date" id="start-date" required />
+                            </div>
+                            <div class="end-date date-template signUp-input-temp">
+                                <h4>End Date</h4>
+                                <input type="date" id="start-date" required />
+                                <h4 class="invisible">Present</h4>
+                            </div>
+                        </div>
+                        <div class="description signUp-input-temp">
+                            <h4>Description</h4>
+                            <input type="textarea" id="description" required />
+                        </div>
+                    </li>
+                </ul>
+                <button class="add-another-job">Add Another Job</button>
+            </div>
+
+            <button class="next-step">Next Step</button>
+            <button class="next-step" id="sign-up-btn">Sign Up</button>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+</html>

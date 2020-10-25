@@ -1,6 +1,6 @@
 import {elements} from './base';
 
-const renderContact = (doc) => {
+export const renderContact = (doc) => {
     const markup = `
         <li class="contact-person" id="${doc.id+';'+doc.chatterUid}">
             <div class="person-image">
@@ -13,8 +13,8 @@ const renderContact = (doc) => {
             </div>
         </li>
     `;
-                    // <h3 class="time">${doc.history[doc.history.length-1].time.toDate()}</h3>
-                    // <h3>${doc.history[doc.history.length-1].content}</h3>
+    // <h3 class="time">${doc.history[doc.history.length-1].time.toDate()}</h3>
+    // <h3>${doc.history[doc.history.length-1].content}</h3>
    
    document.querySelector('.contact-list').insertAdjacentHTML('beforeend',markup);
 };
@@ -25,3 +25,21 @@ export const renderContacts = (chatData,uid) => {
     });
 };
 
+export const renderSearchRes = (profile) => {
+    const markup = `
+        <li class="search-result-person" id="${profile.id}">
+            <div class="person-image"><img class="round-image" src="images/Bill.jpg"></div>
+            <h3 class="person-name">${profile.data.name}</h3>
+        </li>
+    `;
+    document.querySelector('.search-results').insertAdjacentHTML('beforeend',markup);
+};
+
+export const renderSearchResults = (profileArr) => {
+    document.querySelector('.search-results').innerHTML = `<p> Search Results Below </p>`;
+    profileArr.forEach(renderSearchRes);
+};
+
+export const removeSearchResults = () => {
+    document.querySelector('.search-results').innerHTML = ``;
+}

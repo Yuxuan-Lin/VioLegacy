@@ -1,9 +1,12 @@
+import { homeScreen } from "../controllers/homeController";
+
 export const clearProfile = () => {
-    document.querySelector('.home-top').innerHTML = '';
+    document.querySelector('.home-top-profile').innerHTML = '';
     document.querySelector('.about').innerHTML = '';
     document.querySelector('.experience').innerHTML = '';
     document.querySelector('.opp-column').innerHTML = '';
 };
+
 
 export const renderProfile = self => {
     const markup = `
@@ -14,13 +17,10 @@ export const renderProfile = self => {
             <h2>${self.name}</h2>
             <h3>${self.major}</h3>
         </div>
-        <div class="home-top-icon">
-            <ion-icon name="pencil-outline" class="big-icon"></ion-icon>
-        </div>
     `;
-    
-    document.querySelector('.home-top').insertAdjacentHTML('beforeend',markup);
+    document.querySelector('.home-top-profile').insertAdjacentHTML('beforeend',markup);
 };
+
 
 export const renderAbout = self => {
     const markup = `
@@ -35,9 +35,8 @@ export const renderExp = experience => {
         <li class="my-exp">
             <h2>${experience.title}</h2>
             <h4>${experience.company}</h4>
-            <h4>${experience.time} and ${experience.location}</h4>
-            <h4>${experience.description}
-            </h4>
+            <h4>${experience.startTime.toDate()}</h4>
+            <h4>${experience.description}</h4>
         </li>
     `;
      document.querySelector('.experience').insertAdjacentHTML('beforeend',markup);
@@ -113,7 +112,6 @@ export const renderOpp = (profile,opp,i) => {
 };
 
 export const renderOpps = async (profile,opps) => {
-    //console.log(await db.collection('Opportunities').doc('6WWXIkveZkOEUYoEyRdG').get().data());
     for (let i=0; i<profile.myOpps.length; i++){
         opps.forEach(opp => {
             if (opp.id == profile.myOpps[i].uid){
@@ -143,7 +141,30 @@ export const expand = () => {
     document.querySelector('.more-less').textContent = "Show less profile information";
 };
 
+export const setEditUI = (state) => {
+    state.home.laputa = document.querySelector(".laputa");
+    state.home.finishBtn = document.querySelector("#finish-btn");
+    state.home.about = document.querySelector('#laputa-about-area');
+    state.home.major = document.querySelector('#laputa-major');
+    state.home.firstName = document.querySelector('#laputa-first-name');
+    state.home.lastName = document.querySelector('#laputa-last-name');
+    state.home.year = document.querySelector('#laputa-year');
 
+    state.home.laputa.addEventListener('click',e => {
+        e.preventDefault();
+        const btn = e.target.closest('.signUp-small-container');
+        if(btn == null){
+            state.home.laputa.classList.add("invisible");
+        }
+    });
+
+    state.home.about.value = state.home.profile.about;
+    state.home.major.value = state.home.profile.major;
+    state.home.firstName.value = state.home.profile.name.split(" ")[0];
+    state.home.lastName.value = state.home.profile.name.split(" ")[1];
+    state.home.year.value = state.home.profile.year;
+
+}
 
 
 

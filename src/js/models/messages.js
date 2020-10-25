@@ -12,18 +12,21 @@ export default class Messages{
 		throw Error("Cannot get position in a chat that I am not part of")
 	}
 
-	async getContacts(){
+	async getContacts(renderContactFn){
 		try{
-			const snapshot = await db.collection('Messages').where("chatterIds", "array-contains", this.uid).get()
-			this.contacts = snapshot.docs.map(doc => {
-				const data = doc.data();
-				const pos = this.getPos(data.chatterIds);
-				const otherPos = (pos + 1) % 2;
-				return {
-					id: doc.id,
-					chatterName: data.chatters[otherPos],
-					chatterUid: data.chatterIds[otherPos]
-				}
+			await db.collection('Messages').where("chatterIds", "array-contains", this.uid).onSnapshot(snapshot => {
+				const changes = snapshot.docChanges();
+				changes.forEach(change => {
+					const data = change.doc.data();
+					const pos = this.getPos(data.chatterIds);
+					const otherPos = (pos + 1) % 2;
+					const contact = {
+						id: change.doc.id,
+						chatterName: data.chatters[otherPos],
+						chatterUid: data.chatterIds[otherPos] 
+					}
+					renderContactFn(contact);
+				});
 			})
 		} catch (error){
 			alert(error);
@@ -43,7 +46,8 @@ export default class Messages{
 				const changes = snapshot.docChanges();
 				changes.forEach(change => {
 					const message = change.doc.data();
-					renderChatFn(message, this.selfPos == message.senderId ? true : false);
+					renderChatFn(message, this.selfPos == message.senderID);
+
 				});
 			})
 		} catch (error){
@@ -65,7 +69,7 @@ export default class Messages{
 		try{
 			await db.collection('Messages').doc(chatId).collection('history').add({
 				content: message,
-				senderId: this.selfPos,
+				senderID: this.selfPos,
 				time: now
 			});
 		} catch (error) {
@@ -78,10 +82,38 @@ export default class Messages{
 		try{
 			await db.collection("Profiles").where("name", "==", searchContent).get().then(function(querySnapshot) {
 				querySnapshot.forEach(function(doc) {
-					arr.push(doc.data());
+					arr.push({
+						data:doc.data(),
+						id: doc.id
+					});
 				});
 			});
 			this.searchRes = arr;
+		} catch(error){
+			alert(error);
+		}
+	}
+
+	async doesChatExists(targetUid,selfUid){
+		try{
+			const chats = await db.collection("Messages").where("chatterIds","array-contains",selfUid).get();
+			chats.forEach(chat => {
+				if(chat.data().chatterIds[0] == targetUid || chat.data().chatterIds[1] == targetUid){
+					console.log(chat.data());
+					this.chatExists = true;
+				}
+			});
+		} catch(error){
+			alert(error);
+		}
+	}
+
+	async createNewChat(chatterId,chatter,myName){
+		try{
+			await db.collection('Messages').add({
+				chatterIds:[this.uid,chatterId],
+				chatters:[myName,chatter]
+			});
 		} catch(error){
 			alert(error);
 		}
