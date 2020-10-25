@@ -219,8 +219,3 @@ export const setUI = async function(state, user){
     });
 
 };
-
-
-
-
-
