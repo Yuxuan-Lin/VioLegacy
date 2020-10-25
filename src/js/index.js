@@ -83,7 +83,7 @@ const screenSwitch = async function (state, tab){
         if (state.user.isSenior){
             console.log("senior decision page start");
         } else {
-            oppControl.oppScreen(state);
+            oppControl.setUpOppScreen(state);
         }        
     }
     else if (state.tab == '3'){
@@ -189,10 +189,10 @@ export const setUI = async function(state, user){
                 const uploadBtn = e.target.closest('#uploader');
 
                 if(uploadBtn){
-
+                    console.log('test');
                 }
             });
-            
+
             document.querySelector("#junior-btn").addEventListener('change', e => {
                 e.preventDefault();
                 const btn = e.target.closest('#junior-btn');

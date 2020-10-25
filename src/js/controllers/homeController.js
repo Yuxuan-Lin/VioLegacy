@@ -18,6 +18,7 @@ export const controlHome = async (state) => {
     
     state.user.name = state.home.profile.name;
 
+    console.log(state.home.seniorOpps)
     //2) Prepare UI(optional)
     homeView.clearProfile(state.user.isSenior);
     
