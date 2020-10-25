@@ -2,6 +2,7 @@ import Home from './models/home';
 import Opp from './models/opportunities';
 import Messages from './models/messages';
 import {elements} from './views/base';
+import uploadFile from './firebaseStorage';
 
 
 import * as homeControl from './controllers/homeController';
@@ -111,6 +112,9 @@ const renderAccountSettings = async function(state){
             <div class="account-management">
                 <h3 class="setting-header">Account Management</h3>
                 <button class="account-management-btn">Change Password</button>
+                <label for="avatar">Choose a file:</label>
+                <input type="file"
+                    id="resume-input" name="avatar">
                 <button class="account-management-btn" id="uploader">Upload Resume</button>
                 <button class="account-management-btn">Log Out</button>
             </div>
@@ -182,14 +186,12 @@ export const setUI = async function(state, user){
                     tabSwitch(state, document.getElementById("default"));
                 }
             });
-
-            //???????????????????????????????????????????????????????????????
-            document.querySelector("#uploader").addEventListener('click', e => {
+            document.querySelector("#uploader").addEventListener('click', async e => {
                 e.preventDefault();
                 const uploadBtn = e.target.closest('#uploader');
-
+                const resume = document.querySelector("#resume-input").files[0]
                 if(uploadBtn){
-
+                    uploadFile(resume, new Date())
                 }
             });
             
