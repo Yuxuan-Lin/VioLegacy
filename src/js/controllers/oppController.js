@@ -27,7 +27,7 @@ export const controlOpp = async (state) => {
 };
 
 
-export const oppScreen = async function(state){
+const oppScreen = async function(){
     const oppSetUp = `
         <div class="opp-container">
             <div class="opp-top">
@@ -67,106 +67,90 @@ export const oppScreen = async function(state){
             </div>
         </div>   
     `;
+    elements.container.insertAdjacentHTML('beforeend',oppSetUp);
+};
 
-    const setUpOppScreen = (state) => {
-        elements.container.insertAdjacentHTML('beforeend',oppSetUp);
-        controlOpp(state);
+export const setUpOppScreen = async (state) => {
+    oppScreen();
+    controlOpp(state);
+    //console.log(state.opp.opps[1].data())
+    state.opp.opps.forEach(opp => {
+        //console.log(opp.data());
+    })
+    document.querySelector('.referral-box').addEventListener('click', async e => {
+        const btn = e.target.closest('.referral');
+        if(btn) {
+            // clear right screen
+            clearScreen();
+            // render temp 2
+            console.log(btn.value);
+            oppView.renderDetail(state.opp.opps[btn.value]);
 
-        document.querySelector('.referral-box').addEventListener('click', e => {
-            const btn = e.target.closest('.referral');
-            if(btn) {
-                // clear right screen
-                clearScreen();
-                // render temp 2
-                oppView.renderDetail(state.opp.opps[btn.id]);
+            document.querySelector('.back-top').addEventListener('click', async e => {
+                const btn2 = e.target.closest('.back-top');
 
-                document.querySelector('.back-top').addEventListener('click', e => {
-                    const btn2 = e.target.closest('.back-top');
-
-                    if(btn) {
-                        // clear right screen
-                        clearScreen();
-                        // render temp 2
-                        setUpOppScreen(state,oppSetUp);
-                    }
-                });
-
-                //console.log("attention: " + state.user.uid);
-                //console.log("attention: " + state.opp.opps[btn.id].data().registered[1].uid);
-                let flag = false;
-                for (let i=0; i<state.opp.opps[btn.id].data().registered.length; i++){
-                    if (state.opp.opps[btn.id].data().registered[i].uid == state.user.uid){
-                        flag = true;
-                    }
+                if(btn2) {
+                    // clear right screen
+                    clearScreen();
+                    // render temp 2
+                    setUpOppScreen(state);
                 }
-                if (flag){
-                    document.querySelector('.ref-request').innerHTML = `
-                    <div class="ref-request" id="1">
-                        <button type="button">Request Sent!</button>
-                    </div>
-                    `;
-                } else {
-                    document.querySelector('.ref-request').innerHTML = `
-                    <div class="ref-request" id="0">
-                        <button type="button">Request a Referral</button>
-                    </div>
-                    `;
-                }
+            });
 
-
-                document.querySelector('.ref-request').addEventListener('click', e => {
-                    const btn3 = e.target.closest('.ref-request');
-                    console.log("attention: "+state.opp.opps[btn.id].id);
-
-                    if(btn3 && btn3.id == 0) {
-
-                        
-                        // UI change
-                        btn3.innerHTML = `
-                            <div class="ref-request" id="1">
-                                <button type="button">Request Sent!</button>
-                            </div>
-                        `;
-                        let tempArr = state.opp.opps[btn.id].data().registered;
-                        tempArr.push({
-                            name: state.home.profile.name,
-                            uid: state.user.uid
-                        });
-                        //console.log(tempArr);
-                        //console.log(state.opp.opps[btn.id].data().registered);
-                        db.collection('Opportunities').doc(state.opp.opps[btn.id].id).update({
-                            registered: tempArr
-                        });
-                        
-                        
-                    } else if(btn3 && btn3.id == 1) {
-                        btn3.innerHTML = `
-                            <div class="ref-request" id="0">
-                                <button type="button">Request a Referral</button>
-                            </div>
-                        `;
-
-                        let tempArr = [];
-                        for (let i=0; i<state.opp.opps[btn.id].data().registered.length; i++){
-                            if (state.opp.opps[btn.id].data().registered[i].uid != state.user.uid){
-                                tempArr.push(state.opp.opps[btn.id].data().registered[i]);
-                            }
-                        }
-
-                        db.collection('Opportunities').doc(state.opp.opps[btn.id].id).update({
-                            registered: tempArr
-                        });
-                        
-
-                    }
-
-                    state.opp.getOppData();
-
-                });
+            //console.log("attention: " + state.user.uid);
+            //console.log("attention: " + state.opp.opps[btn.value].data().registered[1].uid);
+            await state.opp.isRegistered(state.user.uid, btn.id);
+            let flag = state.opp.flag;
+            console.log(flag);
+            if (flag){
+                document.querySelector('.ref-request').innerHTML = `
+                <div class="ref-request" id="1">
+                    <button type="button">Request Sent!</button>
+                </div>
+                `;
+            } else {
+                document.querySelector('.ref-request').innerHTML = `
+                <div class="ref-request" id="0">
+                    <button type="button">Request a Referral</button>
+                </div>
+                `;
             }
-        });
-    }
 
 
-    setUpOppScreen(state);
+            document.querySelector('.ref-request').addEventListener('click', async e => {
+                const btn3 = e.target.closest('.ref-request');
+                console.log("attention: "+state.opp.opps[btn.value].id);
+
+                if(btn3 && btn3.id == 0) {
+
+                    
+                    // UI change
+                    btn3.innerHTML = `
+                        <div class="ref-request" id="1">
+                            <button type="button">Request Sent!</button>
+                        </div>
+                    `;
+                    
+                    await state.opp.register(state, btn.id);
+                    await state.home.registerOpp(state.user.uid, btn.id);
+                    
+                    
+                } else if(btn3 && btn3.id == 1) {
+                    btn3.innerHTML = `
+                        <div class="ref-request" id="0">
+                            <button type="button">Request a Referral</button>
+                        </div>
+                    `;
+
+                    await state.opp.unRegister(state, btn.id);
+                    await state.home.unRegisterOpp(state.user.uid, btn.id);
+                    
+
+                }
+
+                //state.opp.getOppData();
+
+            });
+        }
+    });
 };

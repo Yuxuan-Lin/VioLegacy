@@ -1,10 +1,7 @@
 *{
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
-	font-family: sans-serif;
-	font-size: 100%;
-	font-weight: normal;
+	box-sizing: border-box;	
 }
 
 .round-image{
@@ -27,12 +24,14 @@
 .navigator{
 	flex: 0 1 20%;
 	background-color: #CCA2D8;
+	height: 100vh;
 	color: white;
+	font-size: 110%;
+	font-weight: 200;
 }
 
 .collapsed-navigator{
-	flex: 0 1 5.5%;
-	width: 7%;
+    flex: 0 1 5.5%;
 }
 
 .contacts{
@@ -51,9 +50,8 @@
 }
 
 .head div img{
-    height: 5vh;
-	align-self: center;
-	padding-left: 0;
+    height: 4vh;
+    align-self: center;
 }
 
 .head h2{
@@ -78,7 +76,6 @@
 	padding: 1.5vh 0;
 	padding-left: 2vw;
 	align-items: center;
-	font-size: 150%;
 }
 
 .tab:hover{
@@ -93,12 +90,15 @@
 
 .tab h2{
 	flex: 1 0 auto;
+	padding: auto 0;
 }
 
 .selected-tab{
+	font-family: 'Arial', Hebrew Desk Interface;
+	font-style: normal;
 	background-color: white;
 	color: #CCA2D8;
-	border-radius: 5vh 0 0 5vh;
+	border-radius: 40px 0px 0px 40px;
 }
 
 .above-selected{
@@ -123,20 +123,19 @@
 
 .special-tab-1{
 	background-color:#CCA2D8;
-	border-radius: 0 0 4vh 0;
+	border-radius: 0px 0px 40px 0px;
 }
 
 .special-tab-2{
 	background-color:#CCA2D8;
-	border-radius: 0 4vh 0 0;
+	border-radius: 0px 40px 0px 0px;
 }
 
 #invisible-1,
 #invisible-2,
 #invisible-1:hover,
 #invisible-2:hover{
-	color: #CCA2D8;
-	height: 0;
+    color: #CCA2D8;
 }
 
 .collapse h2{
@@ -156,7 +155,7 @@
 	background-color: #F1F1F1;
 	display: flex;
 	align-items: center;
-	border-radius: 1vh;
+	border-radius: 10px;
 }
 
 .search-bar div{
@@ -186,9 +185,9 @@
 }
 
 .contact-person{
-	display: flex;
-	padding: 1vw;
-	border-top: 1vh solid #808080;
+	display:flex;
+	padding:1vw;
+	border-top: 1px solid #808080;
 }
 
 .contact-person:hover{
@@ -227,7 +226,7 @@
 .profile{
 	align-items: center;
 	padding: 1vw;
-	border-bottom: 0.1vh solid #C4C4C4;
+	border-bottom: 1px solid #C4C4C4;
 	display: flex;
 }
 .profile-image{
@@ -236,10 +235,11 @@
 
 .profile-info{
 	flex: 1 0 auto;
+	font-style: normal;
 	font-weight: bold;
 	font-size: 16px;
 	color: #000000;
-	line-height: 3vh;
+	line-height: 30px;
 }
 
 .profile-major{
@@ -347,9 +347,9 @@
 }
 
 .type-field{
-	border-top: .5vh black solid;
+	border-top: 5px black solid;
 	height: 22vh;
-	width: 100%; 
+	width: 100%;
 }
 
 .tool-bar{
@@ -662,7 +662,7 @@
     margin:3vh;
     flex:0 1 25%;
     border-radius: 3vh;
-    box-shadow: 0 2vh 3vh rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 2vh 3vh rgba(0, 0, 0, 0.25);
 }
 
 .opp-category{
@@ -733,7 +733,7 @@
     height: 8vh;
     width: 28vh;
     background: linear-gradient(180deg, #E3B3EF 0%, #CCA2D8 100%);
-    box-shadow: 0 2vh 4vh rgba(204, 162, 216, 0.5);
+    box-shadow: 0px 2vh 4vh rgba(204, 162, 216, 0.5);
     border-radius: 2vh;
 }
 
@@ -782,8 +782,6 @@
 .search-btn:hover{
 	color: #CCA2D8;
 }
-
-/*Anything below this line. Do not touch. Do not tempt. Do not cross. Do not. Just Don't.*/
 
 *{
 	margin: 0;
@@ -1078,7 +1076,20 @@ button:hover{
 
 
 .official-container{
-    margin: 30vh 35vw;
+    position:relative;
+    padding: 10vh 0 10vh 25vw;
+}
+
+.NYU-map{
+    position:absolute;
+    top: 0;
+    right: 0;
+}
+
+.official-cover{
+    z-index: 0;
+    height:35vh;
+    margin-top: 5vh;
 }
 
 .SignUp-Login{
@@ -1130,4 +1141,141 @@ button:hover{
     height: 100vh;
     overflow-y: scroll;
     padding: 4vh 15vw;
+}
+
+/*Account Settings CSS below. */
+
+.account-settings-container{
+    margin: 5vh 10vw;
+    font-size: 150%;
+}
+
+.setting-header{
+    font-weight: bold;
+    margin: 2vh 0;
+}
+
+.career-status p{
+    font-size: 75%;
+    margin: 2vh 0;
+}
+
+.career-status-choice{
+    display:flex;
+}
+
+.career-status-choice input{
+    flex: 0 1 10%;
+}
+
+.career-status-choice p{
+    flex: 1 0 auto;
+}
+
+.checkbox-template {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+  
+  /* Hide the browser's default radio button */
+.checkbox-template input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+  
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+  
+/* On mouse-over, add a grey background color */
+.checkbox-template:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+  
+/* When the radio button is checked, add a blue background */
+.checkbox-template input:checked ~ .checkmark {
+    background-color: #CCA2D8;
+}
+  
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Show the indicator (dot/circle) when checked */
+.checkbox-template input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.checkbox-template .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+  
+
+.account-management-btn{
+    display:block;
+    border: 2px #CCA2D8 solid;
+    background-color: white;
+    color: #CCA2D8;
+    padding: 1vh 1vw;
+    width: 8vw;
+    margin: 1vh 0;
+}
+
+.alumni-opp-top-bar{
+    display:flex;
+    margin: 0 2vw;
+}
+
+.alumni-opp-top-bar h2{
+    flex: 0 1 50%;
+}
+
+.alumni-opp-top-bar h4{
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.add-referral-template{
+    margin:3vh;
+    flex:0 1 25%;
+    border: 0.5vh dashed grey;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-referral-template div{
+    color: grey;
+    font-size: 600%;
+}
+
+.alumni-opp-container{
+    margin-top: 5vh;
 }

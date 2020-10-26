@@ -31,5 +31,50 @@ export default class Home{
 		}
 	}
 
+	async registerOpp(userId,oppId){
+		try{
+			await db.collection('Profiles').doc(userId).collection("myOpps").add({
+				status: "pending",
+				oppId: oppId
+			})
+		} catch (error) {
+			alert(error);
+		}
+	}
+
+	async unRegisterOpp(userId,oppId){
+		try{
+			await db.collection('Profiles').doc(userId).collection("myOpps").where("oppId", "==", oppId).get().then(async docs => {
+				docs.forEach(async doc => {
+					await db.collection('Profiles').doc(userId).collection("myOpps").doc(doc.id).delete();
+				})
+			})
+		} catch (error) {
+			alert(error);
+		}
+	}
+
+
+
+	async getMyOpps(userId) {
+		try{
+			await db.collection('Profiles').doc(userId).collection("myOpps").get().then(docs => {
+				this.myOpps = docs;
+			});
+		} catch (error) {
+			alert("getMyOpps: " + error);
+		}
+	}
+
+	async seniorGetOpps(userId){
+		//console.log(userId);
+		try{			
+			await db.collection('NewOpportunities').where("alumniId", "==", userId).get().then(docs => {
+				this.seniorOpps = docs;
+			});			
+		} catch (error) {
+			alert("seniorGetOpps: " + error);
+		}
+	}
 }
 
