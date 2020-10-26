@@ -177,14 +177,14 @@ export const homeScreen = async (state) => {
 
     document.querySelector(".home-top-icon").addEventListener('click',(e)=>{
         e.preventDefault();
-        document.querySelector('.laputa').classList.remove('invisible');
+        document.querySelector('#home-edit').classList.remove('invisible');
 
         homeView.setEditUI(state);
 
         state.home.finishBtn.addEventListener('click',e => {
             e.preventDefault();
             state.home.sendEditedProfile(state);
-            state.home.laputa.classList.add("invisible");
+            state.home.edit.classList.add("invisible");
             controlHome(state);
         });
     });

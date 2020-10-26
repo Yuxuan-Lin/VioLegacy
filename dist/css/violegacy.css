@@ -668,7 +668,6 @@
 .opp-category{
     font-weight: normal;
     padding: 3vh;
-    
     background-color: #CCA2D8;
     border-radius: 3vh 3vh 0 0;
 }
@@ -1132,7 +1131,7 @@ button:hover{
     color:#c98eda;
 }
 
-.laputa{
+.window{
     position: fixed;
     z-index: 1;
     top: 0;
@@ -1278,4 +1277,48 @@ button:hover{
 
 .alumni-opp-container{
     margin-top: 5vh;
+}
+
+
+
+/*Tests for senior-myOpp-detail*/
+.senior-myOpp-detail{
+    margin: 10vh 0;
+    border-radius: 3vh;
+    box-shadow: 0px 2vh 3vh rgba(0, 0, 0, 0.25);
+}
+
+.senior-myOpp-detail-header{
+    font-weight: normal;
+    padding: 3vh;
+    background-color: #CCA2D8;
+    border-radius: 3vh 3vh 0 0;
+    color: white;
+}
+
+.senior-myOpp-detail-header h3{
+    margin-top: 1vh;
+}
+
+.senior-myOpp-detail-body{
+    background-color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 3vh;
+    border-radius: 0 0 3vh 3vh;
+}
+
+.senior-myOpp-detail-body-bar{
+    list-style: none;
+}
+
+.senior-myOpp-detail-body-bar li{
+    display: inline-block;
+    margin:0 2vw 0 0;
+}
+
+
+.senior-myOpp-detail-body-list li{
+    padding: 1vh 1vw;
 }

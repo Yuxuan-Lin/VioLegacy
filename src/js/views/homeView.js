@@ -148,19 +148,19 @@ export const expand = () => {
 };
 
 export const setEditUI = (state) => {
-    state.home.laputa = document.querySelector(".laputa");
+    state.home.edit = document.querySelector("#home-edit");
     state.home.finishBtn = document.querySelector("#finish-btn");
-    state.home.about = document.querySelector('#laputa-about-area');
-    state.home.major = document.querySelector('#laputa-major');
-    state.home.firstName = document.querySelector('#laputa-first-name');
-    state.home.lastName = document.querySelector('#laputa-last-name');
-    state.home.year = document.querySelector('#laputa-year');
+    state.home.about = document.querySelector('#edit-about-area');
+    state.home.major = document.querySelector('#edit-major');
+    state.home.firstName = document.querySelector('#edit-first-name');
+    state.home.lastName = document.querySelector('#edit-last-name');
+    state.home.year = document.querySelector('#edit-year');
 
-    state.home.laputa.addEventListener('click',e => {
+    state.home.edit.addEventListener('click',e => {
         e.preventDefault();
         const btn = e.target.closest('.signUp-small-container');
         if(btn == null){
-            state.home.laputa.classList.add("invisible");
+            state.home.edit.classList.add("invisible");
         }
     });
 

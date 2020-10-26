@@ -273,8 +273,77 @@
 		</div>
 	
 		
-		<!-- This is for home edit -->
-		<div class="laputa invisible">
+		<div class="window invisible">
+			<div class="senior-myOpp-detail">
+				<div class="senior-myOpp-detail-header">
+					<h1>Software Developer</h1>
+					<h3>Apple</h3>
+				</div>
+				<div class="senior-myOpp-detail-body">
+					<ul class="senior-myOpp-detail-body-bar">
+						<li id="senior-myOpp-detail-body-all">All(3)</li>
+						<li id="senior-myOpp-detail-body-pending">Pending(1)</li>
+						<li id="senior-myOpp-detail-body-accepted">Accepted(1)</li>
+						<li id="senior-myOpp-detail-body-declined">Declined(1)</li>
+					</ul>
+					<ul class="senior-myOpp-detail-body-list">
+						<li class = "opp-column-item">
+							<div class="opp-item-left">
+								<h2>Jinlong Han</h2>
+							</div>
+							<div class="opp-item-right">
+								<div class="opp-item-icon">
+									<ion-icon name="timer-outline" class="big-icon violet"></ion-icon>
+								</div>
+								<div class="opp-item-status">
+									<h4>You haven't made a decison.</h4>
+								</div>
+							</div>
+						</li>
+				
+						<hr>
+		
+						<li class = "opp-column-item">
+							<div class="opp-item-left">
+								<h2>Yuxuan Lin</h2>
+							</div>
+							<div class="opp-item-right">
+								<div class="opp-item-icon">
+									<ion-icon name="checkmark-circle-outline" class="big-icon green"></ion-icon>
+								</div>
+								<div class="opp-item-status">
+									<h4>You has accepted SI LI’s request. You can now message Si Li.</h4>
+								</div>
+							</div>
+						</li>
+				
+						<hr>
+		
+						<li class = "opp-column-item">
+							<div class="opp-item-left">
+								<h2>Benwei Lu</h2>
+							</div>
+							<div class="opp-item-right">
+								<div class="opp-item-icon">
+									<ion-icon name="close-circle-outline" class="big-icon red"></ion-icon>
+								</div>
+								<div class="opp-item-status">
+									<h4>You has declined Wu Zhao’s request. </h4>
+								</div>
+							</div>
+						</li>
+				
+						<hr>
+		
+		
+					</ul>
+				</div>
+			</div>
+	
+		</div>
+
+		
+		<div class="window invisible" id="home-edit">
 			<div class="signUp-small-container">
 				<ul class="progression">
 					<li><h3>Basic Information</h3></li>
@@ -288,30 +357,30 @@
 						<li class="basic-info-1st-line">
 							<div class="first-item">
 								<h4>First Name</h4>
-								<input type="text" id="laputa-first-name" required />
+								<input type="text" id="edit-first-name" required />
 							</div>
 							<div class="second-item">
 								<h4>Last Name</h4>
-								<input type="text" id="laputa-last-name" required />
+								<input type="text" id="edit-last-name" required />
 							</div>
 						</li>
 						<li>
 							<div class="signUp-input-temp">
 								<h4>Major</h4>
-								<input type="text" id="laputa-major" required />
+								<input type="text" id="edit-major" required />
 							</div>
 						</li>
 						<li>
 							<div class="signUp-input-temp">
 								<h4>Year</h4>
-								<input type="text" id="laputa-year" required />
+								<input type="text" id="edit-year" required />
 							</div>
 						</li>
 					</ul>
 				</div>
 				<div class="signUp-about signUp-input-temp">
 					<h4>About</h4>
-					<input type="textarea" id="laputa-about-area" required />
+					<input type="textarea" id="edit-about-area" required />
 				</div>
 				<div class="signUp-experience">
 					<ul class="signUp-experiences">
@@ -323,24 +392,24 @@
 							</div>
 							<div class="signUp-input-temp">
 								<h4>Job Title</h4>
-								<input type="text" id="laputa-job-title" required />
+								<input type="text" id="edit-job-title" required />
 							</div>
 							<div class="signUp-input-temp">
 								<h4>Company</h4>
-								<input type="text" id="laputa-company" required />
+								<input type="text" id="edit-company" required />
 							</div>
 							<div class="checkbox">
-								<input type="checkbox" id="laputa-current-in-role">
+								<input type="checkbox" id="edit-current-in-role">
 								<h4 >I am currently working on this role.</h4>
 							</div>
 							<div class="start-end">
 								<div class="start-date date-template signUp-input-temp">
 									<h4>Start Date</h4>
-									<input type="date" id="laputa-start-date" required />
+									<input type="date" id="edit-start-date" required />
 								</div>
 								<div class="end-date date-template signUp-input-temp">
 									<h4>End Date</h4>
-									<input type="date" id="laputa-end-date" required />
+									<input type="date" id="edit-end-date" required />
 									<div id="present-box" class="invisible">
 										<h3 id="in-roll-text">Present</h3>
 									</div>
@@ -348,7 +417,7 @@
 							</div>
 							<div class="description signUp-input-temp">
 								<h4>Description</h4>
-								<input type="textarea" id="laputa-description" required />
+								<input type="textarea" id="edit-description" required />
 							</div>
 						</li>
 					</ul>
