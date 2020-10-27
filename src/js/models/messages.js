@@ -38,18 +38,23 @@ export default class Messages{
 			const snapshot = await db.collection('Messages').doc(chatId).get();
 			this.selfPos = this.getPos(snapshot.data().chatterIds);
 			
+			
 			// Detaches update listener when opening new chat
 			if (this.unsubscribe) {
 				this.unsubscribe();
 			}
+			
+			this.unsubscribe = null;
 			this.unsubscribe = db.collection('Messages').doc(chatId).collection('history').orderBy('time').onSnapshot(snapshot => {
 				const changes = snapshot.docChanges();
 				changes.forEach(change => {
 					const message = change.doc.data();
 					renderChatFn(message, this.selfPos == message.senderID);
-
+					console.log('111');
+					console.log('222');
 				});
 			})
+
 		} catch (error){
 			alert(error);
 		}

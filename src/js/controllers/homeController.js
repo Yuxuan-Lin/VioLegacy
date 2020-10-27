@@ -9,6 +9,7 @@ export const controlHome = async (state) => {
     //console.log(userId);
     await state.home.getHomeData();
     await state.opp.getOppData();
+
     if (state.user.isSenior){
         console.log("senior present");
         await state.home.seniorGetOpps(state.user.uid);
@@ -28,6 +29,7 @@ export const controlHome = async (state) => {
     homeView.renderExps(state.home.profile.experience);
     if (state.user.isSenior){
         oppView.renderOpps(state.home.seniorOpps);
+        homeView.seniorOppAddEvents(state);
         //console.log(state.home.seniorOpps[0].data());
     } else {
         homeView.renderOpps(state.home.myOpps,state.opp.opps);

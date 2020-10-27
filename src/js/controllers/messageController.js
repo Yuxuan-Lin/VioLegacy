@@ -20,6 +20,13 @@ export const controlChat = async (state,chatId,chatterUid) => {
     await state.messages.getMessages(chatId, chatView.renderChat);
 };
 
+const cleanseEvent = function(className){
+    const oldNavigator = document.querySelector(className);
+    const newNavigator = oldNavigator.cloneNode(true);
+    oldNavigator.parentNode.replaceChild(newNavigator, oldNavigator);
+    console.log(newNavigator);
+};
+
 export const messageScreen = (state) => {
     const messageSetUp = `
         <div class="contacts">
@@ -97,7 +104,7 @@ export const messageScreen = (state) => {
         }
     });
     
-    
+    //cleanseEvent('.type-field');
     document.querySelector('.type-field').addEventListener('click', e => {
         e.preventDefault();
         const btn = e.target.closest('#the-btn');
@@ -112,7 +119,6 @@ export const messageScreen = (state) => {
                 document.body.scrollTop = document.body.scrollHeight;
             }
         }        
-
     });
 
     const searchResUI = document.querySelector('.search-results');

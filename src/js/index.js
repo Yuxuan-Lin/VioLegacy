@@ -133,7 +133,11 @@ export const clearScreen = function(){
 };
 
 
-
+const cleanseEvent = function(className){
+    const oldNavigator = document.querySelector(className);
+    const newNavigator = oldNavigator.cloneNode(true);
+    oldNavigator.parentNode.replaceChild(newNavigator, oldNavigator);
+};
 
 export const setUI = async function(state, user){
     state.home = new Home(user.uid);
@@ -151,12 +155,9 @@ export const setUI = async function(state, user){
 
 
     //cleanse existing event listeners
-    const oldNavigator = document.querySelector('.tools');
-    const newNavigator = oldNavigator.cloneNode(true);
-    oldNavigator.parentNode.replaceChild(newNavigator, oldNavigator);
-    const oldCollapse = document.querySelector('.collapse');
-    const newCollapse = oldCollapse.cloneNode(true);
-    oldCollapse.parentNode.replaceChild(newCollapse, oldCollapse);
+    cleanseEvent('.tools');
+    cleanseEvent('.collapse');
+    cleanseEvent('#account-settings');
 
     //3 main function tabs        
     document.querySelector('.tools').addEventListener('click', e => {

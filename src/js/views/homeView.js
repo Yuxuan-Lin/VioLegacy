@@ -112,7 +112,7 @@ export const renderOpp = (myOpp,opp) => {
         <hr>
     `;
     }
-     document.querySelector('.opp-column').insertAdjacentHTML('beforeend',markup);
+    document.querySelector('.opp-column').insertAdjacentHTML('beforeend',markup);
 };
 
 export const renderOpps = async (myOpps,opps) => {
@@ -171,7 +171,105 @@ export const setEditUI = (state) => {
     state.home.year.value = state.home.profile.year;
 };
 
+export const seniorOppAddEvents = async (state) => {
+    console.log(state);
+    document.querySelector('.referral-box').addEventListener('click', async e => {
+        const btn = e.target.closest('.referral');
+        if(btn) {
+            await state.opp.getSeniorOppRegistration(btn.id);
+            state.home.seniorOppDetail = document.querySelector('.senior-myOpp-detail').parentNode;
+            renderSeniorOppDetails(state.opp.seniorOppRegistration);
+            state.home.seniorOppDetail.classList.remove('invisible');
+            state.home.seniorOppDetail.addEventListener('click',e => {
+                e.preventDefault();
+                const btn2 = e.target.closest('.senior-myOpp-detail');
+                if(btn2 == null){
+                    state.home.seniorOppDetail.classList.add("invisible");
+                }
+            });
+        }
+    });
+};
 
+let seniorOppDetailCounter = [0,0,0,0];
 
+const renderSeniorOppDetails = (list) => {
+    clearSeniorOppDetail();
+    seniorOppDetailCounter = [0,0,0,0];
+    list.forEach(headcount=>{
+        renderSeniorOppDetail(headcount.data().status, headcount.data().name);
+        seniorOppDetailCounter[0]++;
+    });
+    document.querySelector("#senior-myOpp-detail-body-all").textContent = `All (${seniorOppDetailCounter[0]})`;
+    document.querySelector("#senior-myOpp-detail-body-pending").textContent = `Pending (${seniorOppDetailCounter[1]})`;
+    document.querySelector("#senior-myOpp-detail-body-accepted").textContent = `Accepted (${seniorOppDetailCounter[2]})`;
+    document.querySelector("#senior-myOpp-detail-body-declined").textContent = `Declined (${seniorOppDetailCounter[3]})`;
+};
 
+const renderSeniorOppDetail = (status,name) => {
+    const pending = `
+        <li class = "opp-column-item">
+            <div class="opp-item-left">
+                <h2>${name}</h2>
+            </div>
+            <div class="opp-item-right">
+                <div class="opp-item-icon">
+                    <ion-icon name="timer-outline" class="big-icon violet"></ion-icon>
+                </div>
+                <div class="opp-item-status">
+                    <h4>You haven't made a decison.</h4>
+                </div>
+            </div>
+        </li>
+        <hr>
+    `;
 
+    const accepted = `
+        <li class = "opp-column-item">
+            <div class="opp-item-left">
+                <h2>${name}</h2>
+            </div>
+            <div class="opp-item-right">
+                <div class="opp-item-icon">
+                    <ion-icon name="checkmark-circle-outline" class="big-icon green"></ion-icon>
+                </div>
+                <div class="opp-item-status">
+                    <h4>You have accepted ${name}’s request. You can now message ${name}.</h4>
+                </div>
+            </div>
+        </li>
+        <hr>
+    `;
+
+    const declined = `
+        <li class = "opp-column-item">
+            <div class="opp-item-left">
+                <h2>${name}</h2>
+            </div>
+            <div class="opp-item-right">
+                <div class="opp-item-icon">
+                    <ion-icon name="close-circle-outline" class="big-icon red"></ion-icon>
+                </div>
+                <div class="opp-item-status">
+                    <h4>You have declined ${name}’s request. </h4>
+                </div>
+            </div>
+        </li>				
+        <hr>
+    `;
+
+    if (status == "pending"){
+        document.querySelector('.senior-myOpp-detail-body-list').insertAdjacentHTML('beforeend',pending);
+        seniorOppDetailCounter[1]++;
+    } else if (status == "accepted"){
+        document.querySelector('.senior-myOpp-detail-body-list').insertAdjacentHTML('beforeend',accepted);
+        seniorOppDetailCounter[2]++;
+    } else {
+        document.querySelector('.senior-myOpp-detail-body-list').insertAdjacentHTML('beforeend',declined);
+        seniorOppDetailCounter[3]++;
+    }
+ }
+
+ const clearSeniorOppDetail = () => {
+     document.querySelector(".senior-myOpp-detail-body-list").innerHTML="";
+ }

@@ -58,4 +58,16 @@ export default class Opportunities{
 			alert(error);
 		}
 	}
+
+	async getSeniorOppRegistration(oppId){
+		try{
+			await db.collection('NewOpportunities').doc(oppId).collection("registered").get().then(docs => {
+				this.seniorOppRegistration = docs;
+			})
+			console.log(this.seniorOppRegistration)
+			console.log("registration log acquired")
+		} catch (error){
+			alert(error);
+		}
+	}
 }
