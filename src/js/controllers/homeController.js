@@ -6,12 +6,10 @@ import * as oppView from '../views/oppView';
 
 export const controlHome = async (state) => {
     //1) Get contact list(array)
-    //console.log(userId);
     await state.home.getHomeData();
     await state.opp.getOppData();
 
     if (state.user.isSenior){
-        console.log("senior present");
         await state.home.seniorGetOpps(state.user.uid);
     } else {
         await state.home.getMyOpps(state.user.uid);
@@ -19,7 +17,6 @@ export const controlHome = async (state) => {
     
     state.user.name = state.home.profile.name;
 
-    console.log(state.home.seniorOpps)
     //2) Prepare UI(optional)
     homeView.clearProfile(state.user.isSenior);
     
@@ -28,14 +25,11 @@ export const controlHome = async (state) => {
     homeView.renderAbout(state.home.profile);
     homeView.renderExps(state.home.profile.experience);
     if (state.user.isSenior){
-        oppView.renderOpps(state.home.seniorOpps);
+        oppView.renderOpps(state.home.seniorOpps,state.user.isSenior);
         homeView.seniorOppAddEvents(state);
-        //console.log(state.home.seniorOpps[0].data());
     } else {
         homeView.renderOpps(state.home.myOpps,state.opp.opps);
     }
-
-    console.log('home fully rendered');
     
     //1) Get chatHistory(array) and profile
 
@@ -109,22 +103,6 @@ export const homeScreen = async (state) => {
                 <h4>Manage Posted Opportunities</h4>
             </div>
             <div class="referral-box">
-                <ul class="referral-row" id="row-0">
-                    <li class="referral" id='asdf' value="asdf">
-                        <h3 class='opp-category'>CS</h3>
-                        <div>
-                            <h2>title</h2>
-                            <h3>company</h3>
-                            <h3 class="opp-alumni">from alumni.name</h3>
-                        </div>
-                    </li>
-                    <li class="add-referral-template" id='asdf' value="asdf">
-                        <div>
-                            <ion-icon name="add-outline"></ion-icon>
-                        </div>
-                        <h4>Post A New Opportunity</h4>
-                    </li>
-                </ul>
             </div>
         </div>
     `;
@@ -134,6 +112,7 @@ export const homeScreen = async (state) => {
         document.querySelector(".home-opp").insertAdjacentHTML('beforeend',seniorSetUp);
         await controlHome(state);
     } else {
+        document.querySelector("#dashboard").textContent="Home";
         document.querySelector(".home-opp").insertAdjacentHTML('beforeend',juniorSetUp);
         await controlHome(state);
         state.home.pending = homeView.oppStatus[0];
@@ -156,12 +135,6 @@ export const homeScreen = async (state) => {
         `;
         document.querySelector('.opp-bar').insertAdjacentHTML('afterbegin',oppBarSetUp);
     }
-    
-    
-    console.log(homeView.oppStatus);
-    
-    
-    
     
     document.querySelector('.expand-collapse').addEventListener('click', e => {
         const btn = e.target.closest('.expand-collapse');
@@ -190,5 +163,6 @@ export const homeScreen = async (state) => {
             controlHome(state);
         });
     });
+    
     
 }

@@ -50,8 +50,6 @@ export default class Messages{
 				changes.forEach(change => {
 					const message = change.doc.data();
 					renderChatFn(message, this.selfPos == message.senderID);
-					console.log('111');
-					console.log('222');
 				});
 			})
 

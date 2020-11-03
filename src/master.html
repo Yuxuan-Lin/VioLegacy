@@ -219,7 +219,7 @@
                         <div>
                             <ion-icon name="home-outline" class="small-icon"></ion-icon>
                         </div>
-                        <h2 class='collapse-label'>Home</h2>                    
+                        <h2 class='collapse-label' id="dashboard">Home</h2>                    
                     </div>
 				</li>
 				<li id="2">
@@ -230,8 +230,8 @@
 						<h2 class='collapse-label' id="opp-decision">Opportunities</h2>
 					</div>					
 				</li>
-				<li id="3">
-					<div class="tab">
+				<li id="3"> 
+					<div class="tab" id="message-label">
                         <div>
                             <ion-icon name="chatbox-ellipses-outline" class="small-icon"></ion-icon>
                         </div>
@@ -243,6 +243,7 @@
 						<h2>&nbsp;</h2>
 					</div>					
 				</li>
+				
 			</ul>
 			<ul class="helps">
 				<li class="tab">
@@ -376,6 +377,64 @@
 				</div>
 				
 				<button class="next-step" id="finish-btn">Finish</button>
+			</div>
+		</div>
+		
+		<div class="window invisible" id="senior-post-opp">
+			<div class="signUp-small-container">
+				<div class="senior-post-opp-back">
+					<div class="back-top" id="senior-post-opp-back-btn">
+						<div>
+							<ion-icon name="arrow-back-outline" class="big-icon"></ion-icon>
+						</div>
+						<h2>Back</h2>
+					</div>
+			
+					<hr>
+				</div>
+				
+				<div class="basic-info senior-post-opp-body">
+					<ul>
+						<li>
+							<div class="signUp-input-temp">
+								<h4>Category</h4>
+								<input type="text" id="senior-post-opp-category" required />
+							</div>
+						</li>
+						<li>
+							<div class="signUp-input-temp">
+								<h4>Company</h4>
+								<input type="text" id="senior-post-opp-company" required />
+							</div>
+						</li>
+						<li>
+							<div class="signUp-input-temp">
+								<h4>Title</h4>
+								<input type="text" id="senior-post-opp-title" required />
+							</div>
+						</li>
+						<li>
+							<div class="signUp-input-temp">
+								<h4>Limit</h4>
+								<input type="text" id="senior-post-opp-limit" required />
+							</div>
+						</li>
+						<li>
+							<div class="signUp-input-temp">
+								<h4>Deadline</h4>
+								<input type="date" id="senior-post-opp-deadline" required />
+							</div>
+						</li>
+						<li>
+							<div class="signUp-about signUp-input-temp senior-post-opp-description">
+								<h4>Job Description</h4>
+								<input type="textarea" id="senior-post-opp-description" required />
+							</div>
+						</li>
+					</ul>
+				</div>
+				
+				<button class="next-step" id="senior-post-opp-post-btn">Post</button>
 			</div>
 		</div>
 
