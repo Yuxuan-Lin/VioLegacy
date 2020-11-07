@@ -2,7 +2,7 @@ import Home from './models/home';
 import Opp from './models/opportunities';
 import Messages from './models/messages';
 import {elements} from './views/base';
-import uploadFile from './firebaseStorage';
+import {uploadFile, getUrl} from './firebaseStorage';
 
 
 import * as homeControl from './controllers/homeController';
@@ -117,6 +117,7 @@ const renderAccountSettings = async function(state){
                     id="resume-input" name="avatar">
                 <button class="account-management-btn" id="uploader">Upload Resume</button>
                 <button class="account-management-btn">Log Out</button>
+                <embed id="viewer" src="https://firebasestorage.googleapis.com/v0/b/violegacy-26a40.appspot.com/o/user_files%2FcweSxYtCMpNxBNrPXkuv6kpWMbt1%2FFri%20Nov%2006%202020%2021%3A19%3A23%20GMT-0500%20(Eastern%20Standard%20Time)problem%20set%203%20(solutions).pdf?alt=media&token=e980efa8-7c0f-46d1-9619-f7c0a79fc60e" width="300" height="200"></embed>
             </div>
         </div>
     `;
@@ -192,8 +193,7 @@ export const setUI = async function(state, user){
                 const uploadBtn = e.target.closest('#uploader');
                 const resume = document.querySelector("#resume-input").files[0]
                 if(uploadBtn){
-                    console.log(resume)
-                    uploadFile(resume, new Date())
+                    uploadFile(resume, state.user.uid, 'Resumes')
                 }
             });
 
