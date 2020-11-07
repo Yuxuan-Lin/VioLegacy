@@ -26,6 +26,9 @@
 
 		const auth = firebase.auth();
 		const db = firebase.firestore();
+		const auth = firebase.auth();
+		const storage = firebase.storage();
+		const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
 	</script>
 	
@@ -227,7 +230,7 @@
 						<div>
 							<ion-icon name="briefcase-outline" class="small-icon"></ion-icon>
 						</div>
-						<h2 class='collapse-label'>Opportunities</h2>
+						<h2 class='collapse-label' id="opp-decision">Opportunities</h2>
 					</div>					
 				</li>
 				<li id="3">

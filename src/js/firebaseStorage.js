@@ -1,4 +1,4 @@
-import { storage, db, timestamp } from './firebaseConfig';
+
 
 // file : file, string : date
 const uploadFile = (file, date) => {
