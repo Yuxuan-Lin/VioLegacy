@@ -11,6 +11,7 @@ export const controlContacts = async (state) => {
 };
 
 export const controlChat = async (state,chatId,chatterUid) => {
+
     // render Profile UI
     await state.messages.getAlumniProfile(chatterUid);
     chatView.renderProfile(state.messages.alumniProfile);
@@ -111,6 +112,7 @@ export const messageScreen = (state) => {
                 document.body.scrollTop = document.body.scrollHeight;
             }
         }        
+
     });
 
     const searchResUI = document.querySelector('.search-results');

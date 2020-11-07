@@ -14,19 +14,6 @@ export default class Messages{
 
 	async getContacts(renderContactFn){
 		try{
-			/*
-			const snapshot = await db.collection('Messages').where("chatterIds", "array-contains", this.uid).get();
-			this.contacts = snapshot.docs.map(doc => {
-				const data = doc.data();
-				const pos = this.getPos(data.chatterIds);
-				const otherPos = (pos + 1) % 2;
-				return {
-					id: doc.id,
-					chatterName: data.chatters[otherPos],
-					chatterUid: data.chatterIds[otherPos]
-				}
-			});
-			*/
 			await db.collection('Messages').where("chatterIds", "array-contains", this.uid).onSnapshot(snapshot => {
 				const changes = snapshot.docChanges();
 				changes.forEach(change => {
@@ -41,11 +28,6 @@ export default class Messages{
 					renderContactFn(contact);
 				});
 			})
-
-
-
-
-
 		} catch (error){
 			alert(error);
 		}
@@ -60,11 +42,12 @@ export default class Messages{
 			if (this.unsubscribe) {
 				this.unsubscribe();
 			}
-			this.unsubscribe = await db.collection('Messages').doc(chatId).collection('history').orderBy('time').onSnapshot(snapshot => {
+			this.unsubscribe = db.collection('Messages').doc(chatId).collection('history').orderBy('time').onSnapshot(snapshot => {
 				const changes = snapshot.docChanges();
 				changes.forEach(change => {
 					const message = change.doc.data();
 					renderChatFn(message, this.selfPos == message.senderID);
+
 				});
 			})
 		} catch (error){

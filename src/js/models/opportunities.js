@@ -44,7 +44,8 @@ export default class Opportunities{
 				uid: state.user.uid
 			})
 		} catch (error){
-			alert("??????????????" + error);
+			alert(error);
+
 		}
 	}
 

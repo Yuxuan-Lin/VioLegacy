@@ -39,7 +39,7 @@ export const renderOpps = opps => {
     }
     
     opps.forEach(opp=>{
-        renderOpp(opp,counter,idArray[idCounter]);
+        renderOpp(opp,idCounter,idArray[idCounter]);
         idCounter++;
     })
 };
