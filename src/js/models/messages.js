@@ -16,7 +16,7 @@ export default class Messages{
 		try{
 			await db.collection('Messages').where("chatterIds", "array-contains", this.uid).onSnapshot(snapshot => {
 				const changes = snapshot.docChanges();
-				changes.forEach(change => {
+				changes.forEach(async change => {
 					const data = change.doc.data();
 					const pos = this.getPos(data.chatterIds);
 					const otherPos = (pos + 1) % 2;
@@ -25,7 +25,19 @@ export default class Messages{
 						chatterName: data.chatters[otherPos],
 						chatterUid: data.chatterIds[otherPos] 
 					}
-					renderContactFn(contact);
+					await db.collection("Images").where("userId","==",contact.chatterUid).get().then(snapshots => {
+						let counter=0;
+						snapshots.forEach(doc => {
+							this.profilePic = doc.data().url;
+							counter++;
+						})
+						if (counter == 0){
+							this.profilePic = null;
+						}
+					})
+
+					renderContactFn(contact,this.profilePic);
+			
 				});
 			})
 		} catch (error){
@@ -33,7 +45,7 @@ export default class Messages{
 		}
 	}
 
-	async getMessages(chatId, renderChatFn) {
+	async getMessages(chatId, renderChatFn,profilePic) {
 		try{
 			const snapshot = await db.collection('Messages').doc(chatId).get();
 			this.selfPos = this.getPos(snapshot.data().chatterIds);
@@ -46,7 +58,7 @@ export default class Messages{
 				const changes = snapshot.docChanges();
 				changes.forEach(change => {
 					const message = change.doc.data();
-					renderChatFn(message, this.selfPos == message.senderID);
+					renderChatFn(message, this.selfPos == message.senderID,this.alumniProfilePic,profilePic);
 
 				});
 			})
@@ -59,6 +71,11 @@ export default class Messages{
 		try{
 			await db.collection('Profiles').doc(uid).get().then(doc => {
 				this.alumniProfile = doc.data();
+			})
+			await db.collection("Images").where("userId", "==", uid).get().then(snapshot => {
+				snapshot.forEach(doc => {
+					this.alumniProfilePic = doc.data().url;
+				})
 			})
 		} catch (error){
 			alert(error);

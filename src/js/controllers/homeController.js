@@ -1,5 +1,6 @@
 import Home from '../models/home';
 import {elements} from '../views/base';
+import {getUrl , uploadFile} from '../firebaseStorage';
 import * as homeView from '../views/homeView';
 import * as oppView from '../views/oppView';
 
@@ -23,7 +24,7 @@ export const controlHome = async (state) => {
     homeView.clearProfile(state.user.isSenior);
     
     //3) Render UI
-    homeView.renderProfile(state.home.profile);
+    homeView.renderProfile(state.home.profile,state.home.profilePic);
     homeView.renderAbout(state.home.profile);
     homeView.renderExps(state.home.profile.experience);
     if (state.user.isSenior){

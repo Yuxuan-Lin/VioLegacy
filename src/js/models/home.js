@@ -1,5 +1,3 @@
-
-
 export default class Home{
 	constructor(query){
 		this.query = query;
@@ -12,8 +10,13 @@ export default class Home{
 			await db.collection('Profiles').doc(this.query).onSnapshot(doc => {
 				this.profile = doc.data();
 				console.log("Profile data got.");				
+			});			
+			await db.collection('Images').where("userId","==",this.query).onSnapshot(docs => {
+				docs.forEach(doc => {
+					this.profilePic = doc.data().url;
+					console.log("display url: " + this.profilePic);
+				})
 			});
-			
 		} catch (error){
 			alert(error);
 		}

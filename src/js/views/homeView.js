@@ -12,10 +12,10 @@ export const clearProfile = (isSenior) => {
 };
 
 
-export const renderProfile = self => {
+export const renderProfile = (self,profilePic) => {
     const markup = `
         <div class = "profile-pic">
-            <img class="round-image" src=${"./images/Bill.jpg"} alt="${self.name}">
+            <img class="round-image" src="${profilePic}" alt="${self.name}">
         </div>
         <div class = "home-top-info">
             <h2>${self.name}</h2>

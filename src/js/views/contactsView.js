@@ -1,10 +1,10 @@
 import {elements} from './base';
 
-export const renderContact = (doc) => {
+export const renderContact = (doc,profilePic) => {
     const markup = `
         <li class="contact-person" id="${doc.id+';'+doc.chatterUid}">
             <div class="person-image">
-                <img class="round-image" src="./images/Bill.jpg" alt="${doc.chatterName}">
+                <img class="round-image" src="${profilePic}" alt="${doc.chatterName}">
             </div>
             <div class="person-info">
                 <div class="person-top">

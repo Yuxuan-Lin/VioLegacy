@@ -14,10 +14,10 @@ export const controlChat = async (state,chatId,chatterUid) => {
 
     // render Profile UI
     await state.messages.getAlumniProfile(chatterUid);
-    chatView.renderProfile(state.messages.alumniProfile);
+    chatView.renderProfile(state.messages.alumniProfile, state.messages.alumniProfilePic);
     
     // render Chat UI
-    await state.messages.getMessages(chatId, chatView.renderChat);
+    await state.messages.getMessages(chatId, chatView.renderChat,state.home.profilePic);
 };
 
 export const messageScreen = (state) => {

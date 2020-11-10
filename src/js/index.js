@@ -112,12 +112,15 @@ const renderAccountSettings = async function(state){
             <div class="account-management">
                 <h3 class="setting-header">Account Management</h3>
                 <button class="account-management-btn">Change Password</button>
-                <label for="avatar">Choose a file:</label>
+                <label for="resume">Choose a file:</label>
                 <input type="file"
-                    id="resume-input" name="avatar">
-                <button class="account-management-btn" id="uploader">Upload Resume</button>
+                    id="resume-input" name="resume">
+                <button class="account-management-btn" id="resume-uploader">Upload Resume</button>
+                <label for="profile-pic">Choose an image:</label>
+                <input type="file"
+                    id="profile-pic-input" name="profile-pic">
+                <button class="account-management-btn" id="profile-pic-uploader">Upload Profile Picture</button>
                 <button class="account-management-btn">Log Out</button>
-                <embed id="viewer" src="https://firebasestorage.googleapis.com/v0/b/violegacy-26a40.appspot.com/o/user_files%2FcweSxYtCMpNxBNrPXkuv6kpWMbt1%2FFri%20Nov%2006%202020%2021%3A19%3A23%20GMT-0500%20(Eastern%20Standard%20Time)problem%20set%203%20(solutions).pdf?alt=media&token=e980efa8-7c0f-46d1-9619-f7c0a79fc60e" width="300" height="200"></embed>
             </div>
         </div>
     `;
@@ -188,12 +191,21 @@ export const setUI = async function(state, user){
                 }
             });
 
-            document.querySelector("#uploader").addEventListener('click', e => {
+            document.querySelector("#resume-uploader").addEventListener('click', e => {
                 e.preventDefault();
-                const uploadBtn = e.target.closest('#uploader');
+                const resumeUploadBtn = e.target.closest('#uploader');
                 const resume = document.querySelector("#resume-input").files[0]
-                if(uploadBtn){
+                if(resumeUploadBtn){
                     uploadFile(resume, state.user.uid, 'Resumes')
+                }
+            });
+
+            document.querySelector("#profile-pic-uploader").addEventListener('click', e => {
+                e.preventDefault();
+                const profilePicUploadBtn = e.target.closest('#profile-pic-uploader');
+                const profilePic = document.querySelector("#profile-pic-input").files[0]
+                if(profilePicUploadBtn){
+                    uploadFile(profilePic, state.user.uid, 'Images')
                 }
             });
 

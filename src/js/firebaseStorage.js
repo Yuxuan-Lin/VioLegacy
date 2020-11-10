@@ -33,7 +33,7 @@ const uploadFile = (file, userId, type) => {
 }
 
 const getUrl = async (userId, type) => {
-  var docs = null
+  let docs = null
   await db.collection(type).where("userId", "==", userId)
     .orderBy('createdAt', 'desc')
     .onSnapshot(snap => {
