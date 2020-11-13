@@ -11,7 +11,6 @@ export const controlHome = async (state) => {
     await state.home.getHomeData();
     await state.opp.getOppData();
     if (state.user.isSenior){
-        console.log("senior present");
         await state.home.seniorGetOpps(state.user.uid);
     } else {
         await state.home.getMyOpps(state.user.uid);
@@ -19,7 +18,6 @@ export const controlHome = async (state) => {
     
     state.user.name = state.home.profile.name;
 
-    console.log(state.home.seniorOpps)
     //2) Prepare UI(optional)
     homeView.clearProfile(state.user.isSenior);
     
@@ -29,18 +27,12 @@ export const controlHome = async (state) => {
     homeView.renderExps(state.home.profile.experience);
     if (state.user.isSenior){
         oppView.renderOpps(state.home.seniorOpps);
-        //console.log(state.home.seniorOpps[0].data());
     } else {
         homeView.renderOpps(state.home.myOpps,state.opp.opps);
     }
 
     console.log('home fully rendered');
     
-    //1) Get chatHistory(array) and profile
-
-    //2) Prepare UI(clear field)
-
-    //3) Render chatHistroy and profile on UI    
 };
 
 

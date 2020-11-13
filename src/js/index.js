@@ -2,7 +2,7 @@ import Home from './models/home';
 import Opp from './models/opportunities';
 import Messages from './models/messages';
 import {elements} from './views/base';
-import {uploadFile, getUrl} from './firebaseStorage';
+import {uploadFile, getUrl, deleteFiles} from './firebaseStorage';
 
 
 import * as homeControl from './controllers/homeController';
@@ -112,15 +112,10 @@ const renderAccountSettings = async function(state){
             <div class="account-management">
                 <h3 class="setting-header">Account Management</h3>
                 <button class="account-management-btn">Change Password</button>
-                <label for="resume">Choose a file:</label>
-                <input type="file"
-                    id="resume-input" name="resume">
-                <button class="account-management-btn" id="resume-uploader">Upload Resume</button>
-                <label for="profile-pic">Choose an image:</label>
-                <input type="file"
-                    id="profile-pic-input" name="profile-pic">
-                <button class="account-management-btn" id="profile-pic-uploader">Upload Profile Picture</button>
-                <button class="account-management-btn">Log Out</button>
+                <button class="account-management-btn" id="resume-uploader" clicked="false">Upload Resume</button>
+                <input class="invisible" type="file" id="resume-input" name="resume">
+                <button class="account-management-btn" id="profile-pic-uploader" clicked="false">Upload Profile Picture</button>
+                <input class="invisible" type="file" id="profile-pic-input" name="profile-pic">
             </div>
         </div>
     `;
@@ -177,6 +172,9 @@ export const setUI = async function(state, user){
     document.querySelector('#account-settings').addEventListener('click', e => {
         e.preventDefault();
         const tab = e.target.closest('.tab');
+        state.settings = {};
+        state.settings.resumeUploadBtnClicked = false;
+        state.settings.profilePicUploadBtnClicked = false;
 
         if (tab){
             renderAccountSettings(state);
@@ -193,10 +191,25 @@ export const setUI = async function(state, user){
 
             document.querySelector("#resume-uploader").addEventListener('click', e => {
                 e.preventDefault();
-                const resumeUploadBtn = e.target.closest('#uploader');
-                const resume = document.querySelector("#resume-input").files[0]
+                const resumeUploadBtn = e.target.closest('#resume-uploader');
+                const resume = document.querySelector("#resume-input").files[0];
                 if(resumeUploadBtn){
-                    uploadFile(resume, state.user.uid, 'Resumes')
+                    if(!state.settings.resumeUploadBtnClicked){
+                        resumeUploadBtn.classList.remove("account-management-btn");
+                        resumeUploadBtn.classList.add("account-management-btn-clicked");
+                        document.querySelector("#resume-input").classList.remove("invisible");
+                        state.settings.resumeUploadBtnClicked = true;
+                    }else{
+                        if(resume){
+                            deleteFiles(state.user.uid, 'Resumes');
+                            uploadFile(resume, state.user.uid, 'Resumes');
+                        }
+                        resumeUploadBtn.classList.add("account-management-btn");
+                        resumeUploadBtn.classList.remove("account-management-btn-clicked");
+                        document.querySelector("#resume-input").classList.add("invisible");
+                        state.settings.resumeUploadBtnClicked = false;
+                    }
+                    
                 }
             });
 
@@ -205,7 +218,21 @@ export const setUI = async function(state, user){
                 const profilePicUploadBtn = e.target.closest('#profile-pic-uploader');
                 const profilePic = document.querySelector("#profile-pic-input").files[0]
                 if(profilePicUploadBtn){
-                    uploadFile(profilePic, state.user.uid, 'Images')
+                    if(!state.settings.profilePicUploadBtnClicked){
+                        profilePicUploadBtn.classList.remove("account-management-btn");
+                        profilePicUploadBtn.classList.add("account-management-btn-clicked");
+                        document.querySelector("#profile-pic-input").classList.remove("invisible");
+                        state.settings.profilePicUploadBtnClicked = true;
+                    }else{
+                        if(profilePic){
+                            deleteFiles(state.user.uid, 'Images');
+                            uploadFile(profilePic, state.user.uid, 'Images');
+                        }
+                        profilePicUploadBtn.classList.add("account-management-btn");
+                        profilePicUploadBtn.classList.remove("account-management-btn-clicked");
+                        document.querySelector("#profile-pic-input").classList.add("invisible");
+                        state.settings.profilePicUploadBtnClicked = false;
+                    }
                 }
             });
 

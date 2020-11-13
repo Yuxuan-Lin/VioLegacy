@@ -13,6 +13,9 @@ export const clearProfile = (isSenior) => {
 
 
 export const renderProfile = (self,profilePic) => {
+    if(profilePic == undefined){
+        profilePic = "./images/default-avatar.png";
+    }
     const markup = `
         <div class = "profile-pic">
             <img class="round-image" src="${profilePic}" alt="${self.name}">

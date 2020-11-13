@@ -6,7 +6,9 @@ export const clearChat = () => {
 };
 
 export const renderProfile = (profile,profilePic) => {
-        
+    if(profilePic == undefined){
+        profilePic = "./images/default-avatar.png";
+    }
     const markup = `
         <div class="profile-image">
             <img class="round-image" src="${profilePic}">
@@ -22,6 +24,9 @@ export const renderProfile = (profile,profilePic) => {
 };
 
 export const renderChat = (message, isRight,alumniProfilePic,profilePic) => {
+    if(profilePic == undefined){
+        profilePic = "./images/default-avatar.png";
+    }
     let markup;
     if (isRight){
         markup = `
