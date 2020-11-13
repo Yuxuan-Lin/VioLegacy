@@ -203,6 +203,9 @@ export const setUI = async function(state, user){
                         if(resume){
                             deleteFiles(state.user.uid, 'Resumes');
                             uploadFile(resume, state.user.uid, 'Resumes');
+                            alert("Upload Success");
+                        }else{
+                            alert("Upload Failure.");
                         }
                         resumeUploadBtn.classList.add("account-management-btn");
                         resumeUploadBtn.classList.remove("account-management-btn-clicked");
@@ -227,6 +230,9 @@ export const setUI = async function(state, user){
                         if(profilePic){
                             deleteFiles(state.user.uid, 'Images');
                             uploadFile(profilePic, state.user.uid, 'Images');
+                            alert("Upload Success");
+                        }else{
+                            alert("Upload Failure.");
                         }
                         profilePicUploadBtn.classList.add("account-management-btn");
                         profilePicUploadBtn.classList.remove("account-management-btn-clicked");
