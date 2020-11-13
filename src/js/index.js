@@ -72,14 +72,14 @@ const tabSwitch = async function (state,tab){
                 markup[9].childNodes[1].classList.add('special-tab-2');
             }
         } else {
-            //UI Changes for tab above selected tab
+            //UI Changes for tab above selected tab(Curve at right-bottom corner and Background Corner)
             markup[1 + (parseInt(tab.parentNode.id) - 1) * 2].classList.add('above-selected');
             markup[1 + (parseInt(tab.parentNode.id) - 1) * 2].childNodes[1].classList.add('special-tab-1');
 
-            //UI Changes for selected tab
+            //UI Changes for selected tab(Curve at left-top and left-bottom corner and Background Corner)
             tab.parentNode.classList.add('selected-tab');
 
-            //UI Changes for tab below selected tab
+            //UI Changes for tab below selected tab(Curve at right-top corner and Background Corner)
             markup[1 + (parseInt(tab.parentNode.id) + 1) * 2].classList.add('below-selected');
             markup[1 + (parseInt(tab.parentNode.id) + 1) * 2].childNodes[1].classList.add('special-tab-2');
         }        

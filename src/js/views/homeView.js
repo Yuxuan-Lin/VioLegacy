@@ -285,9 +285,9 @@ export const seniorOppAddEvents = async (state) => {
 let seniorOppDetailCounter = [0,0,0,0];
 
 const updateSeniorOppDetails = function(state,juniorList,info){
-    juniorList.forEach(async headcount => {
-        await state.home.getJuniorInfo(headcount.data().uid);
-        renderSeniorOppDetail(headcount.data().status, headcount.data().uid, info, state.home.juniorInfo);
+    juniorList.forEach(async junior => {
+        await state.home.getJuniorInfo(junior.data().uid);
+        renderSeniorOppDetail(junior.data().status, junior.data().uid, info, state.home.juniorInfo);
         seniorOppDetailCounter[0]++;
         updateDashboardStatusBar();
     });
