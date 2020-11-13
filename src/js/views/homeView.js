@@ -1,5 +1,7 @@
 import * as homeCtrl from '../controllers/homeController';
 import {elements} from './base';
+import {cleanseEvent} from '../index';
+
 
 export const clearProfile = (isSenior) => {
     document.querySelector('.home-top-profile').innerHTML = '';
@@ -179,9 +181,8 @@ export const setEditUI = (state) => {
 };
 
 export const seniorOppAddEvents = async (state) => {
-    //state.cleanseEvent('#senior-post-opp-btn');
-    state.cleanseEvent("#senior-post-opp-back-btn");
-    state.cleanseEvent('#senior-post-opp-post-btn');
+    cleanseEvent("#senior-post-opp-back-btn");
+    cleanseEvent('#senior-post-opp-post-btn');
 
 
     document.querySelector('.referral-box').addEventListener('click', async e => {
@@ -283,14 +284,8 @@ export const seniorOppAddEvents = async (state) => {
 
 let seniorOppDetailCounter = [0,0,0,0];
 
-async function asyncForEach(array, callback) {
-    for (let index = 0; index < array.length; index++) {
-        await callback(array[index], index, array);
-    }
-}
-
-const updateSeniorOppDetails = function(state,list,info){
-    list.forEach(async headcount => {
+const updateSeniorOppDetails = function(state,juniorList,info){
+    juniorList.forEach(async headcount => {
         await state.home.getJuniorInfo(headcount.data().uid);
         renderSeniorOppDetail(headcount.data().status, headcount.data().uid, info, state.home.juniorInfo);
         seniorOppDetailCounter[0]++;
@@ -372,7 +367,7 @@ const renderSeniorOppDetails = (state,list,info,oppId) => {
         const declineBtn = e.target.closest('.dashboard-detail-decline-btn');
 
         if (acceptBtn){
-            await state.opp.updateJunior(oppId,acceptBtn.parentNode.parentNode.parentNode.id,"accepted");
+            await state.opp.updateJuniorStatus(oppId,acceptBtn.parentNode.parentNode.parentNode.id,"accepted");
             acceptBtn.parentNode.innerHTML = `
                 <div class="green">
                     <ion-icon name="checkmark-outline" class="small-icon"></ion-icon>
@@ -383,7 +378,7 @@ const renderSeniorOppDetails = (state,list,info,oppId) => {
             seniorOppDetailCounter[1]--;
         }
         else if (declineBtn){
-            await state.opp.updateJunior(oppId,declineBtn.parentNode.parentNode.parentNode.id,"declined");
+            await state.opp.updateJuniorStatus(oppId,declineBtn.parentNode.parentNode.parentNode.id,"declined");
             declineBtn.parentNode.innerHTML = `
                 <div class="red">
                     <ion-icon name="close-outline" class="small-icon"></ion-icon>

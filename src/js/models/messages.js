@@ -104,6 +104,7 @@ export default class Messages{
 				if(chat.data().chatterIds[0] == targetUid || chat.data().chatterIds[1] == targetUid){
 					console.log(chat.data());
 					this.chatExists = true;
+					this.searchChatId = chat.id;
 				}
 			});
 		} catch(error){

@@ -70,7 +70,7 @@ export default class Opportunities{
 		}
 	}
 
-	async updateJunior(oppId,juniorId,decision){
+	async updateJuniorStatus(oppId,juniorId,decision){
 		try{
 			let docId = '';
 			await db.collection('NewOpportunities').doc(oppId).collection("registered").where("uid","==",juniorId).get().then(docs => {

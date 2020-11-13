@@ -104,8 +104,7 @@ export default class Home{
 				this.juniorInfo = doc;
 			});
 		} catch (error) {
-			alert("seniorGetOpps: " + error);
+			alert("getJuniorInfo: " + error);
 		}
 	}
 }
-

@@ -72,14 +72,14 @@ const tabSwitch = async function (state,tab){
                 markup[9].childNodes[1].classList.add('special-tab-2');
             }
         } else {
-            //above selected change
+            //UI Changes for tab above selected tab
             markup[1 + (parseInt(tab.parentNode.id) - 1) * 2].classList.add('above-selected');
             markup[1 + (parseInt(tab.parentNode.id) - 1) * 2].childNodes[1].classList.add('special-tab-1');
 
-            //selected tab change
+            //UI Changes for selected tab
             tab.parentNode.classList.add('selected-tab');
 
-            //below selected change
+            //UI Changes for tab below selected tab
             markup[1 + (parseInt(tab.parentNode.id) + 1) * 2].classList.add('below-selected');
             markup[1 + (parseInt(tab.parentNode.id) + 1) * 2].childNodes[1].classList.add('special-tab-2');
         }        
@@ -150,14 +150,13 @@ export const clearScreen = function(){
 };
 
 
-
+export const cleanseEvent = function(className){
+    const oldNavigator = document.querySelector(className);
+    const newNavigator = oldNavigator.cloneNode(true);
+    oldNavigator.parentNode.replaceChild(newNavigator, oldNavigator);
+};
 
 export const setUI = async function(state, user){
-    state.cleanseEvent = function(className){
-        const oldNavigator = document.querySelector(className);
-        const newNavigator = oldNavigator.cloneNode(true);
-        oldNavigator.parentNode.replaceChild(newNavigator, oldNavigator);
-    };
 
     state.home = new Home(user.uid);
     //console.log(user.uid);
@@ -174,9 +173,9 @@ export const setUI = async function(state, user){
 
 
     //cleanse existing event listeners
-    state.cleanseEvent('.tools');
-    state.cleanseEvent('.collapse');
-    state.cleanseEvent('#account-settings');
+    cleanseEvent('.tools');
+    cleanseEvent('.collapse');
+    cleanseEvent('#account-settings');
 
     //3 main function tabs        
     document.querySelector('.tools').addEventListener('click', e => {
