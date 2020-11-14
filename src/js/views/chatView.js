@@ -5,6 +5,10 @@ export const clearChat = () => {
     document.querySelector('.profile').innerHTML = '';
 };
 
+export const clearChatBlock = () => {
+    document.querySelector('.chat-block').innerHTML = '';
+};
+
 export const renderProfile = (profile) => {
         
     const markup = `

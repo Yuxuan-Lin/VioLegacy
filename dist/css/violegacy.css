@@ -39,7 +39,7 @@
 }
 
 .contacts{
-	flex: 0 1 30%;
+	flex: 0 0 30%;
 	padding: 3vh;
 }
 
@@ -224,7 +224,34 @@
 
 .chat-block{
 	background-color: #F1F1F1;
-    flex: 1 0 auto;
+    flex: 0 0 70%;
+}
+
+.default-chat-screen{
+    width: 100%;
+    color: #808080;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.default-chat-screen div{
+    margin-top: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5vh;
+}
+
+.screen-icon{
+    font-size: 500%;
+}
+
+.default-chat-screen h1{
+    text-align: center;
+    width: 50vw;
+    word-wrap: break-word;
 }
 
 .profile{
@@ -387,15 +414,20 @@
 	margin: auto;
 }
 
-.input-field input{
+.input-field textarea, .input-field textarea:focus{
+    font-size: 150%;
+    padding: 1vh;
+    margin-top: 3vh;
 	height: 100%;
-	width: 100%;
+    width: 100%;
+    resize: none;
 }
 
 .button-bar{
+    margin-top: 3vh;
 	display: flex;
 	align-items: center;
-	height: 25%;
+	height: 30%;
 	padding-right: 5%;
 	padding-bottom: 1%;
 }
@@ -408,7 +440,6 @@
 .button-bar input{
 	flex: 0 1 15%;
 	height: 60%;
-
 }
 
 .home-main {
@@ -1467,3 +1498,4 @@ button:hover{
 .dashboard-detail h1{
     margin-top: 5vh;
 }
+
