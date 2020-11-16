@@ -1,13 +1,42 @@
-Progress Notes
+Nov - Dec Plan
+
+1. Matching Algorithm (match junior profiles to seniors' preferences)
+2. Resume UI(Art Team and Dev Team)
+3. Promotion (Art Team)
+4. Testing Phase I
+5. General Research before Year-end Launch
+6. EAT senior headhunt
 
 
+Matching Algorithm
+- New development team member
+- Deadline: Nov 31
 
+Storage---Completed
+- Leo
+- Deadline: Nov 14 
 
+Promotion
+- Email, Social Media
+- strategy deadline: Nov 7
 
-To-do List:
+Testing Phase I
+- Start date: Dec 10
 
-0. Debugging and Revising(Kaitlyn)
-1. jQuery
-2. Implement client-side post requests
-3. Implement server-side requests
-4. Data Base Research and Set up and Migration
+General Research before Year-end Launch
+- From Dec 1 to Dec 15
+
+EAT senior headhunt
+- reach 20 by Dec 10
+- reach 30 by Dec 31
+
+Code Seal-off date
+- Dec 25
+
+Development Team:
+1. Official Page (Title and Background)
+2. Required Fields (SignUp and SignIn Forms, Edit Profile, Post New Opp) 
+3. Home Profile Experience, Edit Btn UI
+4. Senior Dashboard (Detail Filters, Resume, Delete Opp UI)
+5. Messages (Contact Search UI)
+6. Navigator Helps UI (FAQ)
