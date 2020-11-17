@@ -1,7 +1,7 @@
 Nov - Dec Plan
 
 1. Matching Algorithm (match junior profiles to seniors' preferences)
-2. profile pic and resume upload, storage
+2. Resume UI(Art Team and Dev Team)
 3. Promotion (Art Team)
 4. Testing Phase I
 5. General Research before Year-end Launch
@@ -12,7 +12,7 @@ Matching Algorithm
 - New development team member
 - Deadline: Nov 31
 
-Storage
+Storage---Completed
 - Leo
 - Deadline: Nov 14 
 
@@ -33,3 +33,10 @@ EAT senior headhunt
 Code Seal-off date
 - Dec 25
 
+Development Team:
+1. Official Page (Title and Background)
+2. Required Fields (SignUp and SignIn Forms, Edit Profile, Post New Opp) 
+3. Home Profile Experience, Edit Btn UI
+4. Senior Dashboard (Detail Filters, Resume, Delete Opp UI)
+5. Messages (Contact Search UI)
+6. Navigator Helps UI (FAQ)
