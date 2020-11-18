@@ -37,7 +37,6 @@ const deleteFiles = (userId, type) => {
     console.error("invalid user id for upload, please check your permissions. ")
     return
   }
-  const date = new Date()
   const storageRef = storage.ref('user_files/' + userId);
   var collectionRef = null;
   collectionRef = db.collection(type)
@@ -61,9 +60,6 @@ const deleteFiles = (userId, type) => {
     dir.items.forEach(fileRef => {
       deleteFile(storageRef.fullPath, fileRef.name);
     });
-    dir.prefixes.forEach(folderRef => {
-      deleteFolderContents(folderRef.fullPath);
-    })
   })
 
   const deleteFile = (pathToFile, fileName) => {

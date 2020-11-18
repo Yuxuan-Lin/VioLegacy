@@ -1,5 +1,3 @@
-
-
 export default class Opportunities{
 	constructor(query){
 		this.query = query;

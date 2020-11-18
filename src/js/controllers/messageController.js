@@ -7,7 +7,7 @@ import * as chatView from '../views/chatView';
 export const controlContacts = async (state) => {
     // render Profile UI
     await state.messages.getContacts(contactsView.renderContact);
-    //contactsView.renderContacts(state.messages.contacts, state.user.uid);
+    //contactsView.renderContacts(state.messages.contacts);
 };
 
 export const controlChat = async (state,chatId,chatterUid) => {
