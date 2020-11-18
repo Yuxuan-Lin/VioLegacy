@@ -278,8 +278,6 @@ export const seniorOppAddEvents = async (state) => {
                 state.home.seniorPostLimit.value = "";
                 state.home.seniorPostDeadline.value = "";
                 state.home.seniorPostDescription.value = "";
-
-                console.log("Senior New Opp Posted");
             });
         }
     });
@@ -368,7 +366,7 @@ const renderSeniorOppDetails = (state,list,info,oppId) => {
     document.querySelector(".dashboard-detail-list").addEventListener("click", async e => {
         const acceptBtn = e.target.closest('.dashboard-detail-accept-btn');
         const declineBtn = e.target.closest('.dashboard-detail-decline-btn');
-
+    
         if (acceptBtn){
             await state.opp.updateJuniorStatus(oppId,acceptBtn.parentNode.parentNode.parentNode.id,"accepted");
             acceptBtn.parentNode.innerHTML = `
@@ -381,6 +379,8 @@ const renderSeniorOppDetails = (state,list,info,oppId) => {
             seniorOppDetailCounter[1]--;
         }
         else if (declineBtn){
+            console.log(oppId)
+            console.log(declineBtn.parentNode.parentNode.parentNode.id)
             await state.opp.updateJuniorStatus(oppId,declineBtn.parentNode.parentNode.parentNode.id,"declined");
             declineBtn.parentNode.innerHTML = `
                 <div class="red">
@@ -405,7 +405,7 @@ const renderSeniorOppDetail = (status,juniorUid,oppInfo,juniorInfo) => {
                     <img class="round-image" src="./images/kerwin.jpg" alt="avatar">
                 </div>
                 <div class="dashboard-detail-list-element-profile-info">
-                    <h3>${juniorInfo.data().name} requested a referral to ${oppInfo[0]} at ${oppInfo[0]}.</h3>
+                    <h3>${juniorInfo.data().name} requested a referral to ${oppInfo[0]} at ${oppInfo[1]}.</h3>
                     <h4>${juniorInfo.data().major}</h4>
                 </div>
                 <div class="dashboard-detail-list-element-profile-btns">

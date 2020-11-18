@@ -14,7 +14,6 @@ export default class Home{
 			await db.collection('Images').where("userId","==",this.query).onSnapshot(docs => {
 				docs.forEach(doc => {
 					this.profilePic = doc.data().url;
-					console.log("display url: " + this.profilePic);
 				})
 			});
 		} catch (error){
@@ -93,7 +92,6 @@ export default class Home{
 	}
 
 	async seniorGetOpps(userId){
-		//console.log(userId);
 		try{			
 			await db.collection('NewOpportunities').where("alumniId", "==", userId).get().then(docs => {
 				this.seniorOpps = docs;

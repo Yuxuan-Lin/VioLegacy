@@ -74,7 +74,6 @@ export const messageScreen = (state) => {
     `;
 
     elements.container.insertAdjacentHTML('beforeend',messageSetUp);
-    //console.log("Screen fully Setup");
     controlContacts(state);
     document.querySelector('.contact-list').addEventListener('click', e => {
         const btn = e.target.closest('.contact-person').id;
@@ -121,8 +120,6 @@ export const messageScreen = (state) => {
     searchResUI.addEventListener('click', async e=>{
         const btn = e.target.closest('.search-result-person');
         const chatter = btn.parentNode.parentNode.childNodes[1].childNodes[3];
-        console.log(chatter);
-
         if (btn){
             state.messages.chatExists = false;
             await state.messages.doesChatExists(btn.id,state.user.uid);

@@ -78,7 +78,6 @@ const getUrl = async (userId, type) => {
     .onSnapshot(snap => {
       let documents = [];
       snap.forEach(doc => {
-        console.log(doc)
         documents.push(doc.data().url);
       });
       docs = documents[0]

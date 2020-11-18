@@ -109,7 +109,6 @@ export const setUpOppScreen = async (state) => {
 
             document.querySelector('.ref-request').addEventListener('click', async e => {
                 const btn3 = e.target.closest('.ref-request');
-                console.log("attention: "+state.opp.opps[btn.value].id);
 
                 if(btn3 && btn3.id == 0) {
 

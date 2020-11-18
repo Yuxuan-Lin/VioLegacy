@@ -119,7 +119,6 @@ export default class Messages{
 			const chats = await db.collection("Messages").where("chatterIds","array-contains",selfUid).get();
 			chats.forEach(chat => {
 				if(chat.data().chatterIds[0] == targetUid || chat.data().chatterIds[1] == targetUid){
-					console.log(chat.data());
 					this.chatExists = true;
 					this.searchChatId = chat.id;
 				}

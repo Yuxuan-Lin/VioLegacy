@@ -23,7 +23,6 @@ export default class Opportunities{
 					if(doc.data().uid == userId){
 						this.flag = true;
 					}
-					console.log(doc.data());
 				})
 			})
 		} catch (error){
@@ -72,15 +71,26 @@ export default class Opportunities{
 
 	async updateJuniorStatus(oppId,juniorId,decision){
 		try{
-			let docId = '';
+			let oppDocId = '';
+			let profileDocId = '';
+			//update firebase NewOpportunities register status
 			await db.collection('NewOpportunities').doc(oppId).collection("registered").where("uid","==",juniorId).get().then(docs => {
 				docs.forEach(doc => {
-					docId = doc.id;
+					oppDocId = doc.id;
 				})				
 			})
-			await db.collection('NewOpportunities').doc(oppId).collection("registered").doc(docId).update({
+			await db.collection('NewOpportunities').doc(oppId).collection("registered").doc(oppDocId).update({
 				status:decision
-			})			
+			})
+			//update firebase Profile myOpps status
+			await db.collection('Profiles').doc(juniorId).collection("myOpps").where("oppId","==",oppId).get().then(docs => {
+				docs.forEach(doc => {
+					profileDocId = doc.id;
+				})				
+			})
+			await db.collection('Profiles').doc(juniorId).collection("myOpps").doc(profileDocId).update({
+				status:decision
+			})
 		} catch (error){
 			alert(error);
 		}
