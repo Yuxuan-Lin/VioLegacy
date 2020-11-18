@@ -261,7 +261,8 @@
 	display: flex;
 }
 .profile-image{
-	flex: 0 1 10%;
+    flex: 0 1 10%;
+    padding-left: 0.75vw;
 }
 
 .profile-info{
@@ -279,7 +280,10 @@
 
 .profile-career{
 	font-weight: normal;
-	color: #808080;
+    color: #808080;
+    width: 40vw;
+    height: 3vh;
+    overflow: hidden;
 }
 
 .chat-box{

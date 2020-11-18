@@ -18,7 +18,7 @@ export const renderProfile = (profile) => {
         <div class="profile-info">
             <h3 class="profile-name">${profile.name}</h3>
             <h3 class="profile-major">${profile.major}</h3>
-            <h3 class="profile-career">${profile.name} will refer you to the position at ${profile.company}.</h3>
+            <h3 class="profile-career">${profile.about}.</h3>
         </div>
     `;
     
