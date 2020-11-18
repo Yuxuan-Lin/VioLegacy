@@ -4,6 +4,10 @@
 	box-sizing: border-box;	
 }
 
+.green{
+    color:green;
+}
+
 .round-image{
 	width: 3vw;
 	height: 3vw;
@@ -13,12 +17,12 @@
 
 .container{
 	height:100%;
-	display:flex;
+    display:flex;
 }
 
 .right-container{
 	flex: 1 0 80%;
-	display: flex;
+    display: flex;
 }
 
 .navigator{
@@ -663,12 +667,12 @@
     flex:0 1 25%;
     border-radius: 3vh;
     box-shadow: 0px 2vh 3vh rgba(0, 0, 0, 0.25);
+    height:28vh;
 }
 
 .opp-category{
     font-weight: normal;
     padding: 3vh;
-    
     background-color: #CCA2D8;
     border-radius: 3vh 3vh 0 0;
 }
@@ -689,6 +693,7 @@
 
 .referral-detail{
     padding: 5vh 8vh;
+    width: 100%;
 }
 
 .back-top{
@@ -1132,7 +1137,7 @@ button:hover{
     color:#c98eda;
 }
 
-.laputa{
+.window{
     position: fixed;
     z-index: 1;
     top: 0;
@@ -1284,7 +1289,8 @@ button:hover{
 .add-referral-template{
     margin:3vh;
     flex:0 1 25%;
-    border: 0.5vh dashed grey;
+    border: 0.5vh dashed rgb(165, 164, 164);
+    color:grey;
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -1292,10 +1298,192 @@ button:hover{
 }
 
 .add-referral-template div{
-    color: grey;
+    color: rgb(165, 164, 164);
     font-size: 600%;
 }
 
 .alumni-opp-container{
+    margin-top: 5vh;
+}
+
+.senior-myOpp-detail{
+    margin: 10vh 0;
+    border-radius: 3vh;
+    box-shadow: 0px 2vh 3vh rgba(0, 0, 0, 0.25);
+}
+
+.senior-myOpp-detail-header{
+    font-weight: normal;
+    padding: 3vh;
+    background-color: #CCA2D8;
+    border-radius: 3vh 3vh 0 0;
+    color: white;
+}
+
+.senior-myOpp-detail-header h3{
+    margin-top: 1vh;
+}
+
+.senior-myOpp-detail-body{
+    background-color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 3vh;
+    border-radius: 0 0 3vh 3vh;
+}
+
+.senior-myOpp-detail-body-bar{
+    list-style: none;
+}
+
+.senior-myOpp-detail-body-bar li{
+    display: inline-block;
+    margin:0 2vw 0 0;
+}
+
+
+.senior-myOpp-detail-body-list li{
+    padding: 1vh 1vw;
+}
+
+.senior-post-opp-back{
+    width: 100%;
+}
+
+.senior-post-opp-body{
+    margin-top: 3vh;
+}
+
+.senior-post-opp-description{
+    margin-top: 3vh;
+}
+
+#senior-post-opp-btn{
+    height:28vh;
+    border-radius: 3vh;
+}
+
+#senior-post-opp-btn:hover{
+    color: grey;
+    border-color: grey;
+}
+
+/* Dashboard Detail Below*/
+.dashboard-detail{
+    padding: 5vh 5vw;
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.dashboard-detail-text{
+    margin: 2vh 0;
+}
+
+.dashboard-detail-status-bar{
+    list-style: none;
+}
+
+.dashboard-detail-status-bar li{
+    display: inline-block;
+    margin-right:2vw;
+}
+
+.dashboard-detail-list{
+    list-style: none;
+}
+
+.dashboard-detail-list-element{
+    border: 2px rgb(221, 221, 221) solid;
+    border-radius: 1vh;
+    padding: 1.5vh 1.5vw;
+    margin:2vh 0;
+}
+
+.dashboard-detail-list-element-profile{
+    display: flex;
+    margin-bottom: 1.5vh;
+}
+
+.dashboard-detail-list-element-profile-image{
+    flex: 0 1 8%;
+    display: flex;
+    align-items: center;
+}
+
+.dashboard-detail-list-element-profile-info{
+    flex: 0 1 62%;
+}
+
+.dashboard-detail-list-element-profile-info h3{
+    margin-bottom: 1.5vh;
+}
+
+.dashboard-detail-list-element-profile-info h4{
+    background-color: rgb(238, 238, 238);
+    display: inline-block;
+    padding:1vh 1vw;
+    border-radius: 1vh;
+}
+
+.dashboard-detail-list-element-profile-image img{
+    height: 4vw;
+    width: 4vw;
+}
+
+.dashboard-detail-list-element-profile-btns{
+    flex: 1 0 auto;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-detail-list-element-profile-btns div{
+	flex: 0 0 4vw;
+    padding-right: 1vw;
+}
+
+.dashboard-detail-list-element-profile-btns h3{
+	flex: 1 0 auto;
+    padding: auto 0;
+}
+
+.dashboard-detail-decline-btn{
+    padding:1vh 1vw;
+    border: 2px white solid;
+    background-color: white;
+    border-radius: 0.5vw;
+    margin-right: 2vw;;
+    font-size: 120%;
+}
+
+.dashboard-detail-decline-btn:hover{
+    border-color: rgb(252, 91, 91) ;
+    color: rgb(252, 91, 91);
+}
+
+.dashboard-detail-accept-btn{
+    padding:1vh 1vw;
+    border: 2px #CCA2D8 solid;
+    color: #CCA2D8;
+    border-radius: 0.5vw;
+    background-color: white;
+    font-size: 120%;
+}
+
+.dashboard-detail-accept-btn:hover{
+    border-color: #c069d8 ;
+    color: #c069d8;
+}
+
+.dashboard-detail-list-status-icon{
+    display:flex;
+	padding: 1.5vh 0;
+	padding-left: 2vw;
+	align-items: center;
+}
+
+.dashboard-detail h1{
     margin-top: 5vh;
 }
