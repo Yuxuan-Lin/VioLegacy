@@ -31,6 +31,27 @@ export default class Home{
 		}
 	}
 
+	async seniorPostNewOpp(state){
+		try{
+			const dateArr = state.home.seniorPostDeadline.value.split("-");
+			const deadline = new Date(dateArr[0], dateArr[1] - 1, dateArr[2]);
+
+			await db.collection('NewOpportunities').add({
+				alumni: state.user.name,
+				alumniId: state.user.uid,
+				category: state.home.seniorPostCategory.value,
+				company: state.home.seniorPostCompany.value,
+				title: state.home.seniorPostTitle.value,
+				limit: state.home.seniorPostLimit.value,
+				deadline: new firebase.firestore.Timestamp.fromDate(deadline).toDate(),
+				description: state.home.seniorPostDescription.value
+			});
+			console.log("New Opp Posted.")
+		} catch (error) {
+			alert(error);
+		}
+	}
+
 	async registerOpp(userId,oppId){
 		try{
 			await db.collection('Profiles').doc(userId).collection("myOpps").add({
@@ -76,5 +97,14 @@ export default class Home{
 			alert("seniorGetOpps: " + error);
 		}
 	}
-}
 
+	async getJuniorInfo(juniorUid){
+		try{			
+			await db.collection('Profiles').doc(juniorUid).get().then(doc => {
+				this.juniorInfo = doc;
+			});
+		} catch (error) {
+			alert("getJuniorInfo: " + error);
+		}
+	}
+}

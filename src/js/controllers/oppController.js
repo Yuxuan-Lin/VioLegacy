@@ -17,12 +17,7 @@ export const controlOpp = async (state) => {
     oppView.clearOpps();
 
     //3) Render contacts on UI
-    oppView.renderOpps(state.opp.opps);
-    //1) Get chatHistory(array) and profile
-
-    //2) Prepare UI(clear field)
-
-    //3) Render chatHistroy and profile on UI
+    oppView.renderOpps(state.opp.opps,state.user.isSenior);
     
 };
 
@@ -73,9 +68,7 @@ const oppScreen = async function(){
 export const setUpOppScreen = async (state) => {
     oppScreen();
     controlOpp(state);
-    //console.log(state.opp.opps[1].data())
     state.opp.opps.forEach(opp => {
-        //console.log(opp.data());
     })
     document.querySelector('.referral-box').addEventListener('click', async e => {
         const btn = e.target.closest('.referral');
@@ -83,11 +76,11 @@ export const setUpOppScreen = async (state) => {
             // clear right screen
             clearScreen();
             // render temp 2
-            console.log(btn.value);
             oppView.renderDetail(state.opp.opps[btn.value]);
 
-            document.querySelector('.back-top').addEventListener('click', async e => {
-                const btn2 = e.target.closest('.back-top');
+            document.querySelector('#opp-back-top').addEventListener('click', async e => {
+                const btn2 = e.target.closest('#opp-back-top');
+                console.log("opp-backed");
 
                 if(btn2) {
                     // clear right screen
@@ -97,11 +90,8 @@ export const setUpOppScreen = async (state) => {
                 }
             });
 
-            //console.log("attention: " + state.user.uid);
-            //console.log("attention: " + state.opp.opps[btn.value].data().registered[1].uid);
             await state.opp.isRegistered(state.user.uid, btn.id);
             let flag = state.opp.flag;
-            console.log(flag);
             if (flag){
                 document.querySelector('.ref-request').innerHTML = `
                 <div class="ref-request" id="1">

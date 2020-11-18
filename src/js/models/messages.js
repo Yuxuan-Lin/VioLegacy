@@ -38,18 +38,21 @@ export default class Messages{
 			const snapshot = await db.collection('Messages').doc(chatId).get();
 			this.selfPos = this.getPos(snapshot.data().chatterIds);
 			
+			
 			// Detaches update listener when opening new chat
 			if (this.unsubscribe) {
 				this.unsubscribe();
 			}
+			
+			this.unsubscribe = null;
 			this.unsubscribe = db.collection('Messages').doc(chatId).collection('history').orderBy('time').onSnapshot(snapshot => {
 				const changes = snapshot.docChanges();
 				changes.forEach(change => {
 					const message = change.doc.data();
 					renderChatFn(message, this.selfPos == message.senderID);
-
 				});
 			})
+
 		} catch (error){
 			alert(error);
 		}
@@ -101,6 +104,7 @@ export default class Messages{
 				if(chat.data().chatterIds[0] == targetUid || chat.data().chatterIds[1] == targetUid){
 					console.log(chat.data());
 					this.chatExists = true;
+					this.searchChatId = chat.id;
 				}
 			});
 		} catch(error){

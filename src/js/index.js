@@ -54,18 +54,35 @@ const tabSwitch = async function (state,tab){
             markup[i].classList = [];
             markup[i].childNodes[1].classList = ['tab'];
         }
+        
 
-        //above selected change
-        markup[1 + (parseInt(tab.parentNode.id) - 1) * 2].classList.add('above-selected');
-        markup[1 + (parseInt(tab.parentNode.id) - 1) * 2].childNodes[1].classList.add('special-tab-1');
+        if (state.user.isSenior){
+            document.querySelector("#opp-decision").parentNode.parentNode.classList.add("invisible");
+            if (tab.parentNode.id == "1"){
+                markup[1].classList.add('above-selected');
+                markup[1].childNodes[1].classList.add('special-tab-1');
+                tab.parentNode.classList.add('selected-tab');
+                markup[7].classList.add('below-selected');
+                markup[7].childNodes[1].classList.add('special-tab-2');
+            } else if (tab.parentNode.id == "3"){
+                markup[3].classList.add('above-selected');
+                markup[3].childNodes[1].classList.add('special-tab-1');
+                tab.parentNode.classList.add('selected-tab');
+                markup[9].classList.add('below-selected');
+                markup[9].childNodes[1].classList.add('special-tab-2');
+            }
+        } else {
+            //UI Changes for tab above selected tab(Curve at right-bottom corner and Background Corner)
+            markup[1 + (parseInt(tab.parentNode.id) - 1) * 2].classList.add('above-selected');
+            markup[1 + (parseInt(tab.parentNode.id) - 1) * 2].childNodes[1].classList.add('special-tab-1');
 
-        //selected tab change
-        tab.parentNode.classList.add('selected-tab');
+            //UI Changes for selected tab(Curve at left-top and left-bottom corner and Background Corner)
+            tab.parentNode.classList.add('selected-tab');
 
-        //below selected change
-        markup[1 + (parseInt(tab.parentNode.id) + 1) * 2].classList.add('below-selected');
-        markup[1 + (parseInt(tab.parentNode.id) + 1) * 2].childNodes[1].classList.add('special-tab-2');
-        console.log("tab highlighed");
+            //UI Changes for tab below selected tab(Curve at right-top corner and Background Corner)
+            markup[1 + (parseInt(tab.parentNode.id) + 1) * 2].classList.add('below-selected');
+            markup[1 + (parseInt(tab.parentNode.id) + 1) * 2].childNodes[1].classList.add('special-tab-2');
+        }        
     }
 };
 
@@ -133,9 +150,14 @@ export const clearScreen = function(){
 };
 
 
-
+export const cleanseEvent = function(className){
+    const oldNavigator = document.querySelector(className);
+    const newNavigator = oldNavigator.cloneNode(true);
+    oldNavigator.parentNode.replaceChild(newNavigator, oldNavigator);
+};
 
 export const setUI = async function(state, user){
+
     state.home = new Home(user.uid);
     //console.log(user.uid);
     state.user = user;
@@ -151,12 +173,9 @@ export const setUI = async function(state, user){
 
 
     //cleanse existing event listeners
-    const oldNavigator = document.querySelector('.tools');
-    const newNavigator = oldNavigator.cloneNode(true);
-    oldNavigator.parentNode.replaceChild(newNavigator, oldNavigator);
-    const oldCollapse = document.querySelector('.collapse');
-    const newCollapse = oldCollapse.cloneNode(true);
-    oldCollapse.parentNode.replaceChild(newCollapse, oldCollapse);
+    cleanseEvent('.tools');
+    cleanseEvent('.collapse');
+    cleanseEvent('#account-settings');
 
     //3 main function tabs        
     document.querySelector('.tools').addEventListener('click', e => {
@@ -177,9 +196,10 @@ export const setUI = async function(state, user){
                 const btn = e.target.closest('#senior-btn');
 
                 if (btn){
-                    document.querySelector("#opp-decision").textContent = 'Decision';
+                    document.querySelector("#dashboard").textContent = 'Dashboard';                  
                     state.user.isSenior = true;
                     tabSwitch(state, document.getElementById("default"));
+                    document.querySelector("#opp-decision").parentNode.parentNode.classList.add("invisible");
                 }
             });
 
@@ -198,6 +218,8 @@ export const setUI = async function(state, user){
                 const btn = e.target.closest('#junior-btn');
 
                 if (btn){
+                    document.querySelector("#dashboard").textContent = 'Home';
+
                     document.querySelector("#opp-decision").textContent = 'Opportunities';
                     state.user.isSenior = false;
                     tabSwitch(state, document.getElementById("default"));

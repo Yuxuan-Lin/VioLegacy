@@ -73,15 +73,6 @@ export const messageScreen = (state) => {
         </div>
     `;
 
-    const searchSetUp = `
-        <li class="search-result-person">
-            <div class="person-image"><img class="round-image" src="images/Bill.jpg"></div>
-            <div class="person-name">
-                <h3 class="name">Bill Ruochen Gu</h3>
-            </div>
-        </li>
-    `;
-
     elements.container.insertAdjacentHTML('beforeend',messageSetUp);
     //console.log("Screen fully Setup");
     controlContacts(state);
@@ -97,7 +88,6 @@ export const messageScreen = (state) => {
         }
     });
     
-    
     document.querySelector('.type-field').addEventListener('click', e => {
         e.preventDefault();
         const btn = e.target.closest('#the-btn');
@@ -112,7 +102,6 @@ export const messageScreen = (state) => {
                 document.body.scrollTop = document.body.scrollHeight;
             }
         }        
-
     });
 
     const searchResUI = document.querySelector('.search-results');
@@ -138,7 +127,9 @@ export const messageScreen = (state) => {
             state.messages.chatExists = false;
             await state.messages.doesChatExists(btn.id,state.user.uid);
             if (state.messages.chatExists){
-                alert("Conversation between you and search target already exists.");
+                console.log("Conversation between you and search target already exists.");
+                chatView.clearChat();
+                controlChat(state,state.messages.searchChatId,btn.id);
             } else {
                 await state.messages.createNewChat(btn.id,chatter.value,state.user.name);
             }

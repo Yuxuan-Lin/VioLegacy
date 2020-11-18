@@ -1,0 +1,29 @@
+1. Official page HTML&CSS refine
+    a. Background map size settings
+    b. Titles refactor
+2. Sign-up / Log-in
+    a. back button to official page
+    b. required fields
+    c. experiences
+    d. profile pics and resume
+3. Junior Side
+    a. Home
+        Edit button style improvement, experiences
+        Search box deletion
+        Unregister button
+    b. Opportunities
+        Filters or Search Algorithm
+        Opp Detail Description
+    c. Messages
+        Contact CSS improvement: active / focus effect
+        Search Algorithm?
+        Type Field Changes
+4. Senior Side
+    a. DashBoard
+        delete "Manage posted Opportunities"
+        Post new Opportunities required fields
+        Post new Opportunities candidate filter junior resumes/profiles
+5. General
+    a. Password Changes
+    b. FAQ
+    c. Upload
