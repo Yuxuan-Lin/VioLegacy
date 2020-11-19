@@ -1,5 +1,3 @@
-import {elements} from './base';
-
 export const clearChat = () => {
     document.querySelector('.chat-history').innerHTML = '';
     document.querySelector('.profile').innerHTML = '';
