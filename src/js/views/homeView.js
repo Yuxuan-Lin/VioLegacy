@@ -101,7 +101,7 @@ export const renderOpp = (myOpp,opp) => {
                     <ion-icon name="checkmark-circle-outline" class="big-icon green"></ion-icon>
                 </div>
                 <div class="opp-item-status">
-                    <h4>${opp.alumni.name} has accepted your request. You may soon receive an email from ${opp.company}.</h4>
+                    <h4>${opp.alumni} has accepted your request. You may soon receive an email from ${opp.company}.</h4>
                 </div>
             </div>
         </li>
@@ -117,7 +117,7 @@ export const renderOpp = (myOpp,opp) => {
                     <ion-icon name="close-circle-outline" class="big-icon red"></ion-icon>
                 </div>
                 <div class="opp-item-status">
-                    <h4>${opp.alumni.name} has declined your request.</h4>
+                    <h4>${opp.alumni} has declined your request.</h4>
                 </div>
             </div>
         </li>
