@@ -47,7 +47,6 @@ signUpBtn.addEventListener('click', (e) => {
       major: major.value,
       name: firstName.value + " " + lastName.value,
       year: year.value,
-      myOpps: []
     })
     email.value = "";
     password.value = "";

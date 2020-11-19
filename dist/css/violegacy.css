@@ -620,6 +620,8 @@
 .opp-container{
     padding: 3vh;
     flex: 1 0 auto;
+    height: 100vh;
+    overflow-y: scroll;
 }
 
 .opp-top{

@@ -1,4 +1,3 @@
-import Home from '../models/home';
 import {elements} from '../views/base';
 import {getUrl , uploadFile} from '../firebaseStorage';
 import * as homeView from '../views/homeView';

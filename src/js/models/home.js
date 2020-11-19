@@ -101,8 +101,28 @@ export default class Home{
 		}
 	}
 
+	async getAndRenderJunior(juniorUid, renderSeniorOppDetail,junior,info){
+		try{			
+			let juniorInfo,juniorPic;
+			//console.log(juniorUid);
+			await db.collection('Profiles').doc(juniorUid).get().then(doc => {
+				juniorInfo = doc;
+			});
+			await db.collection('Images').where("userId","==",juniorUid).get().then(docs => {
+				docs.forEach(doc => {
+					juniorPic = doc.data().url;
+					console.log()
+				})
+			});
+			renderSeniorOppDetail(junior.data().status, junior.data().uid, info, juniorInfo, juniorPic);
+		} catch (error) {
+			alert("getAndRenderJunior: " + error);
+		}
+	}
+
 	async getJuniorInfo(juniorUid){
 		try{			
+			//console.log(juniorUid);
 			await db.collection('Profiles').doc(juniorUid).get().then(doc => {
 				this.juniorInfo = doc;
 			});
