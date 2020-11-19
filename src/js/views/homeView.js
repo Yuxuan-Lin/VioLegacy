@@ -288,10 +288,7 @@ let seniorOppDetailCounter = [0,0,0,0];
 
 const updateSeniorOppDetails = async function(state,juniorList,info){
     juniorList.forEach(async junior => {
-        await state.home.getAndRenderJunior(junior.data().uid, renderSeniorOppDetail,junior,info);
-        //console.log("1111111111" + junior.data().uid)
-        //console.log(state.home.juniorPic)
-        
+        await state.home.getAndRenderJunior(junior.data().uid, renderSeniorOppDetail,junior.data().status,info); 
         seniorOppDetailCounter[0]++;
         updateDashboardStatusBar();
     });  

@@ -101,7 +101,7 @@ export default class Home{
 		}
 	}
 
-	async getAndRenderJunior(juniorUid, renderSeniorOppDetail,junior,info){
+	async getAndRenderJunior(juniorUid, renderSeniorOppDetail,juniorStatus,info){
 		try{			
 			let juniorInfo,juniorPic;
 			//console.log(juniorUid);
@@ -114,7 +114,7 @@ export default class Home{
 					console.log()
 				})
 			});
-			renderSeniorOppDetail(junior.data().status, junior.data().uid, info, juniorInfo, juniorPic);
+			renderSeniorOppDetail(juniorStatus, juniorUid, info, juniorInfo, juniorPic);
 		} catch (error) {
 			alert("getAndRenderJunior: " + error);
 		}
