@@ -46,7 +46,7 @@ signUpBtn.addEventListener('click', (e) => {
       about: about.value,
       major: major.value,
       name: firstName.value + " " + lastName.value,
-      year: year.value,
+      year: year.value
     })
     email.value = "";
     password.value = "";
