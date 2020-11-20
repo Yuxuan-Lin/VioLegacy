@@ -70,9 +70,11 @@ export default class Home{
 	async unRegisterOpp(userId,oppId){
 		try{
 			await db.collection('Profiles').doc(userId).collection("myOpps").where("oppId", "==", oppId).get().then(async docs => {
-				docs.forEach(async doc => {
-					await db.collection('Profiles').doc(userId).collection("myOpps").doc(doc.id).delete();
+				let promises = []
+				docs.forEach(doc => {
+					promises.push(doc.ref.delete())
 				})
+				return Promise.all(promises)
 			})
 		} catch (error) {
 			alert(error);
