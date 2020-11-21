@@ -245,10 +245,10 @@ export const setUI = async function(state, user){
                     }else{
                         if(profilePic){
                             let status = deleteFiles(state.user.uid, 'Images');
-                            await status.promise1;
-                            await status.promise2;
+                            await status.deleteURLFinished;
+                            await status.deleteFileFinished;
                             status = uploadFile(profilePic, state.user.uid, 'Images');
-                            await status.promise;
+                            await status.uploadFinished;
                             alert("Upload Success");
                         }else{
                             alert("Upload Failure.");
