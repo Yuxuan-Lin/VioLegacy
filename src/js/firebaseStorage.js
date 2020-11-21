@@ -18,7 +18,7 @@ const uploadFile = (file, userId, type) => {
   let url = ''
   let error = ''
   
-  let promise = new Promise(function(resolve, reject){
+  let uploadFinished = new Promise(function(resolve, reject){
     storageRef.put(file).on('state_changed', (snap) => {
       percentage = (snap.bytesTransferred / snap.totalBytes) * 100; // progress bar
     }, (err) => {
@@ -53,7 +53,7 @@ const deleteFiles = (userId, type) => {
   let url = ''
   let error = ''
 
-  let promise1 = collectionRef.where("userId", "==", userId).get().then(async docs => {
+  let deleteURLFinished = collectionRef.where("userId", "==", userId).get().then(async docs => {
     let promises = []
     docs.forEach(doc => {
       promises.push(collectionRef.doc(doc.id).delete());
@@ -61,7 +61,7 @@ const deleteFiles = (userId, type) => {
     return Promise.all(promises)
   });
   
-  let promise2 = storageRef.listAll().then(dir => {
+  let deleteFileFinished = storageRef.listAll().then(dir => {
     let promises = []
     dir.items.forEach(fileRef => {
       promises.push(deleteFile(storageRef.fullPath, fileRef.name));
