@@ -16,7 +16,8 @@ export default class Messages{
 		try{
 			await db.collection('Messages').where("chatterIds", "array-contains", this.uid).onSnapshot(snapshot => {
 				const changes = snapshot.docChanges();
-				changes.forEach(async change => {
+				let promises = []
+				changes.forEach(change => {
 					const data = change.doc.data();
 					const pos = this.getPos(data.chatterIds);
 					const otherPos = (pos + 1) % 2;
@@ -25,20 +26,22 @@ export default class Messages{
 						chatterName: data.chatters[otherPos],
 						chatterUid: data.chatterIds[otherPos] 
 					}
-					await db.collection("Images").where("userId","==",contact.chatterUid).get().then(snapshots => {
-						let counter=0;
-						snapshots.forEach(doc => {
-							this.profilePic = doc.data().url;
-							counter++;
+					promises.push(
+						db.collection("Images").where("userId","==",contact.chatterUid).get().then(snapshots => {
+							let counter=0;
+							snapshots.forEach(doc => {
+								this.profilePic = doc.data().url;
+								counter++;
+							})
+							if (counter == 0){
+								this.profilePic = null;
+							}
+						}).then(() => {
+							renderContactFn(contact,this.profilePic)
 						})
-						if (counter == 0){
-							this.profilePic = null;
-						}
-					})
-
-					renderContactFn(contact,this.profilePic);
-			
-				});
+					)
+				})
+				return Promise.all(promises)
 			})
 		} catch (error){
 			alert(error);

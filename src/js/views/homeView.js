@@ -287,11 +287,17 @@ export const seniorOppAddEvents = async (state) => {
 let seniorOppDetailCounter = [0,0,0,0];
 
 const updateSeniorOppDetails = async function(state,juniorList,info){
-    juniorList.forEach(async junior => {
-        await state.home.getAndRenderJunior(junior.data().uid, renderSeniorOppDetail,junior.data().status,info); 
-        seniorOppDetailCounter[0]++;
-        updateDashboardStatusBar();
-    });  
+    let promises = []
+    juniorList.forEach(junior => {
+        promises.push(
+            state.home.getAndRenderJunior(junior.data().uid, renderSeniorOppDetail,junior.data().status,info)
+                      .then(() => {
+                        seniorOppDetailCounter[0]++;
+                        updateDashboardStatusBar();
+                      })
+        )
+    })
+    return Promise.all(promises)
 }  
 
 const updateDashboardStatusBar = () => {

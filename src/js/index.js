@@ -202,7 +202,7 @@ export const setUI = async function(state, user){
                 }
             });
 
-            document.querySelector("#resume-uploader").addEventListener('click', e => {
+            document.querySelector("#resume-uploader").addEventListener('click', async e => {
                 e.preventDefault();
                 const resumeUploadBtn = e.target.closest('#resume-uploader');
                 const resume = document.querySelector("#resume-input").files[0];
@@ -214,8 +214,11 @@ export const setUI = async function(state, user){
                         state.settings.resumeUploadBtnClicked = true;
                     }else{
                         if(resume){
-                            deleteFiles(state.user.uid, 'Resumes');
-                            uploadFile(resume, state.user.uid, 'Resumes');
+                            let status = deleteFiles(state.user.uid, 'Resumes');
+                            await status.promise1;
+                            await status.promise2;
+                            status = uploadFile(resume, state.user.uid, 'Resumes');
+                            await status.promise;
                             alert("Upload Success");
                         }else{
                             alert("Upload Failure.");
@@ -229,7 +232,7 @@ export const setUI = async function(state, user){
                 }
             });
 
-            document.querySelector("#profile-pic-uploader").addEventListener('click', e => {
+            document.querySelector("#profile-pic-uploader").addEventListener('click', async e => {
                 e.preventDefault();
                 const profilePicUploadBtn = e.target.closest('#profile-pic-uploader');
                 const profilePic = document.querySelector("#profile-pic-input").files[0]
@@ -241,8 +244,11 @@ export const setUI = async function(state, user){
                         state.settings.profilePicUploadBtnClicked = true;
                     }else{
                         if(profilePic){
-                            deleteFiles(state.user.uid, 'Images');
-                            uploadFile(profilePic, state.user.uid, 'Images');
+                            let status = deleteFiles(state.user.uid, 'Images');
+                            await status.deleteURLFinished;
+                            await status.deleteFileFinished;
+                            status = uploadFile(profilePic, state.user.uid, 'Images');
+                            await status.uploadFinished;
                             alert("Upload Success");
                         }else{
                             alert("Upload Failure.");

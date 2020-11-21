@@ -18,18 +18,21 @@ const uploadFile = (file, userId, type) => {
   let url = ''
   let error = ''
   
-  storageRef.put(file).on('state_changed', (snap) => {
-    percentage = (snap.bytesTransferred / snap.totalBytes) * 100; // progress bar
-  }, (err) => {
-    console.error(err);
-    error = err
-  }, async () => {
-    url = await storageRef.getDownloadURL();
-    const createdAt = timestamp();
-    await collectionRef.add({ url, createdAt, date, userId});
+  let uploadFinished = new Promise(function(resolve, reject){
+    storageRef.put(file).on('state_changed', (snap) => {
+      percentage = (snap.bytesTransferred / snap.totalBytes) * 100; // progress bar
+    }, (err) => {
+      console.error(err);
+      error = err
+    }, async () => {
+      url = await storageRef.getDownloadURL();
+      const createdAt = timestamp();
+      await collectionRef.add({ url, createdAt, date, userId});
+      resolve();
+    })
   });
 
-  return { percentage, url, error };
+  return { percentage, url, error, uploadFinished };
 }
 
 const deleteFiles = (userId, type) => {
@@ -50,25 +53,28 @@ const deleteFiles = (userId, type) => {
   let url = ''
   let error = ''
 
-  collectionRef.where("userId", "==", userId).get().then(async docs => {
-    docs.forEach(async doc => {
-      collectionRef.doc(doc.id).delete();
+  let deleteURLFinished = collectionRef.where("userId", "==", userId).get().then(async docs => {
+    let promises = []
+    docs.forEach(doc => {
+      promises.push(collectionRef.doc(doc.id).delete());
     })
-  });			
+    return Promise.all(promises)
+  });
   
-  storageRef.listAll().then(dir => {
+  let deleteFileFinished = storageRef.listAll().then(dir => {
+    let promises = []
     dir.items.forEach(fileRef => {
-      deleteFile(storageRef.fullPath, fileRef.name);
-    });
+      promises.push(deleteFile(storageRef.fullPath, fileRef.name));
+    })
+    return Promise.all(promises)
   })
 
   const deleteFile = (pathToFile, fileName) => {
     const ref = firebase.storage().ref(pathToFile);
-    const childRef = ref.child(fileName);
-    childRef.delete();
+    return ref.child(fileName).delete();
   }
 
-  return { percentage, url, error };
+  return { percentage, url, error, deleteURLFinished, deleteFileFinished };
 }
 
 const getUrl = async (userId, type) => {
