@@ -32,7 +32,7 @@ const uploadFile = (file, userId, type) => {
     })
   });
 
-  return { percentage, url, error, promise };
+  return { percentage, url, error, uploadFinished };
 }
 
 const deleteFiles = (userId, type) => {
@@ -71,11 +71,10 @@ const deleteFiles = (userId, type) => {
 
   const deleteFile = (pathToFile, fileName) => {
     const ref = firebase.storage().ref(pathToFile);
-    const childRef = ref.child(fileName);
-    return childRef.delete();
+    return ref.child(fileName).delete();
   }
 
-  return { percentage, url, error, promise1, promise2 };
+  return { percentage, url, error, deleteURLFinished, deleteFileFinished };
 }
 
 const getUrl = async (userId, type) => {
