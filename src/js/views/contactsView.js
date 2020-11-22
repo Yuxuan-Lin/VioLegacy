@@ -1,10 +1,11 @@
-import {elements} from './base';
-
-export const renderContact = (doc) => {
+export const renderContact = (doc,profilePic) => {
+    if(profilePic == undefined){
+        profilePic = "./images/default-avatar.png";
+    }
     const markup = `
         <li class="contact-person" id="${doc.id+';'+doc.chatterUid}">
             <div class="person-image">
-                <img class="round-image" src="./images/Bill.jpg" alt="${doc.chatterName}">
+                <img class="round-image" src="${profilePic}" alt="${doc.chatterName}">
             </div>
             <div class="person-info">
                 <div class="person-top">
@@ -19,7 +20,7 @@ export const renderContact = (doc) => {
    document.querySelector('.contact-list').insertAdjacentHTML('beforeend',markup);
 };
 
-export const renderContacts = (chatData,uid) => {
+export const renderContacts = (chatData) => {
     chatData.forEach(doc => {
         renderContact(doc);
     });

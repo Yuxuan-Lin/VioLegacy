@@ -23,7 +23,6 @@ export default class Opportunities{
 					if(doc.data().uid == userId){
 						this.flag = true;
 					}
-					console.log(doc.data());
 				})
 			})
 		} catch (error){
@@ -46,10 +45,12 @@ export default class Opportunities{
 
 	async unRegister(state,oppId){
 		try{
-			await db.collection('NewOpportunities').doc(oppId).collection("registered").where("uid", "==", state.user.uid).get().then(async docs => {
-				docs.forEach(async doc => {
-					await db.collection('NewOpportunities').doc(oppId).collection("registered").doc(doc.id).delete();
+			await db.collection('NewOpportunities').doc(oppId).collection("registered").where("uid", "==", state.user.uid).get().then(docs => {
+				let promises = []
+				docs.forEach(doc => {
+					promises.push(doc.ref.delete())
 				})
+				return Promise.all(promises)
 			})
 		} catch (error){
 			alert(error);
@@ -72,15 +73,28 @@ export default class Opportunities{
 
 	async updateJuniorStatus(oppId,juniorId,decision){
 		try{
-			let docId = '';
+			//update firebase NewOpportunities register status
 			await db.collection('NewOpportunities').doc(oppId).collection("registered").where("uid","==",juniorId).get().then(docs => {
+				let promises = []
 				docs.forEach(doc => {
-					docId = doc.id;
-				})				
+					promises.push(doc.ref.update({
+						status: decision
+					}))
+				})
+				return Promise.all(promises)
 			})
-			await db.collection('NewOpportunities').doc(oppId).collection("registered").doc(docId).update({
-				status:decision
-			})			
+
+			//update firebase Profile myOpps status
+			await db.collection('Profiles').doc(juniorId).collection("myOpps").where("oppId","==",oppId).get().then(docs => {
+				let promises = []
+				docs.forEach(doc => {
+					promises.push(doc.ref.update({
+						status: decision
+					}))
+				})
+				return Promise.all(promises)
+			})
+
 		} catch (error){
 			alert(error);
 		}

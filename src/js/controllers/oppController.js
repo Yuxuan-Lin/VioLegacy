@@ -80,7 +80,6 @@ export const setUpOppScreen = async (state) => {
 
             document.querySelector('#opp-back-top').addEventListener('click', async e => {
                 const btn2 = e.target.closest('#opp-back-top');
-
                 if(btn2) {
                     // clear right screen
                     clearScreen();

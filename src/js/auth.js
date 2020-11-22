@@ -42,13 +42,11 @@ signUpBtn.addEventListener('click', (e) => {
   // sign up the user & add firestore data
   auth.createUserWithEmailAndPassword(email.value, password.value).then(cred => {
     state.userId = cred.user.uid;
-    //console.log(cred.additionalUserInfo.isNewUser);
     db.collection("Profiles").doc(state.userId).set({
       about: about.value,
       major: major.value,
       name: firstName.value + " " + lastName.value,
-      year: year.value,
-      myOpps: []
+      year: year.value
     })
     email.value = "";
     password.value = "";

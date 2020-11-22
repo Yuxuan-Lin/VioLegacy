@@ -2,6 +2,7 @@ import Home from './models/home';
 import Opp from './models/opportunities';
 import Messages from './models/messages';
 import {elements} from './views/base';
+import {uploadFile, getUrl, deleteFiles} from './firebaseStorage';
 
 
 import * as homeControl from './controllers/homeController';
@@ -124,8 +125,10 @@ const renderAccountSettings = async function(state){
             <div class="account-management">
                 <h3 class="setting-header">Account Management</h3>
                 <button class="account-management-btn">Change Password</button>
-                <button class="account-management-btn" id="uploader">Upload Resume</button>
-                <button class="account-management-btn">Log Out</button>
+                <button class="account-management-btn" id="resume-uploader" clicked="false">Upload Resume</button>
+                <input class="invisible" type="file" id="resume-input" name="resume">
+                <button class="account-management-btn" id="profile-pic-uploader" clicked="false">Upload Profile Picture</button>
+                <input class="invisible" type="file" id="profile-pic-input" name="profile-pic">
             </div>
         </div>
     `;
@@ -145,15 +148,14 @@ export const clearScreen = function(){
    elements.container.innerHTML = "";
 };
 
-
 export const cleanseEvent = function(className){
     const oldNavigator = document.querySelector(className);
     const newNavigator = oldNavigator.cloneNode(true);
     oldNavigator.parentNode.replaceChild(newNavigator, oldNavigator);
 };
 
-export const setUI = async function(state, user){
 
+export const setUI = async function(state, user){
     state.home = new Home(user.uid);
     state.user = user;
     state.user.isSenior = false;
@@ -182,6 +184,9 @@ export const setUI = async function(state, user){
     document.querySelector('#account-settings').addEventListener('click', e => {
         e.preventDefault();
         const tab = e.target.closest('.tab');
+        state.settings = {};
+        state.settings.resumeUploadBtnClicked = false;
+        state.settings.profilePicUploadBtnClicked = false;
 
         if (tab){
             renderAccountSettings(state);
@@ -197,13 +202,62 @@ export const setUI = async function(state, user){
                 }
             });
 
-            //Testing button, to be removed later
-            document.querySelector("#uploader").addEventListener('click', e => {
+            document.querySelector("#resume-uploader").addEventListener('click', async e => {
                 e.preventDefault();
-                const uploadBtn = e.target.closest('#uploader');
+                const resumeUploadBtn = e.target.closest('#resume-uploader');
+                const resume = document.querySelector("#resume-input").files[0];
+                if(resumeUploadBtn){
+                    if(!state.settings.resumeUploadBtnClicked){
+                        resumeUploadBtn.classList.remove("account-management-btn");
+                        resumeUploadBtn.classList.add("account-management-btn-clicked");
+                        document.querySelector("#resume-input").classList.remove("invisible");
+                        state.settings.resumeUploadBtnClicked = true;
+                    }else{
+                        if(resume){
+                            let status = deleteFiles(state.user.uid, 'Resumes');
+                            await status.promise1;
+                            await status.promise2;
+                            status = uploadFile(resume, state.user.uid, 'Resumes');
+                            await status.promise;
+                            alert("Upload Success");
+                        }else{
+                            alert("Upload Failure.");
+                        }
+                        resumeUploadBtn.classList.add("account-management-btn");
+                        resumeUploadBtn.classList.remove("account-management-btn-clicked");
+                        document.querySelector("#resume-input").classList.add("invisible");
+                        state.settings.resumeUploadBtnClicked = false;
+                    }
+                    
+                }
+            });
 
-                if(uploadBtn){
-                    console.log('test');
+            document.querySelector("#profile-pic-uploader").addEventListener('click', async e => {
+                e.preventDefault();
+                const profilePicUploadBtn = e.target.closest('#profile-pic-uploader');
+                const profilePic = document.querySelector("#profile-pic-input").files[0]
+                if(profilePicUploadBtn){
+                    if(!state.settings.profilePicUploadBtnClicked){
+                        profilePicUploadBtn.classList.remove("account-management-btn");
+                        profilePicUploadBtn.classList.add("account-management-btn-clicked");
+                        document.querySelector("#profile-pic-input").classList.remove("invisible");
+                        state.settings.profilePicUploadBtnClicked = true;
+                    }else{
+                        if(profilePic){
+                            let status = deleteFiles(state.user.uid, 'Images');
+                            await status.deleteURLFinished;
+                            await status.deleteFileFinished;
+                            status = uploadFile(profilePic, state.user.uid, 'Images');
+                            await status.uploadFinished;
+                            alert("Upload Success");
+                        }else{
+                            alert("Upload Failure.");
+                        }
+                        profilePicUploadBtn.classList.add("account-management-btn");
+                        profilePicUploadBtn.classList.remove("account-management-btn-clicked");
+                        document.querySelector("#profile-pic-input").classList.add("invisible");
+                        state.settings.profilePicUploadBtnClicked = false;
+                    }
                 }
             });
 
