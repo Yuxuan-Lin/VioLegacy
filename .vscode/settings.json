@@ -1,11 +1,8 @@
 {
-  "breadcrumbs.enabled": true,
-  "editor.acceptSuggestionOnEnter": "on",
   "editor.detectIndentation": false,
   "editor.fontFamily": "'Source Code Pro', Menlo, Consolas, Courier, monospace",
   "editor.formatOnSave": true,
   "editor.insertSpaces": true,
-  "editor.multiCursorModifier": "ctrlCmd",
   "editor.quickSuggestions": {
     "other": true,
     "comments": true,
@@ -18,8 +15,5 @@
   "editor.wrappingIndent": "indent",
   "files.insertFinalNewline": true,
   "files.eol": "\r\n",
-  "html.format.endWithNewline": true,
-  "html.format.extraLiners": "body",
-  "html.format.indentInnerHtml": true,
-  "html.format.unformatted": "b,em,i,span,strong,wbr"
+  "html.format.wrapLineLength": 0
 }
