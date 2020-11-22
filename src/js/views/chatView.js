@@ -3,6 +3,10 @@ export const clearChat = () => {
     document.querySelector('.profile').innerHTML = '';
 };
 
+export const clearChatBlock = () => {
+    document.querySelector('.chat-block').innerHTML = '';
+};
+
 export const renderProfile = (profile,profilePic) => {
     if(profilePic == undefined){
         profilePic = "./images/default-avatar.png";

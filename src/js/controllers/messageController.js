@@ -35,39 +35,28 @@ export const messageScreen = (state) => {
             <ul class="contact-list"></ul>
         </div>   
         <div class="chat-block">
-            <div class="profile"></div>
-            <div class="chat-box">
-                <div class="chat-field">
-                    <ul class="chat-history"></ul>
+            <div class="default-chat-screen">                   
+                <div>
+                    <ion-icon name="chatbubbles-outline" class="screen-icon"></ion-icon>
                 </div>
-                <div class="type-field invisible">
-                    <ul class="tool-bar">
-                        <li class="tool-icon">
-                            <ion-icon name="happy-outline" class="small-icon"></ion-icon>
-                        </li>
-                        <li class="tool-icon">
-                            <ion-icon name="image-outline" class="small-icon"></ion-icon>
-                        </li>
-                        <li class="tool-icon">
-                            <ion-icon name="mic-outline" class="small-icon"></ion-icon>
-                        </li>
-                        <li class="tool-icon">
-                            <ion-icon name="folder-outline" class="small-icon"></ion-icon>
-                        </li>
-                        <li class="tool-icon">
-                            <ion-icon name="link-outline" class="small-icon"></ion-icon>
-                        </li>
-                        <li class="tool-icon-special">
-                            &nbsp;
-                        </li>
-                    </ul>
-                    <div class="input-field">
-                        <input type="textarea" name="message-input-field" id="type-box">
-                    </div>
-                    <div class="button-bar">
-                        <div>&nbsp;</div>
-                        <input type="submit" name="send-button" class="send-btn" id="the-btn">
-                    </div>
+                <h1>Click on your contacts to see chats. Or search your contact first.</h1>                    
+            </div>
+        </div>
+    `;
+
+    const chatMarkUp = `
+        <div class="profile"></div>
+        <div class="chat-box">
+            <div class="chat-field">
+                <ul class="chat-history"></ul>
+            </div>
+            <div class="type-field invisible">
+                <div class="input-field">
+                    <textarea name="message-input-field" id="type-box" wrap="hard"></textarea>
+                </div>
+                <div class="button-bar">
+                    <div>&nbsp;</div>
+                    <input type="submit" name="send-button" class="send-btn" id="the-btn" value="Send">
                 </div>
             </div>
         </div>
@@ -79,20 +68,37 @@ export const messageScreen = (state) => {
         const btn = e.target.closest('.contact-person').id;
         state.messages.currentChatId = btn.split(";")[0];
         if (btn) {
+            chatView.clearChatBlock();
+            document.querySelector('.chat-block').insertAdjacentHTML('beforeend',chatMarkUp);
             document.querySelector('.type-field').classList.remove('invisible');
-            chatView.clearChat();
+            //chatView.clearChat();
             controlChat(state, btn.split(";")[0], btn.split(";")[1]);
             //searchView.clearResults();
             //searchView.renderResults(state.search.result, goToPage);
+            document.querySelector('.type-field').addEventListener('click', e => {
+                e.preventDefault();
+                const btn = e.target.closest('#the-btn');
+        
+                if (btn){
+                    const typeBox = btn.parentNode.parentNode.childNodes[1].childNodes[1];
+                    if (typeBox.value){
+                        const now = new firebase.firestore.Timestamp.now().toDate();
+                        const message = typeBox.value;
+                        state.messages.sendMessage(message, state.messages.currentChatId,now);
+                        typeBox.value = '';
+                        document.body.scrollTop = document.body.scrollHeight;
+                    }
+                }        
+            });
         }
     });
-    
+    /*
     document.querySelector('.type-field').addEventListener('click', e => {
         e.preventDefault();
         const btn = e.target.closest('#the-btn');
 
         if (btn){
-            const typeBox = btn.parentNode.parentNode.childNodes[3].childNodes[1];
+            const typeBox = btn.parentNode.parentNode.childNodes[1].childNodes[1];
             if (typeBox.value){
                 const now = new firebase.firestore.Timestamp.now().toDate();
                 const message = typeBox.value;
@@ -102,7 +108,7 @@ export const messageScreen = (state) => {
             }
         }        
     });
-
+    */
     const searchResUI = document.querySelector('.search-results');
 
     document.querySelector('.search-btn').addEventListener('click', async e =>  {

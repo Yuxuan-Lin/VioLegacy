@@ -154,8 +154,8 @@ export const cleanseEvent = function(className){
     oldNavigator.parentNode.replaceChild(newNavigator, oldNavigator);
 };
 
-
 export const setUI = async function(state, user){
+
     state.home = new Home(user.uid);
     state.user = user;
     state.user.isSenior = false;
