@@ -276,7 +276,6 @@ export const seniorOppAddEvents = async (state) => {
                 state.home.seniorPostCompany.value = "";
                 state.home.seniorPostTitle.value = "";
                 state.home.seniorPostLimit.value = "";
-
                 state.home.seniorPostDeadline.value = "";
                 state.home.seniorPostDescription.value = "";
             });
@@ -372,7 +371,6 @@ const renderSeniorOppDetails = (state,list,info,oppId) => {
     document.querySelector(".dashboard-detail-list").addEventListener("click", async e => {
         const acceptBtn = e.target.closest('.dashboard-detail-accept-btn');
         const declineBtn = e.target.closest('.dashboard-detail-decline-btn');
-    
         if (acceptBtn){
             await state.opp.updateJuniorStatus(oppId,acceptBtn.parentNode.parentNode.parentNode.id,"accepted");
             acceptBtn.parentNode.innerHTML = `
@@ -385,8 +383,6 @@ const renderSeniorOppDetails = (state,list,info,oppId) => {
             seniorOppDetailCounter[1]--;
         }
         else if (declineBtn){
-            console.log(oppId)
-            console.log(declineBtn.parentNode.parentNode.parentNode.id)
             await state.opp.updateJuniorStatus(oppId,declineBtn.parentNode.parentNode.parentNode.id,"declined");
             declineBtn.parentNode.innerHTML = `
                 <div class="red">
@@ -403,6 +399,7 @@ const renderSeniorOppDetails = (state,list,info,oppId) => {
     });
 };
 
+
 const renderSeniorOppDetail = (status,juniorUid,oppInfo,juniorInfo,juniorPic) => {
     if(juniorPic == undefined){
         juniorPic = "./images/default-avatar.png";
@@ -411,6 +408,7 @@ const renderSeniorOppDetail = (status,juniorUid,oppInfo,juniorInfo,juniorPic) =>
         <li class="dashboard-detail-list-element" id="${juniorUid}">
             <div class="dashboard-detail-list-element-profile">
                 <div class="dashboard-detail-list-element-profile-image">
+
                     <img class="round-image" src="${juniorPic}" alt="avatar">
                 </div>
                 <div class="dashboard-detail-list-element-profile-info">

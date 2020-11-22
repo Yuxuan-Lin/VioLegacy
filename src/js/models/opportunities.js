@@ -99,4 +99,34 @@ export default class Opportunities{
 			alert(error);
 		}
 	}
+
+	async getSeniorOppRegistration(oppId){
+		let docCounter = 0;
+		try{
+			await db.collection('NewOpportunities').doc(oppId).collection("registered").get().then(docs => {
+				this.seniorOppRegistration = docs;
+				docs.forEach(doc => docCounter++);
+				this.docsLength = docCounter;
+			})
+			
+		} catch (error){
+			alert(error);
+		}
+	}
+
+	async updateJuniorStatus(oppId,juniorId,decision){
+		try{
+			let docId = '';
+			await db.collection('NewOpportunities').doc(oppId).collection("registered").where("uid","==",juniorId).get().then(docs => {
+				docs.forEach(doc => {
+					docId = doc.id;
+				})				
+			})
+			await db.collection('NewOpportunities').doc(oppId).collection("registered").doc(docId).update({
+				status:decision
+			})			
+		} catch (error){
+			alert(error);
+		}
+	}
 }
