@@ -64,14 +64,12 @@ export const setSignUpUI = function(){
         e.preventDefault();
         page++;
         setUIwithPage(page);
-        console.log("next page");
     });
 
     prevStepBtn.addEventListener('click',e => {
         e.preventDefault();
         page--;
         setUIwithPage(page);
-        console.log("previous page");
     });
 
     checkbox.addEventListener('change',e => {
@@ -126,6 +124,4 @@ export const setSignUpUI = function(){
         `;
         document.querySelector(`.signUp-experiences`).insertAdjacentHTML('beforeend',addJobMarkUp);
     });
-
-    console.log("Sign Up Page Set Up completed");
 }

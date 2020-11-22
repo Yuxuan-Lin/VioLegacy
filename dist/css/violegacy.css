@@ -620,6 +620,8 @@
 .opp-container{
     padding: 3vh;
     flex: 1 0 auto;
+    height: 100vh;
+    overflow-y: scroll;
 }
 
 .opp-top{
@@ -1248,6 +1250,26 @@ button:hover{
     padding: 1vh 1vw;
     width: 8vw;
     margin: 1vh 0;
+}
+
+.account-management-btn:hover{
+    border-color: #b948d8;
+    color: #b948d8;
+}
+
+.account-management-btn-clicked{
+    display:block;
+    border: 2px #CCA2D8 solid;
+    background-color: #CCA2D8;
+    color: white;
+    font-weight: 200;
+    padding: 1vh 1vw;
+    width: 8vw;
+    margin: 1vh 0;
+}
+
+.account-management-btn-clicked:hover{
+    background-color: #b948d8;
 }
 
 .alumni-opp-top-bar{

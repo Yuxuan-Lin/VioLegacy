@@ -22,10 +22,13 @@ const clearDashboardDetailList = function(){
     document.querySelector('.dashboard-detail-list').innerHTML = '';
 }
 
-export const renderProfile = self => {
+export const renderProfile = (self,profilePic) => {
+    if(profilePic == undefined){
+        profilePic = "./images/default-avatar.png";
+    }
     const markup = `
         <div class = "profile-pic">
-            <img class="round-image" src=${"./images/Bill.jpg"} alt="${self.name}">
+            <img class="round-image" src="${profilePic}" alt="${self.name}">
         </div>
         <div class = "home-top-info">
             <h2>${self.name}</h2>
@@ -98,7 +101,7 @@ export const renderOpp = (myOpp,opp) => {
                     <ion-icon name="checkmark-circle-outline" class="big-icon green"></ion-icon>
                 </div>
                 <div class="opp-item-status">
-                    <h4>${opp.alumni.name} has accepted your request. You may soon receive an email from ${opp.company}.</h4>
+                    <h4>${opp.alumni} has accepted your request. You may soon receive an email from ${opp.company}.</h4>
                 </div>
             </div>
         </li>
@@ -114,7 +117,7 @@ export const renderOpp = (myOpp,opp) => {
                     <ion-icon name="close-circle-outline" class="big-icon red"></ion-icon>
                 </div>
                 <div class="opp-item-status">
-                    <h4>${opp.alumni.name} has declined your request.</h4>
+                    <h4>${opp.alumni} has declined your request.</h4>
                 </div>
             </div>
         </li>
@@ -273,10 +276,9 @@ export const seniorOppAddEvents = async (state) => {
                 state.home.seniorPostCompany.value = "";
                 state.home.seniorPostTitle.value = "";
                 state.home.seniorPostLimit.value = "";
+
                 state.home.seniorPostDeadline.value = "";
                 state.home.seniorPostDescription.value = "";
-
-                console.log("Senior New Opp Posted");
             });
         }
     });
@@ -284,13 +286,18 @@ export const seniorOppAddEvents = async (state) => {
 
 let seniorOppDetailCounter = [0,0,0,0];
 
-const updateSeniorOppDetails = function(state,juniorList,info){
-    juniorList.forEach(async junior => {
-        await state.home.getJuniorInfo(junior.data().uid);
-        renderSeniorOppDetail(junior.data().status, junior.data().uid, info, state.home.juniorInfo);
-        seniorOppDetailCounter[0]++;
-        updateDashboardStatusBar();
-    });
+const updateSeniorOppDetails = async function(state,juniorList,info){
+    let promises = []
+    juniorList.forEach(junior => {
+        promises.push(
+            state.home.getAndRenderJunior(junior.data().uid, renderSeniorOppDetail,junior.data().status,info)
+                      .then(() => {
+                        seniorOppDetailCounter[0]++;
+                        updateDashboardStatusBar();
+                      })
+        )
+    })
+    return Promise.all(promises)
 }  
 
 const updateDashboardStatusBar = () => {
@@ -365,7 +372,7 @@ const renderSeniorOppDetails = (state,list,info,oppId) => {
     document.querySelector(".dashboard-detail-list").addEventListener("click", async e => {
         const acceptBtn = e.target.closest('.dashboard-detail-accept-btn');
         const declineBtn = e.target.closest('.dashboard-detail-decline-btn');
-
+    
         if (acceptBtn){
             await state.opp.updateJuniorStatus(oppId,acceptBtn.parentNode.parentNode.parentNode.id,"accepted");
             acceptBtn.parentNode.innerHTML = `
@@ -378,6 +385,8 @@ const renderSeniorOppDetails = (state,list,info,oppId) => {
             seniorOppDetailCounter[1]--;
         }
         else if (declineBtn){
+            console.log(oppId)
+            console.log(declineBtn.parentNode.parentNode.parentNode.id)
             await state.opp.updateJuniorStatus(oppId,declineBtn.parentNode.parentNode.parentNode.id,"declined");
             declineBtn.parentNode.innerHTML = `
                 <div class="red">
@@ -394,15 +403,18 @@ const renderSeniorOppDetails = (state,list,info,oppId) => {
     });
 };
 
-const renderSeniorOppDetail = (status,juniorUid,oppInfo,juniorInfo) => {
+const renderSeniorOppDetail = (status,juniorUid,oppInfo,juniorInfo,juniorPic) => {
+    if(juniorPic == undefined){
+        juniorPic = "./images/default-avatar.png";
+    }
     const pending = `
         <li class="dashboard-detail-list-element" id="${juniorUid}">
             <div class="dashboard-detail-list-element-profile">
                 <div class="dashboard-detail-list-element-profile-image">
-                    <img class="round-image" src="./images/kerwin.jpg" alt="avatar">
+                    <img class="round-image" src="${juniorPic}" alt="avatar">
                 </div>
                 <div class="dashboard-detail-list-element-profile-info">
-                    <h3>${juniorInfo.data().name} requested a referral to ${oppInfo[0]} at ${oppInfo[0]}.</h3>
+                    <h3>${juniorInfo.data().name} requested a referral to ${oppInfo[0]} at ${oppInfo[1]}.</h3>
                     <h4>${juniorInfo.data().major}</h4>
                 </div>
                 <div class="dashboard-detail-list-element-profile-btns">
@@ -436,10 +448,10 @@ const renderSeniorOppDetail = (status,juniorUid,oppInfo,juniorInfo) => {
         <li class="dashboard-detail-list-element" id="${juniorUid}">
             <div class="dashboard-detail-list-element-profile">
                 <div class="dashboard-detail-list-element-profile-image">
-                    <img class="round-image" src="./images/kerwin.jpg" alt="avatar">
+                    <img class="round-image" src="${juniorPic}" alt="avatar">
                 </div>
                 <div class="dashboard-detail-list-element-profile-info">
-                    <h3>${juniorInfo.data().name} requested a referral to ${oppInfo[0]} at ${oppInfo[0]}.</h3>
+                    <h3>${juniorInfo.data().name} requested a referral to ${oppInfo[0]} at ${oppInfo[1]}.</h3>
                     <h4>${juniorInfo.data().major}</h4>
                 </div>
                 <div class="dashboard-detail-list-element-profile-btns">
@@ -475,10 +487,10 @@ const renderSeniorOppDetail = (status,juniorUid,oppInfo,juniorInfo) => {
         <li class="dashboard-detail-list-element" id="${juniorUid}">
             <div class="dashboard-detail-list-element-profile">
                 <div class="dashboard-detail-list-element-profile-image">
-                    <img class="round-image" src="./images/kerwin.jpg" alt="avatar">
+                    <img class="round-image" src="${juniorPic}" alt="avatar">
                 </div>
                 <div class="dashboard-detail-list-element-profile-info">
-                    <h3>${juniorInfo.data().name} requested a referral to ${oppInfo[0]} at ${oppInfo[0]}.</h3>
+                    <h3>${juniorInfo.data().name} requested a referral to ${oppInfo[0]} at ${oppInfo[1]}.</h3>
                     <h4>${juniorInfo.data().major}</h4>
                 </div>
                 <div class="dashboard-detail-list-element-profile-btns">

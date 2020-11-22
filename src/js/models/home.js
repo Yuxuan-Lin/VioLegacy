@@ -10,8 +10,12 @@ export default class Home{
 			await db.collection('Profiles').doc(this.query).onSnapshot(doc => {
 				this.profile = doc.data();
 				console.log("Profile data got.");				
+			});			
+			await db.collection('Images').where("userId","==",this.query).onSnapshot(docs => {
+				docs.forEach(doc => {
+					this.profilePic = doc.data().url;
+				})
 			});
-			
 		} catch (error){
 			alert(error);
 		}
@@ -66,9 +70,11 @@ export default class Home{
 	async unRegisterOpp(userId,oppId){
 		try{
 			await db.collection('Profiles').doc(userId).collection("myOpps").where("oppId", "==", oppId).get().then(async docs => {
-				docs.forEach(async doc => {
-					await db.collection('Profiles').doc(userId).collection("myOpps").doc(doc.id).delete();
+				let promises = []
+				docs.forEach(doc => {
+					promises.push(doc.ref.delete())
 				})
+				return Promise.all(promises)
 			})
 		} catch (error) {
 			alert(error);
@@ -88,7 +94,6 @@ export default class Home{
 	}
 
 	async seniorGetOpps(userId){
-		//console.log(userId);
 		try{			
 			await db.collection('NewOpportunities').where("alumniId", "==", userId).get().then(docs => {
 				this.seniorOpps = docs;
@@ -98,8 +103,28 @@ export default class Home{
 		}
 	}
 
+	async getAndRenderJunior(juniorUid, renderSeniorOppDetail,juniorStatus,info){
+		try{			
+			let juniorInfo,juniorPic;
+			//console.log(juniorUid);
+			await db.collection('Profiles').doc(juniorUid).get().then(doc => {
+				juniorInfo = doc;
+			});
+			await db.collection('Images').where("userId","==",juniorUid).get().then(docs => {
+				docs.forEach(doc => {
+					juniorPic = doc.data().url;
+					console.log()
+				})
+			});
+			renderSeniorOppDetail(juniorStatus, juniorUid, info, juniorInfo, juniorPic);
+		} catch (error) {
+			alert("getAndRenderJunior: " + error);
+		}
+	}
+
 	async getJuniorInfo(juniorUid){
 		try{			
+			//console.log(juniorUid);
 			await db.collection('Profiles').doc(juniorUid).get().then(doc => {
 				this.juniorInfo = doc;
 			});

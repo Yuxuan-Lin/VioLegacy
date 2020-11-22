@@ -80,8 +80,6 @@ export const setUpOppScreen = async (state) => {
 
             document.querySelector('#opp-back-top').addEventListener('click', async e => {
                 const btn2 = e.target.closest('#opp-back-top');
-                console.log("opp-backed");
-
                 if(btn2) {
                     // clear right screen
                     clearScreen();
@@ -109,7 +107,6 @@ export const setUpOppScreen = async (state) => {
 
             document.querySelector('.ref-request').addEventListener('click', async e => {
                 const btn3 = e.target.closest('.ref-request');
-                console.log("attention: "+state.opp.opps[btn.value].id);
 
                 if(btn3 && btn3.id == 0) {
 
