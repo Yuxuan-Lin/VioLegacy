@@ -11,7 +11,6 @@ import * as messageControl from './controllers/messageController';
 
 
 const collapseMenu = function(state) {
-    console.log("success");
     state.menuCollapsed = true;
     const labelled = document.querySelectorAll('.collapse-label');
     labelled.forEach(labelCollapse);
@@ -22,7 +21,6 @@ const collapseMenu = function(state) {
 };
 
 const expandMenu = function(state){
-    //console.log("success");
     state.menuCollapsed = false;
     const labelled = document.querySelectorAll('.collapse-label');
     labelled.forEach(labelExpand);
@@ -43,13 +41,11 @@ const labelExpand = function(el){
 
 const tabSwitch = async function (state,tab){
     const id = parseInt(tab.parentNode.id);
-    //console.log(state.user.name);
     if (id != 0 && id != 4){
         screenSwitch(state, tab);
 
         //clear
         let markup = tab.parentNode.parentNode.childNodes;
-        //console.log(markup);
         for (let i=1; i<11; i=i+2){
             markup[i].classList = [];
             markup[i].childNodes[1].classList = ['tab'];
@@ -159,7 +155,6 @@ export const cleanseEvent = function(className){
 export const setUI = async function(state, user){
 
     state.home = new Home(user.uid);
-    //console.log(user.uid);
     state.user = user;
     state.user.isSenior = false;
     state.opp = new Opp("Ishmael");
@@ -168,7 +163,6 @@ export const setUI = async function(state, user){
     state.home.collapsed = false;
     state.menuCollapsed = false;
     state.messages.firstRender = true;
-    //console.log(state.user.name);
     tabSwitch(state, document.getElementById("default"));
 
 

@@ -655,6 +655,8 @@
 .opp-container{
     padding: 3vh;
     flex: 1 0 auto;
+    height: 100vh;
+    overflow-y: scroll;
 }
 
 .opp-top{
@@ -1398,11 +1400,30 @@ button:hover{
 
 .dashboard-detail-status-bar{
     list-style: none;
+    display: flex;
+    align-items: center;
 }
 
 .dashboard-detail-status-bar li{
-    display: inline-block;
+    flex: 0 1 8%;
     margin-right:2vw;
+    text-align:center;
+}
+
+#dashboard-detail-status-bar-blank{
+    flex: 1 0 auto;
+}
+
+#dashboard-detail-filter-btn{
+    flex: 0 1 15%;
+}
+
+#dashboard-detail-filter-btn button{
+    background-color: white;
+    color: #CCA2D8;
+    padding: 0.5vh 1vw;
+    border: 0.3vh #CCA2D8 solid;
+    border-radius: 1vh;
 }
 
 .dashboard-detail-list{
@@ -1503,3 +1524,84 @@ button:hover{
     margin-top: 5vh;
 }
 
+/* Experiment */
+.dashboard-detail-filter{
+    border: 2px #CCA2D8 solid;
+    border-radius: 1vh;
+    padding: 1.5vh 1.5vw;
+    margin:2vh 0;
+    display: flex;
+}
+
+.dashboard-detail-filter-major{
+    flex: 0 1 20%;
+}
+
+.dashboard-detail-filter-gpa{
+    flex: 0 1 20%;
+}
+
+.dashboard-detail-filter-exp{
+    flex: 0 1 20%;
+    position: relative;
+}
+
+.dashboard-detail-filter-titles{
+    margin-bottom: 0.5vh;
+}
+
+#dashboard-detail-filter-major-selections{
+    overflow-y: scroll;
+    height: 15vh;
+    width: 85%;
+    border-color: #CCA2D8;
+}
+
+#dashboard-detail-filter-major-selections option{
+    padding: 0.3vh 0.5vw;
+    font-size: 120%;
+}
+
+.dashboard-detail-filter-gpa-input,
+.dashboard-detail-filter-gpa-input:focus{
+    border: 0.1vh #CCA2D8 solid;
+    font-size: 110%;
+    padding: 0.3vh 0.5vw;
+}
+
+.dashboard-detail-filter-exp label{
+    font-weight: bold;
+}
+
+.dashboard-detail-filter-exp input{
+    position: absolute;
+    cursor: pointer;
+    top: 2.75vh;
+    left: 0.5vw;
+    height: 0;
+    width: 0;
+}
+
+.dashboard-detail-filter-exp span{
+    top: 2.5vh;
+}
+
+.dashboard-detail-filter-exp input:checked  ~ .checkmark{
+    background-color: #CCA2D8;
+    color: white;
+}
+  
+/* Show the indicator (dot/circle) when checked */
+.dashboard-detail-filter-exp input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.dashboard-detail-filter-exp .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
