@@ -57,4 +57,3 @@ export const renderChat = (message, isRight) => {
     const chatField = document.querySelector('.chat-field');
     chatField.scrollTop = chatField.scrollHeight;
 };
-

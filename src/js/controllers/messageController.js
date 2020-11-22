@@ -7,17 +7,17 @@ import * as chatView from '../views/chatView';
 export const controlContacts = async (state) => {
     // render Profile UI
     await state.messages.getContacts(contactsView.renderContact);
-    //contactsView.renderContacts(state.messages.contacts, state.user.uid);
+    //contactsView.renderContacts(state.messages.contacts);
 };
 
 export const controlChat = async (state,chatId,chatterUid) => {
 
     // render Profile UI
     await state.messages.getAlumniProfile(chatterUid);
-    chatView.renderProfile(state.messages.alumniProfile);
+    chatView.renderProfile(state.messages.alumniProfile, state.messages.alumniProfilePic);
     
     // render Chat UI
-    await state.messages.getMessages(chatId, chatView.renderChat);
+    await state.messages.getMessages(chatId, chatView.renderChat,state.home.profilePic);
 };
 
 export const messageScreen = (state) => {
@@ -63,7 +63,6 @@ export const messageScreen = (state) => {
     `;
 
     elements.container.insertAdjacentHTML('beforeend',messageSetUp);
-    //console.log("Screen fully Setup");
     controlContacts(state);
     document.querySelector('.contact-list').addEventListener('click', e => {
         const btn = e.target.closest('.contact-person').id;
@@ -127,8 +126,6 @@ export const messageScreen = (state) => {
     searchResUI.addEventListener('click', async e=>{
         const btn = e.target.closest('.search-result-person');
         const chatter = btn.parentNode.parentNode.childNodes[1].childNodes[3];
-        console.log(chatter);
-
         if (btn){
             state.messages.chatExists = false;
             await state.messages.doesChatExists(btn.id,state.user.uid);
