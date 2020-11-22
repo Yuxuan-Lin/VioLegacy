@@ -1,463 +1,463 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>VioLegacy Chat Page</title>
-	<!-- The core Firebase JS SDK is always required and must be listed first -->
-	<script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-firestore.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-storage.js"></script>
-	
-
-	<script>
-		// Your web app's Firebase configuration
-		// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-		var firebaseConfig = {
-			apiKey: "AIzaSyBiCwymuT8cMZHBqG2csQ7OnDHsyyhrhl4",
-			authDomain: "violegacy-26a40.firebaseapp.com",
-			databaseURL: "https://violegacy-26a40.firebaseio.com",
-			projectId: "violegacy-26a40",
-			storageBucket: "violegacy-26a40.appspot.com",
-			messagingSenderId: "49331994721",
-			appId: "1:49331994721:web:ab5255883b3f9b077a2a20",
-			measurementId: "G-R9G1V3E3RE"
-		};
-		// Initialize Firebase
-		firebase.initializeApp(firebaseConfig);
-
-		const auth = firebase.auth();
-		const db = firebase.firestore();
-		const storage = firebase.storage();
-		console.log(storage)
-		const timestamp = firebase.firestore.FieldValue.serverTimestamp;
-
-	</script>
-	
-	<link rel="stylesheet" type="text/css" href="css/violegacy.css">
+  <title>VioLegacy Chat Page</title>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-storage.js"></script>
+  
+  
+  <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyBiCwymuT8cMZHBqG2csQ7OnDHsyyhrhl4",
+      authDomain: "violegacy-26a40.firebaseapp.com",
+      databaseURL: "https://violegacy-26a40.firebaseio.com",
+      projectId: "violegacy-26a40",
+      storageBucket: "violegacy-26a40.appspot.com",
+      messagingSenderId: "49331994721",
+      appId: "1:49331994721:web:ab5255883b3f9b077a2a20",
+      measurementId: "G-R9G1V3E3RE"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+    console.log(storage)
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp;
+    
+  </script>
+  
+  <link rel="stylesheet" type="text/css" href="css/violegacy.css">
 </head>
 <body>
-	<div class="official-container invisible">
+  <div class="official-container invisible">
+    <div>
+      <img src="./images/logo.png"></img>
+    </div>
+    <img class="official-cover" src="./images/official-cover.png" alt="Official Title">
+    <div class="SignUp-Login">
+      <button class="official-sign-up">Sign Up</button>
+      <button class="official-log-in">Log in</button>
+    </div>
+    <img class="NYU-map" src="./images/NYUmap.png" alt="NYU Map">
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  <div class="signUp-container invisible">
+    <div class="signUp-header">
+      <div>
+        <img src="./images/logo.png"></img>
+      </div>
+    </div>
+    
+    <div class="signUp-small-container">
+      <ul class="progression">
+        <li><h3>Basic Information</h3></li>
+        <li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
+        <li><h3>About</h3></li>
+        <li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
+        <li><h3>Experience</h3></li>
+      </ul>
+      <div class="basic-info">
+        <ul>
+          <li class="basic-info-1st-line">
+            <div class="first-item">
+              <h4>First Name</h4>
+              <input type="text" id="first-name" required />
+            </div>
+            <div class="second-item">
+              <h4>Last Name</h4>
+              <input type="text" id="last-name" required />
+            </div>
+          </li>
+          <li>
+            <div class="signUp-input-temp">
+              <h4>Email</h4>
+              <input type="email" id="signUp-email" required />
+            </div>
+          </li>
+          <li>
+            <div class="signUp-input-temp">
+              <h4>Password</h4>
+              <input type="password" id="signUp-password" required />
+            </div>
+          </li>
+          <li>
+            <div class="signUp-input-temp">
+              <h4>Major</h4>
+              <input type="text" id="major" required />
+            </div>
+          </li>
+          <li>
+            <div class="signUp-input-temp">
+              <h4>Year</h4>
+              <input type="text" id="year" required />
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="signUp-about signUp-input-temp">
+        <h4>About</h4>
+        <input type="textarea" id="about-area" required />
+      </div>
+      <div class="signUp-experience">
+        <ul class="signUp-experiences">
+          <li class="experience-template">
+            <div class="job-header">
+              <hr>
+              <h3>Job 1</h3>
+              <hr>
+            </div>
+            <div class="signUp-input-temp">
+              <h4>Job Title</h4>
+              <input type="text" id="job-title" required />
+            </div>
+            <div class="signUp-input-temp">
+              <h4>Company</h4>
+              <input type="text" id="company" required />
+            </div>
+            <div class="checkbox">
+              <input type="checkbox" id="current-in-role">
+              <h4 >I am currently working on this role.</h4>
+            </div>
+            <div class="start-end">
+              <div class="start-date date-template signUp-input-temp">
+                <h4>Start Date</h4>
+                <input type="date" id="start-date" required />
+              </div>
+              <div class="end-date date-template signUp-input-temp">
+                <h4>End Date</h4>
+                <input type="date" id="end-date" required />
+                <div id="present-box" class="invisible">
+                  <h3 id="in-roll-text">Present</h3>
+                </div>
+              </div>
+            </div>
+            <div class="description signUp-input-temp">
+              <h4>Description</h4>
+              <input type="textarea" id="description" required />
+            </div>
+          </li>
+        </ul>
+        <button class="add-another-job">Add Another Job</button>
+      </div>
+      
+      <div class="step-btns">
+        <button class="next-step" id="previous-step-btn">Previous Step</button>
+        <button class="next-step" id="next-step-btn">Next Step</button>
+      </div>
+      
+      <button class="next-step" id="sign-up-btn">Sign Up</button>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  <div class="login-container invisible">
+    <div class="signUp-header">
+      <div>
+        <img src="./images/logo.png"></img>
+      </div>
+    </div>
+    
+    <div class="signUp-small-container">
+      <ul class="progression">
+        <li><h3>Log In</h3></li>
+      </ul>
+      <div class="basic-info">
+        <ul>
+          <li>
+            <div class="signUp-input-temp">
+              <h4>Email</h4>
+              <input type="email" id="login-email" required />
+            </div>
+          </li>
+          <li>
+            <div class="signUp-input-temp">
+              <h4>Password</h4>
+              <input type="password" id="login-password" required />
+            </div>
+          </li>
+          
+        </ul>
+      </div>
+      
+      <button class="next-step" id="log-in-btn">Log In</button>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  <div class="container invisible">
+    <div class="navigator">
+      <div class="tab head">
         <div>
-            <img src="./images/logo.png"></img>
+          <img src="./images/Logo.jpg"></img>
         </div>
-        <img class="official-cover" src="./images/official-cover.png" alt="Official Title">
-        <div class="SignUp-Login">
-            <button class="official-sign-up">Sign Up</button>
-            <button class="official-log-in">Log in</button>
-        </div>
-        <img class="NYU-map" src="./images/NYUmap.png" alt="NYU Map">
-    </div>
-
-	
-
-
-
-
-
-	<div class="signUp-container invisible">
-        <div class="signUp-header">
+        <h2 class='collapse-label'>VioLegacy</h2>
+      </div>
+      <ul class="tools">
+        <li id="0">
+          <div class="tab" id="invisible-1">
+            <h2>&nbsp;</h2>
+          </div>
+        </li>
+        <li id="1">
+          <div class="tab" id="default">                     
             <div>
-                <img src="./images/logo.png"></img>
+              <ion-icon name="home-outline" class="small-icon"></ion-icon>
             </div>
+            <h2 class='collapse-label' id="dashboard">Home</h2>                    
+          </div>
+        </li>
+        <li id="2">
+          <div class="tab">
+            <div>
+              <ion-icon name="briefcase-outline" class="small-icon"></ion-icon>
+            </div>
+            <h2 class='collapse-label' id="opp-decision">Opportunities</h2>
+          </div>
+        </li>
+        <li id="3"> 
+          <div class="tab" id="message-label">
+            <div>
+              <ion-icon name="chatbox-ellipses-outline" class="small-icon"></ion-icon>
+            </div>
+            <h2 class='collapse-label'>Messages</h2>
+          </div>
+        </li>
+        <li id="4">
+          <div class="tab" id="invisible-2">
+            <h2>&nbsp;</h2>
+          </div>
+        </li>
+        
+      </ul>
+      <ul class="helps">
+        <li class="tab">
+          <div>
+            <ion-icon name="help-circle-outline" class="small-icon"></ion-icon>
+          </div>
+          <h2 class='collapse-label'>FAQ</h2>
+        </li>
+        <li class="tab" id="account-settings">
+          <div>
+            <ion-icon name="settings-outline" class="small-icon"></ion-icon>
+          </div>
+          <h2 class='collapse-label'>Account Settings</h2>
+        </li>
+        <li class="tab" id="log-out-btn">
+          <div>
+            <ion-icon name="log-out-outline" class="small-icon"></ion-icon>
+          </div>
+          <h2 class='collapse-label'>Log Out</h2>
+        </li>
+      </ul>
+      <div class="collapse tab">
+        <div class="collapse-icon">
+          <ion-icon name="arrow-back-outline" class="small-icon"></ion-icon>
+        </div>
+        <h2 class='collapse-label'>Collapse Menu</h2>
+      </div>
+    </div>
+    
+    
+    <div class="window invisible">
+      <div class="senior-myOpp-detail">
+        <div class="senior-myOpp-detail-header">
+          <h1>Software Developer</h1>
+          <h3>Apple</h3>
+        </div>
+        <div class="senior-myOpp-detail-body">
+          <ul class="senior-myOpp-detail-body-bar">
+            <li id="senior-myOpp-detail-body-all">All(3)</li>
+            <li id="senior-myOpp-detail-body-pending">Pending(1)</li>
+            <li id="senior-myOpp-detail-body-accepted">Accepted(1)</li>
+            <li id="senior-myOpp-detail-body-declined">Declined(1)</li>
+          </ul>
+          <ul class="senior-myOpp-detail-body-list">
+          </ul>
+        </div>
+      </div>
+      
+    </div>
+    
+    
+    <div class="window invisible" id="home-edit">
+      <div class="signUp-small-container">
+        <ul class="progression">
+          <li><h3>Basic Information</h3></li>
+          <li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
+          <li><h3>About</h3></li>
+          <li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
+          <li><h3>Experience</h3></li>
+        </ul>
+        <div class="basic-info">
+          <ul>
+            <li class="basic-info-1st-line">
+              <div class="first-item">
+                <h4>First Name</h4>
+                <input type="text" id="edit-first-name" required />
+              </div>
+              <div class="second-item">
+                <h4>Last Name</h4>
+                <input type="text" id="edit-last-name" required />
+              </div>
+            </li>
+            <li>
+              <div class="signUp-input-temp">
+                <h4>Major</h4>
+                <input type="text" id="edit-major" required />
+              </div>
+            </li>
+            <li>
+              <div class="signUp-input-temp">
+                <h4>Year</h4>
+                <input type="text" id="edit-year" required />
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="signUp-about signUp-input-temp">
+          <h4>About</h4>
+          <input type="textarea" id="edit-about-area" required />
+        </div>
+        <div class="signUp-experience">
+          <ul class="signUp-experiences">
+            <li class="experience-template">
+              <div class="job-header">
+                <hr>
+                <h3>Job 1</h3>
+                <hr>
+              </div>
+              <div class="signUp-input-temp">
+                <h4>Job Title</h4>
+                <input type="text" id="edit-job-title" required />
+              </div>
+              <div class="signUp-input-temp">
+                <h4>Company</h4>
+                <input type="text" id="edit-company" required />
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" id="edit-current-in-role">
+                <h4 >I am currently working on this role.</h4>
+              </div>
+              <div class="start-end">
+                <div class="start-date date-template signUp-input-temp">
+                  <h4>Start Date</h4>
+                  <input type="date" id="edit-start-date" required />
+                </div>
+                <div class="end-date date-template signUp-input-temp">
+                  <h4>End Date</h4>
+                  <input type="date" id="edit-end-date" required />
+                  <div id="present-box" class="invisible">
+                    <h3 id="in-roll-text">Present</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="description signUp-input-temp">
+                <h4>Description</h4>
+                <input type="textarea" id="edit-description" required />
+              </div>
+            </li>
+          </ul>
+          <button class="add-another-job">Add Another Job</button>
         </div>
         
-        <div class="signUp-small-container">
-            <ul class="progression">
-                <li><h3>Basic Information</h3></li>
-                <li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
-                <li><h3>About</h3></li>
-                <li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
-                <li><h3>Experience</h3></li>
-            </ul>
-            <div class="basic-info">
-                <ul>
-                    <li class="basic-info-1st-line">
-                        <div class="first-item">
-                            <h4>First Name</h4>
-                            <input type="text" id="first-name" required />
-                        </div>
-                        <div class="second-item">
-                            <h4>Last Name</h4>
-                            <input type="text" id="last-name" required />
-                        </div>
-					</li>
-					<li>
-                        <div class="signUp-input-temp">
-                            <h4>Email</h4>
-                            <input type="email" id="signUp-email" required />
-                        </div>
-					</li>
-					<li>
-                        <div class="signUp-input-temp">
-                            <h4>Password</h4>
-                            <input type="password" id="signUp-password" required />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="signUp-input-temp">
-                            <h4>Major</h4>
-                            <input type="text" id="major" required />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="signUp-input-temp">
-                            <h4>Year</h4>
-                            <input type="text" id="year" required />
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="signUp-about signUp-input-temp">
-                <h4>About</h4>
-                <input type="textarea" id="about-area" required />
-            </div>
-            <div class="signUp-experience">
-                <ul class="signUp-experiences">
-                    <li class="experience-template">
-                        <div class="job-header">
-                            <hr>
-                            <h3>Job 1</h3>
-                            <hr>
-                        </div>
-                        <div class="signUp-input-temp">
-                            <h4>Job Title</h4>
-                            <input type="text" id="job-title" required />
-                        </div>
-                        <div class="signUp-input-temp">
-                            <h4>Company</h4>
-                            <input type="text" id="company" required />
-                        </div>
-                        <div class="checkbox">
-                            <input type="checkbox" id="current-in-role">
-                            <h4 >I am currently working on this role.</h4>
-                        </div>
-                        <div class="start-end">
-                            <div class="start-date date-template signUp-input-temp">
-                                <h4>Start Date</h4>
-                                <input type="date" id="start-date" required />
-                            </div>
-                            <div class="end-date date-template signUp-input-temp">
-                                <h4>End Date</h4>
-								<input type="date" id="end-date" required />
-								<div id="present-box" class="invisible">
-									<h3 id="in-roll-text">Present</h3>
-								</div>
-                            </div>
-                        </div>
-                        <div class="description signUp-input-temp">
-                            <h4>Description</h4>
-                            <input type="textarea" id="description" required />
-                        </div>
-                    </li>
-                </ul>
-                <button class="add-another-job">Add Another Job</button>
-            </div>
-
-			<div class="step-btns">
-				<button class="next-step" id="previous-step-btn">Previous Step</button>
-            	<button class="next-step" id="next-step-btn">Next Step</button>
-			</div>
-			
-            <button class="next-step" id="sign-up-btn">Sign Up</button>
-        </div>
+        <button class="next-step" id="finish-btn">Finish</button>
+      </div>
     </div>
-
-
-
-
-
-	<div class="login-container invisible">
-		<div class="signUp-header">
+    
+    <div class="window invisible" id="senior-post-opp">
+      <div class="signUp-small-container">
+        <div class="senior-post-opp-back">
+          <div class="back-top" id="senior-post-opp-back-btn">
             <div>
-                <img src="./images/logo.png"></img>
+              <ion-icon name="arrow-back-outline" class="big-icon"></ion-icon>
             </div>
+            <h2>Back</h2>
+          </div>
+          
+          <hr>
         </div>
         
-        <div class="signUp-small-container">
-            <ul class="progression">
-                <li><h3>Log In</h3></li>
-            </ul>
-            <div class="basic-info">
-                <ul>
-					<li>
-                        <div class="signUp-input-temp">
-                            <h4>Email</h4>
-                            <input type="email" id="login-email" required />
-                        </div>
-					</li>
-					<li>
-                        <div class="signUp-input-temp">
-                            <h4>Password</h4>
-                            <input type="password" id="login-password" required />
-                        </div>
-                    </li>
-                    
-                </ul>
-            </div>
-			
-            <button class="next-step" id="log-in-btn">Log In</button>
+        <div class="basic-info senior-post-opp-body">
+          <ul>
+            <li>
+              <div class="signUp-input-temp">
+                <h4>Category</h4>
+                <input type="text" id="senior-post-opp-category" required />
+              </div>
+            </li>
+            <li>
+              <div class="signUp-input-temp">
+                <h4>Company</h4>
+                <input type="text" id="senior-post-opp-company" required />
+              </div>
+            </li>
+            <li>
+              <div class="signUp-input-temp">
+                <h4>Title</h4>
+                <input type="text" id="senior-post-opp-title" required />
+              </div>
+            </li>
+            <li>
+              <div class="signUp-input-temp">
+                <h4>Limit</h4>
+                <input type="text" id="senior-post-opp-limit" required />
+              </div>
+            </li>
+            <li>
+              <div class="signUp-input-temp">
+                <h4>Deadline</h4>
+                <input type="date" id="senior-post-opp-deadline" required />
+              </div>
+            </li>
+            <li>
+              <div class="signUp-about signUp-input-temp senior-post-opp-description">
+                <h4>Job Description</h4>
+                <input type="textarea" id="senior-post-opp-description" required />
+              </div>
+            </li>
+          </ul>
         </div>
-	</div>
-
-
-
-
-
-
-	<div class="container invisible">
-		<div class="navigator">
-			<div class="tab head">
-				<div>
-					<img src="./images/Logo.jpg"></img>
-				</div>
-				<h2 class='collapse-label'>VioLegacy</h2>
-			</div>
-			<ul class="tools">
-				<li id="0">
-					<div class="tab" id="invisible-1">
-						<h2>&nbsp;</h2>
-					</div>					
-				</li>
-                <li id="1">
-                    <div class="tab" id="default">                     
-                        <div>
-                            <ion-icon name="home-outline" class="small-icon"></ion-icon>
-                        </div>
-                        <h2 class='collapse-label' id="dashboard">Home</h2>                    
-                    </div>
-				</li>
-				<li id="2">
-					<div class="tab">
-						<div>
-							<ion-icon name="briefcase-outline" class="small-icon"></ion-icon>
-						</div>
-						<h2 class='collapse-label' id="opp-decision">Opportunities</h2>
-					</div>					
-				</li>
-				<li id="3"> 
-					<div class="tab" id="message-label">
-                        <div>
-                            <ion-icon name="chatbox-ellipses-outline" class="small-icon"></ion-icon>
-                        </div>
-                        <h2 class='collapse-label'>Messages</h2>
-                    </div>
-				</li>
-                <li id="4">
-					<div class="tab" id="invisible-2">
-						<h2>&nbsp;</h2>
-					</div>					
-				</li>
-				
-			</ul>
-			<ul class="helps">
-				<li class="tab">
-					<div>
-						<ion-icon name="help-circle-outline" class="small-icon"></ion-icon>
-					</div>
-					<h2 class='collapse-label'>FAQ</h2>
-				</li>
-				<li class="tab" id="account-settings">
-					<div>
-						<ion-icon name="settings-outline" class="small-icon"></ion-icon>
-					</div>
-					<h2 class='collapse-label'>Account Settings</h2>
-				</li>
-				<li class="tab" id="log-out-btn">
-					<div>
-						<ion-icon name="log-out-outline" class="small-icon"></ion-icon>
-					</div>
-					<h2 class='collapse-label'>Log Out</h2>
-				</li>
-			</ul>
-			<div class="collapse tab">
-				<div class="collapse-icon">
-					<ion-icon name="arrow-back-outline" class="small-icon"></ion-icon>
-				</div>
-				<h2 class='collapse-label'>Collapse Menu</h2>
-			</div>
-		</div>
-	
-		
-		<div class="window invisible">
-			<div class="senior-myOpp-detail">
-				<div class="senior-myOpp-detail-header">
-					<h1>Software Developer</h1>
-					<h3>Apple</h3>
-				</div>
-				<div class="senior-myOpp-detail-body">
-					<ul class="senior-myOpp-detail-body-bar">
-						<li id="senior-myOpp-detail-body-all">All(3)</li>
-						<li id="senior-myOpp-detail-body-pending">Pending(1)</li>
-						<li id="senior-myOpp-detail-body-accepted">Accepted(1)</li>
-						<li id="senior-myOpp-detail-body-declined">Declined(1)</li>
-					</ul>
-					<ul class="senior-myOpp-detail-body-list">
-					</ul>
-				</div>
-			</div>
-	
-		</div>
-
-		
-		<div class="window invisible" id="home-edit">
-			<div class="signUp-small-container">
-				<ul class="progression">
-					<li><h3>Basic Information</h3></li>
-					<li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
-					<li><h3>About</h3></li>
-					<li><ion-icon name="arrow-forward-outline" class="arrow-back-icon"></ion-icon></li>
-					<li><h3>Experience</h3></li>
-				</ul>
-				<div class="basic-info">
-					<ul>
-						<li class="basic-info-1st-line">
-							<div class="first-item">
-								<h4>First Name</h4>
-								<input type="text" id="edit-first-name" required />
-							</div>
-							<div class="second-item">
-								<h4>Last Name</h4>
-								<input type="text" id="edit-last-name" required />
-							</div>
-						</li>
-						<li>
-							<div class="signUp-input-temp">
-								<h4>Major</h4>
-								<input type="text" id="edit-major" required />
-							</div>
-						</li>
-						<li>
-							<div class="signUp-input-temp">
-								<h4>Year</h4>
-								<input type="text" id="edit-year" required />
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div class="signUp-about signUp-input-temp">
-					<h4>About</h4>
-					<input type="textarea" id="edit-about-area" required />
-				</div>
-				<div class="signUp-experience">
-					<ul class="signUp-experiences">
-						<li class="experience-template">
-							<div class="job-header">
-								<hr>
-								<h3>Job 1</h3>
-								<hr>
-							</div>
-							<div class="signUp-input-temp">
-								<h4>Job Title</h4>
-								<input type="text" id="edit-job-title" required />
-							</div>
-							<div class="signUp-input-temp">
-								<h4>Company</h4>
-								<input type="text" id="edit-company" required />
-							</div>
-							<div class="checkbox">
-								<input type="checkbox" id="edit-current-in-role">
-								<h4 >I am currently working on this role.</h4>
-							</div>
-							<div class="start-end">
-								<div class="start-date date-template signUp-input-temp">
-									<h4>Start Date</h4>
-									<input type="date" id="edit-start-date" required />
-								</div>
-								<div class="end-date date-template signUp-input-temp">
-									<h4>End Date</h4>
-									<input type="date" id="edit-end-date" required />
-									<div id="present-box" class="invisible">
-										<h3 id="in-roll-text">Present</h3>
-									</div>
-								</div>
-							</div>
-							<div class="description signUp-input-temp">
-								<h4>Description</h4>
-								<input type="textarea" id="edit-description" required />
-							</div>
-						</li>
-					</ul>
-					<button class="add-another-job">Add Another Job</button>
-				</div>
-				
-				<button class="next-step" id="finish-btn">Finish</button>
-			</div>
-		</div>
-		
-		<div class="window invisible" id="senior-post-opp">
-			<div class="signUp-small-container">
-				<div class="senior-post-opp-back">
-					<div class="back-top" id="senior-post-opp-back-btn">
-						<div>
-							<ion-icon name="arrow-back-outline" class="big-icon"></ion-icon>
-						</div>
-						<h2>Back</h2>
-					</div>
-			
-					<hr>
-				</div>
-				
-				<div class="basic-info senior-post-opp-body">
-					<ul>
-						<li>
-							<div class="signUp-input-temp">
-								<h4>Category</h4>
-								<input type="text" id="senior-post-opp-category" required />
-							</div>
-						</li>
-						<li>
-							<div class="signUp-input-temp">
-								<h4>Company</h4>
-								<input type="text" id="senior-post-opp-company" required />
-							</div>
-						</li>
-						<li>
-							<div class="signUp-input-temp">
-								<h4>Title</h4>
-								<input type="text" id="senior-post-opp-title" required />
-							</div>
-						</li>
-						<li>
-							<div class="signUp-input-temp">
-								<h4>Limit</h4>
-								<input type="text" id="senior-post-opp-limit" required />
-							</div>
-						</li>
-						<li>
-							<div class="signUp-input-temp">
-								<h4>Deadline</h4>
-								<input type="date" id="senior-post-opp-deadline" required />
-							</div>
-						</li>
-						<li>
-							<div class="signUp-about signUp-input-temp senior-post-opp-description">
-								<h4>Job Description</h4>
-								<input type="textarea" id="senior-post-opp-description" required />
-							</div>
-						</li>
-					</ul>
-				</div>
-				
-				<button class="next-step" id="senior-post-opp-post-btn">Post</button>
-			</div>
-		</div>
-
-
-		<div class="right-container">
-			
-		</div>
-	</div>
-	
-
+        
+        <button class="next-step" id="senior-post-opp-post-btn">Post</button>
+      </div>
+    </div>
+    
+    
+    <div class="right-container">
+      
+    </div>
+  </div>
+  
+  
 </body>
 
 
 
 
 <script
-  src="https://code.jquery.com/jquery-2.2.4.js"
-  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-  crossorigin="anonymous"></script>
+src="https://code.jquery.com/jquery-2.2.4.js"
+integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+crossorigin="anonymous"></script>
 <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 
 

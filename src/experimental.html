@@ -1,112 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="../dist/css/violegacy.css">
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="../dist/css/violegacy.css" />
+  </head>
+  <body>
     <div class="dashboard-detail">
-        <div class="senior-post-opp-back">
-            <div class="back-top" id="senior-post-opp-back-btn">
-                <div>
-                    <ion-icon name="arrow-back-outline" class="big-icon"></ion-icon>
-                </div>
-                <h2>Back</h2>
-            </div>    
-            <hr>
+      <div class="senior-post-opp-back">
+        <div class="back-top" id="senior-post-opp-back-btn">
+          <div>
+            <ion-icon name="arrow-back-outline" class="big-icon"></ion-icon>
+          </div>
+          <h2>Back</h2>
         </div>
-        <h3 class="dashboard-detail-text">Please make decisions on the following referral requests.</h3>
-        <ul class="dashboard-detail-status-bar">
-            <li id="senior-myOpp-detail-body-all">All(3)</li>
-            <li id="senior-myOpp-detail-body-pending">Pending(1)</li>
-            <li id="senior-myOpp-detail-body-accepted">Accepted(1)</li>
-            <li id="senior-myOpp-detail-body-declined">Declined(1)</li>
-            <li id="dashboard-detail-status-bar-blank"></li>
-            <li id="dashboard-detail-filter-btn">
-                <button>Hide Additional Filters</button>
-            </li>
-        </ul>
+        <hr />
+      </div>
+      <h3 class="dashboard-detail-text">
+        Please make decisions on the following referral requests.
+      </h3>
+      <ul class="dashboard-detail-status-bar">
+        <li id="senior-myOpp-detail-body-all">All(3)</li>
+        <li id="senior-myOpp-detail-body-pending">Pending(1)</li>
+        <li id="senior-myOpp-detail-body-accepted">Accepted(1)</li>
+        <li id="senior-myOpp-detail-body-declined">Declined(1)</li>
+        <li id="dashboard-detail-status-bar-blank"></li>
+        <li id="dashboard-detail-filter-btn">
+          <button>Hide Additional Filters</button>
+        </li>
+      </ul>
 
-
-
-
-
-
-        <div class="dashboard-detail-filter">
-            <div class="dashboard-detail-filter-major">
-                <h4 class="dashboard-detail-filter-titles">GPA Minimum</h4>
-                <select name="dashboard-detail-filter-major-selections" id="dashboard-detail-filter-major-selections" multiple>
-                    <option value="Computer Science">Computer Science</option>
-                    <option value="Finance">Finance</option>
-                    <option value="Engineering">Engineering</option>
-                    <option value="Web Design">Web Design</option>
-                </select>
-            </div>
-            <div class="dashboard-detail-filter-gpa">
-                <h4 class="dashboard-detail-filter-titles">GPA Minimum</h4>
-                <input class="dashboard-detail-filter-gpa-input" type="text">
-            </div>
-            <div class="dashboard-detail-filter-exp">
-                <label class="dashboard-detail-filter-titles">Has Previous Experience
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                </label>
-            </div>
+      <div class="dashboard-detail-filter">
+        <div class="dashboard-detail-filter-major">
+          <h4 class="dashboard-detail-filter-titles">GPA Minimum</h4>
+          <select
+            name="dashboard-detail-filter-major-selections"
+            id="dashboard-detail-filter-major-selections"
+            multiple
+          >
+            <option value="Computer Science">Computer Science</option>
+            <option value="Finance">Finance</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Web Design">Web Design</option>
+          </select>
         </div>
+        <div class="dashboard-detail-filter-gpa">
+          <h4 class="dashboard-detail-filter-titles">GPA Minimum</h4>
+          <input class="dashboard-detail-filter-gpa-input" type="text" />
+        </div>
+        <div class="dashboard-detail-filter-exp">
+          <label class="dashboard-detail-filter-titles"
+            >Has Previous Experience
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
 
-
-
-
-
-
-
-
-        <ul class="dashboard-detail-list">
-            <li class="dashboard-detail-list-element">
-                <div class="dashboard-detail-list-element-profile">
-                    <div class="dashboard-detail-list-element-profile-image">
-                        <img class="round-image" src="../dist/images/Kerwin.jpg" alt="avatar">
-                    </div>
-                    <div class="dashboard-detail-list-element-profile-info">
-                        <h3>Alex Wang requested a referral to Software Developer at Apple. </h3>
-                        <h4>BS Computer Science ’20</h4>
-                    </div>
-                    <div class="dashboard-detail-list-element-profile-btns">
-                        <!--
+      <ul class="dashboard-detail-list">
+        <li class="dashboard-detail-list-element">
+          <div class="dashboard-detail-list-element-profile">
+            <div class="dashboard-detail-list-element-profile-image">
+              <img
+                class="round-image"
+                src="../dist/images/Kerwin.jpg"
+                alt="avatar"
+              />
+            </div>
+            <div class="dashboard-detail-list-element-profile-info">
+              <h3>
+                Alex Wang requested a referral to Software Developer at Apple.
+              </h3>
+              <h4>BS Computer Science ’20</h4>
+            </div>
+            <div class="dashboard-detail-list-element-profile-btns">
+              <!--
                         <button class="dashboard-detail-decline-btn">Decline</button>
                         <button class="dashboard-detail-accept-btn">Accept</button>
                         -->
 
-                        
-                        <div>
-                            <ion-icon name="checkmark-outline" class="small-icon"></ion-icon>
-                        </div>
-                        <h3>Accepted</h3>
-                        
-                    </div>
-                </div>
-                <hr>
-                
-                <div class = 'about'>
-                    <h3>About</h3>
-                </div>
-                
-                <h3 class="exp-title">Experience</h3>
-                <ul class="experience">
-                </ul>
-                
-                <hr>
-                
-                <div class = "expand-collapse">
-                    <div>
-                        <ion-icon name="chevron-up-outline" class="up-down big-icon"></ion-icon>
-                    </div>
-                    <h4 class="more-less">Show less profile information</h4>
-                </div>
-            </li>
-            
-        </ul>
+              <div>
+                <ion-icon
+                  name="checkmark-outline"
+                  class="small-icon"
+                ></ion-icon>
+              </div>
+              <h3>Accepted</h3>
+            </div>
+          </div>
+          <hr />
+
+          <div class="about">
+            <h3>About</h3>
+          </div>
+
+          <h3 class="exp-title">Experience</h3>
+          <ul class="experience"></ul>
+
+          <hr />
+
+          <div class="expand-collapse">
+            <div>
+              <ion-icon
+                name="chevron-up-outline"
+                class="up-down big-icon"
+              ></ion-icon>
+            </div>
+            <h4 class="more-less">Show less profile information</h4>
+          </div>
+        </li>
+      </ul>
     </div>
-</body>
-<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+  </body>
+  <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 </html>
