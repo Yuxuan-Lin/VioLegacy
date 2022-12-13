@@ -23,7 +23,7 @@
   "dependencies": {
     "axois": "0.0.1-security",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "firebase": "^7.23.0"
   }
 }
